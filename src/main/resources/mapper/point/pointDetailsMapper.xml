@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.point.PointDetailsMapper">
+
+    <select id="selectCountByIndividualMemberId" resultType="int">
+        select count(*)
+        from tbl_point_details
+        where individual_member_id = #{individualMemberId}
+    </select>
+
+    <select id="selectAllByIndividualMemberIdWithPaging" resultType="PointDetailsDTO">
+        select
+            pd.id,
+            pd.individual_member_id,
+            pd.point_type,
+            if(pd.point_type = 'earn', pd.point_amount, -pd.point_amount) as point_amount,
+            (select sum(pd2.point_amount)
+             from tbl_point_details pd2
+             where pd2.individual_member_id = pd.individual_member_id
+               and (pd2.created_datetime &lt; pd.created_datetime
+                    or (pd2.created_datetime = pd.created_datetime and pd2.id &lt;= pd.id))
+            ) as remaining_point_amount,
+            if(pd.point_type = 'earn' and pd.payment_amount = 0,
+               pd.point_amount * 110,
+               if(pd.point_type = 'purchase_cancel', -pd.payment_amount, pd.payment_amount)) as payment_amount,
+            if(pd.point_type = 'earn',
+               ifnull(pd.expire_datetime, date_add(pd.created_datetime, interval 1 year)),
+               pd.expire_datetime) as expire_datetime,
+            pd.payment_order_id,
+            pd.payment_receipt_id,
+            pd.cancelled_datetime,
+            if(pd.point_type = 'earn'
+               and pd.cancelled_datetime is null
+               and datediff(now(), pd.created_datetime) &lt;= 7
+               and pd.remaining_point_amount = pd.point_amount,
+               1, 0) as cancellable,
+            pd.created_datetime,
+            pd.updated_datetime
+        from tbl_point_details pd
+        where pd.individual_member_id = #{individualMemberId}
+        order by pd.created_datetime desc, pd.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_point_details (
+            individual_member_id,
+            point_type,
+            point_amount,
+            remaining_point_amount,
+            payment_amount,
+            expire_datetime,
+            payment_order_id,
+            payment_receipt_id,
+            cancelled_datetime
+        )
+        values (
+            #{individualMemberId},
+            #{pointType},
+            #{pointAmount},
+            #{remainingPointAmount},
+            #{paymentAmount},
+            #{expireDatetime},
+            #{paymentOrderId},
+            #{paymentReceiptId},
+            #{cancelledDatetime}
+        )
+    </insert>
+
+    <select id="selectEarnCountByPaymentOrderId" resultType="int">
+        select count(*)
+        from tbl_point_details
+        where point_type = 'earn'
+          and payment_order_id = #{paymentOrderId}
+    </select>
+
+    <update id="updateIndividualMemberPointByDelta">
+        update tbl_individual_member
+        set individual_member_point = individual_member_point + #{delta}
+        where id = #{individualMemberId}
+          and individual_member_point + #{delta} >= 0
+    </update>
+
+    <select id="selectCurrentPointByIndividualMemberId" resultType="int">
+        select individual_member_point
+        from tbl_individual_member
+        where id = #{individualMemberId}
+    </select>
+
+    <select id="selectChargeDetailByIdAndIndividualMemberId" resultType="PointDetailsDTO">
+        select
+            id,
+            individual_member_id,
+            point_type,
+            point_amount,
+            '일반충전' as charge_method,
+            remaining_point_amount,
+            if(payment_amount = 0,
+               point_amount * 110, payment_amount) as payment_amount,
+            ifnull(expire_datetime, date_add(created_datetime, interval 1 year)) as expire_datetime,
+            payment_order_id,
+            payment_receipt_id,
+            cancelled_datetime,
+            if(cancelled_datetime is null
+               and datediff(now(), created_datetime) &lt;= 7
+               and remaining_point_amount = point_amount,
+               1, 0) as cancellable,
+            created_datetime,
+            updated_datetime
+        from tbl_point_details
+        where id = #{id}
+          and individual_member_id = #{individualMemberId}
+          and point_type = 'earn'
+    </select>
+
+    <update id="updateChargeCancelled">
+        update tbl_point_details
+        set remaining_point_amount = 0,
+            cancelled_datetime = now(),
+            updated_datetime = now()
+        where id = #{id}
+          and individual_member_id = #{individualMemberId}
+          and point_type = 'earn'
+          and cancelled_datetime is null
+    </update>
+
+    <select id="selectEarnDetailsWithRemaining" resultType="PointDetailsDTO">
+        select id, remaining_point_amount
+        from tbl_point_details
+        where individual_member_id = #{individualMemberId}
+          and point_type = 'earn'
+          and cancelled_datetime is null
+          and remaining_point_amount > 0
+        order by created_datetime asc
+    </select>
+
+    <update id="updateRemainingPointAmount">
+        update tbl_point_details
+        set remaining_point_amount = #{remainingPointAmount},
+            updated_datetime = now()
+        where id = #{id}
+    </update>
+
+</mapper>

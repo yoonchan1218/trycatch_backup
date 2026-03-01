@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.file.CorpLogoFileMapper">
+
+    <insert id="insert">
+        INSERT INTO tbl_corp_logo_file (id, corp_id)
+        VALUES (#{id}, #{corpId})
+    </insert>
+
+    <delete id="deleteByCorpId">
+        DELETE FROM tbl_corp_logo_file
+        WHERE corp_id = #{corpId}
+    </delete>
+
+    <select id="selectByCorpId" resultType="map">
+        SELECT f.id, f.file_path, f.file_name, f.file_original_name
+        FROM tbl_corp_logo_file clf
+        JOIN tbl_file f ON clf.id = f.id
+        WHERE clf.corp_id = #{corpId}
+    </select>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.experience.ExperienceProgramFileMapper">
+    <select id="selectAllByExperienceProgramId">
+        select
+            id, experience_program_id, file_path, file_name, file_original_name,
+            file_size, file_content_type, created_datetime, updated_datetime
+        from view_experience_program_file
+        where experience_program_id = #{id};
+    </select>
+
+    <insert id="insert">
+        INSERT INTO tbl_experience_program_file (id, experience_program_id)
+        VALUES (#{id}, #{experienceProgramId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM tbl_experience_program_file
+        WHERE id = #{id}
+    </delete>
+</mapper>

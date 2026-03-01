@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mypage</title>
+        <link rel="stylesheet" href="/css/qna/header.css">
+        <link rel="stylesheet" href="/css/mypage/mypagea.css" />
+    </head>
+    <body class="mtuHome">
+    <header th:replace="~{/qna/header.html::header}"></header>
+        <div id="wrap">
+            <section id="container">
+                <h1 class="skip">개인회원 서비스</h1>
+
+                <section
+                    class="my-content-banner"
+                    id="topBannerFinance"
+                    style="display: none"
+                >
+                    <div class="content-line-banner t1">
+                        <a
+                            href="https://www.jobkorea.co.kr/Theme/special_finance"
+                            target="_blank"
+                            class="line-banner-image image-finance"
+                        >
+                            <img
+                                src="https://file2.jobkorea.co.kr/Net/Mng/DownFile/FileUrl?file_No=546798"
+                                alt="이직을 고민중인 금융직 경력자라면? 금융 전문가 채용관 바로가기"
+                            />
+                        </a>
+                        <button
+                            class="line-banner-close"
+                            data-type="topBannerFinance"
+                        >
+                            <span>닫기</span>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="my-content">
+                    <h1 class="skip">프로필</h1>
+                    <div class="my-content-top">
+                        <div class="my-profile-wrap info">
+                            <h2 class="skip">프로필</h2>
+
+                            <div class="my-profile">
+                                <div
+                                    class="pie-chart"
+                                    style="
+                                        background: conic-gradient(
+        #006e3f 0%, 
+        #006e3f 80%, 
+        #f4f4f4 80%, 
+        #f4f4f4 100%
+    );
+                                    "
+                                >
+                                    <div class="profile-img">
+                                        <p class="img"><img th:src="${profile.memberProfileImageUrl != null ? profile.memberProfileImageUrl : '/image/default_photo.png'}" src="/image/default_photo.png" alt="" /></p>
+                                    </div>
+                                </div>
+                                <button
+                                    class="profile-btn btnRegist"
+                                    type="button"
+                                >
+                                    <span class="skip">사진편집</span>
+                                </button>
+                            </div>
+                            <a
+                                href="/mypage/change-my-information"
+                                class="my-career link"
+                                ><span th:text="${'프로필 레벨 ' + profile.individualMemberLevel}">프로필 레벨 1</span></a
+                            >
+                        </div>
+                        <div class="my-info-wrap">
+                            <div class="my-status-wrap">
+                                <div class="my-status-top">
+                                    <!--
+                        [UI, DEV] 이력서 업데이트
+                        이력서 미완성일 경우 status-incomplete 추가
+                    -->
+
+                                    <div class="badge">
+                                        <span th:text="${profile.updatedDatetime != null ? '최근 업데이트: ' + profile.updatedDatetime : '최근 업데이트 정보 없음'}">최근 업데이트 정보 없음</span>
+                                        <div class="tip">
+                                            <button
+                                                type="button"
+                                                class="tip-close"
+                                                onclick=""
+                                            ></button>
+                                            <a
+                                                href=""
+                                                onclick="
+                                                   
+                                                "
+                                                target="_blank"
+                                                >어떤 분야에서 일하고
+                                                싶으세요?</a
+                                            >
+                                        </div>
+                                    </div>
+                                    <!-- 포지션 제안 설정 영역 -->
+                                    <!-- [UI/개발] 포지션 제안받는 중 인 경우-->
+                                </div>
+                                <!-- /포지션 제안 설정 영역 -->
+                                <div class="user-status-title">
+                                    <h1>
+                                        <strong class="company" th:text="${profile.memberName != null ? profile.memberName : 'User'}">User</strong>님의 프로필 요약이에요 💻
+                                    </h1>
+                                </div>
+                                <div class="my-status-box">
+                                    <div class="status">
+                                        <a href="/mypage/experience">Level <span th:text="${profile.individualMemberLevel}"> 1</span></a>
+                                    </div>
+                                    <ul>
+                                        <li><span th:text="${profile.memberEmail != null ? profile.memberEmail : ''}"></span></li>
+                                        <li th:text="${profile.individualMemberBirth != null ? profile.individualMemberBirth : 'Birth not set'}">Birth not set</li>
+                                        <li th:text="${profile.individualMemberGender != null ? (profile.individualMemberGender.value == 'man' ? '남자' : '여자') : ''}"></li>
+                                        <li th:text="${profile.memberPhone != null ? profile.memberPhone : 'Phone not set'}">Phone not set</li>
+                                    </ul>
+                                    <p class="detail" th:text="${profile.individualMemberEducation == 'high-school' ? '고등학교 졸업' :
+                                                               profile.individualMemberEducation == 'associate'   ? '대학(2,3년) 졸업' :
+                                                               profile.individualMemberEducation == 'bachelor'    ? '대학교(4년) 졸업' :
+                                                               profile.individualMemberEducation == 'graduate'    ? '대학원 졸업' : ''}">학력 미설정</p>
+                                    <ul class="my-status-list" style="margin-top: 8px">
+                                        <li>Point: <span th:text="${profile.individualMemberPoint}">0</span></li>
+                                        <li>Posts: <span th:text="${profile.individualMemberPostCount}">0</span></li>
+                                        <li>Questions: <span th:text="${profile.individualMemberQuestionCount}">0</span></li>
+                                    </ul>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-content-bottom">
+                        <h2 class="skip">주요활동내역</h2>
+                    </div>
+                </section>
+
+                <section class="content">
+                    <input type="hidden" id="CareerLevel" th:value="${profile.individualMemberLevel}" value="1" />
+                    <input
+                        type="hidden"
+                        id="hdnDMPLog"
+                        value="3950962faff8c0197b153b2b1269403720a7e43cfbca9cc13d171312a50b23478f92e41fabbace7b83df0edf06e88a3fa380ccaa32183aaa45c8f1daaa540f1dc4c1af26baf3580fd82b9312c5c9daa76c0aa2d8dfeb23f4811b7f9b52262a22328b35d6c22fe7b938cbb2a6133227bc6f3043f51b87eabb6655215ff731e249b219fa66c9c83abd8b949d4b54e82321c004da6a67d6c2408dc660c2a529669339dd4aca138117cc84bde5f0e6c1a0675436b043f184cbaf78dfaa0bb45704d7e0673c8dd2d2efe19f1e8ee43ac7b433fb8907bc2177cdc5ce9fa61f66ba2545bfceaae3d3efff2286ed167367c945dee374ec0ec1a4dc141e0d865b42d44ed675a377ced68e07d42664992c51d34d97001eb38af0420c06c16f40187bb4c751f034ca210d70be83c471aa76f8e07f36d8dd9a383ddacd9cfdc48e78b08f5dacf232f1fca6b64592da2b27e7ea2f7c795ae6cf539059ac263ff9a390bbd1e27b7ff8d02d2a4999b02f66ecf288fd1d8ad1b3f19467008ae2cdc4db0ef497b96d2963460a76c7d22c6a92620471fd67e42880eae74ec7f8064154809de2af70bbc338cb901cfe74b5ef2fd93959798240e40086e8bf8bffbbd7357309d0d7e3b9de93921450201aac8958e62d3dd996f39af528a03d89bba9d5263e8ecf213352073d4b7f5c21378a13e807454f9d54ece90d52514323bdffff2212b941465453a1364c9b4a7ed4c7040364b198cc5adff05f444f203c2141fc2ac467ff6f32fcb80a9dd9f2c11cae5d0432c730ca696b8ca6a4da0fa6f8cc325edd4a6c60820f49510a29fe6d0e71840d2c09e402f39fcf399fbe50122bfcbee58b20960b0f3aca44fac0d36d0791928e7eae61e7533967c3e387e65b942f8b0ff3d336aa8a7d736ab08c3de239013f35f8e0a3131e64e2b2d3a13bc1071e896a025e9eee0faf6d4ac465cbe1e3564d64c4da1c1f4cc3ae16c2ab65b5350bed58b86917f905bb6cdef8d20f93a51e48c07e767574444405a8a3418d09dca1203c8c0dc2d38cc2db2bdc446b7ed36429f303f7fb411cec6fe406db358b05208a3660d9ee4155024b041a45fab26b108abd8c51b68b43adaa86bda1b0ece78191f9efeae3e270831a293830830a99f828989c673780c12d02e1791e1202784944094a538211de17471b8cd7f290eac76be1eafcbd8f45e2e6350d6f7c2d4fe6782c6667f9fb6ae7f429ce3ed99ef3ce7a6cbfc4621d8a2da773ddc9baf35d74789cad55afc6c2d4f5aed9f7f5e44c64603d50cbeadeef6c657abb817ed5f78783088885575175ba4ca4c19df5bb7e7115dcf2d634ea6a09dab29e0b703b765678eb36c4cb258bacbef98b1653effea6a7df04b509f63341b96cc4d64e0f3347605fe42fcacf4b3d617c04ef1b03467aeca0eed257d66ad6b0d1b39c8370eeab7c9c5b3e95c243657622763e2c7f959bf9b73cfd82103c7beb4141434a82de99783b3cf9a6f2a869897193bd8bd98530b236ce2240482bf6c31b8604a5f08a560fe04b4c52d6a4d84227de49c311e287b2b596af8ec25a0cbc5b01b61392c2e0064e81dc443822b78f5fbc6bf23e68bcd8dacf845f2e402e84f48f76e7f3b2a33ecfb9e4012576533572bfd2f18b8efc9ecac38923a26a8759fc4032f5abc69829e16d2f42d3310958215d933afbedaa2493f37b64f2cdadccbd44afc5815e7ed24ea147ade81893342719fbbadee9d12914d6906680b5493e61d6b03eb9836e9ae9fbb70a34365521d4debd6bcee0f50baf2845cbef48216fe58d6556fa625c54034158a89721788fe5690c753c15a07014fb122c20e246c19b5cb1ca7bbb0e0944942ca07262236b3f9150301f0e2daf9d5778a517b1ee67a12d3bc9c0d0c30a9d2492333accf669b8ba28201f0ae32ff1da97a73a8d86296ee1c0a2866f451bd7163b3a4c246377af94749a313beb6babae949852af157e66534f5c3c62c6cfbdfba139bae4d7e91e86f2e1ea40fff1d96fce6a80b84865a077008469afecf84bca9dbe62ad764cdffd5117b7b16f5e061d841142e770a25c03baa73a8b4dd580dcaa8111697d09f592acf9ded7947feb27901fbff99a792956784f2cb3250d19692ae039e9252bcd206ebcc60226f6b0f928b8172d37535391c2224d0537882e0fd86f9dd04a517ba885311f3fca00a70f1bcf4e4d046fa4badd19ead60a24ba5c91eb58f50879520938787931d4669d4e0228e65a5dbe9c8a52c06bf69946a01f4d9e5c03c66eda8642cdc0de15a673dd23476b3c6ef0e7da359af6fe24fee4b16a80041447adc57ac72f8d8cf8fe9f8224b3ba35538238c2aca7f223326e3a4145df44044fc2fe5802438e4869235a2aa1c0b0c44bee7a148184ceb00a4e94993274a850b1462e8a0da346ada25230da547ae62bb3f42cba7480da32c62138659e6673b57474f7d4f04000470f9d48bbd9d2dca3fd41bcea3eb633c980a4b7a624eac597db0031c18a822cb182deb45de0d244d6707826c44212f1f8a7746d6e929a373f724fa29588c7bb60e15eedcedf9fa74f7d5dfab85fdf9b2bccaf9146c80c4076a2054c83b0a8724fbad50688672ee73be49ef02c135d11cd6ee9da250c8d08faae8f56f6788bba001ba92be689c4b50c30a2d0e02212059c7e9af4e7f7ab9104fc6198b4b8536d723fc975c443e17bf5918836bbed05f3a81844d32f0c4bcf208f8c7f499197918563d15802656d76ad9d6adae96a6870062148efa7499da6a54e020807d539a1765313ab19c4eb741cf9a4f583d878eb940f4616fb4f2dbef57cd5e164e1c993ca2606fd8b06636262ab260f3207b7d384115cfc8c0a5bf729b47750860ab77ef923c68e9c10628145a86ef782c5050a6fc7c10eea49c53b622992bd3bd1a8b54ddf1478d0a4cfb5daf7199a1cc3a9d44cc9047d397170f5f297198d63cbf4cf8801f5ee4720ed41975706bcddbd8ff559c06d79021408be74daa54949b74182db8a775f5e0fb0d9264f3eff2935b9b1a6cfd67ac4f6e07c2d8ff3501c06967e9642f0a97e64679104286b8204f897580d440b852f69f3b602fa6e8102480a85c1e90c06f6e63454cc2d9b3ed8c38c3d9ba4f77533717e7c34ee68f01ac1423fbc42bbe890d666a7b705e9272fdc090333e480aa72d51953436ed6eb073df732b7ee46206d829d98a9c20a96e34d085db361768dea94bd8e3c1e137ed4f180eaba1890a0adbf577a8be465c07a18e65a59676a6ef8ee3789d9906c872596bdc6c21aab2fc6d6656c15795fb9942364d3f6281558310f69d815464bcca9dff29d1916511d0dca9c6c92a29da1528db77c01d56ca18f866904aa8a8d845f628f75dd8ec180776bb6d09852608d65282c3150fd8460fc1fc1bae07907422027bd7714d6a018d8ca5ebadd5f1eda67a1ce001de3f4f74781b59a1ec842b8c13341ad366c7a8c446bb4e6b310de0adeafcebeffb864d2cebe22dbd7560d1e3e2738391cbac8973c15449e2b218bfc7220c55052684fc7bc5834375905bcb04e87427e87f4f012da87a43ec77cbc90c4d297c3fba1181b1f6ed869046ca7cb224a34ebcf48fb0b3d0b5c46abe58e61c097992c1054177f847944010c1a2953a9bdc7040781e2f688154c1c69e77ff411486f4fa6402c04c349c59c669e1323710217b1bdcf65e0d11a33060c52"
+                    />
+
+                    <div class="topContent topContent_onepick" id="dev-onepick">
+                        <div class="topHdWrap">
+                            <div class="banish-tooltip">
+                                <i></i
+                                ><span
+                                    ><i class="bar-ico"></i>합격 예측 결과도
+                                    함께 확인해 보세요</span
+                                >
+                            </div>
+                            <h2 class="top_hd_2">딱! 맞는 원픽 공고</h2>
+                        </div>
+
+                        <div
+                            class="swiper celebrate_my swiper-container-horizontal"
+                        >
+                            <ul
+                                class="swiper-wrapper"
+                                id="celebrateContainer"
+                                style="
+                                    transform: translate3d(0px, 0px, 0px);
+                                    transition-duration: 0ms;
+                                "
+                            >
+                                <li th:if="${#lists.isEmpty(topPostings)}">
+                                    <div style="text-align: center; padding: 20px; color: #999;">추천 공고가 없습니다.</div>
+                                </li>
+                                <li th:each="posting : ${topPostings}"
+                                    class="swiper-slide"
+                                    style="width: 304px; margin-right: 12px"
+                                >
+                                    <a th:href="@{/experience/program/{id}(id=${posting.experienceProgramId})}"
+                                        target="_blank"
+                                        class="section-item_link"
+                                    >
+                                        <div class="col infoCol">
+                                            <div class="company">
+                                                <span th:text="${posting.corpCompanyName}">기업명</span>
+                                            </div>
+                                            <span class="tit" th:text="${posting.experienceProgramTitle}">공고 제목</span>
+                                            <div class="information">
+                                                <div class="information-career">
+                                                    <i></i><span th:text="${posting.experienceProgramJob}">직무</span>
+                                                </div>
+                                                <div class="information-date">
+                                                    <i></i><span th:text="'~' + ${posting.experienceProgramDeadline}">~마감일</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <span
+                                class="swiper-notification"
+                                aria-live="assertive"
+                                aria-atomic="true"
+                            ></span>
+                            <span
+                                class="swiper-notification"
+                                aria-live="assertive"
+                                aria-atomic="true"
+                            ></span>
+                        </div>
+                        <a
+                            class="mtuSpImgAfter btnSpMore"
+                            href=""
+                            target="_blank"
+                            >더보기</a
+                        >
+                        <div
+                            class="celebrate-btn-next celebrate-btn"
+                            style=""
+                            tabindex="0"
+                            role="button"
+                            aria-label="Next slide"
+                            aria-disabled="false"
+                        ></div>
+                        <div
+                            class="celebrate-btn-prev celebrate-btn swiper-button-disabled"
+                            style=""
+                            tabindex="0"
+                            role="button"
+                            aria-label="Previous slide"
+                            aria-disabled="true"
+                        ></div>
+                    </div>
+
+                    <input
+                        type="hidden"
+                        id="DefaultResumeRNo"
+                        value="29799302"
+                    />
+                    <input type="hidden" id="MemSysNo" value="50176432" />
+                    <input type="hidden" id="PopUpDeleteDesignJob" value="0" />
+
+                    <!-- 선배에게 질문하기 -->
+                    <div class="topContent qna-content">
+                        <div class="topHdWrap">
+                            <h2 class="top_hd_2">취업톡톡</h2>
+
+                        </div>
+                        <ul class="qna-list-wrap">
+                            <li th:each="qna : ${topQnas}">
+                                <a th:href="@{/qna/detail(id=${qna.id})}" target="_blank">
+                                    <span class="label">인기질문</span>
+                                    <p class="list-tit" th:text="${qna.qnaTitle}"></p>
+                                    <div class="list-info">
+                                        <span class="job" th:text="${qna.jobCategoryName}"></span>
+                                        <span class="corporation" th:text="${qna.companyName != null ? qna.companyName : qna.collegeFriend}"></span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <a
+                            href="/qna/list"
+                            class="mtuSpImgAfter btnSpMore"
+                            target="_blank"
+                            onclick="
+
+                            "
+                            >더보기</a
+                        >
+                    </div>
+
+                    <!-- 선배에게 질문하기 //-->
+
+                    <!-- 공기업 모의고사 -->
+
+                    <div class="topContent aptitudeTest">
+                        <div class="topHdWrap">
+                            <h2 class="top_hd_2">최신 체험공고</h2>
+                        </div>
+
+                        <ol class="rankList">
+                                <li th:if="${#lists.isEmpty(topPublicPostings)}">
+                                    <div style="text-align: center; padding: 20px; color: #999;">체험공고가 없습니다.</div>
+                                </li>
+                                <li th:each="posting, iterStat : ${topPublicPostings}"
+                                    th:class="'rank_' + ${iterStat.count}"
+                                >
+                                    <div class="rkItem">
+                                        <span class="titBx" th:text="${posting.corpCompanyName}">기업명</span>
+                                        <span class="txBx">
+                                            <span class="corpType">체험공고</span>
+                                            <a th:href="@{/experience/program/{id}(id=${posting.experienceProgramId})}"
+                                               target="_blank" class="recruit"
+                                               th:text="${posting.experienceProgramViewCount + '건'}">0건</a>
+                                        </span>
+                                    </div>
+                                    <a th:href="@{/experience/program/{id}(id=${posting.experienceProgramId})}"
+                                       target="_blank" class="itemlink"
+                                       th:text="${posting.corpCompanyName + ' 체험공고'}">기업명 체험공고</a>
+                                </li>
+                        </ol>
+                        <a
+                            href=""
+                            class="mtuSpImgAfter btnSpMore"
+                            onclick="
+                                
+                            "
+                            >더보기</a
+                        >
+                    </div>
+                    <!--Top100-->
+
+                    <div class="topContent">
+                        <div class="topHdWrap">
+                            <h2 class="top_hd_2">
+                                <em>TOP100</em> 공고
+                            </h2>
+                            <!--// 안내 레이어, 이력서 없는 경우 미노출 -->
+                            <div class="tplLyWrap devTplLyClick">
+                                <button
+                                    type="button"
+                                    class="mtuSpImg mtuSpHelp devTplLyBtn"
+                                >
+                                    <span class="skip">TOP100 안내</span>
+                                </button>
+                                <div class="tplLyType devLyType">
+                                    <p class="lyCnt">
+                                        잡코리아 빅데이터 분석으로 제공되는
+                                        추천정보입니다.
+                                    </p>
+                                    <p class="lyBtn">
+                                        <button
+                                            type="button"
+                                            class="tplBtnTy tplLyBtnClose devLyBtnClose"
+                                        >
+                                            <span class="blind"
+                                                >TOP100 안내 닫기</span
+                                            >
+                                        </button>
+                                    </p>
+                                    <span
+                                        class="tplIcnTy tplLyIcnArrBtm"
+                                    ></span>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="rankList">
+                                <li th:if="${#lists.isEmpty(top100Postings)}">
+                                    <div style="text-align: center; padding: 20px; color: #999;">공고가 없습니다.</div>
+                                </li>
+                                <li th:each="posting, iterStat : ${top100Postings}"
+                                    th:class="'rank_' + ${iterStat.count}"
+                                >
+                                    <span th:text="${iterStat.count}"
+                                          th:class="${iterStat.index < 3} ? 'rkBx case' : 'rkBx'">1</span>
+                                    <a th:href="@{/experience/program/{id}(id=${posting.experienceProgramId})}"
+                                       target="_blank"
+                                    >
+                                        <span class="titBx" th:text="${posting.experienceProgramTitle}">공고 제목</span>
+                                        <span class="txBx" th:text="${posting.corpCompanyName}">기업명</span>
+                                    </a>
+                                </li>
+                        </ol>
+                        <a
+                            onclick="
+                            "
+                            href=""
+                            target="_blank"
+                            class="mtuSpImgAfter btnSpMore"
+                            >더보기</a
+                        ><!--// 이력서 없는 경우 미노출 -->
+                    </div>
+
+                    <!-- TOP100 //-->
+
+                    <div class="contWrap">
+                        <div class="mtuTab devFixedTab">
+                            <ul>
+                                <li data-flag="SC" class="">
+                                    <a
+                                        href="javascript:void(0);"
+                                        onclick="
+                                            
+                                        "
+                                        >스크랩 공고</a
+                                    >
+                                </li>
+                                <li data-flag="RE" class="on">
+                                    <a
+                                        href="javascript:void(0);"
+                                        onclick="
+                                            
+                                        "
+                                        >최근 본 공고</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- AI추천 : 푸시.알림 설정  -->
+
+                        <!-- modal-acceptance 약관동의 / modal-missing 놓치는 알림 -->
+                        <div
+                            class="AImodal-popup AImodal-missing"
+                            style="display: none"
+                        >
+                            <div class="AImodal-common-wrap">
+                                <p class="AImodal-common-title"></p>
+                                <!--놓치는 알림-->
+                                <div
+                                    class="AImodal-missing-alram"
+                                    style="display: none"
+                                >
+                                    <span class="AImissing-alram-image"></span>
+                                    <div class="AImissing-alram-group">
+                                        <ul>
+                                            <li
+                                                class="AImissing-alram-item"
+                                                data-rcv-code="4"
+                                            >
+                                                <i class="line_line_check"></i
+                                                >AI추천 채용정보
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--놓치는 알림-->
+                                <!-- 약관 내용 -->
+                                <div class="AImodal-common-policy">
+                                    <p class="AIcommon-policy-title">
+                                        <em class="AIcommon-type-choose"
+                                            >[선택]</em
+                                        >
+                                        개인정보 수집 및 이용 동의
+                                    </p>
+                                    <div class="AIcommon-policy-content">
+                                        <div class="AIcommon-policy-wrap">
+                                            <ol class="AIcommon-policy-list">
+                                                <li
+                                                    class="AIcommon-policy-item"
+                                                >
+                                                    1. 수집 이용 목적
+                                                    <p>
+                                                        <u
+                                                            >맞춤공고, 서비스
+                                                            안내, 마케팅 발송을
+                                                            목적으로 활용</u
+                                                        >
+                                                    </p>
+                                                </li>
+                                                <li
+                                                    class="AIcommon-policy-item"
+                                                >
+                                                    2. 수집하는 개인정보 항목
+                                                    <p>
+                                                        전화번호, 이메일,
+                                                        푸시토큰, 서비스 이용
+                                                        기록
+                                                    </p>
+                                                </li>
+                                                <li
+                                                    class="AIcommon-policy-item"
+                                                >
+                                                    3. 개인정보 보유 및 이용기간
+                                                    <p>
+                                                        <u
+                                                            >회원탈퇴 시 즉시
+                                                            파기</u
+                                                        >
+                                                    </p>
+                                                </li>
+                                                <li
+                                                    class="AIcommon-policy-item"
+                                                >
+                                                    4. 수신동의 거부 및 철회방법
+                                                    안내
+                                                    <p>
+                                                        본 동의는 거부하실 수
+                                                        있습니다. 다만 거부 시
+                                                        동의를 통해 제공 가능한
+                                                        각종 혜택, 이벤트 안내를
+                                                        받아보실 수 없습니다. 더
+                                                        이상 맞춤공고, 서비스
+                                                        안내, 마케팅 발송을
+                                                        원하시지 않는 경우
+                                                        회원정보수정 페이지에서
+                                                        수신여부를 변경하실 수
+                                                        있습니다.
+                                                    </p>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="AIbutton-common-agreement"
+                                    onclick=""
+                                >
+                                    동의하고 알림받기
+                                </button>
+                                <button
+                                    type="button"
+                                    class="AIbutton-common-close"
+                                    onclick="
+                                        
+                                    "
+                                >
+                                    <i class="system_system_close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <input
+                            type="hidden"
+                            id="isResultPrivacyChoiceAgree"
+                            value="0"
+                        />
+                        <input
+                            type="hidden"
+                            id="PrivacyChoiceAgreeUrl"
+                            value="/user/mypage"
+                        />
+
+                        <div id="recentContent">
+                        <!-- 스마트매치 -->
+                        <h2 class="skip">스마트매치 리스트</h2>
+                        <div
+                            class="ai-recommendations-list-wrapper"
+                            id="smartMatch"
+                        >
+                            <input
+                                type="hidden"
+                                id="MatchList"
+                                value='[{"Gno":10000001,"GI_Type_Code":null,"GiTitle":"백엔드 엔지니어 신입/경력","Part":",1000042,1000229,1000233,"},{"Gno":10000002,"GI_Type_Code":null,"GiTitle":"서버 개발자 (Spring/Java)","Part":",1000042,1000229,1000233,"},{"Gno":10000003,"GI_Type_Code":null,"GiTitle":"Backend Engineer","Part":",1000042,1000229,1000233,"},{"Gno":10000004,"GI_Type_Code":null,"GiTitle":"Server Developer","Part":",1000042,1000229,1000233,"},{"Gno":10000005,"GI_Type_Code":null,"GiTitle":"백엔드 개발자","Part":",1000042,1000229,1000233,"}]'
+                            />
+                            <input type="hidden" id="Monitoring" />
+
+                            <input type="hidden" id="PageFlag" value="RE" />
+
+                            <div class="ai-recommendations-list">
+                                <ul>
+                                    <li th:if="${#lists.isEmpty(latestWatchPostings)}">
+                                        <div style="text-align: center; padding: 20px; color: #999;">최근 본 공고가 없습니다.</div>
+                                    </li>
+                                    <li th:each="posting : ${latestWatchPostings}"
+                                        data-sc="10"
+                                        data-sn=""
+                                        class=""
+                                    >
+                                        <div class="recruit-content">
+                                            <div class="headers">
+                                                <a
+                                                    th:href="@{/experience/program/{id}(id=${posting.experienceProgramId})}"
+                                                    target="_blank"
+                                                    class="title giread"
+                                                    th:text="${posting.experienceProgramTitle}"
+                                                >공고 제목</a>
+                                            </div>
+                                            <a
+                                                class="devLinkRecruit"
+                                                th:href="@{/experience/program/{id}(id=${posting.experienceProgramId})}"
+                                                target="_blank"
+                                            >
+                                                <div class="recruitment">
+                                                    <div class="item" th:if="${posting.experienceProgramDeadline != null}" th:text="'마감 ' + ${posting.experienceProgramDeadline}">마감일</div>
+                                                    <div class="item" th:text="${posting.experienceProgramStatus != null ? posting.experienceProgramStatus.value : ''}">모집상태</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="recruit-apply">
+                                            <div class="recruit-apply-wrap">
+                                                <div class="deadline date">
+                                                    <span class="tahoma" th:text="${'~' + posting.experienceProgramDeadline}">~마감일</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btnMoreBlock">
+                            <a
+                                class="mtuSpImgAfter"
+                                href=""
+                                id="moreLink"
+                                >더보기</a
+                            >
+                        </div>
+                        </div>
+
+                        <div id="scrapContent" style="display: none;">
+                        <h2 class="skip">스크랩 공고 리스트</h2>
+                        <div class="ai-recommendations-list-wrapper">
+                            <div class="ai-recommendations-list">
+                                <ul>
+                                    <li th:if="${#lists.isEmpty(scrapPostings)}">
+                                        <div style="text-align: center; padding: 20px; color: #999;">스크랩한 공고가 없습니다.</div>
+                                    </li>
+                                    <li th:each="scrap : ${scrapPostings}"
+                                        data-sc="10" data-sn="" class="">
+                                        <div class="recruit-content">
+                                            <div class="headers">
+                                                <a th:href="@{/experience/program/{id}(id=${scrap.experienceProgramId})}"
+                                                   target="_blank"
+                                                   class="title giread"
+                                                   th:text="${scrap.experienceProgramTitle}">공고 제목</a>
+                                                <button type="button"
+                                                        class="scrap tplBtnTy js-scrBtn ScrapGA"
+                                                        th:classappend="${scrap.scrapStatus.value == 'active'} ? ' tplBtnScrOn on' : ' tplBtnScrOff'"
+                                                        th:data-scrap-id="${scrap.id}"
+                                                        th:data-scrap-status="${scrap.scrapStatus.value}">스크랩</button>
+                                            </div>
+                                            <a class="devLinkRecruit"
+                                               th:href="@{/experience/program/{id}(id=${scrap.experienceProgramId})}"
+                                               target="_blank">
+                                                <div class="recruitment">
+                                                    <div class="item" th:if="${scrap.experienceProgramDeadline != null}" th:text="'마감 ' + ${scrap.experienceProgramDeadline}">마감일</div>
+                                                    <div class="item" th:text="${scrap.experienceProgramStatus != null ? scrap.experienceProgramStatus.value : ''}">모집상태</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="recruit-apply">
+                                            <div class="recruit-apply-wrap">
+                                                <div class="deadline date">
+                                                    <span class="tahoma" th:text="${'~' + scrap.experienceProgramDeadline}">~마감일</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btnMoreBlock">
+                            <a class="mtuSpImgAfter" href="">더보기</a>
+                        </div>
+                        </div>
+
+                    </div>
+                    <!--성공 취업툴-->
+                </section>
+                <!--// Lnb Area -->
+                <!-- [개발] 메뉴 선택시 a.on 추가 -->
+                <section class="secLnb">
+                    <h1 class="skip">개인회원 서비스 메뉴</h1>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">
+                            <a href="/mypage/mypage">개인회원 홈</a>
+                        </h2>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">기술블로그</h2>
+                        <ul>
+                            <li>
+                                <a href="/skill-log/list">전체 글 목록</a>
+                            </li>
+                            <li>
+                                <a href="/skill-log/list?mine=true">내 글 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">체험 지원 관리</h2>
+                        <ul>
+                            <li>
+                                <a href="/mypage/experience">체험 지원 현황</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">QnA</h2>
+                        <ul>
+                            <li>
+                                <a href="/qna/list">전체 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">회원정보 관리</h2>
+                        <ul>
+                            <li>
+                                <a href="/mypage/change-my-information">회원정보 수정</a>
+                            </li>
+                            <li>
+                                <a href="/mypage/unsubscribe">회원탈퇴</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- Lnb Area //-->
+            </section>
+        </div>
+
+        <!-- 프로필 사진 편집 모달 -->
+<div class="modal-overlay" id="profileModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>프로필 사진 편집</h3>
+            <button type="button" class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="profile-preview">
+                <img src="" id="previewImg">
+            </div>
+            <div class="profile-upload">
+                <input type="file" id="profileInput" accept="image/*">
+                <label for="profileInput" class="upload-btn">사진 선택</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" id="modalCancel">취소</button>
+            <button type="button" class="btn-confirm">저장</button>
+        </div>
+    </div>
+</div>
+        <script src="/js/mypage/main/service.js"></script>
+        <script src="/js/mypage/main/layout.js"></script>
+        <script src="/js/mypage/main/event.js"></script>
+        <script src="/js/qna/header-event.js"></script>
+    </body>
+</html>
+

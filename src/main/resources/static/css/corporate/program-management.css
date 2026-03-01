@@ -1,0 +1,767 @@
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-display: swap;
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
+}
+
+
+/* 기본 */
+* {
+    /* padding: 0;
+    margin: 0; */
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+html, body {
+    width: 100%;
+}
+body {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+    background-color: #f2f4f7;
+}
+body, button, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, table, td, textarea, th, ul {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+}
+a, a:link, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+img {
+    border: 0;
+    vertical-align: top;
+}
+button, input, table, td, th {
+    font-size: 12px;
+    letter-spacing: 0;
+}
+button, fieldset, form, iframe {
+    border: 0;
+}
+button {
+    overflow: visible;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+button, input, select {
+    vertical-align: middle;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    font-size: 100%;
+}
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+input[type=text] {
+    font-size: 13px;
+    letter-spacing: 0;
+    color: #000;
+}
+input, option, select, textarea {
+    vertical-align: middle;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0px;
+}
+address, caption, em {
+    font-weight: 400;
+    font-style: normal;
+}
+textarea {
+    font-size: 13px;
+    color: #000;
+    resize: none;
+}
+form, fieldset, button {
+    border: 0 none;
+}
+/* em {
+    font-size: 15px;
+    color: #666;
+} */
+address, caption, em {
+    font-weight: normal;
+    font-style: normal;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 0 none;
+}
+table, th, td, input, button {
+    font-size: 12px;
+    letter-spacing: 0px;
+}
+
+#wrap {
+    position: relative;
+    min-width: 1270px;
+    margin: 0 auto;
+    background: #f2f4f7;
+}
+#wrap #container {
+    position: relative;
+    width: 1250px;
+    margin: 0 auto;
+}
+#wrap #container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+div#wrap div#container {
+    width: 1260px;
+}
+
+/* 배너 */
+.banner-smartfit-notice {
+    margin-bottom: 28px;
+    margin-top: 40px;
+}
+.banner-smartfit-notice .smartfit-banner-link {
+    width: 100%;
+    height: 104px;
+    display: block;
+}
+.banner-smartfit-notice .smartfit-banner-link img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 본문 */
+#wrap #container #content {
+    width: 100%;
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+}
+div#wrap div#container div#content {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* 전체 공고 */
+/* header */
+.mtcSubNotice div.noticeContent {
+    padding: 30px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background: #fff;
+}
+.mtcSubNotice div.topArea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: none;
+    padding-bottom: 15px;
+    margin-bottom: -1px;
+}
+
+.subTits {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+.noticeContent .topArea .subTits {
+    float: left;
+}
+div.noticeContent .topArea h2.subTits {
+    font-weight: 700;
+}
+.noticeContent .topArea:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.mtcTplTab {
+    margin-top: 10px;
+    padding-left: 1px;
+}
+.mtcSubNotice .mtcTplTab {
+    margin-top: 0;
+}
+
+.mtcTplTab .tabItems {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+div.mtcTplTab ul.tabItems {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.mtcTplTab .tabItems li {
+    display: table-cell;
+}
+div.mtcTplTab ul.tabItems li {
+    min-width: 100px;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+div.mtcTplTab ul.tabItems li:first-child {
+    padding-left: 0;
+}
+
+.mtcTplTab .tabItems li a {
+    display: block;
+    height: 43px;
+    line-height: 43px;
+    margin-left: -1px;
+    border: 1px solid #e5e6e8;
+    border-bottom: 1px solid #858c99;
+    background-color: #fafafa;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #999;
+    text-align: center;
+}
+div.mtcTplTab ul.tabItems li a {
+    font-size: 16px;
+    letter-spacing: 0;
+    color: #333;
+    height: 34px;
+    line-height: 34px;
+    border: none;
+    padding: 0 12px;
+    background: #fff;
+}
+div.mtcTplTab ul.tabItems li.on a {
+    border: none;
+    border-bottom: 4px solid #006e3f;
+    color: #006e3f;
+
+    z-index: 2;
+    background-color: #fff;
+    font-weight: bold;
+
+    padding: 0 12px;
+}
+
+div.mtcTplTab ul.tabItems li a .verdana {
+    font-size: 16px;
+    letter-spacing: 0;
+    margin-left: 6px;
+    vertical-align: inherit;
+}
+.mtcTplTab .tabItems li.on a .verdana {
+    color: #006e3f;
+    font-weight: normal;
+}
+div.mtcTplTab ul.tabItems li.on a .verdana {
+    font-weight: 700;
+}
+
+/* search area */
+.sort-select-box {
+    position: relative;
+    z-index: 4;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ebebeb;
+}
+.sort-select-box.notFound {
+    border-bottom: none;
+}
+
+.sort-select-box .drop-down-box {
+    margin-top: 6px;
+    display: flex;
+    gap: 20px;
+    padding-left: 12px;
+}
+
+.sort-select-box .drop-down-box .button-box .sort-button {
+    display: block;
+    padding-right: 20px;
+    text-align: left;
+    min-width: 82px;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 20px;
+    background: url("/images/corporate/arrow_14x20.png") no-repeat 100%;
+}
+
+.select-modal_common {
+    position: absolute;
+    z-index: 3;
+    display: none;
+    width: auto;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1490196078);
+}
+.select-modal_common.active {
+    display: block;
+}
+.sort-select-box .drop-down-box .button-box .sort-select-modal {
+    margin-top: 12px;
+}
+
+.select-modal_common ul li {
+    padding: 0 10px;
+}
+.select-modal_common ul li:hover {
+    background: #f7f8fa;
+}
+
+.select-modal_common ul li button {
+    display: block;
+    width: 100%;
+    line-height: 34px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+.select-modal_common ul li :first-of-type {
+    padding-right: 16px;
+}
+.select-modal_common.check-version ul li button {
+    padding-left: 22px;
+    background: url("/images/corporate/check_14x14_off.png") no-repeat 4px;
+}
+.select-modal_common.check-version ul li button.active {
+    background-image: url("/images/corporate/check_14x14_on.png");
+}
+.select-modal_common ul li:nth-child(n+2) button {
+    border-top: 1px solid #eee;
+}
+
+.input-box_common {
+    width: auto;
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+}
+.sort-select-box .search-box {
+    display: flex;
+    width: auto;
+    margin-right: 0;
+}
+
+.input-box_common input {
+    display: inline-block;
+    height: 32px;
+    margin-left: 20px;
+}
+.sort-select-box .search-box input {
+    width: 220px;
+    box-sizing: border-box;
+    padding: 4px 33px 4px 6px;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+}
+.input-box_common .search-button {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    display: block;
+    width: 28px;
+    height: 30px;
+    background: url("/images/corporate/icon_search.png") no-repeat 50%;
+}
+
+/* list */
+.scNoSelectWrap .noSelectInner {
+    display: table-cell;
+    vertical-align: middle;
+}
+.scNoSelectWrap {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 143px;
+    padding: 50px 0 50px;
+    text-align: center;
+    text-align: center;
+    border-bottom: 1px solid #edeef0;
+}
+div.scNoSelectWrap {
+    border-bottom: 1px solid #ebebeb;
+    padding: 125px 0;
+}
+.scNoSelectWrap .scNoSelectAppList {
+    display: inline-block;
+    padding-left: 80px;
+    position: relative;
+}
+div.scNoSelectWrap .scNoSelectAppList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+}
+
+.mngSpAfter:after, .mngSpBefore:before, .mngSpImg {
+    background: url("/images/corporate/sprite_ver2_img.png") 100% 100% / 100% no-repeat !important;
+}
+div.scNoSelectWrap .scNoSelectAppList:before {
+    content: "";
+    display: block;
+    width: 76px;
+    height: 70px;
+    position: static;
+    margin-top: 0;
+    background-position: 0;
+}
+
+div.scNoSelectWrap .scNoSelectAppList p.tx {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 21px;
+    color: #333;
+    padding: 20px 0 24px;
+}
+.scNoSelectWrap .scNoSelectAppList .tx strong {
+    display: block;
+    font-size: 18px;
+    letter-spacing: 0px;
+    color: #000;
+    font-weight: normal;
+    padding-bottom: 5px;
+}
+div.scNoSelectWrap .scNoSelectAppList p.tx strong {
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 21px;
+    color: #333;
+    padding: 0;
+    font-weight: 600;
+}
+
+div.scNoSelectWrap .scNoSelectAppList .noSelLink {
+    text-align: center;
+    width: 126px;
+    height: 54px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 17px 0;
+    box-sizing: border-box;
+    margin-top: 0;
+}
+
+div.scNoSelectWrap .scNoSelectAppList .noSelLink a {
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 17px;
+    color: #333;
+}
+
+div.noticeBx {
+    margin: 30px 0 0;
+    padding: 20px;
+    background: rgba(245, 247, 250, .5) 0 0 no-repeat padding-box;
+    border-top: none;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.noticeBx ul {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #888;
+    line-height: 24px;
+}
+div.noticeBx ul {
+    color: #666;
+    line-height: 20px;
+}
+
+.noticeBx li {
+    position: relative;
+    padding-left: 10px;
+}
+div.noticeBx ul li {
+    margin-bottom: 4px;
+}
+
+.noticeBx li:before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 2px;
+    background-color: #747474;
+    position: absolute;
+    left: 0;
+    top: 11px;
+}
+div.noticeBx ul li:before {
+    background-color: #ccc;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.noticeBx li em {
+    color: #000000;
+}
+
+/* 맨위로 */
+.mtcTopBx {
+    position: relative;
+    clear: both;
+}
+
+.mtcBtn, .mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
+    display: inline-block;
+    background: url("/images/corporate/mtc_sp_btn.png") no-repeat;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.mtcTopBx .mtcBtn {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    margin-left: 665px;
+    width: 42px;
+    height: 42px;
+    background-position: -88px -180px;
+}
+.mtcTopBx .mtcBtn.stop {
+    position: absolute;
+    bottom: 0;
+}
+
+.scSelectWrap {
+    padding-top: 30px;
+}
+.scSelectWrap .selectInner {
+    width: 1220px;
+    margin: 0 auto;
+}
+.scSelectWrap .selectInner .scSelectAppList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem {
+    transition: .3s;
+    position: relative;
+    /* height: 270px; */
+    height: 210px;
+    padding: 24px 0;
+    border: 1px solid #d2d2d2;
+    border-radius: 12px;
+    
+}
+.scSelectWrap .selectInner .scSelectAppList>* {
+    width: calc(49% - 10px);
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem:hover {
+    /* margin-top: -6px; */
+    /* border: 1px solid rgba(0, 0, 0, 1); */
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .1);
+    /* border : 1px solid rgba(0, 0, 0, .0); */
+    border: 1px solid #006e3f;
+
+}
+/* .scSelectWrap .selectInner .scSelectAppList .scSelectAppItem:after {
+    width: 590px;
+    height: 245px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem:after {
+    display: none;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border: 2px solid #5288ff;
+    content: "";
+    border-radius: 12px;
+    box-sizing: border-box;
+    z-index: -1;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem:hover:after {
+    display: block;
+} */
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager {
+    display: flex;
+    min-height: 46px;
+    margin: 0 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed #e8e8e8;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .manager-name {
+    display: block;
+    font-weight: 600;
+    color: #222;
+    line-height: 24px;
+    font-size: 16px;
+    letter-spacing: 0;
+}
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .moreOptionButton {
+    width: 35px;
+    height: 18px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 26px;
+    right: 11px;
+    cursor: pointer;
+}
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .moreOptionButton span svg {
+    height: 35px;
+    line-height: 18px;
+    width: 21px;
+    color: #4d5156;
+    display: inline-block;
+    fill: currentColor;
+    position: relative;
+    cursor: pointer;
+
+}
+
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .department {
+    display: flex;
+    position: relative;
+    margin-right: auto;
+    gap: 4px;
+    align-items: center;
+    
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .department p {
+    max-width: 420px;
+    color: #6a6a6a;
+    line-height: 20px;
+    font-size: 13px;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .more-option {
+    width: 140px;
+    right: 0;
+    display: none;
+    position: absolute;
+    z-index: 500;
+    top: 65px;
+    right: 20px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 0 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1490196078);
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .more-option.active {
+    display: block;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .more-option li {
+    padding: 0 7px;
+    line-height: 40px;
+    font-size: 12px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .more-option li button {
+    font-weight: 400;
+    line-height: 40px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .manager .more-option li:nth-child(n+2) {
+    border-top: 1px solid #f5f5f5;
+}
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link {
+    display: block;
+    max-height: 110px;
+    margin-top: 16px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .program-title{
+    display: flex;
+    padding: 0 24px;
+    align-items: center;
+    gap: 8px
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .program-title .title{
+    font-weight: 700;
+    color: #222;
+    line-height: 28px;
+    font-size: 20px;
+    letter-spacing: -.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .keywords{
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    padding: 0 0 0 24px;
+    gap: 8px;
+    margin-top: 16px;
+    margin-right: 1px;
+}
+.status{
+    display: flex;
+    align-items: center;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .keywords .item{
+    height: 26px;
+    padding: 0 10px;
+    color: #222;
+    line-height: 26px;
+    white-space: nowrap;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+    font-size: 12px;
+    letter-spacing: 0;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .keywords .item.status{
+    /* border: .5px solid rgba(5, 117, 46, 0.4); */
+    /* border: .5px solid #f7f7f7;;
+    color: #222; */
+    border: 1px solid rgba(255, 80, 27, .5);
+    color: #ff501b;
+    background-color: rgba(244, 174, 0, .05);
+}
+
+
+
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .program-description{
+    margin-top: 8px;
+    padding: 0 24px;
+}
+.scSelectWrap .selectInner .scSelectAppList .scSelectAppItem .program-detail-link .program-description p{
+    margin: 0 12px 0 0;
+    color: #6a6a6a;
+    line-height: 20px;
+    font-size: 13px;
+    letter-spacing: 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

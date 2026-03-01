@@ -1,0 +1,176 @@
+@font-face {
+    font-family: Pretendard;
+    font-weight: 400;
+    font-display: swap;
+    src: local("Pretendard Regular"), url(/static/font/Pretendard-Regular.subset.woff2) format("woff");
+}
+
+body {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #6a6a6a;
+}
+
+body {
+    font-size: 12px;
+    letter-spacing: 0px;
+}
+
+* {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+
+address, caption, em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input, textarea, button, p, table, th, td {
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+img {
+    border: 0 none;
+    vertical-align: top;
+    width: 110px;
+}
+
+li {
+    list-style: none;
+}
+/* ---------------------------------------------------------------------- */
+
+#wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    transform: translate(-50%, -50%);
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #006E3F;
+    padding-bottom: 20px;
+}
+
+.head h1 {
+    width: 160px;
+}
+
+.head .nav {
+    margin-left: auto;
+}
+
+.head .nav li {
+    float: left;
+    margin-left: 20px;
+}
+
+.head .nav li a {
+    text-decoration: none;
+    color: #6a6a6a;
+    font-size: 14px;
+}
+
+.head .nav:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.cnt {
+    padding: 60px 45px;
+    text-align: center;
+}
+
+.cnt .tit {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: #222;
+    line-height: 36px;
+}
+
+.cnt .tit em {
+    font-weight: 600;
+    color: #006E3F;
+}
+
+.cnt .txt {
+    margin-top: 24px;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #6a6a6a;
+    line-height: 22px;
+}
+
+.cnt .txt em {
+    color: #006E3F;
+}
+
+.cnt .help {
+    text-decoration: underline;
+    color: #222;
+}
+
+.cnt .btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.cnt .btns a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    border-radius: 8px;
+    min-width: 113px;
+    height: 48px;
+    font-size: 14px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.cnt .btns .btn_back {
+    color: #222;
+    border-color: #ccc;
+}
+
+.cnt .btns .btn_back .arrow {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+    background: url(/static/images/icon_arrow_left.png);
+}
+
+.cnt .btns .btn_back span {
+    padding-right: 10px;
+}
+
+.cnt .btns .btn_home {
+    margin-left: 8px;
+    border-color: #006E3F;
+    background-color: #006E3F;
+    color: #fff;
+}
+
+.footer {
+    border-top: 1px solid #D2D2D2;
+    padding-top: 20px;
+}
+
+.footer p {
+    font-size: 12px;
+    color: #9E9E9E;
+    text-align: center;
+}

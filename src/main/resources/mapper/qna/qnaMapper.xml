@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.qna.QnaMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_qna(individual_member_id,qna_title,qna_content,job_category_small_id,job_category_name,company_name,college_friend)
+        values(#{individualMemberId},#{qnaTitle},#{qnaContent},#{jobCategorySmallId},#{jobCategoryName},#{companyName},#{collegeFriend})
+    </insert>
+
+    <resultMap id="QnaDetailResultMap" type="QnaDTO">
+        <id property="id" column="qna_id"/>
+        <result property="individualMemberId" column="individual_member_id"/>
+        <result property="qnaTitle" column="qna_title"/>
+        <result property="qnaContent" column="qna_content"/>
+        <result property="qnaViewCount" column="qna_view_count"/>
+        <result property="qnaStatus" column="qna_status"/>
+        <result property="jobCategorySmallId" column="job_category_small_id"/>
+        <result property="jobCategoryName" column="job_category_name"/>
+        <result property="companyName" column="company_name"/>
+        <result property="collegeFriend" column="college_friend"/>
+        <result property="memberName" column="member_name"/>
+        <result property="memberProfileImageUrl" column="member_profile_image_url"/>
+        <result property="qnaFileId" column="qna_file_id"/>
+        <result property="qnaLikeCount" column="qna_like_count"/>
+        <result property="createdDatetime" column="created_datetime"/>
+        <result property="updatedDatetime" column="updated_datetime"/>
+        <collection property="files" ofType="com.app.trycatch.dto.file.FileDTO">
+            <id property="id" column="file_id"/>
+            <result property="filePath" column="file_path"/>
+            <result property="fileName" column="file_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectById" resultMap="QnaDetailResultMap">
+        select q.id as qna_id, q.individual_member_id, q.qna_title, q.qna_content,
+               q.qna_view_count, q.qna_status, q.job_category_small_id, q.job_category_name,
+               q.company_name, q.college_friend, q.qna_file_id,
+               q.created_datetime, q.updated_datetime,
+               m.member_name,
+               if(m.member_profile_file_id is not null,
+                   concat('/api/files/display?filePath=', pf.file_path, '&amp;fileName=', pf.file_name),
+                   null) as member_profile_image_url,
+               count(distinct l.id) as qna_like_count,
+               f.id as file_id, f.file_path, f.file_name
+        from tbl_qna q
+        left join tbl_member m on q.individual_member_id = m.id
+        left join tbl_file pf on m.member_profile_file_id = pf.id
+        left join tbl_qna_file qf on q.id = qf.qna_id
+        left join tbl_file f on qf.id = f.id
+        left join tbl_qna_likes l on q.id = l.qna_id
+        where q.id = #{id} and q.qna_status = 'published'
+        group by q.id, m.member_name, pf.file_path, pf.file_name, m.member_profile_file_id, f.id, f.file_path, f.file_name
+    </select>
+
+    <select id="selectAll" resultType="QnaDTO">
+        select *
+        from view_qna_list
+        <where>
+            qna_status = 'published'
+            <if test="keyword != null and keyword != ''">
+                AND (qna_title LIKE CONCAT('%', #{keyword}, '%')
+                  OR qna_content LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        <choose>
+            <when test="sort == 2">order by qna_like_count desc, id desc</when>
+            <when test="sort == 3">order by qna_view_count desc, id desc</when>
+            <when test="sort == 4">order by qna_comment_count desc, id desc</when>
+            <otherwise>order by id desc</otherwise>
+        </choose>
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectTotal" resultType="int">
+        select count(*) from tbl_qna
+        <where>
+            qna_status = 'published'
+            <if test="keyword != null and keyword != ''">
+                AND (qna_title LIKE CONCAT('%', #{keyword}, '%')
+                  OR qna_content LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        update tbl_qna
+        set qna_title = #{qnaTitle},
+            qna_content = #{qnaContent},
+            job_category_small_id = #{jobCategorySmallId},
+            job_category_name = #{jobCategoryName},
+            company_name = #{companyName},
+            college_friend = #{collegeFriend}
+        where id = #{id}
+    </update>
+
+    <update id="increaseViewCount">
+        update tbl_qna
+        set qna_view_count = qna_view_count + 1,
+            updated_datetime = updated_datetime
+        where id = #{id}
+    </update>
+
+    <update id="delete">
+        update tbl_qna
+        set qna_status = 'deleted',
+            updated_datetime = updated_datetime
+        where id = #{id}
+    </update>
+
+    <update id="updateFileId">
+        update tbl_qna
+        set qna_file_id = #{fileId},
+            updated_datetime = updated_datetime
+        where id = #{id}
+    </update>
+
+    <select id="selectTopByViewCount" resultType="QnaDTO">
+        select *
+        from view_qna_list
+        where qna_status = 'published'
+        order by qna_view_count desc, id desc
+        limit #{limit}
+    </select>
+
+    <select id="selectLatest" resultType="QnaDTO">
+        select *
+        from view_qna_list
+        where qna_status = 'published'
+        order by id desc
+        limit #{limit}
+    </select>
+
+    <select id="selectMemberIdById" resultType="Long">
+        select individual_member_id from tbl_qna where id = #{id}
+    </select>
+
+    <select id="selectCorpByKeyword" >
+        select id as corpId, corp_company_name as corpName
+        from tbl_corp
+        where corp_company_name like concat('%', #{keyword}, '%')
+        order by corp_company_name
+        limit 20
+    </select>
+
+</mapper>

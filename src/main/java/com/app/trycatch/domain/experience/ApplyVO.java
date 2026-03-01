@@ -1,0 +1,18 @@
+package com.app.trycatch.domain.experience;
+
+import com.app.trycatch.audit.Period;
+import com.app.trycatch.common.enumeration.experience.ApplyStatus;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@ToString(callSuper = true)
+@EqualsAndHashCode(of="id")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
+public class ApplyVO extends Period {
+    private Long id;
+    private Long experienceProgramId;
+    private Long memberId;
+    private ApplyStatus applyStatus;
+}

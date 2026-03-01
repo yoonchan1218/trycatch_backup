@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>update</title>
+        <link rel="stylesheet" href="/css/qna/header.css"/>
+        <link rel="stylesheet" href="/css/qna/footer.css"/>
+        <link rel="stylesheet" href="/css/skill-log/update.css"/>
+    </head>
+    <body>
+        <!-- 네비게이션 -->
+        <header th:replace="~{/qna/header.html::header}"></header>
+        <div id="wrap">
+
+            <div class="side-navigation">
+                <h2 class="skip">취업톡톡 세부메뉴</h2>
+                <div class="navi-top-area has-tooltip">
+                    <a
+                        href="javascript:;"
+                        class="select-tooltip btn-question qnaSpB"
+                        >블로그 글쓰기</a
+                    >
+                    <!-- [Dev] 툴팁오픈 : tooltip-open 클래스 추가 -->
+                    <div class="create-menu">
+                        <ul class="create-menu-wrap tooltip-layer qnaSpB">
+                            <li>
+                                <a
+                                    href="/skill-log/write"
+                                    class="create-menu-item qna qnaSpB devLoginLayer"
+                                    devalert="1"
+                                    data-wtypecode="1"
+                                    >블로그 작성하기</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="/skill-log/dashboard"
+                                    class="create-menu-item carrier qnaSpB devLoginLayer"
+                                    devalert="1"
+                                    data-wtypecode="2"
+                                    >내 글 목록</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 로그인시 프로필 -->
+                    <div class="myInfoSec" th:object="${aside}">
+                        <a href="/User/Qstn/MainProfile" class="myInfo">
+                            <span class="proThumb"
+                                ><img
+                                    onerror="
+                                        this.src =
+                                            'https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_default.jpg'
+                                    "
+                                    src="https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_5.jpg"
+                                    alt="프로필 이미지"
+                            /></span>
+
+                            <dl class="infoBx">
+                                <dt class="qnaSpA">
+                                    <span th:text="*{memberName}" class="nickname"></span>
+                                    <span th:text="|Lv.*{individualMemberLevel}|" class="lvIcon"></span>
+                                </dt>
+                                <dd>
+                                    <span>글 <b th:text="*{skillLogCount}"></b></span>
+                                    <span>질문 <b th:text="*{questionCount}"></b></span>
+                                </dd>
+                            </dl>
+                        </a>
+                        <button
+                            type="button"
+                            class="myPoint devMainCouponButton"
+                        >
+                            <span class="point qnaSpB" th:text="*{individualMemberPoint}"></span
+                            ><span class="btnCoupon qnaSpA">쿠폰교환</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="navi-list-area">
+                    <!-- [Dev] 메뉴 on : 클래스 active 추가 -->
+                    <div class="sideNavLow">
+                        <strong class="sideNavTit"
+                            ><a href="">블로그 메뉴</a></strong
+                        >
+                        <ul class="sideNavList">
+                            <li class="sideNavListItem">
+                                <a
+                                    href="/skill-log/list"
+                                    >블로그 홈</a
+                                >
+                            </li>
+                            <li class="sideNavListItem">
+                                <a href="/skill-log/write">블로그 작성</a>
+                            </li>
+                            <li class="sideNavListItem">
+                                <a href="/skill-log/dashboard">내 글 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+<!--                    <div class="sideNavLow">-->
+<!--                        <strong class="sideNavTit">실전공략</strong>-->
+<!--                        <ul class="sideNavList">-->
+<!--                            <li class="sideNavListItem">-->
+<!--                                <a href="">자소서 꿀팁</a>-->
+<!--                            </li>-->
+<!--                            <li class="sideNavListItem">-->
+<!--                                <a href="">회사 들여보기</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            <!-- 사이드 네비게이션 끝 -->
+            <!-- 글쓰기 작성 시작 -->
+            <div id="container">
+                <!-- 쓰기 : qnaWriteWrap -->
+                <div id="content" class="qnaWriteWrap devQnaWriteLayer">
+                    <input type="hidden" id="devGno" name="devGno" value="0" />
+                    <input type="hidden" id="devGiTitle" name="devGiTitle" />
+                    <input type="hidden" id="devCName" name="devCName" />
+                    <input
+                        type="hidden"
+                        id="devLogo"
+                        name="devLogo"
+                        value="//img.jobkorea.co.kr/Images/Logo/200/etc/_200.gif"
+                    />
+                    <input
+                        type="hidden"
+                        id="devWTypeCode"
+                        name="devWTypeCode"
+                        value="1"
+                    />
+                    <div class="top-title-wrap">
+                        <h2 class="title">블로그 작성</h2>
+                    </div>
+                    <div class="lyWriteBoard">
+                        <!-- 글쓰기 시작(제목, 내용) -->
+                        <div class="writeBoxWrap" th:object="${skillLog}">
+                            <form action="/skill-log/update" method="post" name="skil-log-update-form" enctype="multipart/form-data">
+<!--                                session-->
+                                <input type="hidden" name="memberId" th:value="${session.member.id}">
+                                <input type="hidden" name="id" th:value="*{id}">
+                                <fieldset>
+                                    <legend>제목 등록하기</legend>
+                                    <div class="jkTxInput">
+                                        <p class="inpWrap">
+                                            <input
+                                                type="text"
+                                                class="jkSchInp devQnaWriteTitle"
+                                                placeholder="블로그 제목을 입력해주세요."
+                                                name="skillLogTitle"
+                                                th:value="*{skillLogTitle}"
+                                            />
+                                        </p>
+                                    </div>
+                                    <!-- 체험공고, 링크, 사진 첨부 -->
+                                    <div class="editor-util">
+                                        <ul>
+                                            <li class="editor-util-item">
+                                                <button
+                                                    type="button"
+                                                    class="icon-recruit qnaSpB btn-layer-open"
+                                                >
+                                                    체험공고
+                                                </button>
+                                                <div
+                                                    class="layer-box-wrap opening-layer"
+                                                >
+                                                    <p class="layer-header">
+                                                        최근 체험 기록
+                                                    </p>
+                                                    <div
+                                                        class="jkSchInput keywordSearch keywordSearchRecruit"
+                                                    >
+                                                        <p class="inpWrap">
+                                                            <input
+                                                                type="text"
+                                                                class="schInp"
+                                                                id="AJAX_TS_Search"
+                                                                maxlength=""
+                                                                placeholder="체험 검색"
+                                                                title="학교명 입력"
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                class="btnSch qnaSpB devSearchRecruit"
+                                                            >
+                                                                <span
+                                                                    class="skip"
+                                                                    >검색</span
+                                                                >
+                                                            </button>
+                                                        </p>
+                                                        <div
+                                                            class="searchLayer thin"
+                                                        >
+                                                            <ul
+                                                                class="keyword-search-area"
+                                                            ></ul>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="layer-cont"
+                                                        id="recentRecruit"
+                                                        style="display: none"
+                                                    >
+                                                        <input
+                                                            type="hidden"
+                                                            id="RecentRecruitTotalCnt"
+                                                            value="1"
+                                                        />
+                                                        <div
+                                                            class="search-title-wrap"
+                                                        ></div>
+                                                        <div
+                                                            class="keyword-search-area"
+                                                        >
+<!--                                                            <th:block th:each="experienceProgram: ${experienceProgramLogs}">-->
+<!--                                                                <div th:object="${experienceProgram}" class="keyword-search-item">-->
+<!--                                                                    <div class="checkboxCommWrap">-->
+<!--                                                                        <input-->
+<!--                                                                            type="checkbox"-->
+<!--                                                                            class="skip"-->
+<!--                                                                            th:id="|recent-item-check_*{id}|"-->
+<!--                                                                            th:data-gno="*{id}"-->
+<!--                                                                            th:data-cname="*{corpCompanyName}"-->
+<!--                                                                            th:data-title="*{experienceProgramTitle}"-->
+<!--                                                                            data-logo=""-->
+<!--                                                                            style="display: none;"-->
+<!--                                                                        />-->
+<!--                                                                        <label class="qnaSpB" th:for="|recent-item-check_*{id}|"></label>-->
+<!--                                                                    </div>-->
+<!--                                                                    <a href="" target="_blank">-->
+<!--                                                                        <p class="companyName">-->
+<!--                                                                            <span th:text="*{corpCompanyName}" class="text_on"></span>-->
+<!--                                                                            <span th:text="*{experienceProgramTitle}"></span>-->
+<!--                                                                        </p>-->
+<!--                                                                    </a>-->
+<!--                                                                </div>-->
+<!--                                                            </th:block>-->
+                                                            <button
+                                                                type="button"
+                                                                class="search-more-button qnaSpA moreRecentRecruitList"
+                                                                style="
+                                                                    display: none;
+                                                                "
+                                                            >
+                                                                더보기
+                                                            </button>
+                                                        </div>
+                                                        <div
+                                                            class="layer-button"
+                                                        >
+                                                            <button
+                                                                type="button"
+                                                                class="apply attachRecruitBtn"
+                                                            >
+                                                                첨부하기
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="layer-cont"
+                                                        id="searchRecruit"
+                                                        style="display: none"
+                                                    ></div>
+                                                    <button
+                                                        type="button"
+                                                        class="btn-layer-close qnaSpB"
+                                                    >
+                                                        <span class="blind"
+                                                            >닫기</span
+                                                        >
+                                                    </button>
+                                                </div>
+                                            </li>
+<!--                                            <li class="editor-util-item">-->
+<!--                                                <button-->
+<!--                                                    type="button"-->
+<!--                                                    class="icon-link qnaSpB btn-layer-open"-->
+<!--                                                >-->
+<!--                                                    링크-->
+<!--                                                </button>-->
+<!--                                                <div-->
+<!--                                                    class="layer-box-wrap link-layer"-->
+<!--                                                >-->
+<!--                                                    <p class="layer-header">-->
+<!--                                                        링크첨부-->
+<!--                                                    </p>-->
+<!--                                                    <div-->
+<!--                                                        class="jkSchInput keywordSearch keywordSearchLink"-->
+<!--                                                    >-->
+<!--                                                        <p class="inpWrap">-->
+<!--                                                            <input-->
+<!--                                                                type="text"-->
+<!--                                                                class="schInp"-->
+<!--                                                                maxlength=""-->
+<!--                                                                placeholder="URL을 입력하세요"-->
+<!--                                                                title="학교명 입력"-->
+<!--                                                            />-->
+<!--                                                            <button-->
+<!--                                                                type="button"-->
+<!--                                                                class="btnSch qnaSpB devSearchLink"-->
+<!--                                                            >-->
+<!--                                                                <span-->
+<!--                                                                    class="skip"-->
+<!--                                                                    >검색</span-->
+<!--                                                                >-->
+<!--                                                            </button>-->
+<!--                                                        </p>-->
+<!--                                                    </div>-->
+<!--                                                    <div-->
+<!--                                                        class="loading"-->
+<!--                                                        style="display: none"-->
+<!--                                                    >-->
+<!--                                                        로딩중-->
+<!--                                                    </div>-->
+<!--                                                    <div-->
+<!--                                                        class="ApiOpenGraphResult"-->
+<!--                                                    ></div>-->
+<!--                                                    <div class="layer-button">-->
+<!--                                                        <button-->
+<!--                                                            type="button"-->
+<!--                                                            class="apply attachLinkBtn"-->
+<!--                                                        >-->
+<!--                                                            첨부하기-->
+<!--                                                        </button>-->
+<!--                                                    </div>-->
+
+<!--                                                    <button-->
+<!--                                                        type="button"-->
+<!--                                                        class="btn-layer-close qnaSpB"-->
+<!--                                                    >-->
+<!--                                                        <span class="blind"-->
+<!--                                                            >닫기</span-->
+<!--                                                        >-->
+<!--                                                    </button>-->
+<!--                                                </div>-->
+<!--                                            </li>-->
+                                            <li class="editor-util-item">
+                                                <button
+                                                    type="button"
+                                                    class="icon-photo qnaSpB btn-layer-open"
+                                                >
+                                                    사진
+                                                </button>
+                                                <input
+                                                    type="file"
+                                                    id="photoInput"
+                                                    accept="image/*"
+                                                    style="display: none"
+                                                    name="file"
+                                                    multiple
+                                                />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <input
+                                        type="hidden"
+                                        id="dev_ApiOpenGraph_default_img"
+                                        data-value="https://cdn-assets.jobkorea.co.kr/images/jk-pc/user/qna/talktalk_none_img.jpg"
+                                    />
+                                    <div class="uiPlaceholder">
+                                        <span class="ph" style="display: none"
+                                            >내용을 입력해주세요.<br />*휴대폰
+                                            번호, 메일 주소, 카카오톡 ID 등
+                                            개인정보가 포함된 내용은 비노출
+                                            처리될 수 있습니다</span
+                                        >
+                                        <div class="type-error-alert qnaSpB">
+                                            허용되지 않는 이미지 형식이 있어
+                                            제외됩니다.
+                                        </div>
+                                        <textarea
+                                            id="editorQnaText"
+                                            style="width: 100%; display: none"
+                                            class="devQnaWriteCntnt"
+                                            title="내용 입력"
+                                        >
+                                        &lt;p&gt;&lt;/p&gt;
+                                    </textarea
+                                        >
+                                        <!-- 실질적인 내용 작성하는 곳 -->
+                                        <div>
+                                            <div class="addFileAndLink">
+<!--                                                공고-->
+                                                <div class="attach-wrap" th:if="*{experienceProgramId != null}">
+                                                    <div class="attach-wrap attach-experience-program" th:data-gno="*{experienceProgramId}">
+                                                        <a href="/Recruit/GI_Read/48389550" target="_blank" class="attach-box">
+                                                            <span class="thumb-img-area">
+                                                                <img th:src="@{/api/files/display(filePath=*{experienceProgramFilePath}, fileName=*{experienceProgramFileName})}"
+                                                                     th:alt="*{corpCompanyName}" onerror="this.src='//img.jobkorea.co.kr/Images/Logo/200/l/o/logo_none_200.png'">
+                                                            </span>
+                                                            <div class="corp-info-area qnaSpA">
+                                                                <p class="corp-name" th:text="*{corpCompanyName}"></p>
+                                                                <p class="content" th:text="*{experienceProgramTitle}"></p>
+                                                            </div>
+                                                        </a>
+                                                        <button type="button" class="remove-button qnaSpB">삭제하기</button>
+                                                    </div>
+                                                </div>
+
+<!--                                                이미지-->
+                                                <th:block th:each="file: *{skillLogFiles}">
+                                                    <div class="attach-wrap attach-image" >
+                                                        <div class="attach-box type-image">
+                                                            <img th:src="@{/api/files/display(filePath=${file.filePath}, fileName=${file.fileName})}" alt="첨부 이미지">
+                                                        </div>
+                                                        <button type="button" th:id="|image${file.id}|" class="remove-button qnaSpB">삭제하기</button>
+                                                    </div>
+                                                </th:block>
+                                            </div>
+                                            <textarea
+                                                id="editorQnaText"
+                                                class="devQnaWriteCntnt custom-editor"
+                                                placeholder="내용을 입력해주세요.
+    *휴대폰 번호, 메일 주소, 카카오톡 ID 등 개인정보가 포함된 내용은 비노출 처리될 수 있습니다"
+                                                name="skillLogContent"
+                                                th:text="*{skillLogContent}"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- 태그 입력란 -->
+                                    <div class="tag-input">
+                                        <th:block th:each="tag: *{tags}">
+                                            <span class="tagDiv" th:id="|tag${tag.id}|" th:text="'#' + ${tag.tagName}"></span>
+                                        </th:block>
+                                        <input
+                                            type="text"
+                                            id="devTags"
+                                            placeholder="태그입력 (#없이 입력후 Enter를 눌러주세요. 태그를 클릭하면 삭제됩니다.)"
+                                            value=""
+                                        />
+                                    </div>
+                                    <!-- 질문하기, 취소 버튼 -->
+                                    <div class="btnCommWrap">
+                                        <button
+                                            type="button"
+                                            class="btnQuestion devQnaWriteButton"
+                                        >
+                                            등록하기
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btnCancel bg_white devQnaWriteCancelButton"
+                                        >
+                                            취소
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <!-- // writeBoxWrap -->
+                        <ul class="txInfoWrap">
+                            <li>
+                                개인정보를 공유 및 요청하거나, 명예 훼손, 무단
+                                광고, 불법 정보 유포 시 이에 대한 민형사상
+                                책임은 작성자에게 있습니다.
+                            </li>
+                            <li>
+                                개인정보가 포함되거나 부적절한 질문은 비노출
+                                또는 서비스 이용 정지 사유가 될 수 있습니다.
+                            </li>
+                            <li>인기 블로그로 추천될 수 있습니다.</li>
+                            <li>
+                                본 사이트와 관련없는 내용을 올릴 시 글이 삭제 될
+                                수 있습니다.
+                            </li>
+                        </ul>
+                        <!-- // txInfoWrap -->
+                    </div>
+                    <!-- // lyWriteBoard -->
+                </div>
+                <!-- // content -->
+            </div>
+        </div>
+        <footer th:replace="~{/qna/footer.html::footer}"></footer>
+    </body>
+    <script src="/js/skill-log/update/service.js"></script>
+    <script src="/js/skill-log/update/layout.js"></script>
+    <script src="/js/skill-log/update/event.js"></script>
+    <script src="/js/qna/header-event.js"></script>
+    <script src="/js/qna/footer.js"></script>
+</html>

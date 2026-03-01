@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.SkillLogLikesMapper">
+    <select id="selectCountBySkillLogId">
+        select count(*)
+        from tbl_skill_log_likes
+        where skill_log_id = #{id}
+    </select>
+
+    <select id="selectBySkillLogIdAndMemberId">
+        select id, member_id, skill_log_id, created_datetime, updated_datetime
+        from tbl_skill_log_likes
+        where skill_log_id = #{skillLogId} and member_id = #{memberId}
+    </select>
+
+    <insert id="insert">
+        insert into tbl_skill_log_likes(skill_log_id, member_id)
+        values (#{skillLogId}, #{memberId})
+    </insert>
+
+    <delete id="delete">
+        delete from tbl_skill_log_likes
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteBySkillLogId">
+        delete from tbl_skill_log_likes
+        where skill_log_id = #{id}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

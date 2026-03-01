@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전체 채험공고 | TRY-CATCH</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/program-management.css">
+</head>
+<body class="mtcSubNotice">
+    <div id="wrap">
+        <div th:replace="~{corporate/header :: header}"></div>
+        <div class="devUseTopBtn" id="container">
+            <!-- 배너 -->
+            <div class="banner-smartfit-notice">
+                <a href="" class="smartfit-banner-link" target="_blank">
+                    <img src="/images/corporate/banner-smartfit-manage.png">
+                </a>
+            </div>
+
+            <!-- 본문영역 시작-->
+            <div id="content">
+                <form th:action="@{/corporate/program-management}" id="form" method="get" name="form">
+                    <!-- 프로그램 상태별 -->
+                    <input id="statusInput" name="status" type="hidden" th:value="${currentStatus}">
+                    <!-- 개수별 -->
+                    <input id="TopCountInput" name="TopCount" type="hidden" th:value="${currentTopCount}">
+                    <!-- 정렬 -->
+                    <input id="sortInput" name="sort" type="hidden" th:value="${currentSort}">
+                    <!-- 페이지 -->
+                    <input id="pageInput" name="page" type="hidden" value="1">
+
+                    <!-- 전체 공고 -->
+                    <div class="noticeContent">
+                        <!-- header -->
+                        <div class="topArea">
+                            <h2 class="subTits">전체 채험공고</h2>
+                        </div>
+
+                        <!-- 메뉴(탭) -->
+                        <div class="mtcTplTab">
+                            <ul class="tabItems">
+                                <li th:classappend="${currentStatus == 'recruiting' ? 'on' : ''}">
+                                    <a th:href="@{/corporate/program-management(status='recruiting', TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}">모집중<span class="verdana" th:text="${programStats['recruiting']}">0</span></a>
+                                </li>
+                                <li th:classappend="${currentStatus == 'closed' ? 'on' : ''}">
+                                    <a th:href="@{/corporate/program-management(status='closed', TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}">모집마감<span class="verdana" th:text="${programStats['closed']}">0</span></a>
+                                </li>
+                                <li th:classappend="${currentStatus == 'draft' ? 'on' : ''}">
+                                    <a th:href="@{/corporate/program-management(status='draft', TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}">진행중<span class="verdana" th:text="${programStats['draft']}">0</span></a>
+                                </li>
+                                <li th:classappend="${currentStatus == 'cancelled' ? 'on' : ''}">
+                                    <a th:href="@{/corporate/program-management(status='cancelled', TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}">진행종료<span class="verdana" th:text="${programStats['cancelled']}">0</span></a>
+                                </li>
+                                <li th:classappend="${currentStatus == '' or currentStatus == null ? 'on' : ''}">
+                                    <a th:href="@{/corporate/program-management(TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}">전체<span class="verdana" th:text="${programStats['recruiting'] + programStats['closed'] + programStats['draft'] + programStats['cancelled']}">0</span></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <fieldset>
+                            <!-- 검색 필터 -->
+                            <div class="sort-select-box" th:classappend="${#lists.isEmpty(programWithPaging.list) ? 'notFound' : ''}">
+                                <div class="drop-down-box">
+                                    <!-- 날짜별 -->
+                                    <div class="button-box">
+                                        <button type="button" class="sort-button sort1"
+                                                th:text="${currentSort == 'created_asc' ? '과거 등록일순' :
+                                                           currentSort == 'updated_desc' ? '수정일순' :
+                                                           currentSort == 'deadline_asc' ? '마감일순' : '최근 등록일순'}">최근 등록일순</button>
+                                        <div class="sort-select-modal select-modal_common check-version">
+                                            <ul>
+                                                <li>
+                                                    <button type="button" data-sort="created_desc" th:classappend="${currentSort == null or currentSort == '' or currentSort == 'created_desc' ? 'active' : ''}">최근 등록일</button>
+                                                </li>
+                                                <li>
+                                                    <button type="button" data-sort="created_asc" th:classappend="${currentSort == 'created_asc' ? 'active' : ''}">과거 등록일</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- 개수별 -->
+                                    <div class="button-box">
+                                        <button type="button" class="sort-button sort2" th:text="${currentTopCount} + '개씩 보기'">10개씩 보기</button>
+                                        <div class="sort-select-modal select-modal_common">
+                                            <ul id="TopCount">
+                                                <li><button type="button" data-count="10">10개</button></li>
+                                                <li><button type="button" data-count="20">20개</button></li>
+                                                <li><button type="button" data-count="30">30개</button></li>
+                                                <li><button type="button" data-count="40">40개</button></li>
+                                                <li><button type="button" data-count="50">50개</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 담당자별 -->
+                                <div class="search-box input-box_common">
+                                    <div class="drop-down-box">
+                                        <div class="button-box">
+                                            <button type="button" class="sort-button sort3">담당자 전체</button>
+                                            <div class="sort-select-modal select-modal_common">
+                                                <ul id="lb_OfcName">
+                                                    <li><button type="button" data-value="">담당자 전체</button></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="text" id="SrchKeyword" maxlength="50" name="SrchKeyword" placeholder="공고제목, 담당자" th:value="${currentKeyword}">
+                                    <button type="submit" class="search-button"></button>
+                                </div>
+                            </div>
+
+                            <div class="rowWrap">
+                                <!-- 공고가 없을 경우 -->
+                                <div class="scNoSelectWrap" th:if="${#lists.isEmpty(programWithPaging.list)}">
+                                    <div class="noSelectInner">
+                                        <div class="scNoSelectAppList mngSpBefore">
+                                            <p class="tx"><strong>진행중인 공고가 없습니다.</strong></p>
+                                            <div class="noSelLink">
+                                                <a class="link" th:href="@{/corporate/program-apply}">공고등록하기</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 공고가 있을 경우 -->
+                                <div class="scSelectWrap" th:if="${!#lists.isEmpty(programWithPaging.list)}">
+                                    <div class="selectInner">
+                                        <ul class="scSelectAppList mngSpBefore">
+                                            <li class="scSelectAppItem" th:each="program : ${programWithPaging.list}">
+                                                <div class="manager">
+                                                    <h2 class="manager-name" th:text="${corpInfo.memberName}">담당자명</h2>
+                                                    <div class="department">
+                                                        <p>
+                                                            Phone: <span th:text="${corpInfo.memberPhone}">010-1234-1234</span> &nbsp; | &nbsp; Email: <span th:text="${corpInfo.memberEmail}">test@gmail.com</span>
+                                                        </p>
+                                                    </div>
+                                                    <button type="button" class="moreOptionButton">
+                                                        <span>
+                                                            <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                                                        </span>
+                                                    </button>
+                                                    <div class="more-option">
+                                                        <ul>
+                                                            <li>
+                                                                <a th:href="@{/corporate/program-update(id=${program.id})}">
+                                                                    <button type="button" class="updateBtn">공고 수정</button>
+                                                                </a>
+                                                            </li>
+                                                            <li th:if="${program.experienceProgramStatus.name() == 'RECRUITING' or program.experienceProgramStatus.name() == 'CLOSED'}">
+                                                                <a th:href="@{/corporate/applicant-list(programId=${program.id})}">
+                                                                    <button type="button" class="applicantBtn">지원자 관리</button>
+                                                                </a>
+                                                            </li>
+                                                            <li th:if="${program.experienceProgramStatus.name() == 'DRAFT' or program.experienceProgramStatus.name() == 'CANCELLED'}">
+                                                                <a th:href="@{/corporate/participant-list(programId=${program.id})}">
+                                                                    <button type="button" class="participantBtn">참여자 관리</button>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <a href="#" class="program-detail-link">
+                                                    <div class="program-title">
+                                                        <h3 class="title" th:text="${program.experienceProgramTitle}">프로그램 제목</h3>
+                                                    </div>
+                                                    <ul class="keywords">
+                                                        <li class="item status"
+                                                            th:text="${program.experienceProgramStatus.name() == 'RECRUITING' ? '모집중' :
+                                                                       program.experienceProgramStatus.name() == 'CLOSED' ? '모집마감' :
+                                                                       program.experienceProgramStatus.name() == 'DRAFT' ? '진행중' : '진행종료'}">상태</li>
+                                                        <li class="item" th:if="${program.experienceProgramLevel != null and program.experienceProgramLevel != ''}" th:text="${program.experienceProgramLevel}">체험형</li>
+                                                        <li class="item" th:if="${program.experienceProgramJob != null and program.experienceProgramJob != ''}" th:text="${program.experienceProgramJob}">개발부</li>
+                                                        <li class="item" th:if="${program.experienceProgramWorkDays != null and program.experienceProgramWorkDays != ''}" th:text="${program.experienceProgramWorkDays}">4주</li>
+                                                        <li class="item" th:if="${program.experienceProgramDeadline != null and program.experienceProgramDeadline != ''}"
+                                                            th:with="dday=${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), T(java.time.LocalDate).parse(program.experienceProgramDeadline))}"
+                                                            th:text="${dday >= 0 ? 'D-' + dday : 'D+' + T(java.lang.Math).abs(dday)}">D-7</li>
+                                                        <li class="item" th:text="${program.experienceProgramRecruitmentCount} + '명'">15명</li>
+                                                    </ul>
+                                                    <div class="program-description">
+                                                        <p th:text="${program.descriptionText}">프로그램 간단 설명글</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- 페이지네이션 -->
+                                <div class="pagination" th:if="${programWithPaging.criteria.realEnd > 1}" style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:24px; padding-bottom:20px;">
+                                    <a th:if="${programWithPaging.criteria.page > 1}"
+                                       th:href="@{/corporate/program-management(page=1, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"
+                                       style="padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;">&#171;</a>
+                                    <a th:if="${programWithPaging.criteria.page > 1}"
+                                       th:href="@{/corporate/program-management(page=${programWithPaging.criteria.page - 1}, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"
+                                       style="padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;">&#8249;</a>
+                                    <th:block th:each="pageNum : ${#numbers.sequence(programWithPaging.criteria.startPage, programWithPaging.criteria.endPage)}">
+                                        <a th:href="@{/corporate/program-management(page=${pageNum}, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"
+                                           th:text="${pageNum}"
+                                           th:style="${pageNum == programWithPaging.criteria.page ? 'padding:6px 12px; border:1px solid #006e3f; border-radius:4px; text-decoration:none; color:#fff; background-color:#006e3f; font-weight:bold;' : 'padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;'}">1</a>
+                                    </th:block>
+                                    <a th:if="${programWithPaging.criteria.page < programWithPaging.criteria.realEnd}"
+                                       th:href="@{/corporate/program-management(page=${programWithPaging.criteria.page + 1}, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"
+                                       style="padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;">&#8250;</a>
+                                    <a th:if="${programWithPaging.criteria.page < programWithPaging.criteria.realEnd}"
+                                       th:href="@{/corporate/program-management(page=${programWithPaging.criteria.realEnd}, status=${currentStatus}, TopCount=${currentTopCount}, SrchKeyword=${currentKeyword}, sort=${currentSort})}"
+                                       style="padding:6px 12px; border:1px solid #ddd; border-radius:4px; text-decoration:none; color:#333;">&#187;</a>
+                                </div>
+                            </div>
+
+                            <div class="noticeBx">
+                                <ul>
+                                    <li>체험 프로그램은 <em>지원자 모집 → 참여 → 검증 → 종료</em> 단계로 진행됩니다.</li>
+                                    <li>참여자는 프로그램 시작 이후 <em>중도 이탈이 가능</em>하며, 이력에 기록됩니다. </li>
+                                    <li>기업은 참여자의 <em>과제 수행, 참여도, 커뮤니케이션 기록</em>을 통해 인재를 검증할 수 있습니다.</li>
+                                    <li>체험 프로그램은 채용 확정을 의미하지 않으며, <em>기업의 채용 판단을 돕기 위한 검증 과정</em>입니다.</li>
+                                    <li>프로그램 내용 및 운영 방식은 <em>기업이 직접 수정·관리</em>할 수 있습니다. </li>
+                                </ul>
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 맨위로 -->
+            <div class="mtcTopBx">
+                <a id="btnMtcTop" href="#skipNavigation" class="mtcBtn btnMtcTop"></a>
+            </div>
+        </div>
+        <div th:replace="~{corporate/footer :: footer}"></div>
+    </div>
+</body>
+<script src="/js/corporate/program-management/event.js"></script>
+</html>

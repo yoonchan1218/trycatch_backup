@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>company-join</title>
+    <link rel="stylesheet" href="/css/main/company-join.css">
+</head>
+<body class="jkJoin jkJoin_company" style="">
+<div id="wrap">
+    <div id="header">
+        <h1>
+            <a href="https://www.jobkorea.co.kr"
+            ><img
+                    src="https://i.jobkorea.kr/content/images/member/gnb/h_logo_jobkorea.png"
+                    alt=""
+            /></a>
+        </h1>
+        <h3 class="skip">글로벌 메뉴</h3>
+        <ul class="gnb f_clear">
+            <li><a href="">TRY-CATCH 홈</a></li>
+        </ul>
+
+        <h3 class="skip">회원 형태별 가입</h3>
+        <ul class="snb f_clear">
+            <li class="person">
+                <a href="/main/individual-join">개인회원</a>
+            </li>
+            <li class="corp on">
+                <a href="">기업회원</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="container" class="mbrRegist">
+        <h3 class="skip">기업 회원가입 정보</h3>
+        <fieldset>
+            <legend>기업 회원가입</legend>
+            <form
+                    action="/main/company-join"
+                    method="POST"
+                    id="form"
+                    name="form"
+                    enctype="multipart/form-data"
+            >
+                <!-- 기업 정보 -->
+                <div class="row row_group">
+                    <h4>기업정보</h4>
+                    <div class="headingGuide"><i>*</i>필수정보</div>
+
+                    <div class="row mbr_name mbr_co_type">
+                        <div class="col_1">
+                            <label class="mbr_name" for="Corp_Type"
+                            >기업형태<i class="icon required" aria-hidden="hidde">*</i></label>
+                        </div>
+                        <div class="col_2">
+                            <div class="select_wrap dev-corp-type">
+                                <select id="Corp_Type" name="corpCompanyType">
+                                    <option value=""></option>
+                                    <option value="대기업">대기업</option>
+                                    <option value="대기업 계열사·자회사">대기업 계열사·자회사</option>
+                                    <option value="중소기업">중소기업(300명이하)</option>
+                                    <option value="중견기업">중견기업(300명이상)</option>
+                                    <option value="벤처기업">벤처기업</option>
+                                    <option value="공공기관·공기업">국내 공공기관·공기업</option>
+                                    <option value="비영리단체">비영리단체·협회·교육재단</option>
+                                </select>
+                            </div>
+                            <div class="notice_msg" style="display: none"></div>
+                        </div>
+                    </div>
+                    <div class="row company_num">
+                        <div class="col_1">
+                            <label for="Corp_RegNum"
+                            >사업자등록번호<i class="icon required" aria-hidden="hidde">*</i></label>
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    name="corpBusinessNumber"
+                                    id="Corp_RegNum"
+                                    class="mbr_name dev-corp-num"
+                                    maxlength="12"
+                                    value=""
+                                    autocomplete="off"
+                            />
+                            <div class="notice_msg" id="notice_msg_regnum"></div>
+                        </div>
+                    </div>
+                    <div class="rows">
+                        <div class="row company_name">
+                            <div class="col_1">
+                                <label class="mbr_name" for="Corp_Name"
+                                >회사명<i class="icon required" aria-hidden="hidde">*</i></label>
+                            </div>
+                            <div class="col_2">
+                                <input
+                                        class="mbr_name dev-corp-name"
+                                        id="Corp_Name"
+                                        maxlength="50"
+                                        name="corpCompanyName"
+                                        type="text"
+                                        value=""
+                                        autocomplete="off"
+                                />
+                                <div class="notice_msg" id="notice_msg_corp_name"></div>
+                            </div>
+                        </div>
+                        <div class="row company_bossname">
+                            <div class="col_1">
+                                <label class="mbr_name" for="Boss_Name"
+                                >대표자명<i class="icon required" aria-hidden="hidde">*</i></label>
+                            </div>
+                            <div class="col_2">
+                                <input
+                                        class="mbr_name dev-ceo-name"
+                                        id="Boss_Name"
+                                        maxlength="20"
+                                        name="corpCeoName"
+                                        type="text"
+                                        value=""
+                                        autocomplete="off"
+                                />
+                                <div class="notice_msg" id="notice_msg_ceo_name"></div>
+                            </div>
+                        </div>
+                        <p class="company_customer-center">
+                            회사명, 대표자명 수정이 필요한 경우, 가입 후
+                            고객센터 (12345-5678) 로 문의 해 주세요.
+                        </p>
+                    </div>
+
+                    <!-- 주소 영역 -->
+                    <div class="row mbr_zipcode">
+                        <a
+                                href="javascript:void(0)"
+                                onclick="execDaumPostcode()"
+                                class="input is-label input-profile-addr"
+                        >
+                            <!-- ★ id="addressLabel" 추가: 주소 선택 후 숨김 처리용 -->
+                            <div class="label" id="addressLabel">
+                                회사주소<i class="icon required" aria-hidden="hidde">*</i>
+                            </div>
+                            <div class="value" id="addressDisplay"></div>
+                            <i class="icon icon-search" aria-hidden="true"></i>
+                            <div class="notice_msg" id="msg_addr"></div>
+                        </a>
+                        <input type="hidden" id="addressZipcode" name="addressZipcode" />
+                        <input type="hidden" id="addressAddress" name="addressAddress" />
+                        <input type="hidden" id="addressDetail" name="addressDetail" />
+                    </div>
+                </div>
+
+                <!-- 기업인증 - 사업자등록증명원 -->
+                <div class="row row_group mbr_info company_cert">
+                    <h4>기업인증</h4>
+                    <div class="row certificate_num">
+                        <div class="col_1">
+                            <label for="CRTFCT_Issue_No">사업자등록증명원 발급번호</label>
+                        </div>
+                        <button type="button" class="button layer-popup-button devCorpCertInfo">
+                            사업자등록번호 입력가이드
+                        </button>
+                        <div class="layer-popup devCorpCertInfoPopup">
+                            <div class="layer-popup-dim"></div>
+                            <div class="layer-popup-content">
+                                <button type="button" class="layer-popup-close devCorpCertInfoCls">
+                                    <span class="skip">닫기</span>
+                                </button>
+                                <p class="layer-popup-title">사업자등록증명원 발급번호란?</p>
+                                <p class="layer-popup-text">
+                                    사업자등록증명원 <em class="point-color">최상단 좌측 문서 고유 발급번호</em>입니다.
+                                </p>
+                                <div class="layer-popup-table">
+                                    <table class="layer-table">
+                                        <colgroup>
+                                            <col class="col1" />
+                                            <col class="col2" />
+                                        </colgroup>
+                                        <tbody>
+                                        <tr>
+                                            <td class="cell-title">발급번호</td>
+                                            <td class="cell-item" rowspan="2">
+                                                <strong>사업자등록증명</strong><br />(부가가치세 면세사업자)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cell-value">0000-000-0000-000</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="layer-popup-text">
+                                    기업인증을 위해서는 신청일 기준 90일 이내 발급한<br />사업자등록증명원의 발급번호가 필요합니다.
+                                </p>
+                                <a
+                                        href="https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09002&amp;CappBizCD=12100000016&amp;tp_seq=01"
+                                        target="_blank"
+                                        class="layer-popup-link"
+                                >사업자등록증명원 발급하기</a>
+                            </div>
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    name="CRTFCT_Issue_No"
+                                    id="CRTFCT_Issue_No"
+                                    class="mbr_name dev-corp-cert CRTFCT_Issue_No"
+                                    maxlength="20"
+                                    value=""
+                                    autocomplete="off"
+                            />
+                            <div class="notice_msg" id="notice_msg_cert"></div>
+                        </div>
+                    </div>
+                    <p class="company_customer-center">
+                        <em>발급일 90일 이내</em> 이내 사업자등록증명원의 발급번호만 가능합니다.
+                    </p>
+                </div>
+
+                <!-- 인사담당자 정보 -->
+                <div class="row_group line_bottom mbr_info">
+                    <h4>인사담당자 정보</h4>
+                    <div class="headingButtons">
+                        <a href="" target="_blank" class="button">Overseas Corporate Help</a>
+                    </div>
+                    <!-- 인증 -->
+                    <div class="certification">
+                        <div class="col colHp">
+                            <button type="button" class="devCertifyPhone devCertifyBtn" data-certify-type="phone">
+                                <div class="header">본인 인증</div>
+                                <div class="description">
+                                    본인 인증 시 제공되는 정보는 인증 이외 용도로 이용 또는 저장되지 않습니다.
+                                </div>
+                            </button>
+                        </div>
+                        <img src="/images/logo.png" style="margin-left: 25px;">
+                    </div>
+                    <!-- 기본정보 -->
+                    <div class="rows">
+                        <div class="row mbr_id">
+                            <div class="col_1">
+                                <label for="U_ID">아이디<i class="icon required" aria-hidden="hidde">*</i></label>
+                            </div>
+                            <div class="col_2">
+                                <input
+                                        id="U_ID"
+                                        maxlength="16"
+                                        name="memberId"
+                                        class="dev-id"
+                                        type="text"
+                                        value=""
+                                        autocomplete="off"
+                                />
+                                <div class="notice_msg" id="notice_msg_id"></div>
+                            </div>
+                        </div>
+                        <div class="row mbr_passwd">
+                            <div class="col_1">
+                                <label for="U_PWD">비밀번호<i class="icon required" aria-hidden="hidde">*</i></label>
+                            </div>
+                            <div class="col_2">
+                                <input
+                                        id="U_PWD"
+                                        class="dev-password"
+                                        maxlength="16"
+                                        name="memberPassword"
+                                        type="password"
+                                        style="ime-mode: disabled"
+                                        value=""
+                                        autocomplete="off"
+                                />
+                                <button type="button" class="btnHelp devPwdHelpBtn" title="안전한 비밀번호 작성법">?</button>
+                                <!-- ★ lyHelp 초기 숨김: style="display: none" 추가 -->
+                                <div class="lyHelp" style="display: none">
+                                    <dl>
+                                        <dt>안전한 비밀번호 작성법</dt>
+                                        <dd>
+                                            <ol>
+                                                <li>8~16자의 영문 대소문, 숫자, 특수기호만 사용가능 (공백입력 불가)</li>
+                                                (사용 가능한 특수문자는 ! "# $ % &amp; ( ) * + , - . / : ; ? @ [ ] ^ _ { } ~ 입니다.)
+                                                <li>3자 이상 연속 영문/숫자 조합은 사용불가 (AAA. 111)</li>
+                                                <li>아이디, 반복되는 영문/숫자 조합은 사용불가 (1234, ABCD)</li>
+                                                <li>키보드의 연속 패턴은 사용하지 마세요. (ASDF)</li>
+                                                <li>비밀번호는 주기적으로 변경하여 안전하게 관리하기</li>
+                                            </ol>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="notice_msg" id="notice_msg_pwd">
+                                    <p class="failure"></p>
+                                </div>
+                            </div>
+                            <div class="col_3">
+                                <button type="button" class="mbrBtnAuth dev-password-dp">
+                                    <span>표시</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ★ 가입자명: mbr_manager_name 클래스 추가 -->
+                    <div class="row mbr_name mbr_manager_name">
+                        <div class="col_1">
+                            <label class="mbr_name" for="Mem_Name"
+                            >가입자명<i class="icon required" aria-hidden="hidde">*</i></label>
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    class="mbr_name dev-name"
+                                    id="Mem_Name"
+                                    maxlength="12"
+                                    name="memberName"
+                                    type="text"
+                                    value=""
+                                    autocomplete="off"
+                            />
+                            <div class="notice_msg" id="notice_msg_name"></div>
+                        </div>
+                    </div>
+                    <div class="row mbr_phone">
+                        <div class="col_1">
+                            <label class="mbr_phone" for="Corp_Phone"
+                            >전화번호<i class="icon required" aria-hidden="hidde">*</i></label>
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    class="mbr_phone dev-phone"
+                                    id="Corp_Phone"
+                                    maxlength="13"
+                                    name="memberPhone"
+                                    title="전화번호"
+                                    type="text"
+                                    value=""
+                                    autocomplete="off"
+                            />
+                            <div class="notice_msg" id="notice_msg_phone">
+                                <p class="failure">필수 정보입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mbr_email">
+                        <div class="col_1">
+                            <label for="Email_ID" class="mbr_email_id"
+                            >이메일<i class="icon required" aria-hidden="hidde">*</i></label>
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    id="email"
+                                    name="memberEmail"
+                                    class="mbr_email_id dev-mail"
+                                    size="8"
+                                    maxlength="100"
+                                    value=""
+                                    autocomplete="off"
+                            />
+                            <div class="notice_msg" id="notice_msg_mail"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="skip">약관 동의</h4>
+                <div class="row_group line_all policy">
+                    <div class="row policy_check_all">
+                        <input type="checkbox" id="lb_chk_all" class="mbrCheckOff" autocomplete="off" />
+                        <label for="lb_chk_all" class="chk_all">
+                                    <span class="txt">
+                                        필수동의 항목 및 개인정보 수집 및 이용 동의(선택), 광고성 정보 수신
+                                        <br />동의(선택)에 모두 동의합니다.
+                                    </span>
+                        </label>
+                    </div>
+                    <div class="row policy_check_service required">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_service"
+                                name="Service_Agree"
+                                class="mbrCheckOn devAgreeCheck"
+                                value="1"
+                                autocomplete="off"
+                        />
+                        <label for="lb_chk_service" class="chk_service">
+                            <strong>[필수]</strong> 이용약관 동의
+                            <a href="#DevPolicyService" class="mbrBtnPolicy devPolicyService">내용보기</a>
+                        </label>
+                        <div id="DevPolicyService" class="policyTplBox" style="display: none">
+                            <div class="pvsSec pvsCntTp">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row policy_check_privacy required">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_sms"
+                                name="SMS_Agreee"
+                                class="mbrCheckOn devAgreeCheck"
+                                value="1"
+                                autocomplete="off"
+                        />
+                        <label for="lb_chk_sms" class="chk_sms">
+                            <strong>[필수]</strong> 문자서비스 이용약관 동의
+                            <a href="#DevPolicySMS" class="mbrBtnPolicy devPolicyService">내용보기</a>
+                        </label>
+                        <div id="DevPolicySMS" class="policyTplBox" style="display: none">
+                            <div class="pvsSec pvsTpList">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row policy_check_privacyOptional optional">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_privacyOptional"
+                                name="memberAgreePrivacy"
+                                class="mbrCheckOn devAgreeCheck"
+                                value="true"
+                                autocomplete="off"
+                        />
+                        <label for="lb_chk_privacyOptional" class="chk_privacyOptional">
+                            [선택] 개인정보 수집 및 이용 동의
+                            <a href="#DevPolicyPrivacyOptional" class="mbrBtnPolicy devPolicyService">내용보기</a>
+                        </label>
+                        <div id="DevPolicyPrivacyOptional" class="policyTplBox" style="display: none">
+                            <div class="pvsSec pvsTpList">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row policy_check_privacyOptional optional">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_ad_info"
+                                name="memberAgreeMarketing"
+                                class="mbrCheckOn devAgreeCheck"
+                                value="true"
+                                autocomplete="off"
+                        />
+                        <label for="lb_chk_ad_info" class="chk_privacyOptional">
+                            [선택] 광고성 정보 수신 동의
+                            <a href="#DevPolicyPrivacyOptional2" class="mbrBtnPolicy devPolicyService">내용보기</a>
+                        </label>
+                        <div id="DevPolicyPrivacyOptional2" class="policyTplBox" style="display: none">
+                            <div class="pvsSec pvsTpList">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notice_msg" id="notice_msg_agree" style="display: none">
+                        <p class="failure">TRY-CATCH 이용약관과 개인정보 수집 및 이용(필수)에 모두 동의해주세요.</p>
+                    </div>
+                </div>
+
+                <!-- 가입하기 버튼 -->
+                <div class="row_group line_none regist_complete" style="position: relative">
+                    <div class="row">
+                        <button type="submit" class="mbrBtnRegist dev-submit">
+                            가입하기
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+        <div class="familysite">
+            <h3 class="skip">Family site</h3>
+            <p class="text">
+                <strong>통합 ID 하나로</strong> TRY-CATCH 모든 서비스 이용 가능합니다
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="copyright">
+        &copy;
+        <strong><a href="" target="_blank">TRY-CATCH</a></strong>
+        LLC. All rights reserved.
+    </div>
+</div>
+</body>
+
+<script src="/js/member/join/corporate-service.js"></script>
+<script src="/js/main/join/company-join-event.js"></script>
+
+<!-- 다음 우편번호 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.getElementById('addressZipcode').value = data.zonecode;
+
+                var addr = '';
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+                document.getElementById('addressAddress').value = addr;
+
+                // ★ 주소 표시 텍스트 설정
+                document.getElementById('addressDisplay').textContent =
+                    '[' + data.zonecode + '] ' + addr;
+
+                // ★ is-value 클래스 추가 → 라벨 축소 + value 영역 세로 정렬
+                var addrLink = document.querySelector('.input-profile-addr');
+                if (addrLink) {
+                    addrLink.classList.add('is-value');
+                }
+
+                // ★ 주소 에러 메시지 제거
+                var addrNotice = document.getElementById('msg_addr');
+                if (addrNotice) {
+                    addrNotice.innerHTML = '';
+                    addrNotice.classList.remove('failure');
+                    addrNotice.style.display = 'none';
+                }
+            }
+        }).open();
+    }
+</script>
+</html>

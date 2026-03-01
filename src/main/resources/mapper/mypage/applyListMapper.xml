@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.mypage.ApplyListMapper">
+
+
+    <select id="selectAllByMemberId" resultType="ApplyListDTO">
+        select
+            a.id                            as applyId,
+            a.experience_program_id,
+            a.apply_status,
+            date_format(a.created_datetime, '%Y.%m.%d') as applyCreatedDatetime,
+            ep.experience_program_title,
+            ep.experience_program_job,
+            ep.experience_program_deadline,
+            ep.experience_program_status,
+            ep.experience_program_level,
+            ep.experience_program_recruitment_count,
+            (select count(*) from tbl_apply
+             where experience_program_id = ep.id
+               and apply_status != 'cancelled') as applicantCount,
+            c.corp_company_name
+        from tbl_apply a
+        left join tbl_experience_program ep on a.experience_program_id = ep.id
+        left join tbl_corp c on ep.corp_id = c.id
+        where a.member_id = #{memberId}
+        order by a.created_datetime desc
+    </select>
+
+
+    <sql id="filterCondition">
+        <if test="fromDt != null and fromDt != ''">
+            and a.created_datetime >= #{fromDt}
+        </if>
+        <if test="toDt != null and toDt != ''">
+            and a.created_datetime &lt; date_add(#{toDt}, interval 1 day)
+        </if>
+        <if test="programStatus != null and programStatus != ''">
+            and ep.experience_program_status = #{programStatus}
+        </if>
+        <if test="applyStatus != null and applyStatus != ''">
+            and a.apply_status = #{applyStatus}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and (c.corp_company_name like concat('%', #{keyword}, '%')
+              or ep.experience_program_title like concat('%', #{keyword}, '%'))
+        </if>
+    </sql>
+
+    <select id="selectAllByMemberIdWithFilter" resultType="ApplyListDTO">
+        select
+            a.id                            as applyId,
+            a.experience_program_id,
+            a.apply_status,
+            date_format(a.created_datetime, '%Y.%m.%d') as applyCreatedDatetime,
+            ep.experience_program_title,
+            ep.experience_program_job,
+            ep.experience_program_deadline,
+            ep.experience_program_status,
+            ep.experience_program_level,
+            ep.experience_program_recruitment_count,
+            (select count(*) from tbl_apply
+             where experience_program_id = ep.id
+               and apply_status != 'cancelled') as applicantCount,
+            c.corp_company_name
+        from tbl_apply a
+        left join tbl_experience_program ep on a.experience_program_id = ep.id
+        left join tbl_corp c on ep.corp_id = c.id
+        where a.member_id = #{memberId}
+        <include refid="filterCondition"/>
+        order by a.created_datetime desc
+    </select>
+
+    <select id="selectAllByMemberIdWithFilterAndPaging" resultType="ApplyListDTO">
+        select
+            a.id                            as applyId,
+            a.experience_program_id,
+            a.apply_status,
+            date_format(a.created_datetime, '%Y.%m.%d') as applyCreatedDatetime,
+            ep.experience_program_title,
+            ep.experience_program_job,
+            ep.experience_program_deadline,
+            ep.experience_program_status,
+            ep.experience_program_level,
+            ep.experience_program_recruitment_count,
+            (select count(*) from tbl_apply
+             where experience_program_id = ep.id
+               and apply_status != 'cancelled') as applicantCount,
+            c.corp_company_name
+        from tbl_apply a
+        left join tbl_experience_program ep on a.experience_program_id = ep.id
+        left join tbl_corp c on ep.corp_id = c.id
+        where a.member_id = #{memberId}
+        <include refid="filterCondition"/>
+        order by a.created_datetime desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountByMemberIdWithFilter" resultType="int">
+        select count(*)
+        from tbl_apply a
+        left join tbl_experience_program ep on a.experience_program_id = ep.id
+        left join tbl_corp c on ep.corp_id = c.id
+        where a.member_id = #{memberId}
+        <include refid="filterCondition"/>
+    </select>
+
+    <select id="selectStatusCountsByMemberIdWithFilter" resultType="ApplyListWithPagingDTO">
+        select
+            sum(case when a.apply_status = 'applied' then 1 else 0 end)        as appliedCount,
+            sum(case when a.apply_status = 'document_pass' then 1 else 0 end)  as documentPassCount,
+            sum(case when a.apply_status = 'document_fail' then 1 else 0 end)  as documentFailCount,
+            sum(case when a.apply_status = 'activity_done' then 1 else 0 end)  as activityDoneCount
+        from tbl_apply a
+        left join tbl_experience_program ep on a.experience_program_id = ep.id
+        left join tbl_corp c on ep.corp_id = c.id
+        where a.member_id = #{memberId}
+        <include refid="filterCondition"/>
+    </select>
+
+</mapper>

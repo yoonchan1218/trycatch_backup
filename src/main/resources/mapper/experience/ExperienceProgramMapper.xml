@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.experience.ExperienceProgramMapper">
+    <sql id="searchWithMemberIdOfChallenger">
+        member_id = #{id}
+        <if test="search.keyword != null and search.keyword != ''.toString()">
+            and (
+            experience_program_title like concat('%', #{search.keyword}, '%')
+            or
+            corp_company_name like concat('%', #{search.keyword}, '%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectAllByMemberIdOfChallenger">
+        select *
+        from view_challenger_program
+        <where>
+            <include refid="searchWithMemberIdOfChallenger"></include>
+        </where>
+        order by created_datetime desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectTotalByMemberIdOfChallenger">
+        select count(*)
+        from view_challenger_program
+        <where>
+            <include refid="searchWithMemberIdOfChallenger"></include>
+        </where>
+    </select>
+
+    <!-- 기업 대시보드: 상태별 프로그램 수 -->
+    <select id="countByStatus" resultType="map">
+        SELECT
+            COALESCE(SUM(experience_program_status = 'draft'), 0)      AS draft,
+            COALESCE(SUM(experience_program_status = 'recruiting'), 0) AS recruiting,
+            COALESCE(SUM(experience_program_status = 'closed'), 0)     AS closed,
+            COALESCE(SUM(experience_program_status = 'cancelled'), 0)  AS cancelled
+        FROM tbl_experience_program
+        WHERE corp_id = #{corpId}
+    </select>
+
+    <!-- 기업 대시보드: 최신 프로그램 N개 -->
+    <select id="selectLatestByCorpId" resultType="ExperienceProgramDTO">
+        SELECT ep.id, ep.experience_program_title, ep.experience_program_description,
+               ep.experience_program_level, ep.experience_program_status,
+               ep.experience_program_deadline, ep.experience_program_recruitment_count,
+               ep.created_datetime, ep.updated_datetime
+        FROM tbl_experience_program ep
+        WHERE ep.corp_id = #{corpId}
+        ORDER BY ep.created_datetime DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 기업 프로그램 관리: 전체 개수 (필터) -->
+    <select id="countByCorpId" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_experience_program ep
+        JOIN tbl_member m ON ep.corp_id = m.id
+        WHERE ep.corp_id = #{corpId}
+        <if test="status != null and status != ''">
+            AND ep.experience_program_status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (ep.experience_program_title LIKE CONCAT('%', #{keyword}, '%')
+                 OR m.member_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <!-- 기업 프로그램 관리: 목록 (페이징 + 필터) -->
+    <select id="selectByCorpId" resultType="ExperienceProgramDTO">
+        SELECT ep.id, ep.experience_program_title, ep.experience_program_description,
+               ep.experience_program_level, ep.experience_program_recruitment_count,
+               ep.experience_program_work_days, ep.experience_program_work_hours,
+               ep.experience_program_deadline, ep.experience_program_status,
+               ep.experience_program_view_count, ep.created_datetime, ep.updated_datetime,
+               ep.corp_id
+        FROM tbl_experience_program ep
+        JOIN tbl_member m ON ep.corp_id = m.id
+        WHERE ep.corp_id = #{corpId}
+        <if test="status != null and status != ''">
+            AND ep.experience_program_status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (ep.experience_program_title LIKE CONCAT('%', #{keyword}, '%')
+                 OR m.member_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <choose>
+            <when test="sort == 'created_asc'">ORDER BY ep.created_datetime ASC</when>
+            <when test="sort == 'updated_desc'">ORDER BY ep.updated_datetime DESC</when>
+            <when test="sort == 'deadline_asc'">ORDER BY ep.experience_program_deadline ASC</when>
+            <otherwise>ORDER BY ep.created_datetime DESC</otherwise>
+        </choose>
+        LIMIT #{criteria.count} OFFSET #{criteria.offset}
+    </select>
+
+    <sql id="publicProgramFilter">
+        <if test="status != null and status != '' and status != 'all'">
+            and ep.experience_program_status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and (
+                ep.experience_program_title like concat('%', #{keyword}, '%')
+                or co.corp_company_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+        <if test="job != null and job != ''">
+            and ep.experience_program_job like concat('%', #{job}, '%')
+        </if>
+    </sql>
+
+    <!-- 체험 프로그램 목록(공개): 전체 개수 (필터) -->
+    <select id="countPublic" resultType="int">
+        select count(*)
+        from tbl_experience_program ep
+        join tbl_corp co on ep.corp_id = co.id
+        where 1=1
+        <include refid="publicProgramFilter"/>
+    </select>
+
+    <!-- 체험 프로그램 목록(공개): 목록 (페이징 + 필터) -->
+    <select id="selectPublic" resultType="ExperienceProgramDTO">
+        select
+            ep.id,
+            ep.experience_program_title,
+            ep.experience_program_description,
+            ep.experience_program_level,
+            ep.experience_program_recruitment_count,
+            ep.experience_program_work_days,
+            ep.experience_program_work_hours,
+            ep.experience_program_deadline,
+            ep.experience_program_status,
+            ep.experience_program_view_count,
+            ep.experience_program_job,
+            ep.created_datetime,
+            ep.updated_datetime,
+            ep.corp_id,
+            co.corp_company_name,
+            co.corp_company_type
+        from tbl_experience_program ep
+        join tbl_corp co on ep.corp_id = co.id
+        where 1=1
+        <include refid="publicProgramFilter"/>
+        <choose>
+            <when test="sort == 'views'">order by ep.experience_program_view_count desc, ep.created_datetime desc</when>
+            <when test="sort == 'deadline'">order by ep.experience_program_deadline asc, ep.created_datetime desc</when>
+            <otherwise>order by ep.created_datetime desc</otherwise>
+        </choose>
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <!-- 프로그램 등록 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_experience_program (
+            corp_id, experience_program_title, experience_program_description,
+            experience_program_level, experience_program_recruitment_count,
+            experience_program_work_days, experience_program_work_hours,
+            experience_program_deadline, experience_program_status,
+            experience_program_view_count, experience_program_job
+        ) VALUES (
+            #{corpId}, #{experienceProgramTitle}, #{experienceProgramDescription},
+            #{experienceProgramLevel}, #{experienceProgramRecruitmentCount},
+            #{experienceProgramWorkDays}, #{experienceProgramWorkHours},
+            #{experienceProgramDeadline}, #{experienceProgramStatus},
+            0, #{experienceProgramJob}
+        )
+    </insert>
+
+    <!-- 마감일 지난 모집중 공고 일괄 마감 처리 -->
+    <update id="closeExpiredPrograms">
+        UPDATE tbl_experience_program
+        SET experience_program_status = 'closed'
+        WHERE experience_program_status = 'recruiting'
+          AND experience_program_deadline &lt; #{today}
+    </update>
+
+    <!-- 체험 시작일 도달: 모집마감 → 진행중 -->
+    <update id="startPrograms">
+        UPDATE tbl_experience_program
+        SET experience_program_status = 'draft'
+        WHERE experience_program_status = 'closed'
+          AND experience_program_work_days IS NOT NULL
+          AND SUBSTRING_INDEX(experience_program_work_days, '~', 1) &lt;= #{today}
+    </update>
+
+    <!-- 체험 종료일 다음날: 진행중 → 진행종료 -->
+    <update id="finishPrograms">
+        UPDATE tbl_experience_program
+        SET experience_program_status = 'cancelled'
+        WHERE experience_program_status = 'draft'
+          AND experience_program_work_days IS NOT NULL
+          AND SUBSTRING_INDEX(experience_program_work_days, '~', -1) &lt; #{today}
+    </update>
+
+    <!-- 프로그램 수정 -->
+    <update id="update">
+        UPDATE tbl_experience_program
+        SET experience_program_title = #{experienceProgramTitle},
+            experience_program_description = #{experienceProgramDescription},
+            experience_program_level = #{experienceProgramLevel},
+            experience_program_recruitment_count = #{experienceProgramRecruitmentCount},
+            experience_program_work_days = #{experienceProgramWorkDays},
+            experience_program_work_hours = #{experienceProgramWorkHours},
+            experience_program_deadline = #{experienceProgramDeadline},
+            experience_program_job = #{experienceProgramJob}
+        WHERE id = #{id}
+          AND corp_id = #{corpId}
+    </update>
+
+    <!-- 마감일 조회 (스케줄러용) -->
+    <select id="selectByDeadline" resultType="ExperienceProgramDTO">
+        select id, corp_id, experience_program_title, experience_program_deadline
+        from tbl_experience_program
+        where experience_program_deadline = #{deadline}
+          and experience_program_status = 'recruiting'
+    </select>
+
+    <select id="selectById">
+        select
+            ep.id,
+            ep.experience_program_title, ep.experience_program_description, ep.experience_program_level,
+            ep.experience_program_recruitment_count, ep.experience_program_work_days, ep.experience_program_work_hours,
+            ep.experience_program_deadline, ep.experience_program_status,
+            ep.experience_program_view_count, ep.experience_program_job, ep.created_datetime, ep.updated_datetime,
+
+            ep.corp_id, co.corp_company_name, co.corp_kind_small_id, co.corp_company_type,
+            co.corp_business_number, co.corp_ceo_name, co.corp_kind_id, co.corp_kind_small_id,
+            co.corp_company_size, co.corp_establishment_date, co.corp_website_url, co.corp_fax, co.corp_capital,
+            co.corp_total_sales, co.corp_performance, co.corp_vision
+
+        from tbl_experience_program ep
+        join tbl_corp co on ep.corp_id = co.id
+        where ep.id = #{id}
+    </select>
+
+    <update id="increaseViewCount">
+        update tbl_experience_program
+        set experience_program_view_count = experience_program_view_count + 1
+        where id = #{id}
+    </update>
+</mapper>

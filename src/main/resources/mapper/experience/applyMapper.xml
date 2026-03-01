@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.experience.ApplyMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_apply (experience_program_id, member_id, apply_status)
+        values (#{experienceProgramId}, #{memberId}, 'applied')
+    </insert>
+
+    <select id="selectExistsByProgramIdAndMemberId" resultType="int">
+        select count(*)
+        from tbl_apply
+        where experience_program_id = #{programId}
+          and member_id = #{memberId}
+    </select>
+
+    <sql id="searchFilter">
+        <if test="status != null and status != ''">
+            AND apply_status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND member_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="education != null and education != ''">
+            AND individual_member_education = #{education}
+        </if>
+        <if test="gender != null and gender != ''">
+            AND individual_member_gender = #{gender}
+        </if>
+    </sql>
+
+    <select id="selectByProgramId" resultType="ApplyDTO">
+        select *
+        from view_applicant
+        where experience_program_id = #{programId}
+        <include refid="searchFilter"/>
+        order by created_datetime desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountByProgramId" resultType="int">
+        select count(*)
+        from view_applicant
+        where experience_program_id = #{programId}
+        <include refid="searchFilter"/>
+    </select>
+
+    <select id="selectStatusCountByProgramId" resultType="map">
+        select
+            count(*) as total,
+            COALESCE(SUM(apply_status = 'document_fail'), 0) as rejected
+        from view_applicant
+        where experience_program_id = #{programId}
+    </select>
+
+    <update id="updateStatus">
+        update tbl_apply
+        set apply_status = #{applyStatus},
+            updated_datetime = now()
+        where id = #{id}
+    </update>
+
+</mapper>

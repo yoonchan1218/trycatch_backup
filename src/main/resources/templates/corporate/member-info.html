@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원정보관리 | TRY-CATCH</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/member-info.css">
+</head>
+<body class="mtcSubInfo mtcSubMember">
+    <div id="wrap">
+        <div th:replace="~{corporate/header :: header}"></div>
+        <div class="sideTrue" id="container">
+            <!-- 어사이드 -->
+            <div id="sideNav" class="devCorpLogin">
+                <!-- 기업 정보 관리 메뉴 -->
+                <div class="nav">
+                    <ul>
+                        <!-- server, javascript: 해당 페이지일 때, on 클래스 추가 -->
+                        <li class="devCorpInfoDetail" th:if="${!session.member.teamMember}">
+                            <a th:href="@{/corporate/profile}">기업정보관리</a>
+                        </li>
+                        <li class="devCorpInfoDetail on">
+                            <span>회원정보관리</span>
+                        </li>
+                        <!-- server: 담당자 로그인 시에만 보이도록 -->
+                        <li class="devCorpInfoDetail" th:if="${!session.member.teamMember}">
+                            <a th:href="@{/corporate/team-member}">팀원관리</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 광고 -->
+                <div class="adLeftBx">
+                    <div class="ad-container">
+                        <a href="javascript:;" class="imgAdBnnr">
+                            <img src="/images/corporate/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
+                            <!-- onerror -->
+                        </a>
+                    </div>
+                </div>
+                <div class="adLeftBx">
+                    <a href="">
+                        <img src="/images/corporate/lnb_certify_banner.png">
+                    </a>
+                </div>
+
+            </div>
+
+            <div id="content">
+                <div class="infoContent memberContent">
+                    <!-- 회원정보관리 -->
+                    <div class="memberMngWrap">
+                        <form id="form" method="post" th:action="@{/corporate/member-info}">
+                            <!-- <input type="hidden" value="a9243965" id="devMemId" name="id"> -->
+                            <fieldset>
+                                <div class="artMemberMng">
+                                    <h3 class="info_hd_3">
+                                        회원정보관리
+                                        <span class="point">
+                                            <em>*</em>
+                                            필수정보
+                                        </span>
+                                    </h3>
+                                    <div class="infoTbBx">
+                                        <!-- 아이디, 가입자명 -->
+                                        <div class="tbRow">
+                                            <div class="tbCell">
+                                                <dl class="tbIpt">
+                                                    <dt>
+                                                        아이디
+                                                        <span class="point">*</span>
+                                                    </dt>
+                                                    <dd th:text="${corpInfo.memberId}"></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="tbCell">
+                                                <dl class="tbIpt">
+                                                    <dt>
+                                                        가입자명
+                                                        <span class="point">*</span>
+                                                    </dt>
+                                                    <dd th:text="${corpInfo.memberName}">담당자</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+
+                                        <!-- 비밀번호 변경 전 -->
+                                        <div class="tbRow tbPw pwNow">
+                                            <div class="elWrap">
+                                                <div class="schInpType">
+                                                    <label class="ph" for="lb_pw">
+                                                        비밀번호
+                                                        <span class="point">*</span>
+                                                    </label>
+                                                    <input type="password" id="lb_pw" class="inpDefault" value="******" disabled>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="infoBtnBd infoBtnPw" id="devBtnChangePwd">
+                                                <span>비밀번호 변경</span>
+                                            </button>
+                                        </div>
+                                        <!-- 비밀번호 변경 -->
+                                        <!-- javascript: 비밀번호 변경 버튼 클릭 시, dispaly: none / table -->
+                                        <div class="tbRow tbPw devPwdChangeArea" style="display: none;">
+                                            <div class="tbBx">
+                                                <!-- javascript: 도움말 버튼 클릭 시, devAgreeLayer에 on 추가 -->
+                                                <div class="lyInfoWrap lyInfoHelp devAgreeLayer">
+                                                    <p class="lyBtn">
+                                                        <button type="button" class="mtcBtn mtcBtnTip devDescLy" title="도움말"></button>
+                                                    </p>
+                                                    <!-- javascript: 도움말 버튼 클릭 시, display: block; -->
+                                                    <div class="lyInfoTy" style="display: none;">
+                                                        <dl class="lyList">
+                                                            <dt>안전한 비밀번호 작성법</dt>
+                                                            <dd>8~16자의 영문 대소문, 숫자, 특수기호만 사용가능 (공백입력 불가)</dd>
+                                                            (사용 가능한 특수문자는 ! "# $ % & ( ) * + , - . / : ; ? @ [ ] ^ _ { } ~ 입니다.)
+                                                            <dd>3자 이상 연속 영문/숫자 조합은 사용불가 (AAA. 111)</dd>
+                                                            <dd>아이디, 반복되는 영문/숫자 조합은 사용불가 (1234,ABCD)</dd>
+                                                            <dd>키보드의 연속 패턴은 사용하지 마세요. (ASDF)</dd>
+                                                            <dd>비밀번호는 주기적으로 변경하여 안전하게 관리하기</dd>
+                                                        </dl>
+                                                        <span class="infoIcn lyArrBtm"></span>
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택시 on 추가, 입력 완료시 .ok 추가, 에러인 경우 .error 추가 -->
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph" for="devNewPwd_1">
+                                                            새로운 비밀번호
+                                                            <span class="point">*</span>
+                                                        </label>
+                                                        <input type="password" id="devNewPwd_1" class="inpDefault devPwdField devAnimPh" name="memberPassword" maxlength="16">
+                                                    </div>
+                                                    <div class="errorBx">
+                                                        <!-- javascript: 입력 시(focus), before 스타일 적용 -->
+                                                        <!-- <p id="Password_errorBx">사용불가 (안전도 등급 매우 약함)</p> -->
+                                                        <!-- <p id="Password_errorBx">사용할 수 있는 비밀번호입니다. (안전도 등급 높음/적정/낮음 등)</p> -->
+                                                        <p>
+                                                            <strong class="invalid">8~16자의 영문, 숫자, 특수문자 조합으로 입력해 주세요.</strong>
+                                                            <!-- <strong class="invalid">8~16자의 영문, 숫자, 특수문자만 사용 가능합니다. (공백, 한글 사용불가)</strong> -->
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tbBx">
+                                                <span class="mtcRdoBx">
+                                                    <input type="radio" id="lb_sf_on">
+                                                    <!-- javascript: 선택 시 chk 추가, textContent 표시로 변경, 새로운 비밀번호, 비밀번호 확인 input type을 text로 변경 -->
+                                                    <label for="lb_sf_on" class="bxIpt" id="devTogglePwd">숨김</label>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- 비밀번호 확인 -->
+                                        <!-- javascript: 비밀번호 변경 버튼 클릭 시, dispaly: none / table -->
+                                        <div class="tbRow tbPw devPwdChangeArea" style="display: none;">
+                                            <div class="tbBx">
+                                                <!-- javascript: input 선택시 on 추가, 입력 완료시 .ok 추가, 에러인 경우 .error 추가 -->
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph" for="devNewPwd_2">
+                                                            새로운 비밀번호 확인
+                                                            <span class="point">*</span>
+                                                        </label>
+                                                        <input type="password" id="devNewPwd_2" class="inpDefault devPwdField devAnimPh" name="Password_Confirm" maxlength="16">
+                                                    </div>
+                                                    <div class="errorBx">
+                                                        <!-- <p id="Password_Confirm_errorBx">새 비밀번호 확인을 입력해 주세요.</p> -->
+                                                        <p id="Password_Confirm_errorBx">새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 전화번호, 이메일 -->
+                                        <div class="tbRow tbPw">
+                                            <div class="tbCell">
+                                                <div class="tbBx">
+                                                    <!-- javascript: input 선택시 on 추가, 입력 완료시 .ok 추가 -->
+                                                    <div class="elWrap devElWrap" th:classappend="${corpInfo.memberPhone != null and !corpInfo.memberPhone.isEmpty()} ? ' ok' : ''">
+                                                        <div class="schInpType">
+                                                            <label class="ph" for="devPhone">
+                                                                가입자 전화번호
+                                                                <span class="point">*</span>
+                                                            </label>
+                                                            <input type="text" id="devPhone" class="inpDefault devAnimPh" name="memberPhone" th:value="${corpInfo.memberPhone}" maxlength="15">
+                                                        </div>
+                                                        <div class="errorBx">
+                                                            <p id="Phone_errorBx">올바른 전화번호를 입력해 주세요.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tbCell">
+                                                <div class="tbBx">
+                                                    <!-- javascript: input 선택시 on 추가, 입력 완료시 .ok 추가 -->
+                                                    <div class="elWrap devElWrap" th:classappend="${corpInfo.memberEmail != null and !corpInfo.memberEmail.isEmpty()} ? ' ok' : ''">
+                                                        <div class="schInpType">
+                                                            <label class="ph" for="devEmail">
+                                                                가입자 이메일
+                                                                <span class="point">*</span>
+                                                            </label>
+                                                            <input type="text" id="devEmail" class="inpDefault devAnimPh" name="memberEmail" th:value="${corpInfo.memberEmail}" maxlength="50">
+                                                        </div>
+                                                        <div class="errorBx">
+                                                            <p id="Email_errorBx">
+                                                                이메일은
+                                                                <strong class="en">abc@jobkorea.co.kr / abc@jobkorea.com</strong>
+                                                                의 형식으로 입력 해 주세요.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 개인정보 수집 이용 동의 -->
+                                        <div class="tbRow tbAgree">
+                                            <div class="corp-terms">
+                                                <div class="terms">
+                                                    <!-- javascript: input value는 true/false로 변경 -->
+                                                    <input type="checkbox" id="devPrivacyChoice" name="memberAgreeMarketing" th:checked="${corpInfo.memberAgreeMarketing}" value="true">
+                                                    <label for="devPrivacyChoice">
+                                                        [선택] 개인정보 수집 및 이용 동의
+                                                        <!-- javascript: 클릭 시 on 추가 -->
+                                                        <a href="#" class="show button-more">
+                                                            내용보기
+                                                            <!-- javascript: 내용보기/닫기 동적으로 변경 -->
+                                                        </a>
+                                                    </label>
+                                                    <!-- javascript: 내용보기 버튼 클릭 시 display: block -->
+                                                    <div class="terms-box" style="display: none;">
+                                                        <ul class="depth-1">
+                                                            <li>
+                                                                1. 수집 이용 목적
+                                                                <p>
+                                                                    <u>상품•서비스 영업, 홍보, 마케팅, 쿠폰 발송을 목적으로 TRY-CATCH에서 활용</u>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                2. 수집하는 개인정보 항목
+                                                                <p>
+                                                                    전화번호, 이메일, 푸시토큰, 서비스 이용 기록
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                3. 개인정보 보유 및 이용기간
+                                                                <p>
+                                                                    <u>회원탈퇴 시 즉시 파기</u>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                3. 수신동의 거부 및 철회방법 안내
+                                                                <p>
+                                                                    본 동의는 거부하실 수 있습니다. 다만 거부 시 동의를 통해 제공 가능한 각종 혜택, 이벤트 안내를 받아보실 수 없습니다. 더 이상 맞춤공고, 서비스 안내, 마케팅 발송을 원하시지 않는 경우 회원정보수정 페이지에서 수신여부를 변경하실 수 있습니다.
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="artBtmFunc">
+                                    <button type="submit" id="devBtnSubmit" class="infoBtnBg infoBtnSave">
+                                        <span>저장</span>
+                                    </button>
+                                </div>
+                                <!-- server: 회원탈퇴 모달 띄우기 -->
+                                <a href="javascript:;" class="infoBtnBd infoBtnLeave">
+                                    <span>회원탈퇴</span>
+                                </a>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 회원탈퇴 모달 -->
+            <!-- javascirpt: 탈퇴버튼 클릭 시 active 추가 -->
+            <div class="common-modal company-certify-modal">
+                <div class="modal-dimmed"></div>
+                <div class="modal-contents">
+                    <button class="close-button"></button>
+                    <div class="modal-head">
+                        <h2>회원 탈퇴 전 확인해 주세요</h2>
+                        <p class="head-desc">
+                            회원 탈퇴 시 해당 기업 정보도 함께 삭제됩니다.
+                        </p>
+                    </div>
+                    <div class="modal-data">
+                        <p class="data-info">
+                            회원 탈퇴를 하시면<br>
+                            등록된 기업 정보가 모두 삭제됩니다.
+                        </p>
+                        <p class="data-desc">
+                            기업 정보 및 채용공고가 영구 삭제됩니다.<br>
+                            삭제된 정보는 복구할 수 없습니다.<br>
+                            지원자 정보 열람이 불가능해집니다.
+                        </p>
+                    </div>
+                    <div class="modal-bts">
+                        <div class="leaveAgreeWrap">
+                            <input type="checkbox" id="devLeaveAgree" name="leaveAgree">
+                            <label for="devLeaveAgree">
+                                위 내용을 확인하였으며,
+                                기업 정보가 함께 삭제되는 것에 동의합니다.
+                            </label>
+                        </div>
+                        <!-- server: 회원탈퇴 페이지로 이동 -->
+                        <a href="" class="modal-btn blue xl">탈퇴하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="~{corporate/footer :: footer}"></div>
+    </div>
+</body>
+<script src="/js/corporate/member-info/event.js"></script>
+</html>

@@ -1,0 +1,673 @@
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-display: swap;
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
+}
+
+/* 기본 */
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+html {
+    width: 100%;
+    overflow-y: scroll;
+}
+body{
+    background: #f3f5f7;
+
+    width: 100%;
+    color: #333;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 1;
+}
+li, ul {
+    list-style: none;
+}
+a, img {
+    display: block;
+}
+/* img {
+    border: 0;
+    vertical-align: top;
+} */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-size: 100%;
+}
+
+a, a:link, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+a, a:active, a:focus, a:hover, a:link, a:visited {
+    color: #333;
+    text-decoration: none;
+}
+address, caption, em {
+    font-weight: 400;
+    font-style: normal;
+}
+
+#wrap {
+    position: relative;
+    min-width: 1270px;
+    margin: 0 auto;
+    background: #f2f4f7;
+}
+
+/* 헤더 */
+.corporate-header {
+    position: relative;
+    background: #353133;
+}
+.corporate-header>.inner {
+    padding-top: 21px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.inner {
+    width: 1260px;
+    margin: 0 auto;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.corporate-header .top-menu h1 {
+    float: left;
+}
+.corporate-header .top-menu h1 a {
+    width: 121px;
+    height: 65px;
+    background-color: #fff;
+    mask-image: url("/images/logo.png");
+    mask-size: 100% 100%;
+    /* background-repeat: no-repeat; */
+    /* background-position: 50%; */
+}
+.corporate-header .top-menu-list {
+    float: right;
+}
+.corporate-header .top-menu-list>li {
+    position: relative;
+    float: left;
+}
+.corporate-header .top-menu-list>li>a {
+    color: #e6e6e6;
+    line-height: 17px;
+}
+.corporate-header .top-menu-list>li:nth-child(n+2) {
+    margin-left: 25px;
+}
+
+.corporate-header .navigation {
+    margin-top: 40px;
+}
+.corporate-header .navigation .left-menu {
+    float: left;
+}
+.corporate-header .navigation .left-menu-list>li, .corporate-header .navigation .right-menu-list>li {
+    position: relative;
+    float: left;
+}
+.corporate-header .navigation .left-menu-list>li:first-child>a {
+    padding-left: 0;
+}
+.corporate-header .navigation .left-menu-list>li .button-all-menu {
+    padding-top: 20px;
+    padding-bottom: 16px;
+}
+.corporate-header .navigation .left-menu-list>li>a {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.corporate-header .navigation .left-menu-list>li>a, .corporate-header .navigation .right-menu-list>li>a {
+    padding-top: 20px;
+    padding-bottom: 21px;
+}
+.corporate-header .navigation .left-menu-list>li .button-all-menu i {
+    display: inline-block;
+    width: 22px;
+    height: 16px;
+    background: url("/images/corporate/icon_menu.png") no-repeat 50%;
+}
+.corporate-header .navigation .left-menu-list>li .button-all-menu.active i {
+    background: url("/images/corporate/icon_menu_close.svg");
+    background-repeat: no-repeat;
+}
+/* javascript: click 했을 때, active 클래스 추가 */
+
+    /* nav 상세(미니 모달) */
+.corporate-header .sub-nav {
+    display: none;
+    position: absolute;
+    z-index: 334;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 12px 0;
+    margin-top: -8px;
+    background-color: #fff;
+    border: 1px solid #d2d2d2;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .08);
+}
+.corporate-header .sub-nav .category {
+    width: 150px;
+}
+.corporate-header .sub-nav .category>ul>li a:hover {
+    background-color: #f8f8f8;
+    color: inherit;
+}
+.corporate-header .sub-nav .category>ul>li a {
+    padding-left: 16px;
+    line-height: 36px;
+    font-size: 14px;
+}
+
+    /* 잡코리아 인재 추천 메세지 css */
+/* .corporate-header .navigation .left-menu-list>li .bubble, .corporate-header .navigation .left-menu-list>li .bubble:before {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+.corporate-header .navigation .left-menu-list>li .bubble {
+    display: inline-block;
+    top: -11px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+    padding: 0 8px;
+    font-weight: 600;
+    border-radius: 22px;
+    background-color: #297fff;
+}
+.corporate-header .navigation .left-menu-list>li .bubble:before {
+    content: "";
+    border: 8px solid rgba(0, 0, 0, 0);
+    border-top-color: #297fff;
+    bottom: -13px;
+} */
+
+    /* 기업 이름 */
+.corporate-header .navigation .right-menu {
+    float: right;
+}
+/* .corporate-header .navigation .right-menu-list>li:last-child>a:hover{
+    color: #3F8F51;
+} */
+.corporate-header .navigation .right-menu-list>li:last-child>a {
+    /* padding-right: 0; */
+    display: flex;
+    gap: 8px;
+}
+.corporate-header .navigation .right-menu-list>li>a {
+    font-size: 16px;
+    color: #fff;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.corporate-header .navigation .right-menu-list>li>.top-menu-modal-button {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 272px;
+    padding-right: 15px;
+    background: url("/images/corporate/arrow_10x17_white.png") no-repeat 100%;
+}
+/* .right-menu-list:last-child */
+
+.corporate-header .top-menu-modal {
+    width: 140px;
+    right: 0;
+    display: none;
+    position: absolute;
+    z-index: 500;
+    /* top: 25px; */
+    background: #fff;
+    border-radius: 10px;
+    padding: 0 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1490196078);
+}
+.corporate-header .top-menu-modal.active {
+    display: block;
+}
+.corporate-header .top-menu-modal li {
+    padding: 0 7px;
+    line-height: 40px;
+    font-size: 12px;
+}
+.corporate-header .top-menu-modal .id {
+    font-weight: 700;
+    font-size: 16px;
+}
+.corporate-header .top-menu-modal li a, .corporate-header .top-menu-modal li div {
+    line-height: 40px;
+}
+.corporate-header .top-menu-modal li:nth-child(n+2) {
+    border-top: 1px solid #f5f5f5;
+}
+
+        /* 기업 알림 */
+.corporate-header .navigation .right-menu.logged-in .notification .bell {
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+}
+.corporate-header .navigation .right-menu.logged-in .notification .bell:before {
+    position: absolute;
+    top: 15px;
+    left: 4px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    content: "";
+    background-color: #fff;
+    mask-image: url("/images/corporate/icon_bell.svg");
+    /* mask-size: contain; */
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+.corporate-header .navigation .right-menu.logged-in .notification .bell:before {
+    animation: wobble 1.15s ease-in;
+}
+.corporate-header .navigation .right-menu.logged-in .notification .bell .alarm-dot {
+    position: absolute;
+    top: 12px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff3b3b;
+    border-radius: 50%;
+}
+.notification .notification-menu {
+    display: none;
+    position: absolute;
+    top: 51px;
+    left: -218px;
+    z-index: 335;
+    width: 338px;
+    max-height: 556px;
+}
+.notification .notification-menu.active {
+    display: block;
+    padding-top: 4px;
+    padding-right: 4px;
+    border: 1px solid #6a6a6a;
+    border-radius: 8px;
+    background-color: #fff;
+}
+.notification .notification-menu .notification-menu-body{
+    overflow-y: auto;
+    width: 100%;
+    height: 516px;
+    border-bottom: 0;
+    border-radius: 8px;
+    background-color: #fff;
+    scrollbar-width: thin;
+}
+            /* 알림 없을 때 */
+.notification .notification-menu .notification-menu-body .no-notification.active {
+    display: block;
+}
+.notification .notification-menu .notification-menu-body .no-notification {
+    display: none;
+    overflow: hidden;
+    padding: 6px 6px 10px 10px;
+    width: 100%;
+    height: 100%;
+}
+.notification .notification-menu .no-notification .no-notification-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: 1px dashed #d9dfea;
+    border-radius: 12px;
+    text-align: center;
+    height: 100%;
+    background: #f9fafb;
+}
+.no-notification-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #eef1f6;
+}
+.no-notification-header {
+    font-weight: 700;
+    line-height: 22px;
+    color: #333;
+    font-size: 16px;
+}
+.no-notification-description {
+    line-height: 20px;
+    color: #999;
+    font-size: 13px;
+}
+            /* 알림 있을 때 */
+ .notification .list-notification-container {
+    overflow: hidden;
+    padding: 0 10px 40px 16px;
+}
+.notification .header-date {
+    height: 54px;
+    padding: 24px 0 8px;
+    font-size: 0;
+}
+.notification .header-date-item {
+    display: inline-block;
+    position: relative;
+    margin-left: 4px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #171717;
+    /* vertical-align: top; */
+    font-size: 16px;
+}
+.notification .notification-item:last-child {
+    margin-bottom: 0;
+}
+.notification .notification-item {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 15px 0 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    background-color: #fff;
+}
+.notification .notification-header {
+    margin-bottom: 8px;
+    padding: 0 15px;
+    font-size: 0;
+}
+.notification .notification-header-item {
+    display: inline-block;
+    line-height: 20px;
+    color: #6a6a6a;
+    font-size: 13px;
+}
+.notification .notification-header .date {
+    margin-left: 4px;
+    font-size: 13px;
+    letter-spacing: 0;
+}
+.notification .notification-body {
+    padding: 0 15px 16px;
+    height: fit-content;
+}
+.notification .notification-title {
+    font-weight: 700;
+    line-height: 24px;
+    color: #171717;
+    font-size: 16px;
+}
+.notification .notification-content {
+    padding-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 15px;
+}
+.notification .notification-item .notification-body.details .notification-content {
+    white-space: normal;
+    text-overflow: clip;
+}
+.notification .notification-footer .buttons {
+    overflow: hidden;
+    /* padding: 0; */
+    border-radius: 0 0 8px 8px;
+    font-size: 0;
+}
+.notification .notification-footer .buttons, .notification .notification-footer .message {
+    height: 43px;
+    border-top: 1px solid #e8e8e8;
+}
+.notification .notification-footer .buttons .button {
+    display: inline-block;
+    width: 100%;
+    height: 42px;
+    padding: 11px 0 0;
+    border: 0;
+    background-color: #fff;
+    font-weight: 400;
+    line-height: 20px;
+    color: #171717;
+    text-align: center;
+    vertical-align: top;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0;
+}
+.notification .notification-item.active .notification-footer .buttons .button {
+    background-color: #f8f8f8;
+}   
+.notification .notification-footer .buttons .button:hover {
+    color: #666 !important;
+}
+
+/* sub-menu(모달) */
+.corporate-header .all-menu-modal, .corporate-header .sub-nav-bg {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 185px;
+    width: 100%;
+    background: #fff;
+    padding-top: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .0784313725);
+}
+.corporate-header .all-menu-modal.active {
+    display: block;
+}
+/* javascript: click시 active 클래스 추가 */
+
+/* .corporate-header .sub-nav-bg {
+    display: none;
+    min-height: 235px;
+    z-index: 5;
+} */
+ .corporate-header .all-menu-modal {
+    padding-bottom: 30px;
+    /* min-height: 352px; */
+    z-index: 333;
+}
+.corporate-header .all-menu-modal .inner {
+    position: relative;
+
+    height: 230px;
+    width: 894px;
+}
+.corporate-header .all-menu-modal .category {
+    float: left;
+    width: 160px;
+}
+.corporate-header .all-menu-modal .category .title {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.corporate-header .all-menu-modal .category .title a {
+    font-size: 15px;
+    color: #1a1a1a;
+    font-weight: 700;
+}
+.corporate-header .all-menu-modal .category>ul {
+    margin-top: 12px;
+}
+.corporate-header .all-menu-modal .category>ul>li a:hover {
+    color: #3F8F51;
+}
+.corporate-header .all-menu-modal .category>ul>li a {
+    line-height: 32px;
+}
+.corporate-header .all-menu-modal .category:nth-child(n+2) {
+    margin-left: 23.3px;
+}
+.corporate-header .all-menu-modal .category .sub-category {
+    margin: 14px 0 0;
+}
+.corporate-header .all-menu-modal .category .sub-category>ul>li>ul>li>a {
+    color: #6a6a6a;
+}
+.corporate-header .all-menu-modal .category>ul>li>ul>li>a {
+    font-size: 12px;
+    line-height: 26px;
+}
+.corporate-header .all-menu-modal .category>ul>li>ul>li>a:before {
+    content: "·";
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 7px;
+}
+.corporate-header .all-menu-modal .category .sub-category.margin-top {
+    margin-top: 22px;
+}
+.corporate-header .all-menu-modal .write-button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 160px;
+    height: 45px;
+    border-radius: 8px;
+    background: #7BA882;
+    line-height: 45px;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+}
+.corporate-header .all-menu-modal .write-button:before {
+    content: "";
+    display: inline-block;
+    vertical-align: sub;
+    width: 19px;
+    height: 23px;
+    background: url("/images/corporate/icon_add.png");
+    background-size: 19px auto;
+    margin-right: 9px;
+}
+.corporate-header .navigation .left-menu-list>li.active .sub-nav, .corporate-header .navigation .right-menu-list>li.active .sub-nav {
+    display: block;
+}
+/* javascript: 마우스 올렸을 때, active 클래스 추가 */
+
+.corporate-header .navigation .left-menu-list>li+.active-fixed>a:after, .corporate-header .navigation .left-menu-list>li+.active>a:after {
+    position: absolute;
+    margin: 0 auto;
+    bottom: 0;
+    content: "";
+    display: block;
+    width: calc(100% - 40px);
+    height: 5px;
+    background: #b8ff00;
+}
+/*  */
+
+
+/* 알림 (공고, 공지사항) */
+    /* 공지사항 배너 */
+.top-notice-section {
+    height: 52px;
+    background: #fff;
+    margin-bottom: 36px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .031372549);
+}
+.top-notice-section .inner {
+    padding: 0 20px;
+}
+/* .top-notice-section * {
+    font-size: 14px;
+    letter-spacing: 0;
+} */
+/* .top-notice-section .notice-box {
+    float: left;
+    width: calc(100% - 314px);
+} */
+.top-notice-section .notice-box .swiper-container {
+    height: 52px;
+}
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    z-index: 1;
+}
+.swiper-container-vertical>.swiper-wrapper {
+    flex-direction: column;
+}
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+}
+.top-notice-section .notice-box .swiper-slide {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #171717;
+    line-height: 52px;
+}
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+}
+.top-notice-section .notice-box .swiper-slide{
+    height: 52px;
+}
+.top-notice-section .notice-box .swiper-slide a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333;
+    /* line-height: 52px; */
+}
+.top-notice-section .notice-box .swiper-slide a .title {
+    max-width: 675px;
+    vertical-align: top;
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
+    /* line-height: inherit; */
+}

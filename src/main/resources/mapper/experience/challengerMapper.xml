@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.experience.ChallengerMapper">
+
+    <sql id="statusFilter">
+        <choose>
+            <when test="status == 'in_progress'">
+                AND challenger_status = 'in_progress'
+            </when>
+            <when test="status == 'failed'">
+                AND challenger_status IN ('step_failed', 'out_of_process')
+            </when>
+            <when test="status == 'completed'">
+                AND challenger_status = 'completed'
+            </when>
+        </choose>
+    </sql>
+
+    <select id="selectByProgramId" resultType="ChallengerDTO">
+        select *
+        from view_participant
+        where experience_program_id = #{programId}
+        <include refid="statusFilter"/>
+        order by created_datetime desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountByProgramId" resultType="int">
+        select count(*)
+        from view_participant
+        where experience_program_id = #{programId}
+        <include refid="statusFilter"/>
+    </select>
+
+    <select id="selectStatusCountByProgramId" resultType="map">
+        select
+            count(*) as total,
+            COALESCE(SUM(challenger_status = 'in_progress'), 0) as inProgress,
+            COALESCE(SUM(challenger_status IN ('step_failed', 'out_of_process')), 0) as failed,
+            COALESCE(SUM(challenger_status = 'completed'), 0) as completed
+        from view_participant
+        where experience_program_id = #{programId}
+    </select>
+
+    <insert id="insert">
+        INSERT IGNORE INTO tbl_challenger (apply_id, challenger_status)
+        VALUES (#{applyId}, 'in_progress')
+    </insert>
+
+    <select id="selectIdByApplyId" resultType="Long">
+        SELECT id FROM tbl_challenger WHERE apply_id = #{applyId}
+    </select>
+
+    <update id="updateStatus">
+        update tbl_challenger
+        set challenger_status = #{challengerStatus},
+            updated_datetime = now()
+        where apply_id = #{applyId}
+    </update>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.mypage.ScrapPostingMapper">
+
+    <select id="selectAllByMemberId" resultType="ScrapPostingDTO">
+        select
+            sp.id,
+            sp.member_id,
+            sp.experience_program_id,
+            sp.scrap_status,
+            sp.created_datetime,
+            sp.updated_datetime,
+            ep.experience_program_title,
+            ep.experience_program_deadline,
+            ep.experience_program_status,
+            ep.corp_id
+        from tbl_scrap_posting sp
+        join tbl_experience_program ep
+        on sp.experience_program_id = ep.id
+        where sp.member_id = #{memberId}
+        and sp.scrap_status = 'active'
+        order by sp.created_datetime desc
+    </select>
+
+    <insert id="insert">
+        insert into tbl_scrap_posting (member_id, experience_program_id)
+        values (#{memberId}, #{experienceProgramId})
+    </insert>
+
+    <update id="updateStatus">
+        update tbl_scrap_posting
+        set
+            scrap_status = #{scrapStatus},
+            updated_datetime = current_timestamp
+        where id = #{id}
+    </update>
+
+</mapper>

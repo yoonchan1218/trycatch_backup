@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.qna.QnaCommentFileMapper">
+    <insert id="insert">
+        insert into tbl_qna_comment_file(id, qna_comment_id)
+        values(#{id}, #{qnaCommentId})
+    </insert>
+
+    <select id="selectFileIdByCommentId" resultType="Long">
+        select id from tbl_qna_comment_file where qna_comment_id = #{qnaCommentId}
+    </select>
+
+    <delete id="deleteByCommentId">
+        delete from tbl_qna_comment_file where qna_comment_id = #{qnaCommentId}
+    </delete>
+</mapper>

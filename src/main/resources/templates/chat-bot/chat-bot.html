@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat-bot</title>
+    <link rel="stylesheet" href="../../static/css/skill-log/chat-bot.css">
+</head>
+<body>
+    <button
+            class="chatbot-toggle"
+            id="chatbotToggle"
+            aria-label="챗봇 열기"
+        >
+            <svg
+                class="icon-chat"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M21 12C21 16.9706 16.9706 21 12 21C10.2289 21 8.57736 20.4884 7.18497 19.6038L3 21L4.39624 16.815C3.51163 15.4226 3 13.7711 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                    stroke="white"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+            <svg
+                class="icon-close"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M18 6L6 18M6 6L18 18"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </button>
+
+        <!-- 챗봇 컨테이너 -->
+        <div class="chatbot-container" id="chatbotContainer">
+            <div class="chatbot-header">
+                <div class="chatbot-header-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+                        <defs>
+                            <!-- 부드러운 그라데이션 -->
+                            <radialGradient id="bodyGradient" cx="50%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#008f52"/>
+                            <stop offset="100%" stop-color="#006e3f"/>
+                            </radialGradient>
+                            <radialGradient id="cheekGradient" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#ff9999"/>
+                            <stop offset="100%" stop-color="#ffb3b3"/>
+                            </radialGradient>
+                            <radialGradient id="bellyGradient" cx="50%" cy="30%" r="70%">
+                            <stop offset="0%" stop-color="#00a85a"/>
+                            <stop offset="100%" stop-color="#008f52"/>
+                            </radialGradient>
+                        </defs>
+                        
+                        <!-- 배경 원 (부드러운 느낌) -->
+                        <circle cx="200" cy="200" r="180" fill="#e8f5e9" opacity="0.5"/>
+                        
+                        <!-- 몸통 (둥글둥글) -->
+                        <ellipse cx="200" cy="280" rx="90" ry="70" fill="url(#bodyGradient)"/>
+                        
+                        <!-- 배 부분 (밝은 색) -->
+                        <ellipse cx="200" cy="290" rx="55" ry="45" fill="url(#bellyGradient)"/>
+                        
+                        <!-- 머리 (큰 동그라미) -->
+                        <ellipse cx="200" cy="160" rx="100" ry="85" fill="url(#bodyGradient)"/>
+                        
+                        <!-- 귀 (왼쪽) -->
+                        <ellipse cx="115" cy="95" rx="25" ry="20" fill="#006e3f"/>
+                        <ellipse cx="118" cy="95" rx="15" ry="12" fill="#ff9999" opacity="0.6"/>
+                        
+                        <!-- 귀 (오른쪽) -->
+                        <ellipse cx="285" cy="95" rx="25" ry="20" fill="#006e3f"/>
+                        <ellipse cx="282" cy="95" rx="15" ry="12" fill="#ff9999" opacity="0.6"/>
+                        
+                        <!-- 얼굴 밝은 부분 -->
+                        <ellipse cx="200" cy="180" rx="70" ry="50" fill="#008f52" opacity="0.5"/>
+                        
+                        <!-- 코 (큰 동그라미) -->
+                        <ellipse cx="200" cy="175" rx="35" ry="28" fill="#004d2b"/>
+                        <ellipse cx="200" cy="172" rx="28" ry="20" fill="#003d22"/>
+                        
+                        <!-- 콧구멍 -->
+                        <ellipse cx="188" cy="170" rx="6" ry="5" fill="#002815"/>
+                        <ellipse cx="212" cy="170" rx="6" ry="5" fill="#002815"/>
+                        
+                        <!-- 코 하이라이트 -->
+                        <ellipse cx="195" cy="165" rx="8" ry="5" fill="#005533" opacity="0.5"/>
+                        
+                        <!-- 눈 (왼쪽) -->
+                        <ellipse cx="155" cy="135" rx="22" ry="24" fill="#1a1a1a"/>
+                        <ellipse cx="160" cy="130" rx="10" ry="12" fill="white"/>
+                        <circle cx="158" cy="128" r="4" fill="white" opacity="0.8"/>
+                        
+                        <!-- 눈 (오른쪽) -->
+                        <ellipse cx="245" cy="135" rx="22" ry="24" fill="#1a1a1a"/>
+                        <ellipse cx="250" cy="130" rx="10" ry="12" fill="white"/>
+                        <circle cx="248" cy="128" r="4" fill="white" opacity="0.8"/>
+                        
+                        <!-- 볼터치 (왼쪽) -->
+                        <ellipse cx="120" cy="165" rx="20" ry="15" fill="url(#cheekGradient)" opacity="0.7"/>
+                        
+                        <!-- 볼터치 (오른쪽) -->
+                        <ellipse cx="280" cy="165" rx="20" ry="15" fill="url(#cheekGradient)" opacity="0.7"/>
+                        
+                        <!-- 입 (귀여운 미소) -->
+                        <path d="M 180 195 Q 200 215 220 195" stroke="#003d22" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- 수염 (왼쪽) -->
+                        <line x1="130" y1="175" x2="155" y2="180" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="128" y1="185" x2="155" y2="185" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="130" y1="195" x2="155" y2="190" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                        
+                        <!-- 수염 (오른쪽) -->
+                        <line x1="270" y1="175" x2="245" y2="180" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="272" y1="185" x2="245" y2="185" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="270" y1="195" x2="245" y2="190" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                        
+                        <!-- 앞발 (왼쪽) -->
+                        <ellipse cx="130" cy="320" rx="30" ry="20" fill="#006e3f"/>
+                        <ellipse cx="120" cy="325" rx="8" ry="6" fill="#004d2b"/>
+                        <ellipse cx="135" cy="328" rx="8" ry="6" fill="#004d2b"/>
+                        
+                        <!-- 앞발 (오른쪽) -->
+                        <ellipse cx="270" cy="320" rx="30" ry="20" fill="#006e3f"/>
+                        <ellipse cx="265" cy="328" rx="8" ry="6" fill="#004d2b"/>
+                        <ellipse cx="280" cy="325" rx="8" ry="6" fill="#004d2b"/>
+                        
+                        <!-- 반짝이 효과 -->
+                        <circle cx="290" cy="100" r="5" fill="#ffeb3b" opacity="0.8"/>
+                        <circle cx="310" cy="120" r="3" fill="#ffeb3b" opacity="0.6"/>
+                        <circle cx="100" cy="110" r="4" fill="#ffeb3b" opacity="0.7"/>
+                        
+                    </svg>
+                </div>
+                <div class="chatbot-header-info">
+                    <h3 class="chatbot-header-title">TRY-CATCH 도우미</h3>
+                    <span class="chatbot-header-status">온라인</span>
+                </div>
+            </div>
+
+            <div class="chatbot-messages" id="chatbotMessages">
+                <!-- 초기 봇 메시지 -->
+                <div class="chatbot-message bot">
+                    <div class="chatbot-message-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+                            <defs>
+                                <!-- 부드러운 그라데이션 -->
+                                <radialGradient id="bodyGradient" cx="50%" cy="40%" r="60%">
+                                <stop offset="0%" stop-color="#008f52"/>
+                                <stop offset="100%" stop-color="#006e3f"/>
+                                </radialGradient>
+                                <radialGradient id="cheekGradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ff9999"/>
+                                <stop offset="100%" stop-color="#ffb3b3"/>
+                                </radialGradient>
+                                <radialGradient id="bellyGradient" cx="50%" cy="30%" r="70%">
+                                <stop offset="0%" stop-color="#00a85a"/>
+                                <stop offset="100%" stop-color="#008f52"/>
+                                </radialGradient>
+                            </defs>
+                            
+                            <!-- 배경 원 (부드러운 느낌) -->
+                            <circle cx="200" cy="200" r="180" fill="#e8f5e9" opacity="0.5"/>
+                            
+                            <!-- 몸통 (둥글둥글) -->
+                            <ellipse cx="200" cy="280" rx="90" ry="70" fill="url(#bodyGradient)"/>
+                            
+                            <!-- 배 부분 (밝은 색) -->
+                            <ellipse cx="200" cy="290" rx="55" ry="45" fill="url(#bellyGradient)"/>
+                            
+                            <!-- 머리 (큰 동그라미) -->
+                            <ellipse cx="200" cy="160" rx="100" ry="85" fill="url(#bodyGradient)"/>
+                            
+                            <!-- 귀 (왼쪽) -->
+                            <ellipse cx="115" cy="95" rx="25" ry="20" fill="#006e3f"/>
+                            <ellipse cx="118" cy="95" rx="15" ry="12" fill="#ff9999" opacity="0.6"/>
+                            
+                            <!-- 귀 (오른쪽) -->
+                            <ellipse cx="285" cy="95" rx="25" ry="20" fill="#006e3f"/>
+                            <ellipse cx="282" cy="95" rx="15" ry="12" fill="#ff9999" opacity="0.6"/>
+                            
+                            <!-- 얼굴 밝은 부분 -->
+                            <ellipse cx="200" cy="180" rx="70" ry="50" fill="#008f52" opacity="0.5"/>
+                            
+                            <!-- 코 (큰 동그라미) -->
+                            <ellipse cx="200" cy="175" rx="35" ry="28" fill="#004d2b"/>
+                            <ellipse cx="200" cy="172" rx="28" ry="20" fill="#003d22"/>
+                            
+                            <!-- 콧구멍 -->
+                            <ellipse cx="188" cy="170" rx="6" ry="5" fill="#002815"/>
+                            <ellipse cx="212" cy="170" rx="6" ry="5" fill="#002815"/>
+                            
+                            <!-- 코 하이라이트 -->
+                            <ellipse cx="195" cy="165" rx="8" ry="5" fill="#005533" opacity="0.5"/>
+                            
+                            <!-- 눈 (왼쪽) -->
+                            <ellipse cx="155" cy="135" rx="22" ry="24" fill="#1a1a1a"/>
+                            <ellipse cx="160" cy="130" rx="10" ry="12" fill="white"/>
+                            <circle cx="158" cy="128" r="4" fill="white" opacity="0.8"/>
+                            
+                            <!-- 눈 (오른쪽) -->
+                            <ellipse cx="245" cy="135" rx="22" ry="24" fill="#1a1a1a"/>
+                            <ellipse cx="250" cy="130" rx="10" ry="12" fill="white"/>
+                            <circle cx="248" cy="128" r="4" fill="white" opacity="0.8"/>
+                            
+                            <!-- 볼터치 (왼쪽) -->
+                            <ellipse cx="120" cy="165" rx="20" ry="15" fill="url(#cheekGradient)" opacity="0.7"/>
+                            
+                            <!-- 볼터치 (오른쪽) -->
+                            <ellipse cx="280" cy="165" rx="20" ry="15" fill="url(#cheekGradient)" opacity="0.7"/>
+                            
+                            <!-- 입 (귀여운 미소) -->
+                            <path d="M 180 195 Q 200 215 220 195" stroke="#003d22" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            
+                            <!-- 수염 (왼쪽) -->
+                            <line x1="130" y1="175" x2="155" y2="180" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="128" y1="185" x2="155" y2="185" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="130" y1="195" x2="155" y2="190" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                            
+                            <!-- 수염 (오른쪽) -->
+                            <line x1="270" y1="175" x2="245" y2="180" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="272" y1="185" x2="245" y2="185" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="270" y1="195" x2="245" y2="190" stroke="#004d2b" stroke-width="2" stroke-linecap="round"/>
+                            
+                            <!-- 앞발 (왼쪽) -->
+                            <ellipse cx="130" cy="320" rx="30" ry="20" fill="#006e3f"/>
+                            <ellipse cx="120" cy="325" rx="8" ry="6" fill="#004d2b"/>
+                            <ellipse cx="135" cy="328" rx="8" ry="6" fill="#004d2b"/>
+                            
+                            <!-- 앞발 (오른쪽) -->
+                            <ellipse cx="270" cy="320" rx="30" ry="20" fill="#006e3f"/>
+                            <ellipse cx="265" cy="328" rx="8" ry="6" fill="#004d2b"/>
+                            <ellipse cx="280" cy="325" rx="8" ry="6" fill="#004d2b"/>
+                            
+                            <!-- 반짝이 효과 -->
+                            <circle cx="290" cy="100" r="5" fill="#ffeb3b" opacity="0.8"/>
+                            <circle cx="310" cy="120" r="3" fill="#ffeb3b" opacity="0.6"/>
+                            <circle cx="100" cy="110" r="4" fill="#ffeb3b" opacity="0.7"/>
+                            
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="chatbot-message-content">
+                            안녕하세요! 👋<br />
+                            TRY-CATCH 도우미입니다.<br />
+                            무엇을 도와드릴까요?<br />
+                            궁금하신 내용을 키워드로<br />
+                            적어주세요! ex) 자기소개서, 체험 신청
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chatbot-input-area">
+                <input
+                    type="text"
+                    class="chatbot-input"
+                    id="chatbotInput"
+                    placeholder="메시지를 입력하세요..."
+                    maxlength="500"
+                />
+                <button class="chatbot-send" id="chatbotSend" aria-label="전송">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+</body>
+<script src="/static/js/skill-log/chat-bot.js"></script>
+</html>

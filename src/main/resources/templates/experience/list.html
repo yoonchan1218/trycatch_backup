@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체험 프로그램 목록</title>
+    <link rel="stylesheet" href="/css/experience/program-list.css">
+</head>
+<body>
+<header class="page-header">
+    <div class="header-inner">
+        <a class="brand" th:href="@{/main/main}">TRY-CATCH</a>
+        <nav class="header-nav">
+            <a th:href="@{/experience/list}">체험 프로그램</a>
+            <a th:href="@{/mypage/mypage}" th:if="${session.member != null}">마이페이지</a>
+            <a th:href="@{/main/log-in(re_url='/experience/list')}" th:if="${session.member == null}">로그인</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page-main">
+    <section class="search-section">
+        <h1>체험 프로그램 목록</h1>
+        <p class="result-text" th:text="|총 ${programWithPaging.total}건|">총 0건</p>
+
+        <form class="search-form" method="get" th:action="@{/experience/list}">
+            <input type="hidden" name="page" value="1">
+
+            <label>
+                상태
+                <select name="status">
+                    <option value="all" th:selected="${status == 'all'}">전체</option>
+                    <option value="recruiting" th:selected="${status == 'recruiting'}">모집중</option>
+                    <option value="draft" th:selected="${status == 'draft'}">진행중</option>
+                    <option value="closed" th:selected="${status == 'closed'}">모집마감</option>
+                    <option value="cancelled" th:selected="${status == 'cancelled'}">종료</option>
+                </select>
+            </label>
+
+            <label>
+                정렬
+                <select name="sort">
+                    <option value="latest" th:selected="${sort == 'latest'}">최신순</option>
+                    <option value="views" th:selected="${sort == 'views'}">조회순</option>
+                    <option value="deadline" th:selected="${sort == 'deadline'}">마감 임박순</option>
+                </select>
+            </label>
+
+            <label>
+                직무
+                <input type="text" name="job" placeholder="예: 개발, 디자인" th:value="${job}">
+            </label>
+
+            <label class="keyword-label">
+                키워드
+                <input type="text" name="keyword" placeholder="프로그램명, 기업명" th:value="${keyword}">
+            </label>
+
+            <button type="submit">검색</button>
+        </form>
+    </section>
+
+    <section class="list-section" th:if="${!#lists.isEmpty(programWithPaging.programs)}">
+        <ul class="program-grid">
+            <li class="program-card" th:each="program : ${programWithPaging.programs}">
+                <th:block th:with="thumb=${#lists.isEmpty(program.experienceProgramFiles) ? null : program.experienceProgramFiles.get(0)}">
+                    <a class="thumbnail" th:href="@{/experience/program/{id}(id=${program.id})}">
+                        <img th:if="${thumb != null}"
+                             th:src="@{/api/files/display(filePath=${thumb.filePath}, fileName=${thumb.fileName})}"
+                             alt="프로그램 대표 이미지">
+                        <div class="thumb-placeholder" th:unless="${thumb != null}">NO IMAGE</div>
+                    </a>
+                </th:block>
+
+                <div class="card-body">
+                    <div class="meta-row">
+                        <span class="corp-name" th:text="${program.corpCompanyName}">기업명</span>
+                        <span class="status-badge" th:switch="${program.experienceProgramStatus != null ? program.experienceProgramStatus.value : 'unknown'}">
+                            <span th:case="'recruiting'">모집중</span>
+                            <span th:case="'draft'">진행중</span>
+                            <span th:case="'closed'">모집마감</span>
+                            <span th:case="'cancelled'">종료</span>
+                            <span th:case="*">상태없음</span>
+                        </span>
+                    </div>
+
+                    <h2>
+                        <a th:href="@{/experience/program/{id}(id=${program.id})}"
+                           th:text="${program.experienceProgramTitle}">프로그램 제목</a>
+                    </h2>
+
+                    <p class="description" th:text="${program.descriptionText}">프로그램 설명</p>
+
+                    <div class="info-row">
+                        <span th:text="|직무: ${program.experienceProgramJob != null ? program.experienceProgramJob : '-'}|">직무</span>
+                        <span th:text="|마감: ${program.experienceProgramDeadline != null ? program.experienceProgramDeadline : '-'}|">마감</span>
+                    </div>
+                    <div class="info-row">
+                        <span th:text="|모집인원: ${program.experienceProgramRecruitmentCount}명|">모집인원</span>
+                        <span th:text="|조회수: ${program.experienceProgramViewCount}|">조회수</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="empty-section" th:if="${#lists.isEmpty(programWithPaging.programs)}">
+        <p>조건에 맞는 체험 프로그램이 없습니다.</p>
+    </section>
+
+    <nav class="pagination" th:if="${programWithPaging.total > 0}">
+        <a class="page-link"
+           th:if="${programWithPaging.criteria.page > 1}"
+           th:href="@{/experience/list(page=${programWithPaging.criteria.page - 1}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}">이전</a>
+
+        <th:block th:each="p : ${#numbers.sequence(programWithPaging.criteria.startPage, programWithPaging.criteria.endPage)}">
+            <a class="page-link"
+               th:classappend="${p == programWithPaging.criteria.page} ? ' active' : ''"
+               th:href="@{/experience/list(page=${p}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}"
+               th:text="${p}">1</a>
+        </th:block>
+
+        <a class="page-link"
+           th:if="${programWithPaging.criteria.hasMore}"
+           th:href="@{/experience/list(page=${programWithPaging.criteria.page + 1}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}">다음</a>
+    </nav>
+</main>
+</body>
+</html>

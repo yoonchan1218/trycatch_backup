@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.mypage.MyPageMapper">
+    <select id="selectProfileByMemberId" resultType="MyPageProfileDTO">
+        select
+            id, member_id, member_name, member_email, member_phone, address_id, member_status,
+            created_datetime, updated_datetime,
+            individual_member_birth, individual_member_gender, individual_member_education,
+            individual_member_point, individual_member_level, individual_member_post_count,
+            individual_member_question_count, member_profile_image_url
+        from view_member_profile
+        where id = #{memberId}
+    </select>
+
+    <update id="updateProfileFileId">
+        update tbl_member
+        set member_profile_file_id = #{fileId}
+        where id = #{memberId}
+    </update>
+
+    <update id="updateMember">
+        update tbl_member
+        <set>
+            <if test="memberName != null">member_name = #{memberName},</if>
+            <if test="memberEmail != null">member_email = #{memberEmail},</if>
+            <if test="memberPhone != null">member_phone = #{memberPhone},</if>
+            updated_datetime = current_timestamp,
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateIndividualMember">
+        update tbl_individual_member
+        <set>
+            <if test="individualMemberBirth != null">individual_member_birth = #{individualMemberBirth},</if>
+            <if test="individualMemberGender != null">individual_member_gender = #{individualMemberGender},</if>
+            <if test="individualMemberEducation != null">individual_member_education = #{individualMemberEducation},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectNotificationsByMemberId" resultType="MyPageNotificationDTO">
+        select
+            id,
+            member_id,
+            notification_type,
+            notification_title,
+            notification_content,
+            notification_is_read,
+            qna_id,
+            experience_program_id,
+            skill_log_id,
+            created_datetime,
+            updated_datetime
+        from tbl_main_notification
+        where member_id = #{memberId}
+        order by created_datetime desc
+    </select>
+
+    <update id="updateMemberStatusToInactive">
+        update tbl_member
+        set
+            member_status = 'inactive',
+            updated_datetime = current_timestamp
+        where id = #{memberId}
+    </update>
+
+    <update id="updateApplyStatusToCancelled">
+        update tbl_apply
+        set
+            apply_status = 'cancelled',
+            updated_datetime = current_timestamp
+        where id = #{applyId}
+          and member_id = #{memberId}
+    </update>
+</mapper>

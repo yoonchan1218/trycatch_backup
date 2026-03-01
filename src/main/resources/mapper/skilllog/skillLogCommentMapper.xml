@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.SkillLogCommentMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_skill_log_comment(skill_log_id, member_id, skill_log_comment_parent_id, skill_log_comment_content)
+        values (#{skillLogId}, #{memberId}, #{skillLogCommentParentId}, #{skillLogCommentContent})
+    </insert>
+
+    <select id="selectAllBySkillLogId">
+        select
+            m.member_name, im.individual_member_level,
+            c.id, c.skill_log_id, c.member_id, c.skill_log_comment_parent_id, c.skill_log_comment_content,
+            c.created_datetime, c.updated_datetime,
+            f.file_path, f.file_name, f.file_original_name,
+            (select count(*) from tbl_skill_log_comment child
+                where child.skill_log_comment_parent_id = c.id) as skill_log_comment_child_count
+        from tbl_skill_log_comment c
+        join tbl_member m
+        on m.id = c.member_id
+        join tbl_individual_member im
+        on m.id = im.id
+        left join tbl_skill_log_comment_file cf
+        on cf.skill_log_comment_id = c.id
+        left join tbl_file f
+        on f.id = cf.id
+        where c.skill_log_id = #{id} and c.skill_log_comment_parent_id is null
+        order by c.created_datetime desc
+        limit #{criteria.rowCount} offset #{criteria.offset}
+    </select>
+    <select id="selectCountAllBySkillLogId">
+        select count(*) from tbl_skill_log_comment c
+        join tbl_member m on m.id = c.member_id
+        join tbl_individual_member im on m.id = im.id
+        where c.skill_log_id = #{id} and c.skill_log_comment_parent_id is null
+    </select>
+
+    <select id="selectAllByCommentParentIdAndSkillLogId">
+        select
+            m.member_name, im.individual_member_level,
+            c.id, c.skill_log_id, c.member_id, c.skill_log_comment_parent_id, c.skill_log_comment_content,
+            c.created_datetime, c.updated_datetime,
+            f.id as fileId, f.file_path, f.file_name, f.file_original_name
+        from tbl_skill_log_comment c
+        join tbl_member m
+        on m.id = c.member_id
+        join tbl_individual_member im
+        on m.id = im.id
+        left join tbl_skill_log_comment_file cf
+        on cf.skill_log_comment_id = c.id
+        left join tbl_file f
+        on f.id = cf.id
+        where c.skill_log_id = #{skillLogId} and skill_log_comment_parent_id = #{commentParentId}
+        order by c.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+    <select id="selectCountAllByCommentParentIdAndSkillLogId">
+        select count(*) from tbl_skill_log_comment c
+        join tbl_member m on m.id = c.member_id
+        join tbl_individual_member im on m.id = im.id
+        where skill_log_id = #{skillLogId} and skill_log_comment_parent_id = #{commentParentId}
+    </select>
+
+    <update id="update">
+        update tbl_skill_log_comment
+        set
+            skill_log_comment_content = #{skillLogCommentContent},
+            updated_datetime = current_timestamp
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from tbl_skill_log_comment
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteAllBySkillLogId">
+        delete from tbl_skill_log_comment
+        where skill_log_id = #{id}
+    </delete>
+
+    <delete id="deleteAllByCommentParentId">
+        delete from tbl_skill_log_comment
+        where skill_log_comment_parent_id = #{id}
+    </delete>
+
+    <delete id="deleteNestedCommentsBySkillLogId">
+        delete from tbl_skill_log_comment
+        where skill_log_id = #{id}
+          and skill_log_comment_parent_id is not null
+    </delete>
+    <delete id="deleteParentCommentsBySkillLogId">
+        delete from tbl_skill_log_comment
+        where skill_log_id = #{id}
+          and skill_log_comment_parent_id is null
+    </delete>
+
+    <select id="selectMemberIdById" resultType="Long">
+        select member_id from tbl_skill_log_comment
+        where id = #{id}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

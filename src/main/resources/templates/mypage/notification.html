@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>notification</title>
+        <link rel="stylesheet" href="/css/qna/header.css">
+        <link rel="stylesheet" href="/css/mypage/notification.css" />
+        <link rel="stylesheet" href="/css/qna/footer.css">
+    </head>
+    <body>
+    <header th:replace="~{/qna/header.html::header}"></header>
+        <div id="wrap">
+            <section id="container">
+                <h1 class="skip">개인회원 서비스</h1>
+
+                <section class="content">
+                    <div class="contWrap alarmCont">
+                        <div class="hdWrap">
+                            <h2 class="hd_1">수신 알림</h2>
+                            <p class="noti">
+                                최근 30일간 보낸 알림만 확인할 수 있습니다.
+                            </p>
+                            <div class="alarmSort">
+                                <span class="selWrap">
+                                    <select id="sortSel" name="Ts_Type" title="수신 알림 선택">
+                                        <option selected="selected" value="">전체 알림</option>
+                                        <option value="qna">취업톡톡</option>
+                                        <option value="experience_apply">체험지원현황</option>
+                                        <option value="skill_log">기술블로그</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <section class="alarmListWrap">
+                            <h3 class="skip">수신 알림 리스트</h3>
+                            <div id="js-alarmFrame">
+    <div th:if="${notificationsByDate == null or notificationsByDate.isEmpty()}" class="alarmList">
+        <div class="hd">알림이 없습니다.</div>
+    </div>
+
+    <div class="alarmList" th:each="entry : ${notificationsByDate}">
+        <div class="hd">
+            <span class="tahoma" th:text="${entry.key}">26.01.29 (목)</span>
+        </div>
+        <article class="cont">
+            <ul>
+                <li class="type_red" th:each="notification : ${entry.value}" th:data-type="${notification.notificationType}">
+                    <span class="update" th:text="${notification.createdTimeLabel}">20:00</span>
+                    <div class="box">
+                        <div class="desc">
+                            <span class="state" th:text="${notification.notificationTypeLabel}">type</span>
+                            <strong class="title">
+                                <a th:if="${notification.notificationType == 'qna'}"
+                                   th:href="@{/qna/detail(id=${notification.qnaId})}"
+                                   th:text="${notification.notificationTitle}">title</a>
+                                <a th:if="${notification.notificationType == 'experience_apply'}"
+                                   th:href="@{/mypage/experience}"
+                                   th:text="${notification.notificationTitle}">title</a>
+                                <a th:if="${notification.notificationType == 'skill_log'}"
+                                   th:href="@{/skill-log/detail(id=${notification.skillLogId})}"
+                                   th:text="${notification.notificationTitle}">title</a>
+                            </strong>
+                            <p class="answer"
+                               th:if="${notification.notificationType == 'qna'}"
+                               th:text="'질문에 댓글이 달렸습니다'">질문에 댓글이 달렸습니다</p>
+                            <p class="answer"
+                               th:if="${notification.notificationType == 'experience_apply'}"
+                               th:text="${notification.experienceStatusLabel}">상태</p>
+                            <p class="answer"
+                               th:if="${notification.notificationType == 'skill_log'}"
+                               th:text="'글에 댓글이 달렸습니다'">글에 댓글이 달렸습니다</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </div>
+</div>
+                        </section>
+                    </div>
+                </section>
+                <!--// Lnb Area -->
+                <!-- 사이드바 시작 -->
+                <section class="secLnb">
+                    <h1 class="skip">개인회원 서비스 메뉴</h1>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">
+                            <a href="/mypage/mypage">개인회원 홈</a>
+                        </h2>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">기술블로그</h2>
+                        <ul>
+                            <li>
+                                <a href="/skill-log/list">전체 글 목록</a>
+                            </li>
+                            <li>
+                                <a href="/skill-log/list?mine=true">내 글 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">체험 지원 관리</h2>
+                        <ul>
+                            <li>
+                                <a href="/mypage/experience">체험 지원 현황</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">QnA</h2>
+                        <ul>
+                            <li>
+                                <a href="/qna/list">전체 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">회원정보 관리</h2>
+                        <ul>
+                            <li>
+                                <a href="/mypage/change-my-information">회원정보 수정</a>
+                            </li>
+                            <li>
+                                <a href="/mypage/unsubscribe">회원탈퇴</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- 사이드바 끝 -->
+                <!-- Lnb Area //-->
+            </section>
+        </div>
+        <footer th:replace="~{/qna/footer.html::footer}"></footer>
+    </body>
+    <script src="/js/mypage/notification/event.js"></script>
+    <script src="/js/qna/header-event.js"></script>
+    <script src="/js/qna/footer.js"></script>
+</html>

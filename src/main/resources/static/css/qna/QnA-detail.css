@@ -1,0 +1,2195 @@
+* {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+
+legend {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    font-size: 0px;
+    letter-spacing: 0px;
+    line-height: 0;
+}
+
+body {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, input, textarea, button, p, table, th, td {
+    padding: 0;
+    margin: 0;
+}
+
+table, th, td, input, button {
+    font-size: 12px;
+    letter-spacing: 0px;
+}
+
+select, input, option, textarea {
+    vertical-align: middle;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+}
+
+form, fieldset, iframe, button {
+    border: 0 none;
+}
+
+input, select, button {
+    vertical-align: middle;
+}
+
+button {
+    overflow: visible;
+    background: transparent;
+    cursor: pointer;
+}
+
+button {
+    outline: none;
+}
+
+.viewContWrap .post-util-item button {
+    font-size: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.viewContWrap .post-util .icon-more-button {
+    margin-right: -10px;
+}
+
+li {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+img {
+    border: 0 none;
+    vertical-align: top;
+}
+
+.create-menu-item {
+    position: relative;
+    display: block;
+    height: 48px;
+    color: #333333;
+    font-size: 14px;
+    letter-spacing: 0px;
+    line-height: 48px;
+    padding-left: 40px;
+    font-weight: bold;
+}
+
+
+a, a:link, a:visited {
+    color: #999;
+    text-decoration: none;
+}
+
+a:hover, a:active, a:focus {
+    color: #39f;
+}
+
+.skip, .blind {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+}
+
+#wrap {
+    position: relative;
+    width: 100%;
+    margin: 25px auto 0 auto;
+    text-align: left;
+    zoom: 1;
+}
+
+#wrap {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+#wrap {
+    width: 1200px !important;
+    margin-top: 0;
+}
+
+.side-navigation {
+    float: left;
+    width: 210px;
+    padding-top: 13px;
+    border: 1px solid #e5e5e7;
+    border-top: none;
+    background-color: #fff;
+}
+
+.side-navigation .navi-top-area {
+    padding: 0 12px;
+}
+
+.side-navigation .btn-question {
+    display: block;
+    width: 100%;
+    height: 56px;
+    background: #7BA882;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 58px;
+    text-align: center;
+}
+
+.side-navigation .btn-question:hover {
+    background-color: #5d8162;
+}
+
+.qnaSpB:before, .qnaSpA:after, .qnaSpM:before, .qnaSpM:after {
+    content: "";
+    display: inline-block;
+    background-image: url(/images/sp_qna_recolor_star20_fixed.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    vertical-align: middle;
+}
+
+.side-navigation .btn-question:before {
+    margin: -3px 7px 0 0;
+    width: 17px;
+    height: 17px;
+    background-position: -140px -90px;
+}
+
+.tooltip-layer {
+    display: none;
+    z-index: 2;
+    position: absolute;
+    left: 70px;
+    top: 45px;
+    padding: 15px 20px;
+    width: 400px;
+    background: #fff;
+    border: 1px solid #565d79;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.navi-top-area.has-tooltip.tooltip-open .tooltip-layer {
+  display: block;
+}
+
+.create-menu-wrap {
+    width: 225px;
+    padding: 0;
+    left: -7px;
+    top: 80px;
+}
+
+.create-menu-item:link, .create-menu-item:visited {
+    color: #333;
+}
+
+.create-menu-item:hover {
+    background-color: #f0f3f9;
+}
+
+.create-menu-item:first-child {
+    border-bottom: solid 1px #eee;
+}
+
+.create-menu-item::before {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 15px;
+    top: 17px;
+}
+
+.create-menu-item.qna::before {
+    background-position: -216px -408px;
+}
+
+.create-menu-item.carrier::before {
+    background-position: -216px -431px;
+}
+
+.side-navigation .myInfoSec {
+    margin: 10px 0 20px;
+    padding: 0 20px;
+    background: #f5f5f5;
+}
+
+.side-navigation .myInfoSec.logout {
+    padding: 0;
+}
+
+.side-navigation .myInfoSec .myInfo {
+    display: block;
+    padding: 20px 0 15px;
+}
+
+.side-navigation .myInfoSec.logout .myInfo {
+    padding: 20px 0;
+}
+
+.side-navigation .myInfoSec .myInfo .proThumb {
+    overflow: hidden;
+    display: block;
+    margin: 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.side-navigation .myInfoSec .myInfo .proThumb img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.side-navigation .myInfoSec.logout .myInfo .msg {
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #000;
+    text-align: center;
+}
+
+address, caption, em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+.side-navigation .myInfoSec.logout .myInfo .msg em {
+    font-weight: bold;
+    color: hsl(154.36deg 100% 21.57%);
+    text-decoration: underline;
+}
+
+.side-navigation .navi-list-area .sideNavLow {
+    position: relative;
+    padding: 16px 19px 19px;
+    border-top: 1px solid #efeff1;
+}
+
+.side-navigation .navi-list-area .has-tooltip .select-tooltip {
+    margin: 5px 0 0 5px;
+    width: 14px;
+    height: 14px;
+    float: right;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavTit a {
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #000;
+    font-weight: bold;
+}
+
+/*.side-navigation .navi-list-area .has-tooltip .select-tooltip:after {*/
+/*    width: 14px;*/
+/*    height: 14px;*/
+/*    margin-top: -5px;*/
+/*    background-position: -215px -388px;*/
+/*}*/
+
+.side-navigation .navi-list-area .sideNavLow {
+    position: relative;
+    padding: 16px 19px 19px;
+    border-top: 1px solid #efeff1;
+}
+
+.side-navigation .navi-list-area .sideNavLow .button-more {
+    position: absolute;
+    right: 19px;
+    top: 19px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999;
+}
+
+.side-navigation .navi-list-area .sideNavLow .button-more:after {
+    margin: -3px 0 0 5px;
+    width: 4px;
+    height: 7px;
+    background-position: -120px -65px;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavList {
+    padding: 6px 0 0 10px;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavList li {
+    margin-top: 8px;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavList li a {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    padding: 0 5px 0 0;
+    max-width: 100%;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #666;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavList.boxList {
+    padding: 6px 0 0;
+}
+
+#container, .container {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+    zoom: 1;
+}
+
+#container {
+    display: table-cell;
+    vertical-align: top;
+    width: 960px;
+    padding: 30px 0 60px;
+    float: right;
+    z-index: 3 !important;
+}
+
+#container {
+    display: table-cell;
+    vertical-align: top;
+    width: 960px !important;
+    min-width: 960px !important;
+    padding: 34px 0 60px;
+    float: right;
+    z-index: 2 !important;
+}
+
+#content {
+    width: 960px;
+    position: relative;
+    zoom: 1;
+}
+
+#container #content {
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 0;
+    line-height: 1.5;
+    position: relative;
+    z-index: 3;
+}
+
+.qnaViewWrap .top-title-wrap .title {
+    margin-bottom: 0 !important;
+}
+
+.viewContWrap {
+    padding: 35px 40px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+}
+
+.viewContWrap .contBox .topArea {
+    margin-bottom: 15px;
+}
+
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.viewContWrap .contBox .topArea .labelSwiper {
+    overflow: hidden;
+    float: left;
+    position: relative;
+    width: -webkit-calc(100% - 70px);
+    width: calc(100% - 70px);
+    height: 22px;
+    white-space: nowrap;
+}
+
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+/* .swiper-container-android .swiper-slide, .swiper-wrapper {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+} */
+
+.viewContWrap .contBox .topArea .labelSwiper .label {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 0 6px;
+    width: auto;
+    height: 22px;
+    background:  #7BA882;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 22px;
+}
+
+.viewContWrap .contBox .topArea .labelSwiper .label:last-child {
+    margin-right: 0;
+}
+
+.viewContWrap .contBox .topArea .labelSwiper .label:hover {
+    background-color:   #5d8162;
+    color: #fff;
+}
+
+.viewContWrap .contBox .topArea .labelSwiper:after {
+    z-index: 1;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 30px;
+    height: 100%;
+    background: url(/content/images/user/qna/bg_gradation_wh.png?202002070000) no-repeat right center;
+    background-size: 30px auto;
+}
+
+.viewContWrap .contBox .topArea .point {
+    float: right;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+}
+
+.viewContWrap .contBox .topArea .point:before {
+    margin: -3px 5px 0 0;
+    width: 20px;
+    height: 20px;
+    background-position: -170px -90px;
+}
+
+.viewContWrap .contBox .topArea:after {
+    content: "";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.viewContWrap .contBox .tit {
+    overflow: hidden;
+    position: relative;
+    font-size: 25px;
+    letter-spacing: -0.5px;
+    color: #333;
+    line-height: 1.5;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.lyViewBoard i[class^="ico"] {
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    color: transparent;
+    text-indent: -9999px;
+}
+
+.lyViewBoard i.icoCmt {
+    top: 8px;
+    width: 10px;
+    height: 10px;
+}
+
+.viewListWrap .cmtList .icoCmt {
+    float: left;
+}
+
+.lyViewBoard i.icoQ_on {
+    top: 9px;
+    width: 23px;
+    height: 23px;
+}
+
+.viewContWrap .contBox .tit i[class^="ico"] {
+    float: left;
+}
+
+.lyViewBoard i[class^="ico"]:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.lyViewBoard i.icoCmt:before {
+    width: 10px;
+    height: 10px;
+    background-position: -216px -127px;
+}
+
+.lyViewBoard i.icoQ_on:before {
+    width: 23px;
+    height: 23px;
+    background-position: 0px -55px;
+}
+
+.viewContWrap .post-state {
+    position: relative;
+    border-bottom: solid 1px #e9e9e9;
+}
+
+.viewContWrap .post-cell-box {
+    padding: 18px 0 25px;
+}
+
+.viewContWrap .post-cell-box .cell {
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #999;
+    vertical-align: middle;
+}
+
+.viewContWrap .post-cell-box i {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: 4px;
+    margin-right: 1px;
+    vertical-align: middle;
+}
+
+.icon-view-eye:before {
+    width: 18px;
+    height: 12px;
+    background-position: -195px -327px;
+}
+
+.viewContWrap .post-cell-box .cell:before {
+    content: "";
+    display: inline-block;
+    margin: 0 10px;
+    width: 1px;
+    height: 12px;
+    background: #edeef0;
+    vertical-align: -2px;
+}
+
+.viewContWrap .post-util {
+    z-index: 5;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    top: auto;
+}
+
+.viewContWrap .post-util-item {
+    position: relative;
+    display: inline-block;
+}
+
+.viewContWrap .post-util .icon-more-button::before {
+    width: 5px;
+    height: 19px;
+    margin-top: 2px;
+    background-position: -262px -179px;
+}
+
+.viewContWrap .post-util .view-more-layer {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 33px;
+    border: 1px solid #565d79;
+    background-color: #fff;
+}
+
+.viewContWrap .post-util .view-more-layer.active {
+    display: block;
+}
+
+.viewContWrap .post-util .view-more-item {
+    display: block;
+    width: 80px;
+    height: 30px;
+    color: #333;
+    font-size: 13px;
+    letter-spacing: 0px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.viewContWrap .contBox .cont {
+    position: relative;
+    margin-top: 20px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #333;
+    line-height: 1.7;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.viewContWrap .contBox .btmArea {
+    position: relative;
+    margin-top: 28px;
+    line-height: 32px;
+}
+
+.viewContWrap .hash-tag-wrap {
+    margin: 30px 0;
+}
+
+.viewContWrap .hash-tag-item {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    border: solid 1px #d5d5d7;
+    color: #666;
+    margin: 0 2px 5px 0;
+}
+
+.lyViewBoard .infoBx .proThumb {
+    overflow: hidden;
+    float: left;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.lyViewBoard .infoBx .proThumb img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.viewContWrap .contBox .btmArea .infoBx .info {
+    float: left;
+    margin-left: 10px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #333;
+}
+
+.viewContWrap .contBox .btmArea .infoBx::after {
+    content: '';
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+
+.viewContWrap .reaction-wrap {
+    margin-top: 30px;
+    border-top: solid 1px #e9e9e9;
+    text-align: center;
+}
+
+.viewContWrap .reaction-item {
+    position: relative;
+    display: inline-block;
+    height: 70px;
+    padding: 0 30px;
+}
+
+.viewContWrap .reaction-item button {
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+}
+
+
+
+.btnBookmark:before {
+    width: 15px;
+    height: 20px;
+    background-position: -195px -30px;
+}
+
+.btnBookmark.on:before {
+    background-position: -195px -55px;
+}
+.viewContWrap .reaction-item button::before {
+    margin-right: 3px;
+    vertical-align: -4px;
+}
+
+
+.viewContWrap .reaction-item .icon-like::before {
+    width: 24px;
+    height: 20px;
+    background-position: -138px -281px;
+    background-image: url(/images/sp_qna_recolor.png);
+}
+.viewContWrap .reaction-item .icon-like.on::before {
+    background-position: -168px -281px;
+}
+
+.viewContWrap .reaction-item em {
+    font-weight: bold;
+    color: hsl(154.36deg 100% 21.57%);
+    padding-left: 5px;
+}
+
+.viewContWrap .reaction-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 22px;
+    background-color: #efeff1;
+}
+
+.viewContWrap .reaction-item .book-mark-layer {
+    top: -42px;
+    left: -77px;
+    width: 210px;
+}
+
+.tooltip-layer .txt {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #333;
+    line-height: 20px;
+}
+
+.viewContWrap .reaction-item .icon-share::before {
+    width: 17px;
+    height: 22px;
+    background-position: -136px -332px;
+}
+
+.viewContWrap .share-layer {
+    left: -25px;
+    top: auto;
+    bottom: 60px;
+    width: 180px;
+    padding: 16px 12px 13px;
+    font-size: 0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.viewContWrap .share-layer .button {
+    display: inline-block;
+    margin: 0 3px;
+    vertical-align: top;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #666;
+    text-align: center;
+}
+
+.viewContWrap .url-copy-layer {
+    display: none;
+    z-index: 5000;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 490px;
+    height: 200px;
+    margin: -100px 0 0 -245px;
+    border: 1px solid #565d79;
+    background-color: #fff;
+    text-align: center;
+}
+
+.viewContWrap .url-copy-layer .layer-body {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.viewContWrap .url-copy-layer .description {
+    margin-bottom: 20px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #333;
+}
+
+.viewContWrap .url-copy-layer .input {
+    padding: 0 30px;
+}
+
+.viewContWrap .url-copy-layer .screen-out {
+    overflow: hidden;
+    position: absolute;
+    left: -10000px;
+    clip: rect(0, 0, 0, 0);
+    clip: rect(0 0 0 0);
+    border: 0;
+    padding: 0;
+}
+
+input[type=text] {
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #333;
+    text-align: left;
+}
+
+input[type=text], input[type=password], input[type=file], input[type=date], input[type=tel], input[type=number] {
+    padding: 0 10px;
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background: #fff;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #333;
+    line-height: 43px;
+}
+
+.viewContWrap .url-copy-layer input {
+    width: 100%;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid #e0e0e0;
+    color: #333;
+    font-weight: bold;
+    background-color: #fbfbfb;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.viewContWrap .url-copy-layer .button-close {
+    overflow: hidden;
+    position: absolute;
+    right: 22px;
+    top: 22px;
+    width: 22px;
+    height: 22px;
+}
+
+.viewContWrap .contBox .btmArea:after {
+    content: "";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.lyViewBoard .cmtWrite {
+    position: relative;
+    border: 1px solid #b3b3b3;
+}
+
+.lyViewBoard .cmtWrite .uiPlaceholder {
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.lyViewBoard .cmtWrite.case .uiPlaceholder {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-right: 55px;
+    width: 100%;
+    height: 50px;
+}
+
+.lyViewBoard .cmtWrite .uiPlaceholder .ph {
+    position: absolute;
+    left: 20px;
+    top: 12px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    line-height: 26px;
+    color: #ccc;
+    word-break: keep-all;
+}
+
+.lyViewBoard .cmtWrite .uiPlaceholder textarea {
+    z-index: 1;
+    overflow-y: auto;
+    position: relative;
+    padding: 15px 20px;
+    width: 100%;
+    height: 125px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    resize: none;
+    line-height: 24px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+    outline: none;
+}
+
+.lyViewBoard .cmtWrite.case .uiPlaceholder textarea {
+    height: 18px;
+    min-height: 50px;
+}
+
+.lyViewBoard .cmtWrite .btnWrap {
+    position: relative;
+    padding: 20px 24px;
+    background-color: #fff;
+    border-top: 1px solid #ebecf0;
+}
+
+.lyViewBoard .cmtWrite.case .btnWrap {
+    position: relative;
+    padding: 0px;
+    height: 50px;
+    background-color: #fff;
+    border-top: 0;
+}
+
+.lyViewBoard .cmtWrite .btnWrap .infoBx {
+    overflow: hidden;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.lyViewBoard .cmtWrite .btnWrap .infoBx .info {
+    float: left;
+    margin-left: 10px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    color: #333;
+    line-height: 32px;
+}
+
+.lyViewBoard .cmtWrite .btnWrap .byte {
+    z-index: 2;
+    display: block;
+    position: absolute;
+    right: 115px;
+    bottom: 22px;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #999;
+}
+
+.lyViewBoard .cmtWrite.case .btnWrap .byte {
+    display: none;
+}
+
+.lyViewBoard .cmtWrite .btnWrap .byte b {
+    font-weight: normal;
+    color: #333;
+}
+
+.lyViewBoard .cmtWrite .btnWrap .btnSbm {
+    z-index: 5;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 90px;
+    height: 40px;
+    background-color: #7BA882;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 40px;
+}
+
+.lyViewBoard .cmtWrite.case .btnWrap .btnSbm {
+    right: -1px;
+    top: -1px;
+    height: 52px;
+    line-height: 52px;
+}
+
+.viewListWrap {
+    margin-top: 10px;
+    border: 1px solid #dce1eb;
+}
+
+.viewListWrap .headerWrap {
+    overflow: hidden;
+    padding: 30px 30px 20px;
+    background: #fff;
+}
+
+.viewListWrap .headerWrap .numBx {
+    float: left;
+}
+
+.viewListWrap .headerWrap .numBx .num {
+    font-weight: bold;
+    color: hsl(154.36deg 100% 21.57%);
+}
+
+.viewListWrap .headerWrap .numBx > span {
+    font-size: 17px;
+    letter-spacing: 0px;
+    color: #333;
+}
+
+
+
+.viewListWrap .listWrap {
+    background: #fff;
+}
+
+.viewListWrap .answerArea > li {
+    position: relative;
+}
+
+.viewListWrap .answerArea > li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: calc(100% - 80px);
+    height: 1px;
+    background-color: #ebecf0;
+    z-index: 1;
+}
+
+.viewListWrap .contSec {
+    position: relative;
+    padding: 25px 40px;
+    background: #fff;
+}
+
+
+.listWrap {
+    position: relative;
+}
+
+.lyViewBoard .commonSecWrap .infoBx{
+    overflow: hidden;
+    position: relative;
+    line-height: 32px;
+}
+
+.lyViewBoard .commonSecWrap .cont {
+    margin-top: 15px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+    line-height: 1.6;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.lyViewBoard .commonSecWrap .cellBx {
+    margin-top: 15px;
+}
+
+
+
+.lyViewBoard .commonSecWrap .cellBx .cell, .lyViewBoard .commonSecWrap .cellBx .cell a, .lyViewBoard .commonSecWrap .cellBx .cell button{
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999;
+    vertical-align: initial;
+}
+
+.lyViewBoard .commonSecWrap .cellBx .cell, .lyViewBoard .commonSecWrap .cellBx .cell a, .lyViewBoard .commonSecWrap .cellBx .cell button {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999;
+    vertical-align: initial;
+}
+
+
+.viewListWrap .btnBx {
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.viewListWrap .btnBx button {
+    float: left;
+    margin-left: 5px;
+    padding: 0 20px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #666;
+    line-height: 30px;
+    outline: 0;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dt {
+    line-height: 1;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dt .nickname {
+    display: inline-block;
+    margin-right: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90px;
+    white-space: nowrap;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #000;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dt .lvIcon {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    top: -1px;
+    padding: 0 5px;
+    height: 14px;
+    background: hsl(154.36deg 100% 21.57%);
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 14px;
+}
+
+/*.side-navigation .myInfoSec .myInfo .infoBx dt:after {*/
+/*    margin: -2px 0 0 5px;*/
+/*    width: 4px;*/
+/*    height: 7px;*/
+/*    background-position: -120px -65px;*/
+/*}*/
+.side-navigation .myInfoSec .myPoint {
+    display: block;
+    padding: 10px 0 20px;
+    width: 100%;
+    border-top: 1px solid #e1e1e1;
+}
+
+.side-navigation .myInfoSec .myPoint .point:before {
+    margin: -2px 5px 0 0;
+    width: 20px;
+    height: 20px;
+    background-position: -170px -90px;
+}
+
+.side-navigation .myInfoSec .myPoint .point {
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+    line-height: 22px;
+}
+
+.side-navigation .myInfoSec .myPoint .btnCoupon {
+    display: inline-block;
+    margin: 5px 0 0 6px;
+    padding: 0 5px;
+    height: 20px;
+    background: #fff;
+    border: 1px solid rgba(153, 153, 153, 0.5);
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #333;
+    text-align: center;
+    line-height: 20px;
+}
+
+.side-navigation .myInfoSec .myPoint .btnCoupon:after {
+    margin: -3px 0 0 5px;
+    width: 4px;
+    height: 7px;
+    background-position: -120px -65px;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dd span {
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: hsl(154.36deg 100% 21.57%);
+    margin-top: 10px;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dd span:nth-child(even) {
+    margin-left: 6px;
+    padding-left: 6px;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dd span {
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: hsl(154.36deg 100% 21.57%);
+    margin-top: 10px;
+}
+
+.side-navigation .myInfoSec .myInfo .infoBx dd span:nth-child(even):before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    margin-top: -1px;
+    width: 2px;
+    height: 2px;
+    background: #999;
+}
+
+.viewListWrap .btnBx .btnCmt em {
+    font-weight: bold;
+    color: #333;
+}
+
+.viewListWrap .btnBx .btnHeart {
+    padding-left: 22px;
+}
+
+
+.viewListWrap .btnBx .btnHeart:before {
+    position: relative;
+    left: -5px;
+    top: -2px;
+    width: 18px;
+    height: 15px;
+    background-position: -262px -205px;
+}
+
+.viewListWrap .btnBx .btnHeart.active:before {
+    background-position: -262px -227px;
+}
+
+.viewListWrap .btnBx .btnHeart.active {
+    border-color: hsl(154.36deg 100% 21.57%);
+    color: hsl(154.36deg 100% 21.57%);
+}
+
+.viewListWrap .contSec.modify-answer{
+    display: none;
+}
+
+
+
+.lyViewBoard .cmtWrite {
+    position: relative;
+    border: 1px solid #b3b3b3;
+}
+
+.viewListWrap .cmtWrite {
+    margin: 20px 50px 20px 58px;
+}
+
+.viewListWrap .cmtWrite:before {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-position: -216px -127px;
+    position: absolute;
+    top: 6px;
+    left: -28px;
+}
+
+.viewListWrap .contSec.modify-answer .cmtWrite .uiPlaceholder textarea {
+    padding: 15px 25px 15px 20px;
+}
+
+.answer-util-item {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.answer-util-item > button {
+    width: 18px; 
+    height: 18px;
+    font-size: 0;
+}
+
+.button.icon-photo.qnaSpB::before{
+    width: 18px; 
+    height: 18px;
+}
+
+.button.icon-photo.qnaSpB{
+    font-size: 0;
+}
+
+.answer-util-item > button::before {
+    width: 100%;
+    height: 100%;
+}
+
+.answer-util-item .icon-photo::before {
+    background-position: -50px -434px;
+}
+
+.answer-util-item .icon-emoticon::before {
+    background-position: -75px -434px;
+}
+
+.answer-util-item .icon-emoticon.on::before {
+    background-position: -75px -459px;
+}
+
+.layer-box-wrap{
+    display: none;
+    padding: 30px 28px;
+    background: #fff;
+    border: 1px solid #565d79;
+}
+
+.emotion-layer {
+    width: 732px;
+    padding: 0;
+    z-index: 10;
+}
+
+.layer-box-wrap.open {
+    display: block;
+}
+
+.lyViewBoard .emotion-layer {
+    position: absolute;
+    top: 50px;
+    left: -1px;
+}
+
+.layer-box-wrap .layer-header {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+
+.emotion-layer .layer-header {
+    padding: 30px 28px 10px;
+}
+
+.emotion-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 730px;
+    height: 380px;
+    padding: 0 28px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.lyViewBoard .emotion-area{
+    height: 260px;
+}
+
+.emotion-item {
+    width: 95px;
+    height: 95px;
+    margin: 0 15px 15px 0;
+}
+
+.layer-box-wrap .btn-layer-close {
+    position: absolute;
+    right: 28px;
+    top: 30px;
+    width: 17px;
+    height: 17px;
+}
+
+.lyViewBoard .cmtWrite .btnModifyCancel {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    padding: 20px;
+    width: 15px;
+    height: 14px;
+}
+
+.viewListWrap .commentSec {
+    display: none;
+    margin: 0 40px;
+    background-color: #fafafa;
+}
+
+.viewListWrap .cmtArea {
+    background: #fafafa;
+    border-top: 1px solid #ebecf0;
+}
+
+.viewListWrap .btnCmtClose {
+    display: block;
+    padding: 7px 0;
+    width: 100%;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+    text-align: center;
+}
+
+.lyViewBoard .cmtWrite.case .uiPlaceholder .ph_2 {
+    display: none;
+}
+
+.viewListWrap .btnCmtClose:after {
+    margin: -4px 0 0 10px;
+    width: 11px;
+    height: 6px;
+    background-position: -216px -250px;
+}
+
+.lyViewBoard .commonSecWrap .infoBx {
+    overflow: hidden;
+    position: relative;
+    line-height: 32px;
+}
+
+.lyViewBoard .commonSecWrap .infoBx .my-profile {
+    float: left;
+}   
+
+.lyViewBoard .commonSecWrap .infoBx .nickname {
+    margin-left: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.lyViewBoard .commonSecWrap .infoBx > span {
+    float: left;
+    margin-left: 6px;
+    font-size: 13px;
+    letter-spacing: 0px;
+}
+
+.lyViewBoard .commonSecWrap .infoBx .lvIcon {
+    position: relative;
+    top: 9px;
+    padding: 0 5px;
+    height: 14px;
+    background: #b6c1c6;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 14px;
+}
+
+.lyViewBoard .commonSecWrap .infoBx .info {
+    color: #666;
+}
+
+.lyViewBoard .commonSecWrap .infoBx .info{
+    color: #666;
+}
+
+.lyViewBoard .commonSecWrap .infoBx .lvIcon {
+    position: relative;
+    top: 9px;
+    padding: 0 5px;
+    height: 14px;
+    background: #7BA882;
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 14px;
+}
+
+.attach-wrap {
+    position: relative;
+    text-align: center;
+}
+
+.lyViewBoard .writeBoxWrap .attach-wrap, .lyViewBoard .answerArea .attach-wrap {
+    margin: 0;
+    padding: 20px;
+    text-align: left;
+}
+
+.attach-emoticon {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.lyViewBoard .writeBoxWrap .attach-emoticon, .lyViewBoard .answerArea .attach-emoticon {
+    width: 95px;
+    height: 95px;
+    margin: 0;
+}
+
+.lyViewBoard .commonSecWrap .cellBx .cell, .lyViewBoard .commonSecWrap .cellBx .cell a, .lyViewBoard .commonSecWrap .cellBx .cell button{
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999;
+    vertical-align: initial;
+}
+
+.viewListWrap .btnBx button:first-child {
+    margin-left: 0;
+}
+
+.viewListWrap .contSec.modify-answer {
+    display: none;
+}
+
+.lyViewBoard .cmtWrite .uiPlaceholder .ph{
+    position: absolute;
+    left: 20px;
+    top: 12px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    line-height: 26px;
+    color: #ccc;
+    word-break: keep-all;
+}
+
+.attach-emoticon img {
+    width: 100%;
+}
+
+.attach-wrap .remove-button {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    font-size: 0;
+}
+
+.emotion-item img {
+    width: 100%;
+}
+
+.layer-box-wrap .btn-layer-close:before {
+    width: 17px;
+    height: 17px;
+    background-position: -262px -285px;
+}
+
+.layer-box-wrap .btn-layer-close{
+    position: absolute;
+    right: 28px;
+    top: 30px;
+    width: 17px;
+    height: 17px;
+}
+
+.tplPagination {
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.tplPagination {
+    background-color: #fff;
+    margin-top: 0;
+    padding: 30px 0 30px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+}
+
+.tplPagination.newVer {
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+    clear: both;
+}
+
+.tplPagination.newVer {
+    margin-top: 0;
+    padding: 30px 0 30px;
+    background-color: #fff;
+    border: none;
+    border-top: 1px solid #e1e5e8;
+}
+
+.tplPagination p, .tplPagination ul, .tplPagination li {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tplPagination.newVer p, .tplPagination.newVer ul, .tplPagination.newVer li{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tplPagination a, .tplPagination .tplBtn, .tplPagination .now {
+    display: inline-block;
+    color: #999;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.tplPagination .now {
+    color: #333;
+    font-weight: bold;
+    border: 1px solid #666;
+}
+
+.tplPagination.newVer a, .tplPagination.newVer .tplBtn, .tplPagination.newVer .now {
+    display: inline-block;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid transparent;
+    background: transparent;
+}
+
+.tplPagination.newVer .now {
+    color: #333;
+    font-weight: bold;
+    border: 1px solid #666;
+}
+
+.tplPagination.newVer .now {
+    border-color: #bbb;
+}
+
+
+.lyViewBoard .bottom-btn-wrap {
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.lyViewBoard .bottom-btn-wrap .btn-all-question {
+    float: right;
+    padding: 0 15px;
+    height: 32px;
+    background-color: #fff;
+    border: 1px solid hsl(154.36deg 100% 21.57%);
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: hsl(154.36deg 100% 21.57%);
+    line-height: 31px;
+    text-align: center;
+}
+
+
+.lyViewBoard .bottom-btn-wrap .btn-all-question:before {
+    margin: -4px 8px 0 0;
+    width: 13px;
+    height: 9px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9'%3E%3Crect x='0' y='0' width='13' height='1' fill='%23006e3e'/%3E%3Crect x='0' y='4' width='13' height='1' fill='%23006e3e'/%3E%3Crect x='0' y='8' width='13' height='1' fill='%23006e3e'/%3E%3C/svg%3E");
+}
+
+.lyViewBoard .bottom-btn-wrap .btn-all-question:hover::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9'%3E%3Crect x='0' y='0' width='13' height='1' fill='%23ffffff'/%3E%3Crect x='0' y='4' width='13' height='1' fill='%23ffffff'/%3E%3Crect x='0' y='8' width='13' height='1' fill='%23ffffff'/%3E%3C/svg%3E");
+}
+
+.lyViewBoard .bottom-btn-wrap .btn-all-question:hover {
+    color: #fff;
+    background-color: hsl(154.36deg 100% 21.57%);
+}
+
+#container #content:after {
+    content: "";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+#wrap:after {
+    content: "";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+#wrap:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavTit a:hover {
+    text-decoration: underline;
+}
+
+.side-navigation .navi-list-area .sideNavLow .sideNavList li a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* 첫 번째 cell(조회수) 앞 구분선 제거 */
+.viewContWrap .post-cell-box .cell:first-child::before {
+    content: none;
+    display: none;
+}
+
+.viewContWrap .share-layer .button:before, .viewContWrap .share-layer .button:before{
+    content: '';
+    display: block;
+    width: 31px;
+    height: 31px;
+    margin: 0 auto 7px;
+    background-image: url(/images/sp_coredata.png);
+    background-repeat: no-repeat;
+}
+
+.viewContWrap .share-layer .button-facebook:before, .viewContWrap .share-layer .button-facebook:before {
+    background-position: -46px -131px;
+}
+
+.viewContWrap .share-layer .button{
+    display: inline-block;
+    margin: 0 3px;
+    vertical-align: top;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #666;
+    text-align: center;
+}
+
+.viewContWrap .share-layer .button-bookmark:before, .viewContWrap .share-layer .button-bookmark:before {
+    background-position: -79px -131px;
+}
+
+.viewContWrap .share-layer .button-copy-url:before, .viewContWrap .share-layer .button-copy-url:before {
+    background-position: -112px -131px;
+}
+
+.tooltip-layer:after {
+    position: absolute;
+    left: 110px;
+    bottom: -6px;
+    width: 9px;
+    height: 6px;
+    background-position: -291px 0;
+}
+
+.viewContWrap .share-layer:after {
+    left: 86px;
+}
+.tooltip-layer:before {
+    position: absolute;
+    left: 20px;
+    top: -6px;
+    width: 9px;
+    height: 6px;
+    background-position: -278px 0;
+}
+
+.create-menu-wrap::before{
+    left: 50%;
+    margin-left: -3px;
+}
+
+.viewContWrap .url-copy-layer.attached {
+    display: table;
+}
+
+.viewContWrap .url-copy-layer .button-close:before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url(/images/tpl_sp_btn.png) no-repeat 0 -65px;
+}
+
+.tooltip-layer.book-mark-layer {
+    display: block;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.viewListWrap .headerWrap .checkBx label:before {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 10px;
+    height: 9px;
+    background-position: -216px -209px;
+}
+
+.mtuPopup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-left: -390px;
+    width: 780px;
+    border: 1px solid #565d79;
+    box-sizing: border-box;
+    background-color: #fff;
+    z-index: 9001;
+}
+
+.lyQnaReport .mtuPopup {
+    position: fixed;
+    top: 50%;
+    width: 443px;
+    margin: -233px 0 0 -221px;
+    z-index: 10001;
+}
+
+.qnaWrapBody .mtuLyWrap .mtuPopup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10001;
+    overflow: hidden;
+}
+
+.mtuPopup > .lyHd {
+    padding: 50px 49px 15px;
+    font-size: 32px;
+    letter-spacing: -1px;
+    color: #000;
+}
+
+.mtuPopup > .lyCnt {
+    padding: 0 49px;
+}
+
+.lyQnaReport .mtuPopup .reportBx {
+    padding-top: 12px;
+    border-top: 1px solid #c1c3c7;
+}
+
+.radioCommWrap label {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: 0px;
+}
+
+.radioCommWrap input[type=radio] + label:before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-position: -195px -90px;
+    vertical-align: middle;
+}
+
+.radioCommWrap input[type=radio]:checked + label:before {
+    background-position: -195px -113px;
+}
+
+.radioCommWrap label > span {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.radioCommWrap input[type=radio] + label > span {
+    margin: 0 8px;
+}
+
+.radioCommWrap:after {
+    content: "";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.lyQnaReport .reasonBx {
+    margin-top: 18px;
+}
+
+.qnaFormBx {
+    position: relative;
+}
+
+.qnaTxaBx {
+    border: 1px solid #e1e2e6;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.lyQnaReport .reasonBx .qnaTxaBx {
+    height: 70px;
+    padding: 2px 2px;
+    background-color: #fcfdff;
+    border-color: #e1e2e6;
+    border-radius: 3px;
+}
+
+.qnaFormBx .ph {
+    position: absolute;
+    left: 21px;
+    top: 12px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #b0b0b0;
+    line-height: 25px;
+}
+
+.lyQnaReport .reasonBx .qnaTxaBx .ph {
+    left: 13px;
+    top: 7px;
+    font-size: 13px;
+    letter-spacing: 0px;
+}
+
+.qnaFormBx .qnaIptTx, .qnaTxaTx {
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+    background-color: transparent;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.qnaTxaTx {
+    overflow: auto;
+    width: 100%;
+    padding: 11px 21px;
+    line-height: 25px;
+    border: 0;
+    resize: none;
+    outline: none;
+}
+
+.lyQnaReport .reasonBx .qnaTxaTx {
+    height: 100%;
+    padding: 8px 13px;
+    background-color: transparent;
+}
+
+.btnCommWrap {
+    overflow: hidden;
+    text-align: center;
+}
+
+.lyQnaReport .btnCommWrap {
+    margin: 20px 0 30px;
+    font-size: 0;
+    text-align: center;
+}
+
+.btnCommWrap button {
+    margin: 0 5px;
+    width: 135px;
+    height: 50px;
+    background: #7BA882;
+    border: 1px solid #7BA882;
+    box-sizing: border-box;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #fff;
+    line-height: 50px;
+}
+
+.btnCommWrap button.bg_white {
+    background: #fff;
+    border-color: #d7d8d9;
+    color: #666;
+}
+
+.mtuPopup .butClose {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 27px;
+    height: 27px;
+    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20id%3D%22close-%26%23xB808%3B%26%23xC774%3B%26%23xC5B4%3B_1%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%2015%2015%22%20xml%3Aspace%3D%22preserve%22%20width%3D%2232%22%20height%3D%2232%22%3E%3Cstyle%3E.st0%7Bfill%3Anone%3Bstroke%3A%23565d79%3Bstroke-width%3A0.5%3Bstroke-miterlimit%3A10%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M15%200L0%2015M0%200l15%2015%22%2F%3E%3C%2Fsvg%3E);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mtuLyWrap .dimmed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .4;
+    filter: alpha(opacity=40);
+}
+
+.mtuLyWrap .dimmed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .4;
+    filter: alpha(opacity=40);
+    z-index: 2000;
+}
+
+.lyQnaReport .dimmed {
+    z-index: 10000;
+}
+
+.qnaWrapBody .mtuLyWrap .dimmed {
+    z-index: 10000;
+}
+
+.lyQnaReport .reportBx li {
+    margin: 5px 0 0 0;
+}
+
+
+.viewContWrap .inputBox .notice-box-wrap {
+    margin-top: 20px;
+    padding: 25px 20px;
+    background: #f9f9f9;
+}
+
+.viewContWrap .inputBox .notice-box-wrap li:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin: -1px 7px 0 0;
+    width: 2px;
+    height: 2px;
+    background: #999;
+}
+
+.viewContWrap .inputBox .notice-box-wrap li {
+    position: relative;
+    padding-left: 10px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999;
+    line-height: 1.8;
+}
+
+.viewListWrap .cmtList > li {
+    position: relative;
+    padding: 20px 30px;
+}
+
+.viewListWrap .cmtList > li.myCmt {
+    background-color: #f9fcff;
+}
+
+
+.lyViewBoard .commonSecWrap .cellBx .cell:before {
+    content: "";
+    display: inline-block;
+    margin: 0 10px;
+    width: 1px;
+    height: 12px;
+    background: #e8e8e8;
+}
+
+/* 첫 번째 cell 앞의 구분선은 삭제 */
+.lyViewBoard .commonSecWrap .cellBx .cell:first-child:before {
+    content: none;
+    display: none;
+}
+
+.viewListWrap .btnBx .btnCmt.active {
+    background: #f6f6f6;
+}
+
+.answer-util-item > button {
+    width: 18px;
+    height: 18px;
+    font-size: 0;
+}
+
+.lyViewBoard .writeBoxWrap .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0;
+    padding: 15px;
+    z-index: 1;
+}
+
+.lyViewBoard .cmtWrite .btnModifyCancel:before {
+    display: block;
+    width: 15px;
+    height: 14px;
+    background-position: 0 -31px;
+    transform: translate(-50%, -50%);
+}
+
+.lyViewBoard .writeBoxWrap .close-button::before {
+    width: 15px;
+    height: 14px;
+    background-position: 0 -30px;
+}
+
+.attach-image {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.lyViewBoard .writeBoxWrap .attach-image, .lyViewBoard .answerArea .attach-image {
+    max-width: 250px;
+    margin: 0;
+    text-align: left;
+}
+
+.attach-wrap .remove-button::before {
+    width: 17px;
+    height: 17px;
+    background-position: -195px -459px;
+}
+
+.attach-image img {
+    max-width: 100%;
+}

@@ -1,0 +1,86 @@
+/* 사진 업로드 영역 스타일 */
+.photo-upload-area {
+    margin-top: 5px;
+}
+
+.photo-upload-box {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+    background-color: #fafbfc;
+}
+
+.photo-upload-box:hover {
+    border-color: #006e3f;
+    background-color: #f0f7f4;
+}
+
+.photo-upload-box.dragover {
+    border-color: #006e3f;
+    background-color: #f0f7f4;
+}
+
+.photo-upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.photo-upload-text {
+    font-size: 15px;
+    color: #495057;
+    font-weight: 500;
+    margin: 0;
+}
+
+.photo-upload-hint {
+    font-size: 13px;
+    color: #adb5bd;
+    margin: 0;
+}
+
+.photo-preview-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.photo-preview-item {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e1e5eb;
+}
+
+.photo-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-remove-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.photo-remove-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}

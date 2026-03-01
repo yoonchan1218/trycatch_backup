@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팀원관리 | TRY-CATCH</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/team-member.css">
+</head>
+<body class="mtcSubInfo">
+    <div id="wrap">
+        <div th:replace="~{corporate/header :: header}"></div>
+        <div class="sideTrue" id="container">
+            <!-- 어사이드 -->
+            <div id="sideNav" class="devCorpLogin">
+                <!-- 기업 정보 관리 메뉴 -->
+                <div class="nav">
+                    <ul>
+                        <!-- server, javascript: 해당 페이지일 때, on 클래스 추가 -->
+                        <li class="devCorpInfoDetail">
+                            <a th:href="@{/corporate/profile}">기업정보관리</a>
+                        </li>
+                        <li class="devCorpInfoDetail">
+                            <a th:href="@{/corporate/member-info}">회원정보관리</a>
+                        </li>
+                        <li class="devCorpInfoDetail on">
+                            <span>팀원관리</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 광고 -->
+                <div class="adLeftBx">
+                    <div class="ad-container">
+                        <a href="javascript:;" class="imgAdBnnr">
+                            <img src="/images/corporate/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
+                            <!-- onerror -->
+                        </a>
+                    </div>
+                </div>
+                <div class="adLeftBx">
+                    <a href="">
+                        <img src="/images/corporate/lnb_certify_banner.png">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- 팀원관리 -->
+            <div id="content">
+                <div class="infoContent teamContent">
+                    <!-- title -->
+                    <div class="topHdWrap">
+                        <h2 class="info_hd_2">팀원 관리</h2>
+                        <ul class="ask_txtBox">
+                            <li>
+                                <p>팀원을 초대하여 기업 계정을 공동으로 관리할 수 있습니다.</p>
+                            </li>
+                            <li>
+                                <p>초대된 팀원에 한해 관리 권한이 부여됩니다.</p>
+                            </li>
+                        </ul>
+                        <div>
+                            <div class="desc_hd">
+                                
+                            </div>
+                            <button type="button" class="invitation_button" id="invitation_button"><span>팀원 초대</span></button>
+                        </div>
+                    </div>
+
+                    <!-- content -->
+                    <div class="teamWrap management">
+                        <div class="schListsWrap blockLists">
+                            <div class="mtcSchListTb">
+                                <table>
+                                    <colgroup>
+                                        <col width="70">
+                                        <col width="240">
+                                        <col width="100">
+                                        <col width="200">
+                                        <col width="300">
+                                        <col width="50">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <div></div>
+                                            </th>
+                                            <th scope="col">
+                                                <div>가입 일시</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div>이름</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div>휴대전화번호</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div>이메일</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- 팀원이 있을 경우 -->
+                                        <tr th:each="member : ${teamWithPaging.list}" th:data-member-id="${member.id}">
+                                            <td>
+                                                <span th:if="${member.corpTeamMemberStatus == 'wait'}" class="status waiting">대기중</span>
+                                                <span th:if="${member.corpTeamMemberStatus != 'wait'}" class="status participating">참여중</span>
+                                            </td>
+                                            <td>
+                                                <span class="date" th:text="${member.createdDatetime}">2026/01/27 (화) 11:03</span>
+                                            </td>
+                                            <td>
+                                                <span class="name" th:text="${member.memberName}">이름</span>
+                                            </td>
+                                            <td>
+                                                <span class="phone" th:text="${member.memberPhone}">010-1234-****</span>
+                                            </td>
+                                            <td>
+                                                <span class="email" th:text="${member.memberEmail}">test@gmail.com</span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <button type="button" class="moreOptionButton">
+                                                        <span>
+                                                            <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+                                                        </span>
+                                                    </button>
+                                                    <div class="more-option">
+                                                        <ul>
+                                                            <li>
+                                                                <button type="button" class="memberDelBtn" th:data-member-id="${member.id}">내보내기</button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <!-- 팀원이 없을 경우 -->
+                                        <tr class="no-team-member" th:if="${teamWithPaging.list == null or #lists.isEmpty(teamWithPaging.list)}">
+                                            <td colspan="6">
+                                                <div class="no-team-member-wrap">
+                                                    <p class="tx">
+                                                        <strong>초대된 팀원이 없습니다.</strong>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="bottom_area" th:if="${teamWithPaging.list != null and !#lists.isEmpty(teamWithPaging.list)}">
+                            <div class="tplPagination">
+                                <ul>
+                                    <li th:if="${teamWithPaging.criteria.page > 1}">
+                                        <a th:href="@{/corporate/team-member(page=${teamWithPaging.criteria.page - 1})}">&lt;</a>
+                                    </li>
+                                    <li th:each="i : ${#numbers.sequence(teamWithPaging.criteria.startPage, teamWithPaging.criteria.endPage)}">
+                                        <a th:href="@{/corporate/team-member(page=${i})}"
+                                           th:text="${i}"
+                                           th:classappend="${i == teamWithPaging.criteria.page} ? 'now' : ''">1</a>
+                                    </li>
+                                    <li th:if="${teamWithPaging.hasMore or teamWithPaging.criteria.page < teamWithPaging.criteria.realEnd}">
+                                        <a th:href="@{/corporate/team-member(page=${teamWithPaging.criteria.page + 1})}">&gt;</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="team_info">
+                            <strong>팀원 초대란?</strong>
+                            <ul class="infoList">
+                                <li>
+                                    <p>팀원을 초대하여 기업 계정을 공동으로 관리할 수 있습니다.</p>
+                                </li>
+                                <li>
+                                    <p>초대할 팀원의 이메일 주소로 초대 링크가 발송됩니다.</p>
+                                </li>
+                                <li>
+                                    <p>
+                                        초대 대기 중인 팀원은 붉은색 아이콘으로, 수락하여 참여 중인 팀원은 녹색 아이콘으로 표시됩니다
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- javascript: 초대 버튼 클릭 시 active 추가 -->
+            <div class="common-modal company-invitation-modal">
+                <div class="modal-dimmed"></div>
+                <div class="modal-contents">
+                    <button class="close-button"></button>
+                    <div class="modal-head">
+                        <h2>팀원 초대하기</h2>
+                        <p class="head-desc">
+                            팀원을 초대하여 기업 정보를 함께 관리하세요!
+                        </p>
+                    </div>
+                    <fieldset>
+                        <form method="post" id="form" name="form" th:action="@{/corporate/team-member/invite}">
+                            <div class="modal-data">
+                                <p class="data-info">
+                                    초대할 팀원의 이메일 주소를 입력해 주세요.<br>
+                                    입력한 이메일로 초대 링크가 발송됩니다.<br>
+                                </p>
+                                <div class="data-info">
+                                    <!-- container -->
+                                    <div class="row_group">
+                                        <div class="form_email form_invitation flex-start">
+                                                <!-- <div class="col_1">
+                                                <div class="selWrap" style="width: 100px;">
+                                                    <p>이메일</p>
+                                                </div>
+                                            </div> -->
+                                            <div class="col_2 ">
+                                                <input type="text" id="invitation_mail" name="invitation_mail" size="4" maxlength="50" class="dev-mail" placeholder="이메일 주소 입력" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-bts">
+                                <!-- server: 회원탈퇴 페이지로 이동 -->
+                                <button type="button" class="modal-btn blue xl">초대하기</a>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div th:replace="~{corporate/footer :: footer}"></div>
+    </div>
+</body>
+<script src="/js/corporate/team-member/event.js"></script>
+</html>

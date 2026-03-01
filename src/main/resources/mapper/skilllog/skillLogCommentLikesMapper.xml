@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.SkillLogCommentLikesMapper">
+    <select id="selectCountBySkillLogCommentId">
+        select count(*)
+        from tbl_skill_log_comment_likes
+        where skill_log_comment_id = #{id}
+    </select>
+
+    <select id="selectBySkillLogCommentIdAndMemberId">
+        select id, member_id, skill_log_comment_id, created_datetime, updated_datetime
+        from tbl_skill_log_comment_likes
+        where skill_log_comment_id = #{skillLogCommentId} and member_id = #{memberId}
+    </select>
+
+    <insert id="insert">
+        insert into tbl_skill_log_comment_likes(skill_log_comment_id, member_id)
+        values (#{skillLogCommentId}, #{memberId})
+    </insert>
+
+    <delete id="delete">
+        delete from tbl_skill_log_comment_likes
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteBySkillLogCommentId">
+        delete from tbl_skill_log_comment_likes
+        where skill_log_comment_id = #{id}
+    </delete>
+
+    <delete id="deleteBySkillLogId">
+        delete l
+        from tbl_skill_log_comment_likes l
+        join tbl_skill_log_comment c
+        on l.skill_log_comment_id = c.id
+        where c.skill_log_id = #{id}
+    </delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

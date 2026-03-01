@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.SkillLogFileMapper">
+    <insert id="insert">
+        insert into tbl_skill_log_file(id, skill_log_id)
+        values (#{id}, #{skillLogId})
+    </insert>
+
+    <select id="selectAllBySkillLogId">
+        select
+            id, skill_log_id, file_path, file_name, file_original_name,
+            file_size, file_content_type, created_datetime, updated_datetime
+        from view_skill_log_file
+        where skill_log_id = #{id}
+        order by created_datetime desc
+    </select>
+
+    <delete id="delete">
+        delete from tbl_skill_log_file
+        where id = #{id}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

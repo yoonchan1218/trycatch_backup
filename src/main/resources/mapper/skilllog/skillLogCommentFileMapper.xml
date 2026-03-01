@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.SkillLogCommentFileMapper">
+    <insert id="insert">
+        insert into tbl_skill_log_comment_file(id, skill_log_comment_id)
+        values (#{id}, #{skillLogCommentId})
+    </insert>
+
+    <select id="selectFilesBySkillLogId" resultType="FileDTO">
+        select
+            f.id, f.file_path, f.file_name, f.file_original_name,
+            f.file_size, f.file_content_type, f.created_datetime, f.updated_datetime
+        from tbl_skill_log_comment_file cf
+        join tbl_file f
+        on cf.id = f.id
+        join tbl_skill_log_comment c
+        on cf.skill_log_comment_id = c.id
+        where c.skill_log_id = #{id}
+    </select>
+    <select id="selectFilesByCommentParentId" resultType="FileDTO">
+        select
+            f.id, f.file_path, f.file_name, f.file_original_name,
+            f.file_size, f.file_content_type, f.created_datetime, f.updated_datetime
+        from tbl_skill_log_comment_file cf
+        join tbl_file f
+        on cf.id = f.id
+        join tbl_skill_log_comment c
+        on cf.skill_log_comment_id = c.id
+        where c.skill_log_comment_parent_id = #{id}
+    </select>
+
+    <select id="selectFileIdBySkillLogCommentId">
+        select
+            f.id
+        from tbl_skill_log_comment_file cf
+        join tbl_file f
+        on cf.id = f.id
+        where cf.skill_log_comment_id = #{id}
+    </select>
+
+    <delete id="delete">
+        delete from tbl_skill_log_comment_file
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteAllBySkillLogId">
+        delete cf, f
+        from tbl_skill_log_comment_file cf
+        join tbl_file f
+        on cf.id = f.id
+        join tbl_skill_log_comment c
+        on cf.skill_log_comment_id = c.id
+        where c.skill_log_id = #{id}
+    </delete>
+
+    <delete id="deleteAllBySkillLogCommentParentId">
+        delete cf, f
+        from tbl_skill_log_comment_file cf
+        join tbl_file f
+        on cf.id = f.id
+        join tbl_skill_log_comment c
+        on cf.skill_log_comment_id = c.id
+        where c.skill_log_comment_parent_id = #{id}
+    </delete>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

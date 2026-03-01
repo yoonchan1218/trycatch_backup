@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.mypage.LatestWatchPostingMapper">
+
+    <select id="selectAllByMemberId" resultType="LatestWatchPostingDTO">
+        select
+            lw.id,
+            lw.member_id,
+            lw.experience_program_id,
+            lw.created_datetime,
+            ep.experience_program_title,
+            ep.experience_program_deadline,
+            ep.experience_program_status,
+            ep.corp_id
+        from tbl_latest_watch_posting lw
+        join tbl_experience_program ep on lw.experience_program_id = ep.id
+        where lw.member_id = #{memberId}
+        order by lw.created_datetime desc
+    </select>
+
+    <insert id="insert">
+        insert into tbl_latest_watch_posting (member_id, experience_program_id)
+        values (#{memberId}, #{experienceProgramId})
+        on duplicate key update created_datetime = current_timestamp
+    </insert>
+
+</mapper>

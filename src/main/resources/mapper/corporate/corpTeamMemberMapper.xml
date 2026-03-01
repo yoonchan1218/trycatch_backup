@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.corporate.CorpTeamMemberMapper">
+
+    <insert id="insert">
+        INSERT INTO tbl_corp_team_member(id, corp_id, corp_team_member_status, invite_code)
+        VALUES(#{id}, #{corpId}, #{corpTeamMemberStatus}, #{inviteCode})
+        ON DUPLICATE KEY UPDATE corp_team_member_status = VALUES(corp_team_member_status),
+                                invite_code = VALUES(invite_code)
+    </insert>
+
+    <select id="selectByCorpId" resultType="CorpTeamMemberDTO">
+        SELECT ctm.id, ctm.corp_id, m.member_name, m.member_phone, m.member_email,
+               ctm.corp_team_member_status, ctm.created_datetime
+        FROM tbl_corp_team_member ctm
+        JOIN tbl_member m ON ctm.id = m.id
+        WHERE ctm.corp_id = #{corpId}
+        ORDER BY ctm.created_datetime DESC
+        LIMIT #{criteria.count} OFFSET #{criteria.offset}
+    </select>
+
+    <select id="selectCountByCorpId" resultType="int">
+        SELECT count(*)
+        FROM tbl_corp_team_member
+        WHERE corp_id = #{corpId}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM tbl_corp_team_member
+        WHERE id = #{id} AND corp_id = #{corpId}
+    </delete>
+
+    <select id="selectByInviteCode" resultType="CorpTeamMemberDTO">
+        SELECT ctm.id, ctm.corp_id, m.member_name, m.member_phone, m.member_email,
+               ctm.corp_team_member_status, ctm.created_datetime
+        FROM tbl_corp_team_member ctm
+        JOIN tbl_member m ON ctm.id = m.id
+        WHERE ctm.invite_code = #{inviteCode}
+    </select>
+
+    <update id="updateStatusByInviteCode">
+        UPDATE tbl_corp_team_member
+        SET corp_team_member_status = #{status},
+            invite_code = NULL
+        WHERE invite_code = #{inviteCode}
+    </update>
+
+</mapper>

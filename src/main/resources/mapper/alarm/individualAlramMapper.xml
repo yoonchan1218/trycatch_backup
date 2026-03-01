@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.alarm.IndividualAlramMapper">
+
+    <select id="selectQnaAlramsByMemberId" resultType="AlramDTO">
+        select id, member_id, notification_type, notification_title,
+               notification_content, notification_is_read,
+               qna_id, experience_program_id, skill_log_id,
+               created_datetime, updated_datetime
+        from tbl_main_notification
+        where member_id = #{memberId}
+          and notification_type = 'qna'
+        order by created_datetime desc
+    </select>
+
+    <select id="selectApplyAlramsByMemberId" resultType="AlramDTO">
+        select id, member_id, notification_type, notification_title,
+               notification_content, notification_is_read,
+               qna_id, experience_program_id, skill_log_id,
+               created_datetime, updated_datetime
+        from tbl_main_notification
+        where member_id = #{memberId}
+          and notification_type = 'experience_apply'
+        order by created_datetime desc
+    </select>
+
+    <select id="selectSkillLogAlramsByMemberId" resultType="AlramDTO">
+        select id, member_id, notification_type, notification_title,
+               notification_content, notification_is_read,
+               qna_id, experience_program_id, skill_log_id,
+               created_datetime, updated_datetime
+        from tbl_main_notification
+        where member_id = #{memberId}
+          and notification_type = 'skill_log'
+        order by created_datetime desc
+    </select>
+
+    <insert id="insertNotification">
+        insert into tbl_main_notification (member_id, notification_type, notification_title, notification_content, qna_id, skill_log_id)
+        values (#{memberId}, #{notificationType}, #{notificationTitle}, #{notificationContent}, #{qnaId}, #{skillLogId})
+    </insert>
+
+    <update id="updateReadByMemberId">
+        update tbl_main_notification
+        set notification_is_read = true,
+            updated_datetime = current_timestamp
+        where member_id = #{memberId}
+          and notification_is_read = false
+    </update>
+
+</mapper>

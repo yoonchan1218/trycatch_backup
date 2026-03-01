@@ -1,0 +1,372 @@
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-display: swap;
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
+}
+
+/* 기본 */
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+html {
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+body {
+    background: #f3f5f7;
+
+    width: 100%;
+    color: #333;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 1;
+}
+li, ul {
+    list-style: none;
+}
+a, a:link, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+a, a:active, a:focus, a:hover, a:link, a:visited {
+    color: #333;
+    text-decoration: none;
+}
+a, img {
+    display: block;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 700;
+}
+em {
+    font-style: normal;
+}
+fieldset, img {
+    border: 0;
+}
+
+#wrap {
+    position: relative;
+    min-width: 1270px;
+    margin: 0 auto;
+    background: #f2f4f7;
+}
+
+/* 사이드바 */
+.side-banner-wrap {
+    position: relative;
+    width: 1260px;
+    margin: 0 auto;
+}
+.side-banner-wrap .right-banner {
+    position: absolute;
+    top: 5px;
+    width: 1260px;
+    z-index: 10;
+}
+.side-banner-wrap .right-banner .container {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: -220px;
+    width: 200px;
+    height: auto;
+    flex-direction: column;
+    gap: 16px;
+}
+    /* quick 상담 */
+.quick-counsel {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 16px;
+}
+.quick-counsel .quick-counsel-user ul {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.quick-counsel .quick-counsel-user ul li:first-child {
+    width: 50px;
+    height: 50px;
+}
+.quick-counsel .quick-counsel-user ul li:first-child i.icon-counsel {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("https://i.jobkorea.kr/content/images/corporate/main_v2/quick-counsel-img.png?2024070200");
+}
+.quick-counsel .quick-counsel-user ul li .user-text {
+    line-height: 20px;
+}
+.quick-counsel .quick-counsel-user .counsel-number, .quick-counsel .quick-counsel-user ul li strong {
+    line-height: 26px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.quick-counsel .quick-counsel-opentime {
+    background-color: #f7f7f7;
+    padding: 12px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.quick-counsel .quick-counsel-opentime li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.quick-counsel .quick-counsel-opentime li:first-child {
+    margin-bottom: 2px;
+}
+.quick-counsel .quick-counsel-opentime li .text {
+    font-weight: 600;
+    line-height: 20px;
+    color: #6a6a6a;
+}
+.quick-counsel .quick-counsel-opentime li .time {
+    font-weight: 400;
+    line-height: 20px;
+    color: #6a6a6a;
+}
+.quick-counsel .quick-counsel-button {
+    margin-top: 16px;
+}
+.quick-counsel .quick-counsel-button>button {
+    border: 1px solid #0057ff;
+    width: 100%;
+    height: 38px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0057ff;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.quick-counsel .quick-counsel-button>button:after {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 11px;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M.366.418A.625.625 0 011.25.366l5 4.445a.625.625 0 01.014.921l-5 4.722a.625.625 0 11-.859-.908l4.504-4.254L.418 1.3A.625.625 0 01.366.418z' fill='%230057FF'/%3E%3C/svg%3E");
+    background-size: contain;
+    vertical-align: baseline;
+    margin-left: 8px;
+}
+    /* quick 캘린더 */
+.quick-calendar {
+    width: 200px;
+    padding: 24px 20px 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .02);
+}
+.quick-calendar .today-text {
+    font-size: 18px;
+    letter-spacing: 0;
+    display: flex;
+    margin-bottom: 4px;
+    color: #222;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 4px;
+    justify-content: center;
+}
+.quick-calendar .icon-calendar, .quick-calendar .icon-link {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+.quick-calendar .icon-calendar {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.905 3.5h16.19c1.052 0 1.905.895 1.905 2v13c0 1.105-.853 2-1.905 2H3.905C2.853 20.5 2 19.605 2 18.5v-13c0-1.105.853-2 1.905-2zm0 1.5a.489.489 0 00-.476.5v13c0 .276.213.5.476.5h16.19a.489.489 0 00.476-.5v-13c0-.276-.213-.5-.476-.5H3.905z' fill='%23222'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8 2.25a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0V3A.75.75 0 018 2.25zM16 2.25a.75.75 0 01.75.75v2.5a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75z' fill='%23222'/%3E%3Cpath d='M8 10a1 1 0 11-2 0 1 1 0 012 0zM8 14a1 1 0 11-2 0 1 1 0 012 0zM12 14a1 1 0 11-2 0 1 1 0 012 0zM12 10a1 1 0 11-2 0 1 1 0 012 0zM16 10a1 1 0 11-2 0 1 1 0 012 0z' fill='%23222'/%3E%3C/svg%3E");
+}
+.quick-calendar .schedule-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #222;
+    line-height: 26px;
+}
+.quick-calendar .schedule-text em {
+    font-weight: 700;
+    color: #b8b8b8;
+}
+.quick-calendar .btn-link {
+    display: flex;
+    width: 100%;
+    padding: 8px 0;
+    color: #6a6a6a;
+    line-height: 22px;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.quick-calendar .icon-link {
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='20' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.866 5.418a.625.625 0 01.882-.052l5 4.445a.625.625 0 01.014.921l-5 4.723a.625.625 0 11-.858-.91l4.504-4.253L7.918 6.3a.625.625 0 01-.052-.883z' fill='%236A6A6A'/%3E%3C/svg%3E");
+}
+
+    /* 나인하이어 */
+.ninehire-banner {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 380px;
+    padding: 32px 20px 27px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .02);
+    background-image: url("https://i.jobkorea.kr/content/images/corporate/main_v2/side-banner_ninehire.png?2024070200");
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-color: #fff;
+}
+.ninehire-banner .logo {
+    display: block;
+    width: 108px;
+    height: 16px;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='746' height='162' fill='none'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M154.41 30h23l39.42 63.87V30h23v101.85h-22.55l-39.87-64.59v64.59h-23V30zm118.28 0h-23v101.85h23V30zm32.85 0h-23v101.85h23V67.26l39.87 64.59h22.55V30h-23v63.87L305.54 30zm134.69 0h-62.42v101.84h62.42v-19.71h-39.42v-23h36.14V69.42h-36.14V49.71h39.42V30zm23 0h23v45.21l42.71-13.25V30h23v101.85h-23V84.38l-42.71 13.24v34.23h-23V30zm121.56 0h-23v101.85h23V30zm64.63 57.88c12.38-4.78 22.43-13.01 22.43-26.51 0-11.11-4.78-19.41-11.82-24.48S644.42 30 633.45 30h-38.8v101.85h23V97.62l10.9-3.38 24.34 37.61h25.6l-29.07-43.97zm-5.28-19.54c-.5.27-1.03.5-1.58.67l-.33.1-12.295 3.81-.146.045-12.149 3.765V49.7h22.15c5.03 0 9.05 4.48 9.05 9.5 0 4.33-1.88 7.59-4.71 9.13l.01.01zM745.77 30h-62.42v101.84h62.42v-19.71h-39.42v-23h36.14V69.42h-36.14V49.71h39.42V30z' clip-rule='evenodd'/%3E%3Cpath fill='%23664FFF' fill-rule='evenodd' d='M0 85.31L36.69 30h28.73v31.416L86.26 30h28.73v46.53L78.3 131.85H49.57v-31.422L28.73 131.85H0V85.31z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-size: auto 21px;
+    background-position: top -3px left;
+    background-repeat: no-repeat;
+}
+.ninehire-banner .texts {
+    margin-top: 10px;
+}
+.ninehire-banner .texts h2 {
+    color: #222;
+    line-height: 30px;
+    font-size: 22px;
+    letter-spacing: -.5px;
+}
+.ninehire-banner .texts h2 span {
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+.ninehire-banner .source {
+    position: absolute;
+    bottom: 76px;
+    color: rgba(34, 34, 34, .32);
+    line-height: 16px;
+    font-size: 10px;
+}
+.ninehire-banner .link-bottom {
+    position: absolute;
+    bottom: 27px;
+    width: 160px;
+    height: 38px;
+}
+.ninehire-banner .link-bottom a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #6643ff;
+    border-radius: 8px;
+}
+.ninehire-banner .link-bottom a span {
+    color: #fff;
+    font-size: 14px;
+}
+.ninehire-banner .link-bottom a .arrow {
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='21' height='20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.366 5.418a.625.625 0 01.883-.052l5 4.445a.625.625 0 01.013.921l-5 4.723a.625.625 0 11-.858-.91l4.504-4.253L8.418 6.3a.625.625 0 01-.052-.883z' fill='%23fff'/%3E%3C/svg%3E");
+    background-position: 50%;
+}
+
+/* 배너 */
+.row-article {
+    margin-top: 40px;
+}
+.inner {
+    position: relative;
+    width: 1260px;
+    margin: 0 auto;
+}
+/* .col-3-section {
+    width: 100%;
+} */
+/* .banner-smartfit-notice {
+    height: 64px;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 16px;
+} */
+/* .banner-smartfit-notice .smartfit-banner-link {
+    display: block;
+} */
+.banner-smartfit-notice .smartfit-banner-link img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 알림 */
+.border-round-section {
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .02);
+}
+.info-section .border-round-section .contents-box.notService {
+    border-color: #d2d2d2;
+}
+.info-section .border-round-section .contents-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 12px 32px;
+    border: 1px solid #fff;
+    border-radius: 15px;
+}
+/* .info-section .border-round-section .contents-box .logo {
+    width: 160px;
+    height: 64px;
+} */
+/* .info-section .border-round-section .contents-box .logo img {
+    margin: 0 auto;
+} */
+.info-section .border-round-section .contents-box .company {
+    position: relative;
+    margin-left: 32px;
+}
+.info-section .border-round-section .contents-box .company .text {
+    overflow: hidden;
+    /* display: inline-block; */
+    max-width: 300px;
+    font-weight: 700;
+    line-height: 25px;
+    color: #1a1a1a;
+    font-size: 22px;
+    letter-spacing: -.5px;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

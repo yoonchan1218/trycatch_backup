@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.qna.QnaLikesMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_qna_likes(member_id, qna_id)
+        values(#{memberId}, #{qnaId})
+    </insert>
+
+    <delete id="delete">
+        delete from tbl_qna_likes where id = #{id}
+    </delete>
+
+    <delete id="deleteByMemberAndQna">
+        delete from tbl_qna_likes where member_id = #{memberId} and qna_id = #{qnaId}
+    </delete>
+
+    <select id="countByQnaId" resultType="int">
+        select count(*) from tbl_qna_likes where qna_id = #{qnaId}
+    </select>
+
+    <select id="existsByMemberAndQna" resultType="int">
+        select count(*) from tbl_qna_likes
+        where member_id = #{memberId} and qna_id = #{qnaId}
+    </select>
+
+</mapper>

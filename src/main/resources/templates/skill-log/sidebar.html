@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="side-navigation">
+            <h2 class="skip">취업톡톡 세부메뉴</h2>
+            <div class="navi-top-area has-tooltip">
+                <a
+                    href="javascript:;"
+                    class="select-tooltip btn-question qnaSpB"
+                    >블로그 글쓰기</a
+                >
+                <!-- [Dev] 툴팁오픈 : tooltip-open 클래스 추가 -->
+                <div class="create-menu">
+                    <ul class="create-menu-wrap tooltip-layer qnaSpB">
+                        <li>
+                            <a
+                                href=""
+                                class="create-menu-item qna qnaSpB devLoginLayer"
+                                devalert="1"
+                                data-wtypecode="1"
+                                >블로그 작성하기</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href=""
+                                class="create-menu-item carrier qnaSpB devLoginLayer"
+                                devalert="1"
+                                data-wtypecode="2"
+                                >내 글 목록</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <!-- 비로그인 프로필 -->
+                <!-- <div class="myInfoSec logout">
+                    <a href="" class="myInfo devLoginLayer" devalert="0">
+                        <span class="proThumb">
+                            <img
+                                src="https://cdn-assets.jobkorea.co.kr/images/jk-pc/user/qna/profile_thumb/random_default.jpg"
+                                alt="프로필 이미지"
+                            />
+                        </span>
+                        <p class="msg">
+                            <em>로그인</em> 후 구독과 활동을
+                            <br />시작해보세요
+                        </p>
+                    </a>
+                </div> -->
+                <!-- 로그인시 프로필 -->
+                <div class="myInfoSec">
+                    <a href="/User/Qstn/MainProfile" class="myInfo">
+                        <span class="proThumb"
+                            ><img
+                                onerror="
+                                    this.src =
+                                        'https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_default.jpg'
+                                "
+                                src="https://cdn-assets.jobkorea.co.kr/images/jk-pc/m/ver_2/user/qna/profile_thumb/random_5.jpg"
+                                alt="프로필 이미지"
+                        /></span>
+
+                        <dl class="infoBx">
+                            <dt class="qnaSpA">
+                                <span class="nickname">mento...</span>
+                                <span class="lvIcon">Lv.1</span>
+                            </dt>
+                            <dd>
+                                <span>글 <b>0</b></span>
+                                <span>질문 <b>0</b></span>
+                                <span>답변 <b>0</b> (채택 <b>0</b>)</span>
+                            </dd>
+                        </dl>
+                    </a>
+                    <button type="button" class="myPoint devMainCouponButton">
+                        <span class="point qnaSpB">0</span
+                        ><span class="btnCoupon qnaSpA">쿠폰교환</span>
+                    </button>
+                </div>
+            </div>
+            <div class="navi-list-area">
+                <!-- [Dev] 메뉴 on : 클래스 active 추가 -->
+                <div class="sideNavLow">
+                    <strong class="sideNavTit"
+                        ><a href="">블로그 메뉴</a></strong
+                    >
+                    <ul class="sideNavList">
+                        <li class="sideNavListItem">
+                            <a href="list.html"
+                                >블로그 홈</a
+                            >
+                        </li>
+                        <li class="sideNavListItem">
+                            <a href="">블로그 작성</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sideNavLow">
+                    <strong class="sideNavTit">실전공략</strong>
+                    <ul class="sideNavList">
+                        <li class="sideNavListItem">
+                            <a href="">자소서 꿀팁</a>
+                        </li>
+                        <li class="sideNavListItem">
+                            <a href="">회사 들여보기</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 사이드 네비게이션 끝 -->
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.TagMapper">
+    <insert id="insert">
+        insert into tbl_tag(tag_name, skill_log_id)
+        values(#{tagName}, #{skillLogId})
+    </insert>
+
+    <select id="selectAllBySkillLogId">
+        select id, tag_name, skill_log_id
+        from tbl_tag
+        where skill_log_id = #{id}
+    </select>
+
+    <select id="selectAll">
+        select tag_name
+        from tbl_tag
+        group by tag_name
+        order by count(*) desc
+    </select>
+
+    <delete id="delete">
+        delete from tbl_tag
+        where id = #{id}
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

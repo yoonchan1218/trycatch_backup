@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.member.CorpMemberMapper">
+    <insert id="insert">
+    insert into tbl_corp (id, corp_company_name,corp_business_number,corp_ceo_name)
+    values (#{id},#{corpCompanyName}, #{corpBusinessNumber}, #{corpCeoName})
+    </insert>
+    <select id="selectByCorpCompanyName" resultType="CorpVO">
+        select  id, corp_company_name, corp_business_number, corp_ceo_name, corp_kind_id, corp_kind_small_id, corp_company_type, corp_company_size, corp_establishment_date, corp_website_url, corp_fax, corp_capital, corp_total_sales, corp_main_business, corp_performance, corp_vision
+        from tbl_corp
+        where corp_company_name = #{corpCompanyName}
+    </select>
+    <select id="selectByCorpBusinessNumber" resultType="CorpVO">
+        select  id, corp_company_name, corp_business_number, corp_ceo_name, corp_kind_id, corp_kind_small_id, corp_company_type, corp_company_size, corp_establishment_date, corp_website_url, corp_fax, corp_capital, corp_total_sales, corp_main_business, corp_performance, corp_vision
+        from tbl_corp
+        where corp_business_number = #{corpBusinessNumber}
+    </select>
+
+    <select id="selectCorpMemberForLogin" resultType="CorpMemberDTO">
+        select m.id, m.member_id, m.member_name, m.member_email, m.member_phone,
+               m.member_status, m.member_agree_privacy, m.member_agree_marketing,
+               m.address_id,
+               c.corp_company_name, c.corp_business_number, c.corp_ceo_name,
+               c.corp_kind_id, c.corp_kind_small_id, c.corp_company_type, c.corp_company_size,
+               c.corp_establishment_date, c.corp_website_url, c.corp_fax,
+               c.corp_capital, c.corp_total_sales, c.corp_main_business, c.corp_performance, c.corp_vision,
+               m.created_datetime, m.updated_datetime,
+               lf.file_path AS logo_file_path, lf.file_name AS logo_file_name,
+               (ctm.id IS NOT NULL) AS team_member,
+               COALESCE(ctm.corp_id, m.id) AS corp_id
+        from tbl_member m
+        join tbl_corp c on m.id = c.id
+        LEFT JOIN tbl_corp_team_member ctm ON m.id = ctm.id
+        LEFT JOIN tbl_corp_logo_file clf ON c.id = clf.corp_id
+        LEFT JOIN tbl_file lf ON clf.id = lf.id
+        where m.member_id = #{memberId} and m.member_password = #{memberPassword} and m.member_status = 'active'
+        LIMIT 1
+    </select>
+
+    <select id="selectCorpMemberById" resultType="CorpMemberDTO">
+        select m.id, m.member_id, m.member_name, m.member_email, m.member_phone,
+               m.member_status, m.member_agree_privacy, m.member_agree_marketing,
+               m.address_id,
+               c.corp_company_name, c.corp_business_number, c.corp_ceo_name,
+               c.corp_kind_id, c.corp_kind_small_id, c.corp_company_type, c.corp_company_size,
+               c.corp_establishment_date, c.corp_website_url, c.corp_fax,
+               c.corp_capital, c.corp_total_sales, c.corp_main_business, c.corp_performance, c.corp_vision,
+               a.address_zipcode, a.address_address, a.address_detail,
+               m.created_datetime, m.updated_datetime,
+               lf.file_path AS logo_file_path, lf.file_name AS logo_file_name,
+               COALESCE(ctm.corp_id, m.id) AS corp_id
+        FROM tbl_member m
+        JOIN tbl_corp c ON m.id = c.id
+        LEFT JOIN tbl_corp_team_member ctm ON m.id = ctm.id
+        LEFT JOIN tbl_address a ON m.address_id = a.id
+        LEFT JOIN tbl_corp_logo_file clf ON c.id = clf.corp_id
+        LEFT JOIN tbl_file lf ON clf.id = lf.id
+        WHERE m.id = #{id}
+        LIMIT 1
+    </select>
+
+    <update id="updateCorp">
+        update tbl_corp set
+            corp_ceo_name          = #{corpCeoName},
+            corp_kind_id           = #{corpKindId},
+            corp_kind_small_id     = #{corpKindSmallId},
+            corp_company_type      = #{corpCompanyType},
+            corp_company_size      = #{corpCompanySize},
+            corp_establishment_date = #{corpEstablishmentDate},
+            corp_website_url       = #{corpWebsiteUrl},
+            corp_fax               = #{corpFax},
+            corp_capital           = #{corpCapital},
+            corp_total_sales       = #{corpTotalSales},
+            corp_main_business     = #{corpMainBusiness},
+            corp_performance       = #{corpPerformance},
+            corp_vision            = #{corpVision}
+        where id = #{id}
+    </update>
+</mapper>

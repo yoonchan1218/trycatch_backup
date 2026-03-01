@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header logged-in</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+</head>
+<body th:fragment="header">
+    <div id="wrap">
+        <!-- 헤더 -->
+        <div class="corporate-header">
+            <!-- main-menu -->
+            <div class="inner">
+                <div class="top-menu clearfix">
+                    <!-- 로고 -->
+                    <h1>
+                        <a th:href="@{/corporate/home}"></a>
+                    </h1>
+                    <!-- 로그인/회원가입 메뉴 -->
+                    <ul class="top-menu-list clearfix">
+                        <!-- 비로그인 시에만 표시 -->
+                        <li th:if="${session.member == null}">
+                            <a th:href="@{/main/company-join}">회원가입</a>
+                        </li>
+
+
+                        <!-- 로그인 시에만 표시 -->
+                        <li th:if="${session.member != null}">
+                            <a th:if="${session.member instanceof T(com.app.trycatch.dto.member.IndividualMemberDTO) and session.member.provider != null and session.member.provider.value == 'kakao'}"
+                               href="https://kauth.kakao.com/oauth/logout?client_id=edeefdf5ab96d36811571fbd1e56a4cf&logout_redirect_uri=http://localhost:10000/main/log-out">로그아웃</a>
+                            <a th:unless="${session.member instanceof T(com.app.trycatch.dto.member.IndividualMemberDTO) and session.member.provider != null and session.member.provider.value == 'kakao'}"
+                               href="/main/log-out">로그아웃</a>
+                        </li>
+
+                        <!-- 비로그인 시에만 표시 -->
+                        <li th:if="${session.member == null}">
+                            <a th:href="@{/main/log-in}">로그인</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- navigation -->
+                <div class="navigation clearfix">
+                    <div class="left-menu">
+                        <ul class="left-menu-list clearfix">
+                            <li>
+                                <a href="javascript:;" class="button-all-menu">
+                                    <i></i>
+                                </a>
+                                <!-- javascript: click 하면 sub-nav-bg의 display none 제거 -->
+                            </li>
+    
+                            <li th:classappend="${#strings.contains(requestURI, '/corporate/home') ? 'active-fixed' : ''}">
+                                <a th:href="@{/corporate/home}">홈</a>
+                            </li>
+
+                            <li th:classappend="${#strings.contains(requestURI, '/corporate/program-apply') ? 'active-fixed' : ''}">
+                                <a th:href="@{/corporate/program-apply}" onclick="checkLogin()">프로그램 등록</a>
+                            </li>
+
+                            <li th:classappend="${#strings.contains(requestURI, '/corporate/program-management') ? 'active-fixed' : ''}">
+                                <a th:href="@{/corporate/program-management}"  onclick="checkLogin()">프로그램 관리</a>
+                            </li>
+    
+                            <li>
+                                <a th:href="@{/skill-log/list}" onclick="checkLogin()">기술 블로그</a>
+                            </li>
+
+                            <li>
+                                <a th:href="@{/qna/list}">커뮤니티</a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <!-- 기업 이름(mypage) -->
+                    <!-- 로그인 시에만 표시 -->
+                    <div class="right-menu logged-in" th:if="${session.member != null}">
+                        <ul class="right-menu-list clearfix">
+                            <li class="notification">
+                                <a href="javascript:;" class="bell">
+                                    <span class="alarm-dot" id="js-corpAlarmDot"
+                                          th:if="${hasUnreadCorpAlrams}"></span>
+                                </a>
+
+                                <div class="notification-menu">
+                                    <div class="notification-menu-body">
+
+                                        <div class="no-notification" th:classappend="${corpAlrams == null or #lists.isEmpty(corpAlrams)} ? 'active'">
+                                            <div class="no-notification-content">
+                                                <div class="no-notification-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b0b8c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="no-notification-header">새로운 알람이 없습니다.</div>
+                                                <div class="no-notification-description">
+                                                    알람은 받고난 뒤 5일 뒤에 삭제됩니다.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="list list-notification-container" th:classappend="${corpAlrams != null and !#lists.isEmpty(corpAlrams)} ? 'active'">
+                                            <ul>
+                                                <li class="notification-item" th:each="alram : ${corpAlrams}">
+                                                    <div class="notification-header">
+                                                        <div class="notification-header-item category"
+                                                             th:text="${alram.notificationType == 'apply_received' ? '지원자 등록' : (alram.notificationType == 'experience_apply_received' ? '체험공고 등록마감' : '커뮤니티')}"></div>
+                                                        <div class="notification-header-item date" th:text="${alram.createdDatetime}"></div>
+                                                    </div>
+                                                    <div class="notification-body">
+                                                        <div class="notification-title" th:text="${alram.notificationTitle}"></div>
+                                                        <div class="notification-content" th:text="${alram.notificationContent}"></div>
+                                                    </div>
+                                                    <div class="notification-footer">
+                                                        <div class="buttons">
+                                                            <a th:if="${alram.notificationType == 'apply_received'}" th:href="@{/corporate/applicant-list}" class="button">자세히보기</a>
+                                                            <a th:if="${alram.notificationType == 'experience_apply_received'}" th:href="@{/corporate/program-management}" class="button">자세히보기</a>
+                                                            <a th:if="${alram.notificationType == 'qna'}" th:href="@{/qna/detail(id=${alram.notificationRelatedId})}" class="button">자세히보기</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="top-menu-modal-button" th:text="${corpInfo?.corpCompanyName}"></a>
+                                <div class="top-menu-modal">
+                                    <ul>
+                                        <!-- 담당자 로그인 시 -->
+                                        <li>
+                                            <div class="id" th:text="${session.member.memberName}">담당자 이름</div>
+                                        </li>
+                                        <li th:if="${!session.member.teamMember}">
+                                            <a th:href="@{/corporate/profile}">기업정보관리</a>
+                                        </li>
+                                        <li>
+                                            <a th:href="@{/corporate/member-info}">회원정보관리</a>
+                                        </li>
+                                        <li th:if="${!session.member.teamMember}">
+                                            <a th:href="@{/corporate/team-member}">팀원관리</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- javascript: click시, active 추가 -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- sub-menu -->
+            <div class="sub-nav-bg"></div>
+            <div class="all-menu-modal">
+                <div class="inner clearfix">
+                    <div class="category">
+                        <div class="title">
+                            <a th:href="@{/corporate/program-management}">프로그램 관리</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a th:href="@{/corporate/program-management}">전체 프로그램</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/corporate/program-management(status='recruiting')}">진행 중인 프로그램</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/corporate/program-management(status='closed')}">종료된 프로그램</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <div class="title">
+                            <a th:href="@{/corporate/program-management}">인재 관리</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a th:href="@{/corporate/program-management}">지원자 관리</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/corporate/program-management}">참여자 관리</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <div class="title">
+                            <a th:href="@{/skill-log/list}">인재 찾기</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a th:href="@{/skill-log/list}">기술 블로그</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <div class="title">
+                            <a th:href="@{/qna/list}">커뮤니티</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a th:href="@{/qna/list}">Q&A</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/qna/list}">내 댓글 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <div class="title">
+                            <a th:href="@{/corporate/profile}">마이페이지</a>
+                        </div>
+                        <ul>
+                            <!-- 담당자로 로그인 시 -->
+                            <li th:if="${session.member != null and !session.member.teamMember}">
+                                <a th:href="@{/corporate/profile}">기업정보관리</a>
+                            </li>
+                            <li th:if="${session.member != null}">
+                                <a th:href="@{/corporate/member-info}">회원정보관리</a>
+                            </li>
+                            <li th:if="${session.member != null and !session.member.teamMember}">
+                                <a th:href="@{/corporate/team-member}">팀원관리</a>
+                            </li>
+
+                            <!-- 비로그인 시 -->
+                            <li th:if="${session.member == null}">
+                                <a th:href="@{/main/log-in}">회원 정보 관리</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a th:href="@{/corporate/program-apply}" class="write-button" onclick="checkLogin()">프로그램 등록</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/corporate/header/event.js"></script>
+    <script src="/js/corporate/notification/event.js"></script>
+</body>
+</html>

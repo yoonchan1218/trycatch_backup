@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew bootRun:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl:*)",
+      "Bash(# 테스트 1: 탈퇴 회원\\(inactive\\)으로 일반 로그인 시도 - 실패해야 함 echo \"\"=== 테스트 1: 탈퇴 회원\\(test0202, inactive\\) 로그인 ===\"\" curl -s -D - -o /dev/null -X POST http://localhost:10000/main/log-in \\\\ -d \"\"memberId=test0202&memberPassword=test0202@@&re_url=/main/main\"\" \\\\)",
+      "Bash(# 테스트 2: 정상 회원\\(active\\)으로 로그인 - 성공해야 함 echo \"\"=== 테스트 2: 정상 회원\\(test020211, active\\) 로그인 ===\"\" curl -s -D - -o /dev/null -X POST http://localhost:10000/main/log-in \\\\ -d \"\"memberId=test020211&memberPassword=erfwef@@1&re_url=/main/main\"\" \\\\)",
+      "Bash(# 서버 로그에서 에러 확인 tail -50 /c/Users/pigch/AppData/Local/Temp/claude/C--Users-pigch-Desktop-trycatch-copy/tasks/b09d334.output)",
+      "Bash(# 전체 서버 로그 최근 부분 확인 tail -100 /c/Users/pigch/AppData/Local/Temp/claude/C--Users-pigch-Desktop-trycatch-copy/tasks/b09d334.output)",
+      "Bash(# bootrun 로그 확인 tail -100 /c/Users/pigch/Desktop/trycatch_copy/bootrun.err.log)",
+      "Bash(powershell -Command:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(__NEW_LINE_1f265ba0cc3ea263__ echo \"=== 회원가입 \\(중복 아이디\\) ===\")",
+      "Bash(__NEW_LINE_1f265ba0cc3ea263__ echo \"=== 회원가입 \\(사용 가능한 아이디\\) ===\")",
+      "Bash(__NEW_LINE_1f265ba0cc3ea263__ echo \"=== 로그인 후 마이페이지 접근 \\(로그인 시뮬레이션\\) ===\")"
+    ]
+  }
+}

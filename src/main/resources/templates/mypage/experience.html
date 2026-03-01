@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>experience</title>
+        <link rel="stylesheet" href="/css/qna/header.css">
+        <link rel="stylesheet" href="/css/mypage/experience.css">
+        <link rel="stylesheet" href="/css/qna/footer.css">
+    </head>
+    <body>
+        <header th:replace="~{/qna/header.html::header}"></header>
+        <!-- 지원취소 누를 시 나오는 팝업 시작 -->
+         <div class="mtuLyWrap" aria-hidden="true" style="display:block; position:relative;">
+        <div class="dimmed" style="position: relative;"></div>
+        <div class="mtuPopup popupApplyCancel" id="popupApplyCancel" style="position: absolute; top: 122px; display: none;">
+            <h1 class="lyHd">지원취소</h1>
+            <div class="lyCnt">
+                
+                <form name="Form1" id="frmCancel" method="post">
+                    <input type="hidden" name="Gi_No" id="Gi_No" value="50296722">
+                    <input type="hidden" name="GB" id="GB" value="CO">
+                    <input type="hidden" name="PassGB" id="PassGB" value="1">
+                    <input type="hidden" name="pass_gubun" id="pass_gubun" value="1">
+                    <input type="hidden" name="Apply_Cncl_Rsn_Code" id="Apply_Cncl_Rsn_Code" value="0">
+                    <input type="hidden" name="ApplyReqNo" id="agireqno" value="0">
+
+                    <input type="hidden" name="ReturnPage" id="ReturnPage" value="1">
+                    <input type="hidden" name="ReturnOrderApply" id="ReturnOrderApply" value="1">
+                    <input type="hidden" name="ReturnIngStat" id="ReturnIngStat" value="0">
+                    <input type="hidden" name="ReturnIngReadStat" id="ReturnIngReadStat" value="0">
+                    <input type="hidden" name="ReturnStatus" id="ReturnStatus" value="0">
+                    <input type="hidden" name="ReturnFromDt" id="ReturnFromDt" value="2025-10-31">
+                    <input type="hidden" name="ReturnToDt" id="ReturnToDt" value="2026-01-29">
+                    <input type="hidden" name="ReturnSearchText" id="ReturnSearchText">
+
+
+                    <div class="mtuPopData">
+                        <fieldset>
+                            <div class="applyCancel">
+                                <div class="tit">취소사유</div>
+                                <div class="reasonSel">
+                                    <div class="mtuDropdown">
+                                        <!--
+                                            항목 미선택시 error 클래스 추가
+                                            항목 선택시 selected 클래스 추가
+                                        -->
+                                        <button type="button" class="btnChoose" aria-haspopup="true"><span>구분선택</span></button>
+
+                                        <!-- 오픈시 visible 클래스 추가, aria-hidden="false"  -->
+                                        <div class="list" aria-hidden="true" rule="menu">
+                                            <ul>
+                                                <li><button type="button" class="btn btnItem" data-index="1">프로필/이력서 등 수정해서 다시 지원 할게요.</button></li>
+                                                <li><button type="button" class="btn btnItem" data-index="2">지원하고 보니 모집내용이 저와 맞지 않네요.</button></li>
+                                                <li><button type="button" class="btn btnItem" data-index="3">얼마 전 다른 곳에 취업 했어요.</button></li>
+                                                <li><button type="button" class="btn btnItem" data-index="4">기타</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="applyCancel reason" id="applyCancelreason" style="display:none">
+                                <div class="tit">직접입력</div>
+                                <div class="inpWrap" id="fileTyle1">
+                                    <input type="text" name="Apply_Cncl_Rsn_Etc" id="Apply_Cncl_Rsn_Etc" placeholder="취소사유를 작성 해 주세요. (30자 이내)">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <style>
+                        .mtuPopup .lyCnt {
+                            padding: 0 49px 30px;
+                        }
+
+                        .mtuPopup .mtuTip {
+                            padding-bottom: 10px;
+                        }
+
+                        .popupApplyCancel .buttons {
+                            font-size: 0;
+                            text-align: center;
+                        }
+
+                            .popupApplyCancel .buttons .button {
+                                display: inline-block;
+                                width: 132px;
+                                height: 50px;
+                                margin: 0 3px;
+                                vertical-align: top;
+                                font-size: 15px;
+                                text-align: center;
+                            }
+
+                                .popupApplyCancel .buttons .button.button-ok {
+                                    background-color: #7BA882;
+                                    color: #fff;
+                                }
+
+                                    .popupApplyCancel .buttons .button.button-ok:hover {
+                                        background-color: #006e3f;
+                                    }
+
+                                .popupApplyCancel .buttons .button.button-cancel {
+                                    background-color: #fff;
+                                    border: 1px solid #ccc;
+                                    color: #666;
+                                }
+
+                                    .popupApplyCancel .buttons .button.button-cancel:hover {
+                                        border-color: #333;
+                                        color: #333;
+                                    }
+                    </style>
+                    <div class="mtuTip">
+                        <strong class="skip">정책 안내</strong>
+                        <ul class="tipList">
+                            <li id="li_1">체험지원을 취소하면 지원한 회사에서 자기소개서를 열람할 수 없습니다.</li>
+                        </ul>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="button button-cancel">취소</button>
+                        <button type="button" class="button button-ok devBtnSubmitCancel">확인</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <button type="button" class="butClose mtuSpImg devLyBtnClose"><span class="blind">레이어 닫기</span></button>
+        </div>
+    </div>
+        <!-- 지원취소 누를 시 나오는 팝업 끝 -->
+        <!-- 체험 지원 현황 시작 -->
+        <div id="wrap">
+            <section id="container">
+                <h1 class="skip">개인회원 서비스</h1>
+
+                <section class="content">
+                    <div class="contWrap applyCont">
+                        <div class="hdWrap">
+                            <h2 class="hd_1">체험지원 현황</h2>
+                        </div>
+
+                        <h2 class="skip">입사지원 현황</h2>
+                        <div
+                            id="devInterview"
+                            name="devInterview"
+                            style="
+                                position: absolute;
+                                left: 17%;
+                                z-index: 15000;
+                                display: none;
+                            "
+                        >
+                        </div>
+                        <div class="applyStatus">
+                            <ul class="clear">
+                                <li>
+                                    <p class="num" id="count-activity-done" th:text="${activityDoneCount}">0</p>
+                                    <p class="txt">참여완료</p>
+                                </li>
+                                <li>
+                                    <p class="num" id="count-document-pass" th:text="${documentPassCount}">0</p>
+                                    <p class="txt">참여중</p>
+                                </li>
+                                <li>
+                                    <p class="num" id="count-document-fail" th:text="${documentFailCount}">0</p>
+                                    <p class="txt">심사완료</p>
+                                </li>
+                                <li>
+                                    <p class="num" id="count-applied" th:text="${appliedCount}">0</p>
+                                    <p class="txt">심사중</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <h3 class="skip">지원완료</h3>
+                        <!-- [개발] 타이틀 추가 : 지원완료/지원취소/인재풀등록 -->
+
+                        <form
+                            name="frmForm"
+                            method="post"
+                            action=""
+                        >
+                            <input
+                                data-val="true"
+                                data-val-number="Page 필드는 숫자여야 합니다."
+                                data-val-required="Page 필드가 필요합니다."
+                                id="Page"
+                                name="Page"
+                                type="hidden"
+                                value="1"
+                            />
+                            <input
+                                class="dev-order"
+                                data-val="true"
+                                data-val-number="Order_Apply 필드는 숫자여야 합니다."
+                                data-val-required="Order_Apply 필드가 필요합니다."
+                                id="hdnOrderApply"
+                                name="Order_Apply"
+                                type="hidden"
+                                value="2"
+                            />
+                            <input
+                                type="hidden"
+                                id="IngStat"
+                                name="IngStat"
+                                value="0"
+                            />
+                            <input
+                                type="hidden"
+                                id="ReadStat"
+                                name="ReadStat"
+                                value="0"
+                            />
+                            <input
+                                type="hidden"
+                                id="StatusStat"
+                                name="StatusStat"
+                                value="0"
+                            />
+
+                            <div class="mtuSortArea schFillter">
+                                <div class="left">
+                                    <div class="up">
+                                        <label>조회기간</label>
+                                        <div class="formBx clear">
+                                            <button
+                                                type="button"
+                                                class="btn dev-btn-period month"
+                                                data-period="99"
+                                            >
+                                                <span>1주일</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn dev-btn-period month"
+                                                data-period="1"
+                                            >
+                                                <span>1개월</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn dev-btn-period month"
+                                                data-period="2"
+                                            >
+                                                <span>2개월</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn dev-btn-period month on"
+                                                data-period="3"
+                                            >
+                                                <span>3개월</span>
+                                            </button>
+                                        </div>
+                                        <label class="selDateLabel"
+                                            >날짜선택</label
+                                        >
+                                        <div class="formBx dateInputWrap">
+                                            <input
+                                                class="ipTxt ipDate"
+                                                type="date"
+                                                title="시작날짜선택"
+                                                name="From_Dt"
+                                                id="txtFromDt"
+                                                value="2025-10-31"
+                                            />
+                                            <span class="dateSeparator">~</span>
+                                            <input
+                                                class="ipTxt ipDate"
+                                                type="date"
+                                                title="마감날짜선택"
+                                                name="To_Dt"
+                                                id="txtToDt"
+                                                value="2026-01-29"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="down">
+                                        <label class="skip">키워드</label>
+                                        <span class="formBx">
+                                            <!-- [개발] .ipGp/.placeholder 추가 -->
+                                            <span class="ipGp">
+                                                <input
+                                                    class="ipTxt ipSearch"
+                                                    type="text"
+                                                    name="SearchText"
+                                                    id="txtSearchText"
+                                                    title="검색어 입력"
+                                                    placeholder="기업명, 채용제목"
+                                                />
+                                            </span>
+                                        </span>
+                                        <div class="mtcListFillter">
+                                            <label>진행여부</label>
+                                            <div class="lyTplArea" data-filter="programStatus">
+                                                <button type="button" class="btnMtcLySel mtcBtnB" data-selected-val="">
+                                                    전체
+                                                </button>
+                                                <div class="lyItems devlyIngItems" style="display: none">
+                                                    <ul>
+                                                        <li><a href="javascript:void(0);" data-val="">전체</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="recruiting">모집 중</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="closed">마감</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mtcListFillter">
+                                            <label>열람여부</label>
+                                            <div class="lyTplArea" data-filter="readStatus">
+                                                <button type="button" class="btnMtcLySel mtcBtnB" data-selected-val="">
+                                                    전체
+                                                </button>
+                                                <div class="lyItems devlyReadItems" style="display: none">
+                                                    <ul>
+                                                        <li><a href="javascript:void(0);" data-val="">전체</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="read">열람</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="unread">미열람</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mtcListFillter status">
+                                            <label>지원상태</label>
+                                            <div class="lyTplArea" data-filter="applyStatus">
+                                                <button type="button" class="btnMtcLySel mtcBtnB" data-selected-val="">
+                                                    전체
+                                                </button>
+                                                <div class="lyItems devlyApplyItems" style="display: none">
+                                                    <ul>
+                                                        <li><a href="javascript:void(0);" data-val="">전체</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="applied">심사중</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="document_pass">참여중</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="document_fail">심사완료</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="activity_done">참여완료</a></li>
+                                                        <li><a href="javascript:void(0);" data-val="cancelled">취소</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <span class="formBx">
+                                        <button
+                                            type="button"
+                                            class="btn btnSearch"
+                                            id="btnSubmit"
+                                        >
+                                            <span>검색</span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="top-msg">
+                            체험 지원 현황은 최대 3년까지 조회할 수 있습니다.
+                        </div>
+                        <div class="user-table applymng-list">
+                            <table class="table">
+                                <caption>
+                                    <span class="skip">체험 지원 현황</span>
+                                </caption>
+                                <colgroup>
+                                    <col width="118" />
+                                    <col />
+                                    <col width="115" />
+                                    <col width="115" />
+                                    <col width="108" />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <button
+                                                type="button"
+                                                class="button button-sort down"
+                                                data-type="Apply"
+                                            >
+                                                상태
+                                            </button>
+                                        </th>
+                                        <th scope="col">체험공고</th>
+                                        <th scope="col">공고진행상태</th>
+                                        <th scope="col">열람</th>
+                                        <th scope="col">처리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 데이터 없음 -->
+                                    <tr th:if="${#lists.isEmpty(applies)}">
+                                        <td colspan="5" style="text-align:center; padding: 30px;">
+                                            체험 지원 내역이 없습니다.
+                                        </td>
+                                    </tr>
+                                    <!-- 데이터 반복 -->
+                                    <tr th:each="apply : ${applies}">
+                                        <td class="vertical-align-top">
+                                            <div class="vertical-align-middle apply-status">
+                                                <div class="inner">
+                                                    <div class="item status" th:text="${apply.applyStatusLabel}">심사중</div>
+                                                    <div class="item date" th:text="${apply.applyCreatedDatetime}">-</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="vertical-align-middle apply-board">
+                                                <div class="inner">
+                                                    <div class="company">
+                                                        <span th:text="${apply.corpCompanyName + ' : ' + apply.experienceProgramLevelLabel}">기업명 : A유형</span>
+                                                    </div>
+                                                    <div class="description">
+                                                        <a th:href="'/experience/program/' + ${apply.experienceProgramId}"
+                                                           target="_blank"
+                                                           th:text="${apply.experienceProgramTitle}">공고 제목</a>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <div class="item applicants-field"
+                                                             th:text="'지원분야 : ' + ${apply.experienceProgramJob}">
+                                                            지원분야 :
+                                                        </div>
+                                                        <div class="item"
+                                                             th:text="'지원자수 : ' + ${apply.applicantCount} + '/' + ${apply.experienceProgramRecruitmentCount}">
+                                                            지원자수 :
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="vertical-align-middle apply-progress">
+                                                <div class="inner">
+                                                    <div class="status" th:text="${apply.experienceProgramStatusLabel}">-</div>
+                                                    <div class="extra"
+                                                         th:if="${apply.experienceProgramDeadline != null}"
+                                                         th:text="'(~' + ${apply.experienceProgramDeadline} + ')'">(-)</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="vertical-align-middle reading">
+                                                <div class="inner">
+                                                    <div class="read-not">열람</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span th:if="${apply.applyStatus == 'cancelled'}">지원취소됨</span>
+                                            <span th:if="${apply.applyStatus == 'document_pass'}">마감</span>
+                                            <span th:if="${apply.applyStatus == 'activity_done'}">마감</span>
+                                            <button th:if="${apply.applyStatus == 'applied' or apply.applyStatus == 'document_fail'}"
+                                                    class="btn btnGyBd devBtnCancel devBtnOddInfo"
+                                                    type="button"
+                                                    th:data-idx="${apply.applyId}"
+                                                    th:data-status="${apply.applyStatus}">
+                                                <span>지원취소</span>
+                                            </button>
+                                            <div class="oddInfo mtuLayerWrap">
+                                                <div class="mtuLayer mtuLayer_1 mtuLayerRsmCancel"
+                                                     style="top: 10px; width: 320px; right: 20px; display: none;">
+                                                    <div class="desc desc2">
+                                                        <p class="point">
+                                                            선택한 공고에 대한 입사지원을 취소하면<br/>
+                                                            <strong>지원한 회사에서 자기소개서를 열람할 수 없습니다.</strong>
+                                                        </p>
+                                                        <p>
+                                                            단, 지원한 회사에서 자기소개서를 이미 열람한 경우는
+                                                            <br/>지원취소를 하더라도 면접제의 등의 연락을 받으실 수도 있습니다.
+                                                        </p>
+                                                    </div>
+                                                    <p class="close">
+                                                        <button type="button"><span>레이어 닫기</span></button>
+                                                    </p>
+                                                    <span class="arrow arrowTop"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 체험 지원 주의사항 시작 -->
+                        <div class="tplPagination">
+                            <ul>
+                                <li th:if="${criteria.realEnd > 10 and criteria.startPage > 1}">
+                                    <a href="javascript:void(0);" class="dev-page-btn" th:data-page="${criteria.startPage - 1}">&lt;</a>
+                                </li>
+                                <li th:each="i : ${#numbers.sequence(criteria.startPage, criteria.endPage)}">
+                                    <span th:if="${i == criteria.page}" class="now" th:text="${i}">1</span>
+                                    <a th:if="${i != criteria.page}" href="javascript:void(0);"
+                                       class="dev-page-btn" th:data-page="${i}" th:text="${i}">1</a>
+                                </li>
+                                <li th:if="${criteria.realEnd > 10 and criteria.endPage < criteria.realEnd}">
+                                    <a href="javascript:void(0);" class="dev-page-btn" th:data-page="${criteria.endPage + 1}">&gt;</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input type="hidden" id="UserSmartMatchItems" />
+                        <input type="hidden" id="UserSmartMatchMonitoring" />
+                        <input type="hidden" id="SmartMatchItems" />
+                        <input type="hidden" id="SmartMatchMonitoring" />
+                        <div class="mtuTip">
+                            <strong class="skip">이용 TIP</strong>
+                            <ul class="tipList">
+                                <li>
+                                    체험 지원을 한 후 해당 자기소개서를 수정해도
+                                    <em
+                                        >이전에 지원한 자기소개서의 내용은 바뀌지
+                                        않으므로</em
+                                    >
+                                    회사마다 자기소개서 내용을 다르게 지원할 수
+                                    있습니다.
+                                </li>
+                                <li>
+                                    체험 지원 내역을 삭제한 경우 지원내역,
+                                    지원취소, 열람여부 확인이 불가능합니다.
+                                </li>
+                                <li>
+                                    지원취소 시 지원한 회사에서 자기소개서를 열람할
+                                    수 없습니다.
+                                </li>
+                                <li>
+                                    기업에 별도의 체험서류를 제출 했다면, 체험
+                                    여부 확정 후 서류 반환 요청을 할 수
+                                    있습니다.
+                                </li>
+                                <li>
+                                    자기소개서에 포함된 첨부파일은 체험공고
+                                    접수마감일로부터 90일간 확인 가능합니다.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 체험 지원 주의사항 끝 -->
+                </section>
+                <!-- 체험 지원 현황 끝 -->
+                <!--// Lnb Area -->
+                <!-- [개발] 메뉴 선택시 a.on 추가 -->
+                <!-- 사이드바 시작 -->
+                <section class="secLnb">
+                    <h1 class="skip">개인회원 서비스 메뉴</h1>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">
+                            <a href="/mypage/mypage">개인회원 홈</a>
+                        </h2>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">기술블로그</h2>
+                        <ul>
+                            <li>
+                                <a href="/skill-log/list">전체 글 목록</a>
+                            </li>
+                            <li>
+                                <a href="/skill-log/list?mine=true">내 글 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">체험 지원 관리</h2>
+                        <ul>
+                            <li>
+                                <a href="/mypage/experience" class="on">체험 지원 현황</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">QnA</h2>
+                        <ul>
+                            <li>
+                                <a href="/qna/list">전체 목록</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lnbGroup">
+                        <h2 class="lnbTit">회원정보 관리</h2>
+                        <ul>
+                            <li>
+                                <a href="/mypage/change-my-information">회원정보 수정</a>
+                            </li>
+                            <li>
+                                <a href="/mypage/unsubscribe">회원 탈퇴</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 사이드바 끝 -->
+                <!-- Lnb Area //-->
+            </section>
+        </div>
+
+        <!-- 지원이력서 모달 -->
+        <div class="resume-modal-overlay" id="resumeModalOverlay">
+            <div class="resume-modal">
+                <div class="resume-modal-header">
+                    <h2>지원 이력서</h2>
+                    <button type="button" class="resume-modal-close" id="resumeModalClose">×</button>
+                </div>
+                <div class="resume-modal-body">
+                    <div class="resume-page">
+                        <div class="resume-view-wrapper">
+                            <div class="resume-header">
+                                <div class="subtitle">채용기업이 보는 이력서 열람화면입니다.</div>
+                            </div>
+                            <div class="resume-view-container">
+                                <div class="resume-application">
+                                    <div class="resume-application-title">[JAVA SI 상암] DevoPS 사업 Front-end 개발 (5)</div>
+                                    <div class="resume-application-meta">
+                                        <div class="item">
+                                            <div class="label">기업명</div>
+                                            <div class="value">㈜제이투이</div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="label">지원분야</div>
+                                            <div class="value">JAVA/VUE.JS 개발자</div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="label">지원일</div>
+                                            <div class="value">2026.01.29</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="resume-subject">이력서</div>
+
+                                <div class="base profile">
+                                    <div class="container">
+                                        <div class="info-container">
+                                            <div class="info-general">
+                                                <div class="item name">test</div>
+                                                <div class="item sex">남</div>
+                                                <div class="item year">2000년</div>
+                                                <div class="item age">(만 25세)</div>
+                                            </div>
+                                            <div class="info-detail">
+                                                <div class="item">
+                                                    <div class="label">휴대폰</div>
+                                                    <div class="value">010-4090-2600</div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="label">Email</div>
+                                                    <div class="value">
+                                                        <a href="mailto:tedwin1@naver.com">tedwin1@naver.com</a>
+                                                    </div>
+                                                </div>
+                                                <div class="item item-full">
+                                                    <div class="label">주소</div>
+                                                    <div class="value">서울 강남구 역삼동</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="summary col-4">
+                                        <div class="item">
+                                            <div class="header">학력</div>
+                                            <div class="description ellipsis">test</div>
+                                            <div class="options">
+                                                <div class="option">대학교</div>
+                                                <div class="option">졸업</div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="header">경력</div>
+                                            <div class="description ellipsis">(주)test</div>
+                                            <div class="options">
+                                                <div class="option">재직 중</div>
+                                                <div class="option">총 2년</div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="item is-singleline">
+                                            <div class="header">인턴·대외활동 / 해외경험</div>
+                                            <div class="description">-</div>
+                                        </div>
+                                        <div class="item is-singleline">
+                                            <div class="header">자격증 / 어학</div>
+                                            <div class="description">-</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="base skill">
+                                    <div class="keyword-wrap">
+                                        <div class="keyword-box">
+                                            <div class="keyword-list">
+                                                <button type="button" class="list-btn"><span>JAVA</span></button>
+                                                <button type="button" class="list-btn"><span>MySQL</span></button>
+                                                <button type="button" class="list-btn"><span>Git</span></button>
+                                                <button type="button" class="list-btn"><span>Spring Boot</span></button>
+                                                <button type="button" class="list-btn"><span>API</span></button>
+                                                <button type="button" class="list-btn"><span>Python</span></button>
+                                                <button type="button" class="list-btn"><span>MariaDB</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sign">
+                                    <div class="message">위의 모든 기재사항은 사실과 다름없음을 확인합니다.</div>
+                                    <div class="writer">작성자 : test</div>
+                                    <div class="warning">
+                                        <div class="description">
+                                            이 자기소개서는 2026년 01월 29일 (목)에 최종 수정된 이력서 입니다.<br>
+                                            위조된 문서를 등록하여 체험활동에 이용 시 법적 책임을 지게 될 수 있습니다.<br>
+                                            test는 구직자가 등록 한 문서에 대해 보증하거나 별도의 책임을 지지 않으며<br>
+                                            첨부된 문서를 신뢰하여 발생한 법적 분쟁에 책임을 지지 않습니다.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="~{/qna/footer.html::footer}"></footer>
+    </body>
+        <script src="/js/mypage/experience/service.js"></script>
+        <script src="/js/mypage/experience/layout.js"></script>
+        <script src="/js/mypage/experience/event.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll(".tplPagination .dev-page-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const page = parseInt(btn.dataset.page, 10);
+                        window.location.href = "/mypage/experience?page=" + page;
+                    });
+                });
+            });
+        </script>
+        <script src="/js/qna/header-event.js"></script>
+        <script src="/js/qna/footer.js"></script>
+    </html>
+    

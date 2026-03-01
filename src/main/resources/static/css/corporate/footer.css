@@ -1,0 +1,193 @@
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-display: swap;
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
+}
+
+/* 기본 */
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+html {
+    width: 100%;
+    overflow-y: scroll;
+}
+body{
+    background: #f3f5f7;
+
+    width: 100%;
+    color: #333;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 1;
+}
+li, ul {
+    list-style: none;
+}
+a, img {
+    display: block;
+}
+/* img {
+    border: 0;
+    vertical-align: top;
+} */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    font-size: 100%;
+}
+
+a, a:link, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+a, a:active, a:focus, a:hover, a:link, a:visited {
+    color: #333;
+    text-decoration: none;
+}
+address, caption, em {
+    font-weight: 400;
+    font-style: normal;
+}
+
+#wrap {
+    position: relative;
+    min-width: 1270px;
+    margin: 0 auto;
+    background: #f2f4f7;
+}
+.inner {
+    width: 1260px;
+    margin: 0 auto;
+}
+
+/* footer */
+#footer {
+    margin-top: 0 !important;
+    width: 100%;
+    padding-bottom: 50px;
+    border-top: 2px solid #a8a8a8;
+    background: #fff;
+    /* font-style: normal; */
+}
+#footer .inner {
+    position: relative;
+    width: 1250px;
+}
+.clear:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+#footer .tcLogo {
+    float: left;
+    margin-top: 30px;
+}
+#footer .tcLogo img {
+    width: 150px;
+}
+
+#footer .footerCont {
+    height: 71px;
+    padding-top: 26px;
+    border-bottom: 1px solid #efefef;
+}
+#footer .tcNotice {
+    float: right;
+    overflow: hidden;
+    font-size: 14px;
+}
+#footer .tcNotice p {
+    position: relative;
+    width: 330px;
+    margin-left: 4px;
+}
+#footer .tcNotice h3, #footer .tcNotice p {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: top;
+}
+#footer .tcNotice h3 a {
+    color: #000;
+    font-weight: bold;
+}
+#footer .tcNotice p a {
+    overflow: hidden;
+    display: inline-block;
+    max-width: 271px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#footer .tcNotice p em {
+    position: absolute;
+    /* top: 0; */
+    right: 0;
+    display: inline-block;
+    color: #888;
+    margin: 1px 0 0 5px;
+    /* vertical-align: top; */
+}
+#footer .tcPolicy {
+    float: left;
+    font-size: 14px;
+    /* text-align: center; */
+}
+#footer .tcPolicy li {
+    display: inline-block;
+}
+#footer .tcPolicy li a {
+    color: #000;
+}
+#footer .tcPolicy li + li {
+    margin-left: 18px;
+}
+#footer .tcHelp {
+    color: #888;
+    margin-top: 27px;
+}
+#footer .tcHelp dl, #footer .tcHelp dt, #footer .tcHelp dd {
+    display: inline-block;
+}
+#footer .tcHelp dt:after {
+    content: ":";
+    display: inline-block;
+    margin-left: 3px;
+}
+#footer .tcHelp dl+:before {
+    content: "l";
+    display: inline-block;
+    color: #ccc;
+    margin: 0 7px;
+}
+#footer .tcHelp a {
+    color: #888;
+}
+#footer .copyright, #footer .copyright a {
+    color: #888;
+    display: inline;
+    font-size: 11px;
+}
+#footer .copyright {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}

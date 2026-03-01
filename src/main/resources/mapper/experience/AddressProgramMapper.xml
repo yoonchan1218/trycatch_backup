@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.experience.AddressProgramMapper">
+
+    <insert id="insert">
+        INSERT INTO tbl_address_program (address_id, experience_program_id)
+        VALUES (#{addressId}, #{experienceProgramId})
+    </insert>
+
+    <select id="selectByExperienceProgramId" resultType="AddressDTO">
+        SELECT a.id, a.address_zipcode, a.address_address, a.address_detail
+        FROM tbl_address_program ap
+        JOIN tbl_address a ON ap.address_id = a.id
+        WHERE ap.experience_program_id = #{experienceProgramId}
+        LIMIT 1
+    </select>
+
+    <delete id="deleteByExperienceProgramId">
+        DELETE FROM tbl_address_program
+        WHERE experience_program_id = #{experienceProgramId}
+    </delete>
+
+</mapper>

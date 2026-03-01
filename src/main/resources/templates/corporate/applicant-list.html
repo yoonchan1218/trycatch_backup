@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지원자 목록 관리</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/applicant-list.css">
+</head>
+<body>
+    <div th:replace="~{corporate/header :: header}"></div>
+    <div class="page-container">
+        <div class="content-wrapper">
+            <div class="content-inner">
+                <div class="main-section">
+                    <!-- 상태 통계 박스 -->
+                    <div class="status-summary">
+                        <div class="status-header">
+                            <h2 class="status-title">지원자 관리</h2>
+                        </div>
+                        <ul class="status-tabs">
+                            <li>
+                                <a th:href="@{/corporate/applicant-list(programId=${programId})}"
+                                   th:classappend="${currentStatus == '' or currentStatus == null} ? 'active' : ''"
+                                   class="status-tab">
+                                    전체 <em th:text="${applicantWithPaging.statusCounts['total'] ?: 0}">0</em>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/corporate/applicant-list(programId=${programId}, status='document_fail')}"
+                                   th:classappend="${currentStatus == 'document_fail'} ? 'active' : ''"
+                                   class="status-tab">
+                                    반려 <em th:text="${applicantWithPaging.statusCounts['rejected'] ?: 0}">0</em>
+                                </a>
+                            </li>
+                            <li class="status-tabs__actions">
+                                <button type="button" class="btn-action btn-reject" style="background-color: #006E3F; color: #fff;">반려하기</button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 검색 및 필터 영역 -->
+                    <div class="search-filter-area">
+                        <button type="button" class="btn-filter-toggle"></button>
+
+                        <!-- 검색 입력 -->
+                        <div class="search-input-wrapper">
+                            <input
+                                type="text"
+                                id="searchKeyword"
+                                placeholder="이름으로 검색"
+                                class="search-input"
+                                th:value="${currentKeyword}"
+                            >
+                            <button type="button" class="btn-search"></button>
+                        </div>
+
+                        <!-- 필터 모달 -->
+                        <div class="filter-modal">
+                            <div class="filter-content">
+                                <!-- 학력 필터 -->
+                                <div class="filter-group">
+                                    <div class="filter-title">학력</div>
+                                    <ul>
+                                        <li><button type="button" class="filter-option" data-filter="education" data-value="고등학교 졸업">고등학교 졸업</button></li>
+                                        <li><button type="button" class="filter-option" data-filter="education" data-value="대학(2,3년) 졸업">대학(2,3년) 졸업</button></li>
+                                        <li><button type="button" class="filter-option" data-filter="education" data-value="대학교(4년) 졸업">대학교(4년) 졸업</button></li>
+                                        <li><button type="button" class="filter-option" data-filter="education" data-value="대학원 졸업">대학원 졸업</button></li>
+                                    </ul>
+                                </div>
+
+                                <!-- 성별 필터 -->
+                                <div class="filter-group">
+                                    <div class="filter-title">성별</div>
+                                    <ul>
+                                        <li><button type="button" class="filter-option" data-filter="gender" data-value="man">남성</button></li>
+                                        <li><button type="button" class="filter-option" data-filter="gender" data-value="women">여성</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- 필터 하단 버튼 -->
+                            <div class="filter-footer">
+                                <div class="selected-filters"></div>
+                                <button type="button" class="btn-filter-search">검색하기</button>
+                                <button type="button" class="btn-filter-reset">초기화</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 선택된 필터 표시 영역 -->
+                    <div class="active-filters" id="activeFilters" style="display: none;">
+                        <ul class="filter-list">
+                            <li class="filter-list__label">검색조건</li>
+                        </ul>
+                        <button class="btn-clear-filters">초기화</button>
+                    </div>
+
+                    <!-- 지원자 테이블 -->
+                    <table class="applicants-table">
+                        <thead>
+                            <tr>
+                                <th class="col-checkbox">
+                                    <input type="checkbox" id="select-all" class="checkbox-all">
+                                    <label for="select-all"></label>
+                                </th>
+                                <th class="col-photo"></th>
+                                <th class="col-name">
+                                    <button class="sort-btn">이름/나이</button>
+                                </th>
+                                <th class="col-statement">
+                                    <button class="sort-btn">자기 소개서</button>
+                                </th>
+                                <th class="col-approve">
+                                    <button class="sort-btn">상태</button>
+                                </th>
+                                <th class="col-time">
+                                    <button class="sort-btn">지원일시</button>
+                                </th>
+                                <th class="col-actions"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 데이터 없을 때 -->
+                            <tr class="empty-state" th:if="${#lists.isEmpty(applicantWithPaging.list)}">
+                                <td colspan="7">
+                                    <div class="empty-icon"></div>
+                                    <div class="empty-title">지원자가 없습니다.</div>
+                                    <div class="empty-description">프로그램에 지원한 인재가 아직 없습니다.</div>
+                                </td>
+                            </tr>
+
+                            <!-- 지원자 행 -->
+                            <tr class="applicant-row" th:each="a, stat : ${applicantWithPaging.list}"
+                                th:data-id="${a.id}">
+                                <td>
+                                    <input type="checkbox" th:id="'applicant-' + ${stat.index}" class="checkbox-item" th:value="${a.id}">
+                                    <label th:for="'applicant-' + ${stat.index}"></label>
+                                </td>
+                                <td>
+                                    <a href="#" class="applicant-photo">
+                                        <span class="photo-wrapper">
+                                            <span class="photo-frame">
+                                                <span class="photo-placeholder"></span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#" class="applicant-info">
+                                        <span class="applicant-name" th:text="${a.memberName}">홍길동</span>
+                                        <span class="applicant-age">
+                                            <span th:text="${a.individualMemberGender != null and a.individualMemberGender.name() == 'MAN'} ? '남' : '여'">여</span>
+                                        </span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn-action btn-view-statement">자기소개서 보기</button>
+                                </td>
+                                <td>
+                                    <span th:if="${a.applyStatus.name() == 'APPLIED'}" style="color: #5288FF;">지원완료</span>
+                                    <span th:if="${a.applyStatus.name() == 'DOCUMENT_FAIL'}" style="color: #FF501B;">반려</span>
+                                    <span th:if="${a.applyStatus.name() == 'DOCUMENT_PASS'}">서류합격</span>
+                                    <span th:if="${a.applyStatus.name() == 'ACTIVITY_DONE'}">활동완료</span>
+                                    <span th:if="${a.applyStatus.name() == 'CANCELLED'}">취소</span>
+                                </td>
+                                <td>
+                                    <span class="approval-time" th:text="${#strings.substring(a.createdDatetime, 0, 16)}"></span>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- 페이지네이션 -->
+                    <div class="button_area" th:if="${!#lists.isEmpty(applicantWithPaging.list)}">
+                        <div class="tplPagination">
+                            <ul>
+                                <li th:if="${applicantWithPaging.criteria.page > 1}">
+                                    <a th:href="@{/corporate/applicant-list(programId=${programId}, status=${currentStatus}, keyword=${currentKeyword}, education=${currentEducation}, gender=${currentGender}, page=${applicantWithPaging.criteria.page - 1})}">&#8249;</a>
+                                </li>
+                                <th:block th:each="pageNum : ${#numbers.sequence(applicantWithPaging.criteria.startPage, applicantWithPaging.criteria.endPage)}">
+                                    <li>
+                                        <a th:href="@{/corporate/applicant-list(programId=${programId}, status=${currentStatus}, keyword=${currentKeyword}, education=${currentEducation}, gender=${currentGender}, page=${pageNum})}"
+                                           th:text="${pageNum}"
+                                           th:classappend="${pageNum == applicantWithPaging.criteria.page} ? 'now' : ''">1</a>
+                                    </li>
+                                </th:block>
+                                <li th:if="${applicantWithPaging.criteria.page < applicantWithPaging.criteria.realEnd}">
+                                    <a th:href="@{/corporate/applicant-list(programId=${programId}, status=${currentStatus}, keyword=${currentKeyword}, education=${currentEducation}, gender=${currentGender}, page=${applicantWithPaging.criteria.page + 1})}">&#8250;</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 안내 사항 -->
+                    <div class="notice-box">
+                        <ul class="notice-list">
+                            <li>TRY-CATCH의 지원자 정보를 통해 수집된 개인정보 및 자기소개서/프로필은 <strong>개인정보보호정책에 의거 기업체험의 목적</strong>으로만 이용하셔야 합니다.</li>
+                            <li>체험 지원자는 선착순으로 모집되고, 자기소개서를 통해 지원자의 정보를 알 수 있습니다</li>
+                            <li>만약 지원자의 자기소개서가 재대로 완성이 되어있지 않다면 <strong>반려</strong> 할 수 있습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 반려 확인 모달 -->
+    <div class="modal modal--reject-confirm">
+        <div class="modal__overlay"></div>
+        <div class="modal__content">
+            <p class="modal__message">선택한 지원자를 반려하시겠습니까?</p>
+            <div class="modal__buttons">
+                <button type="button" class="modal__cancel">취소</button>
+                <button type="button" class="modal__confirm reject-confirm">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 반려 완료 모달 -->
+    <div class="modal modal--reject">
+        <div class="modal__overlay"></div>
+        <div class="modal__content">
+            <p class="modal__message">반려가 완료되었습니다.</p>
+            <button type="button" class="modal__confirm reject-done">확인</button>
+        </div>
+    </div>
+
+    <div th:replace="~{corporate/footer :: footer}"></div>
+    <script th:inline="javascript">
+        const programId = /*[[${programId}]]*/ 0;
+        const currentStatus = /*[[${currentStatus}]]*/ '';
+        const currentKeyword = /*[[${currentKeyword}]]*/ '';
+        const currentEducation = /*[[${currentEducation}]]*/ '';
+        const currentGender = /*[[${currentGender}]]*/ '';
+    </script>
+    <script src="/js/corporate/applicant-list/event.js"></script>
+</body>
+</html>

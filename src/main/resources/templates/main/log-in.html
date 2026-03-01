@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>log-in</title>
+        <link rel="stylesheet" href="/css/main/log-in.css" />
+        <link rel="stylesheet" href="/css/main/footer.css">
+    </head>
+    <body id="login" class="login bg-gray">
+        <p id="skipNavigation"><a href="#content">메뉴 건너뛰기</a></p>
+
+        <div id="wrap">
+            <div id="container">
+                <div class="logtop logtop_login">
+                    <p class="lnb">
+                        <a href="/main/main">TRY-CATCH홈</a>
+                    </p>
+                </div>
+
+                <div class="secLogin">
+                    <div id="lottie-model">
+                        <img
+                            src="/images/logo.png"
+                            style="
+                                width: 260px;
+                                height: 130px;
+                                margin-left: 70px;
+                            "
+                        />
+                    </div>
+                    <div class="logWrap" id="loginFormWrite">
+                        <h2 class="blind">로그인</h2>
+                        <form
+                            name="form"
+                            id="login-form"
+                            method="post"
+                            action="/main/log-in"
+                        >
+                            <fieldset class="login-form">
+                                <legend class="blind">로그인 입력폼</legend>
+                                <input
+                                    type="hidden"
+                                    name="re_url"
+                                    id="re_url"
+                                    th:value="${reUrl != null ? reUrl : '/main/main'}"
+                                />
+                                <input type="hidden" name="idx" value="" />
+                                <input type="hidden" name="Div" value="" />
+                                <input type="hidden" name="BNo" value="" />
+                                <input
+                                    type="hidden"
+                                    id="IP_ONOFF"
+                                    name="IP_ONOFF"
+                                    value="Y"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="Login_Stat"
+                                    id="Login_Stat"
+                                    value=""
+                                />
+                                <input
+                                    type="hidden"
+                                    name="LoginPage"
+                                    value="/Login/Login_Tot.asp"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="returnHost"
+                                    id="returnHost"
+                                    value=""
+                                />
+                                <input
+                                    type="hidden"
+                                    name="jkwww_host"
+                                    id="jkwww_host"
+                                    value=""
+                                />
+                                <input
+                                    type="hidden"
+                                    name="m_type"
+                                    id="m_type"
+                                    value=""
+                                />
+                                <input
+                                    type="hidden"
+                                    name="NaverReferReURL_Stat"
+                                    id="NaverReferReURL_Stat"
+                                    value=""
+                                />
+                                <input
+                                    type="hidden"
+                                    name="DB_Name"
+                                    id="DB_Name"
+                                    value="GG"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="ignoreSession"
+                                    id="ignoreSession"
+                                    value=""
+                                />
+                                <input
+                                    type="hidden"
+                                    name="CapchaCheckUseTime"
+                                    id="CapchaCheckUseTime"
+                                    value="False"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="TargetDate"
+                                    id="TargetDate"
+                                    value=""
+                                />
+                                <!-- 회원선택-->
+                                <section class="login-tab">
+                                    <ul id="devMemTab">
+                                        <li
+                                            class="on"
+                                            role="tab"
+                                            data-tab="tab1"
+                                        >
+                                            <a href="#" data-m-type="M"
+                                                >개인회원</a
+                                            >
+                                        </li>
+                                        <li role="tab" data-tab="tab2">
+                                            <a href="#" data-m-type="Co"
+                                                >기업회원</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </section>
+
+                                <!-- 로그인 입력 폼 - 에러 처리 <div class="row-input error"> -->
+                                <section class="login-input">
+                                    <label
+                                        for="M_ID"
+                                        id="lb_id"
+                                        class="label-form label-id"
+                                        >NO.1 TRY-CATCH 통합 ID</label
+                                    >
+                                    <!--<input type="text" class="inpTxt  input-id" placeholder="아이디" name="M_ID" id="M_ID" size="16" maxlength="20" title="아이디 입력" style="ime-mode:inactive;" value="" required>-->
+                                    <input
+                                        type="text"
+                                        class="inpTxt input-id"
+                                        placeholder="NO.1 TRY-CATCH 통합 ID"
+                                        name="memberId"
+                                        id="M_ID"
+                                        size="16"
+                                        maxlength="20"
+                                        title="아이디 입력"
+                                        style="ime-mode: inactive"
+                                        th:value="${rememberMemberId}"
+                                        required=""
+                                    />
+                                    <label
+                                        for="M_PWD"
+                                        id="lb_pw"
+                                        class="label-form label-password"
+                                        >비밀번호</label
+                                    >
+                                    <input
+                                        type="password"
+                                        class="inpTxt input-password"
+                                        placeholder="비밀번호"
+                                        name="memberPassword"
+                                        id="M_PWD"
+                                        size="16"
+                                        title="비밀번호 입력"
+                                        required=""
+                                    />
+                                    <button type="submit" class="login-button">
+                                        로그인
+                                    </button>
+                                    <div class="text-error">아이디 또는 비밀번호를 다시 확인해주세요.</div>
+                                    <!-- CapsLock 레이어 - <div class="login-capslock" 에 on 클래스 추가 시 활성화 -->
+                                    <div class="login-capslock" id="ipNotice">
+                                        <em>Caps Lock</em>이 켜져 있습니다.<span
+                                            class="mainIcn mainIcnArrUp"
+                                        ></span>
+                                    </div>
+                                </section>
+
+                                <!-- 로그인 유지, IP 보안 ON/OFF -->
+                                <section class="login-convenience">
+                                    <div class="login-convenience-keep">
+                                        <div
+                                            class="keep-id"
+                                            style="display: block"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                name="remember"
+                                                id="lb_idSave"
+                                                value="true"
+                                                class="skip"
+                                                th:checked="${remember}"
+                                            />
+                                            <label for="lb_idSave"
+                                                >아이디 저장</label
+                                            >
+                                        </div>
+                                    </div>
+                                    <!-- <span class="txtBar"> | </span> -->
+                                </section>
+
+                                <!--// 그림문자 입력폼 -->
+                                <section
+                                    class="login-captcha devLoginImgTxt devHide"
+                                >
+                                    <div class="captcha">
+                                        <span class="captcha-image"
+                                            ><img
+                                                id="imgCaptcha"
+                                                src="/login/captcha.asp"
+                                                width="198"
+                                                height="40"
+                                                alt="그림문자"
+                                        /></span>
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="captcha-image-change"
+                                            ><span class="skip"
+                                                >새로고침</span
+                                            ></a
+                                        >
+                                    </div>
+                                    <label for="gtxt" class="blind"
+                                        >그림문자</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="inpTxt"
+                                        name="gtxt"
+                                        id="gtxt"
+                                        size="16"
+                                        title="그림문자 입력"
+                                        autocomplete="off"
+                                        placeholder="위 문자를 보이는 대로 입력해 주세요."
+                                    /><!--[개발] end 추가하면 배경텍스트 사라짐 -->
+                                </section>
+                                <!-- 그림문자 입력폼 //-->
+
+                                <section class="login-social">
+                                    <ul>
+                                        <li>
+                                            <a
+                                                href="javascript:;"
+                                                id="btnKaLogin"
+                                                class="kakao"
+                                                >카카오 로그인</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </section>
+                                <div style="text-align: center; margin-top: 12px;">
+                                    <a id="joinLink" href="/main/individual-join" style="font-size: 13px; color: #888; text-decoration: underline;">회원가입</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="adBan">
+                        <h2 class="skip">광고</h2>
+                        <div
+                            class="ad-container divAdBnnr_14_0"
+                            style="
+                                width: 325px;
+                                height: 310px;
+                                background-color: #ffffff;
+                            "
+                        >
+                            <a
+                                class="imgAdBnnr imgAdBnnr_14_0 isSendImpLog"
+                                href="javascript:;"
+                                data-campaignid="805"
+                                data-campaignproductid="3049"
+                                data-space="loginRight"
+                                data-urlpath="/Login/Login_Tot.asp"
+                                data-linkurl="https://tacademy.skplanet.com/front/customer/viewNotice.do?seq=859&amp;topYn=N&amp;topYn=N&amp;utm_source=Korcham&amp;utm_medium=banner&amp;utm_campaign=asac_apply&amp;utm_id=asac&amp;utm_content=aiDE"
+                                data-linktype="NEW_WINDOW"
+                                data-gender=""
+                                data-age="0"
+                                data-creativename="A"
+                            >
+                                <img
+                                    src="https://ads.jobkorea.co.kr/ads/pc/images/202601/a9d419f9-32ec-4d63-b565-359b39774931.png"
+                                    alt="SK플래닛 AI활용 데이터엔지니어 2기"
+                                />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- AD //-->
+                </div>
+                <!-- // content -->
+
+                <div class="section-company" style="display: none">
+                    <div class="article-jobkorea target">
+                        <div class="inner">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
+                    <div class="article-super target">
+                        <div class="inner">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
+                    <div class="article-smart target">
+                        <div class="inner">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
+                    <div class="article-search target">
+                        <div class="inner">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
+                    <div class="article-hunting target">
+                        <div class="inner">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
+                    <div class="article-learning target">
+                        <div class="inner">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
+
+                    <div class="btn-fixed-right">
+                        <a href="" class="btn-join-right"></a>
+                        <a
+                            href="javascript:;"
+                            onclick="
+                                $('html, body').animate({ scrollTop: 0 }, 800)
+                            "
+                            class="btn-top btn-top-scroll"
+                        >
+                            <img
+                                src="https://i.jobkorea.kr/content/images/join/company/btn_top.png"
+                                alt=""
+                            />
+                        </a>
+                    </div>
+                </div>
+
+                <div id="adFooter" class="footer footer--short">
+                    <div class="footer__wrap">
+                        <div class="footer__advertisement">
+                            <h3 class="blind">배너</h3>
+
+                            <div class="footer__advertisement--text">
+                                <div class="ad-container">
+                                    <a
+                                        class="imgAdBnnr isSendImpLog"
+                                        href="javascript:;"
+                                        data-campaignid="763"
+                                        data-campaignproductid="2868"
+                                        data-space="recruitTextBottom"
+                                        data-urlpath="/Login/Login_Tot.asp"
+                                        data-linkurl="https://www.jobkorea.co.kr/Theme/ktpartners"
+                                        data-linktype="NEW_WINDOW"
+                                        data-gender=""
+                                        data-age="0"
+                                        data-pagetypecode="11"
+                                        data-creativename="A"
+                                        data-creativesrc="대한민국 ICT를 움직이는 기업\n★ KT 파트너 온라인 채용관 ★"
+                                    >
+                                        <p>
+                                            try-catch 아카데미디지털 유닛<br /><strong
+                                                >2026년 제6기 교육생
+                                                모집</strong
+                                            >
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="footer__advertisement--image">
+                                <div
+                                    class="ad-container divAdBnnr_10"
+                                    style="
+                                        width: 495px;
+                                        height: 110px;
+                                        background-color: #ffffff;
+                                    "
+                                >
+                                    <a
+                                        class="imgAdBnnr imgAdBnnr_10 isSendImpLog"
+                                        href="javascript:;"
+                                        data-campaignid="805"
+                                        data-campaignproductid="3041"
+                                        data-space="recruitBottom"
+                                        data-urlpath="/Login/Login_Tot.asp"
+                                        data-linkurl="https://tacademy.skplanet.com/front/customer/viewNotice.do?seq=859&amp;topYn=N&amp;topYn=N&amp;utm_source=Korcham&amp;utm_medium=banner&amp;utm_campaign=asac_apply&amp;utm_id=asac&amp;utm_content=aiDE"
+                                        data-linktype="NEW_WINDOW"
+                                        data-gender=""
+                                        data-age="0"
+                                        data-pagetypecode="10"
+                                        data-creativename="A"
+                                    >
+                                        <img
+                                            src="https://ads.jobkorea.co.kr/ads/pc/images/202601/89c44943-d086-41cb-85b4-2b96ba0f914f.png"
+                                            alt=""
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="footer__advertisement--text">
+                                <div class="ad-container">
+                                    <a
+                                        class="imgAdBnnr isSendImpLog"
+                                        href="javascript:;"
+                                        data-campaignid="805"
+                                        data-campaignproductid="3042"
+                                        data-space="recruitTextBottom"
+                                        data-urlpath="/Login/Login_Tot.asp"
+                                        data-linkurl="https://tacademy.skplanet.com/front/customer/viewNotice.do?seq=859&amp;topYn=N&amp;topYn=N&amp;utm_source=Korcham&amp;utm_medium=banner&amp;utm_campaign=asac_apply&amp;utm_id=asac&amp;utm_content=aiDE"
+                                        data-linktype="NEW_WINDOW"
+                                        data-gender=""
+                                        data-age="0"
+                                        data-pagetypecode="11"
+                                        data-creativename="A"
+                                        data-creativesrc=""
+                                    >
+                                        <p>
+                                            2026 쿠팡 개발자<br /><strong
+                                                >IMPACT 신입체험자 모집</strong
+                                            >
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- container //-->
+
+            <footer th:replace="~{/main/footer.html :: #footer}"></footer>
+            <!-- footer //-->
+        </div>
+    </body>
+    <script th:inline="javascript">const login = [[${login}]];</script>
+    <script src="/js/main/log-in.js"></script>
+    <script src="/js/main/footer.js"></script>
+    <script>
+        document.querySelector(".kakao").addEventListener("click", () => {
+            location.href = "https://kauth.kakao.com/oauth/authorize?client_id=edeefdf5ab96d36811571fbd1e56a4cf&redirect_uri=http://localhost:10000/main/kakao-join&response_type=code";
+        });
+
+        document.querySelectorAll("#devMemTab li").forEach(tab => {
+            tab.addEventListener("click", () => {
+                const joinLink = document.getElementById("joinLink");
+                if (tab.dataset.tab === "tab2") {
+                    joinLink.href = "/main/company-join";
+                } else {
+                    joinLink.href = "/main/individual-join";
+                }
+            });
+        });
+    </script>
+</html>

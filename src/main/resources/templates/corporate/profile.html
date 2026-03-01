@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기업정보관리 | TRY-CATCH</title>
+    <link rel="stylesheet" href="/css/corporate/header.css">
+    <link rel="stylesheet" href="/css/corporate/footer.css">
+    <link rel="stylesheet" href="/css/corporate/profile.css">
+</head>
+<body class="mtcSubInfo mtcSubCompany">
+    <div id="wrap">
+        <div th:replace="~{corporate/header :: header}"></div>
+        <div class="sideTrue devUseTopBtn" id="container">
+            <!-- 어사이드 -->
+            <div id="sideNav" class="devCorpLogin">
+                <!-- 기업 정보 관리 메뉴 -->
+                <div class="nav">
+                    <ul>
+                        <!-- server, javascript: 해당 페이지일 때, on 클래스 추가 -->
+                        <li class="devCorpInfoDetail on">
+                            <span>기업정보관리</span>
+                        </li>
+                        <li class="devCorpInfoDetail">
+                            <a th:href="@{/corporate/member-info}">회원정보관리</a>
+                        </li>
+                        <!-- server: 담당자 로그인 시에만 보이도록 -->
+                        <li class="devCorpInfoDetail">
+                            <a th:href="@{/corporate/team-member}">팀원관리</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 광고 -->
+                <div class="adLeftBx">
+                    <div class="ad-container">
+                        <a href="javascript:;" class="imgAdBnnr">
+                            <img src="/images/corporate/54af1f5a-b9e0-45bb-8f00-cb06f2d01441.png">
+                            <!-- onerror -->
+                        </a>
+                    </div>
+                </div>
+                <div class="adLeftBx">
+                    <a href="">
+                        <img src="/images/corporate/lnb_certify_banner.png">
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- 복리후생 스타일 -->
+            <div id="content">
+                <div class="companyContent">
+                    <div class="companyMngWrap">
+                        <form id="devInfoForm" name="form" method="post" th:action="@{/corporate/profile}">
+                            <input type="hidden" id="devWelfareData" name="welfareData">
+                            <!-- 기업정보관리 입력폼 -->
+                            <fieldset>
+                                <div class="artCompany artCoSummary">
+                                    <div class="infoTbBx">
+                                        <div class="tbRow">
+                                            <div class="tbCell tbSum">
+                                                <p class="name">
+                                                    <a href="" target="_blank" th:text="${corpInfo.corpCompanyName}">기업이름</a>
+                                                </p>
+                                                <dl class="info">
+                                                    <dt>사업자번호</dt>
+                                                    <dd th:text="${corpInfo.corpBusinessNumber}">111-11-11111</dd>
+                                                    <dt>상장여부</dt>
+                                                    <dd>비상장</dd>
+                                                </dl>
+                                            </div>
+
+                                            <div class="tbCell tbLogo">
+                                                <!-- 로고가 없을 때 -->
+                                                <button type="button" class="infoBtnB infoBtnUp" id="devLogoUp" th:if="${corpInfo.logoFilePath == null}"><span>로고업로드</span></button>
+                                                <!-- 로고가 있을 때 -->
+                                                <p class="logo" th:if="${corpInfo.logoFilePath != null}">
+                                                    <img th:src="@{/api/files/display(filePath=${corpInfo.logoFilePath}, fileName=${corpInfo.logoFileName})}">
+                                                </p>
+                                                <p class="btn" th:if="${corpInfo.logoFilePath != null}">
+                                                    <button type="button" class="infoBtn infoBtnDel" id="devLogoDel"></button>
+                                                    <button type="button" class="infoBtn infoBtnMod" id="devLogoModify"></button>
+                                                </p>
+
+                                                <div class="logoUploadWrap">
+                                                    <div id="frmLogo">
+                                                        <!-- 로고 업로드 -->
+                                                        <div class="popRecWrap popLogoUpload">
+                                                            <div class="popHd">
+                                                                <h1>로고 업로드</h1>
+                                                            </div>
+                                                            <div class="popCont">
+                                                                <ul class="ntcList">
+                                                                    <li>
+                                                                        - 
+                                                                        <em>GIF,JPEG,JPG,PNG</em>
+                                                                        파일형식으로, 200KB 용량 이내의 파일만 등록가능합니다.
+                                                                    </li>
+                                                                    <li>- 로고 업로드 시 128 x 50px 사이즈로 등록하시면 최적의 화질로 노출됩니다.</li>
+                                                                </ul>
+                                                                <!-- 파일첨부한 경우 -->
+                                                                <div class="infoFileBx clear">
+                                                                    <fieldset>
+                                                                        <span class="fileBx infoIcnA" id="devSelectLogoDelegator">
+                                                                            <label for="devSelectLogo" id="devSelectLogoName">로고선택</label>
+                                                                            <!-- javascript: 파일 업로드 시 파일명으로 textContent 변경 -->
+                                                                        </span>
+                                                                        <button type="button" class="btnUpload" id="devSubmit">
+                                                                            <span>등록하기</span>
+                                                                        </button>
+                                                                        <input type="file" id="devSelectLogo" name="up_file" accept=".jpg, .jpeg, .gif, .png" style="display:none">
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseLayer"></button>
+                                                        </div>
+
+                                                        <!-- 로고 삭제 -->
+                                                        <div class="popRecWrap popLogoDel">
+                                                            <div class="popHd">
+                                                                <h1>로고 업로드</h1>
+                                                            </div>
+                                                            <div class="popCont">
+                                                                <p class="ntcTx">등록된 로고를 삭제하시겠습니까?</p>
+                                                                <p class="popFunc">
+                                                                    <button type="button" class="mtcBtnBg" id="devDeleteLogo">
+                                                                        <span>확인</span>
+                                                                    </button>
+                                                                </p>
+                                                            </div>
+                                                            <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseDelLayer"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- javascript: 로고 업로드 버튼 클릭 시, on 클래스 추가(모달) -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="artCompany artCoBasic">
+                                    <h3 class="info_hd_3">기본정보</h3>
+                                    <div class="infoTbBx">
+                                        <div class="tbRow">
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph devInputTxExam" for="txtBossName">
+                                                            대표자명
+                                                            <span class="point">*</span>
+                                                        </label>
+                                                        <input type="text" id="txtBossName" class="inpDefault devAnimPh" name="corpCeoName" th:value="${corpInfo.corpCeoName}" maxlength="25">
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보를 입력하지 않을 시 error 추가 -->
+                                            </div>
+
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph devInputTxExam" for="devOpenDate">
+                                                            설립일
+                                                            <span class="point">*</span>
+                                                        </label>
+                                                        <input type="text" id="devOpenDate" class="inpDefault devAnimPh" name="corpEstablishmentDate" th:value="${corpInfo.corpEstablishmentDate}" maxlength="10">
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보를 입력하지 않을 시 error 추가 -->
+                                            </div>
+
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="selType devAnimLy">
+                                                        <button type="button" class="btnSelType mtcBtnA" id="devCoType">
+                                                            <span class="txCate">
+                                                                기업형태
+                                                                <span class="point">*</span>
+                                                            </span>
+                                                            <!-- 선택한 text 들어갈 영역 -->
+                                                            <span id="Company_Name" class="txResult devTxResult"></span>
+                                                        </button>
+                                                        <input type="hidden" id="Company_Type" name="corpCompanyType" th:value="${corpInfo.corpCompanyType}">
+                                                        <!-- 레이어 영역 -->
+                                                        <div class="lyElBx devLyElBx">
+                                                            <ul class="selTypeList">
+                                                                <li data-type="1" class="devCoTypeItem">
+                                                                    <button type="button">중소기업</button>
+                                                                </li>
+                                                                <li data-type="2" class="devCoTypeItem">
+                                                                    <button type="button">중견기업</button>
+                                                                </li>
+                                                                <li data-type="3" class="devCoTypeItem">
+                                                                    <button type="button">대기업</button>
+                                                                </li>
+                                                                <li data-type="4" class="devCoTypeItem">
+                                                                    <button type="button">대기업 계열사·자회사</button>
+                                                                </li>
+                                                                <li data-type="5" class="devCoTypeItem">
+                                                                    <button type="button">벤처기업</button>
+                                                                </li>
+                                                                <li data-type="7" class="devCoTypeItem">
+                                                                    <button type="button">국내 공공기관·공기업</button>
+                                                                </li>
+                                                                <li data-type="9" class="devCoTypeItem">
+                                                                    <button type="button">비영리단체·교육재단</button>
+                                                                </li>
+                                                                <!-- javascript: 버튼 선택 시, 선택한 버튼에 on 추가 -->
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: 버튼 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보를 입력하지 않을 시 error 추가 -->
+                                            </div>
+                                        </div>
+
+                                        <!-- javascript: 외국 기업 선택 시, display: block -->
+                                        <div class="tbRow" id="devForeignCoArea" style="display:none;">
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType devFocusoutExcept">
+                                                        <label class="ph" for="devNation">
+                                                            외국계 국가정보
+                                                            <span class="point">*</span>
+                                                        </label>
+                                                        <input type="text" id="devNation" class="inpDefault devAnimPh">
+                                                        <div class="lyElBx" id="devNationSearchContainer" style="display: none;">
+                                                            <!--// 검색 전 -->
+                                                            <!-- <div class="keySchNtc" id="devKeySchNtc" style="display: none;">
+                                                                <p>찾으시려는 국가명을 입력해주세요</p>
+                                                            </div> -->
+                                                            <!-- javascript: input 클릭 시 display: table;(toggle) -->
+                                                            <!--// 검색 시 -->
+                                                            <div class="keySchType">
+                                                                <ul id="devNationSearchResult">
+                                                                    <!-- <li><a class="devNationSearchItem" style="cursor:pointer"><strong></strong>가<strong></strong>나<strong></strong></a></li> -->
+                                                                </ul>
+                                                                <!-- javascript: 처음엔 빈 리스트, input에 입력을 했다가 전부 지우면 li들 생성 -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 .ok 추가, 필수 정보를 입력하지 않았을 경우 error 추가 -->
+                                            </div>
+                                            <div class="tbCell"></div>
+                                            <div class="tbCell"></div>
+                                        </div>
+                                        
+                                        <div class="tbRow">
+                                            <div class="tbCell tbPart">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="selType devAnimLy">
+                                                        <button type="button" class="btnSelType mtcBtnA">
+                                                            <span class="txCate">
+                                                                업종
+                                                                <span class="point">*</span>
+                                                            </span>
+                                                            <!-- 선택한 text 들어갈 영역 -->
+                                                            <span id="Industry_Name" class="txResult devTxResult"></span>
+                                                        </button>
+                                                        <input type="hidden" id="Industry_Code" name="corpKindId" th:value="${corpInfo.corpKindId}">
+                                                        <input type="hidden" id="Industry_Small_Code" name="corpKindSmallId" th:value="${corpInfo.corpKindSmallId}">
+                                                        <!-- 레이어 영역 -->
+                                                        <div class="lyElBx devLyElBx">
+                                                            <div class="selTypeList">
+                                                                <!-- javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
+                                                                <ul>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10001">
+                                                                        <button type="button">서비스업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10002">
+                                                                        <button type="button">금융·은행업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10007">
+                                                                        <button type="button">IT·정보통신업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10010">
+                                                                        <button type="button">판매·유통업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10009">
+                                                                        <button type="button">제조·생산·화학업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10011">
+                                                                        <button type="button">교육업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10003">
+                                                                        <button type="button">건설업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10004">
+                                                                        <button type="button">의료·제약업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10005">
+                                                                        <button type="button">미디어·광고업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10006">
+                                                                        <button type="button">문화·예술·디자인업</button>
+                                                                    </li>
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10008">
+                                                                        <button type="button">기관·협회</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <!-- javascript: 선택된 리스트가 있다면 devOn 추가(회원가입 때 선택한 업종) -->
+                                                                    <!-- javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
+                                                                <ul class="devPartList " data-part-ctgr-code="10001" style="display:none">
+                                                                    <li data-part="1000001" class="devPartItem">
+                                                                        <button type="button">호텔·여행·항공</button>
+                                                                    </li>
+                                                                    <li data-part="1000003" class="devPartItem">
+                                                                        <button type="button">음식료·외식·프랜차이즈</button>
+                                                                    </li>
+                                                                    <li data-part="1000002" class="devPartItem">
+                                                                        <button type="button">스포츠·여가·레저</button>
+                                                                    </li>
+                                                                    <li data-part="1000004" class="devPartItem">
+                                                                        <button type="button">뷰티·미용</button>
+                                                                    </li>
+                                                                    <li data-part="1000005" class="devPartItem">
+                                                                        <button type="button">콜센터·아웃소싱·기타</button>
+                                                                    </li>
+                                                                    <li data-part="1000006" class="devPartItem">
+                                                                        <button type="button">정비·A/S·카센터</button>
+                                                                    </li>
+                                                                    <li data-part="1000007" class="devPartItem">
+                                                                        <button type="button">렌탈·임대·리스</button>
+                                                                    </li>
+                                                                    <li data-part="1000008" class="devPartItem">
+                                                                        <button type="button">서치펌·헤드헌팅</button>
+                                                                    </li>
+                                                                    <li data-part="1000009" class="devPartItem">
+                                                                        <button type="button">시설관리·보안·경비</button>
+                                                                    </li>
+                                                                    <li data-part="1000010" class="devPartItem">
+                                                                        <button type="button">웨딩·상조·이벤트</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10002" style="display:none">
+                                                                    <li data-part="1000011" class="devPartItem">
+                                                                        <button type="button">은행·금융</button>
+                                                                    </li>
+                                                                    <li data-part="1000012" class="devPartItem">
+                                                                        <button type="button">캐피탈·대출</button>
+                                                                    </li>
+                                                                    <li data-part="1000013" class="devPartItem">
+                                                                        <button type="button">증권·보험·카드</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10007" style="display:none">
+                                                                    <li data-part="1000038" class="devPartItem">
+                                                                        <button type="button">솔루션·SI·CRM·ERP</button>
+                                                                    </li>
+                                                                    <li data-part="1000039" class="devPartItem">
+                                                                        <button type="button">웹에이전시</button>
+                                                                    </li>
+                                                                    <li data-part="1000040" class="devPartItem">
+                                                                        <button type="button">쇼핑몰·오픈마켓·소셜커머스</button>
+                                                                    </li>
+                                                                    <li data-part="1000041" class="devPartItem">
+                                                                        <button type="button">포털·컨텐츠·커뮤니티</button>
+                                                                    </li>
+                                                                    <li data-part="1000042" class="devPartItem">
+                                                                        <button type="button">네트워크·통신서비스</button>
+                                                                    </li>
+                                                                    <li data-part="1000043" class="devPartItem">
+                                                                        <button type="button">정보보안</button>
+                                                                    </li>
+                                                                    <li data-part="1000044" class="devPartItem">
+                                                                        <button type="button">컴퓨터·하드웨어·장비</button>
+                                                                    </li>
+                                                                    <li data-part="1000045" class="devPartItem">
+                                                                        <button type="button">게임·애니메이션</button>
+                                                                    </li>
+                                                                    <li data-part="1000046" class="devPartItem">
+                                                                        <button type="button">모바일·APP</button>
+                                                                    </li>
+                                                                    <li data-part="1000047" class="devPartItem">
+                                                                        <button type="button">IT컨설팅</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10010" style="display:none">
+                                                                    <li data-part="1000016" class="devPartItem">
+                                                                        <button type="button">백화점·유통·도소매</button>
+                                                                    </li>
+                                                                    <li data-part="1000015" class="devPartItem">
+                                                                        <button type="button">무역·상사</button>
+                                                                    </li>
+                                                                    <li data-part="1000014" class="devPartItem">
+                                                                        <button type="button">물류·운송·배송</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10009" style="display:none">
+                                                                    <li data-part="1000052" class="devPartItem">
+                                                                        <button type="button">전기·전자·제어</button>
+                                                                    </li>
+                                                                    <li data-part="1000053" class="devPartItem">
+                                                                        <button type="button">반도체·디스플레이·광학</button>
+                                                                    </li>
+                                                                    <li data-part="1000054" class="devPartItem">
+                                                                        <button type="button">기계·기계설비</button>
+                                                                    </li>
+                                                                    <li data-part="1000055" class="devPartItem">
+                                                                        <button type="button">자동차·조선·철강·항공</button>
+                                                                    </li>
+                                                                    <li data-part="1000056" class="devPartItem">
+                                                                        <button type="button">금속·재료·자재</button>
+                                                                    </li>
+                                                                    <li data-part="1000057" class="devPartItem">
+                                                                        <button type="button">화학·에너지·환경</button>
+                                                                    </li>
+                                                                    <li data-part="1000058" class="devPartItem">
+                                                                        <button type="button">섬유·의류·패션</button>
+                                                                    </li>
+                                                                    <li data-part="1000059" class="devPartItem">
+                                                                        <button type="button">생활화학·화장품</button>
+                                                                    </li>
+                                                                    <li data-part="1000060" class="devPartItem">
+                                                                        <button type="button">생활용품·소비재·기타</button>
+                                                                    </li>
+                                                                    <li data-part="1000061" class="devPartItem">
+                                                                        <button type="button">목재·제지·가구</button>
+                                                                    </li>
+                                                                    <li data-part="1000062" class="devPartItem">
+                                                                        <button type="button">식품가공</button>
+                                                                    </li>
+                                                                    <li data-part="1000063" class="devPartItem">
+                                                                        <button type="button">농축산·어업·임업</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList" data-part-ctgr-code="10011" style="display:none">
+                                                                    <li data-part="1000021" class="devPartItem">
+                                                                        <button type="button">학교(초·중·고·대학·특수)</button>
+                                                                    </li>
+                                                                    <li data-part="1000022" class="devPartItem">
+                                                                        <button type="button">유아·유치원·어린이집</button>
+                                                                    </li>
+                                                                    <li data-part="1000023" class="devPartItem">
+                                                                        <button type="button">학원·어학원·교육원</button>
+                                                                    </li>
+                                                                    <li data-part="1000024" class="devPartItem">
+                                                                        <button type="button">학습지·방문교육</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList" data-part-ctgr-code="10003" style="display:none">
+                                                                    <li data-part="1000018" class="devPartItem">
+                                                                        <button type="button">건축·설비·환경</button>
+                                                                    </li>
+                                                                    <li data-part="1000019" class="devPartItem">
+                                                                        <button type="button">건설·시공·토목·조경</button>
+                                                                    </li>
+                                                                    <li data-part="1000020" class="devPartItem">
+                                                                        <button type="button">인테리어·자재</button>
+                                                                    </li>
+                                                                    <li data-part="1000017" class="devPartItem">
+                                                                        <button type="button">부동산·중개·임대</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10004" style="display:none">
+                                                                    <li data-part="1000026" class="devPartItem">
+                                                                        <button type="button">의료(병원분류별)</button>
+                                                                    </li>
+                                                                    <li data-part="1000027" class="devPartItem">
+                                                                        <button type="button">의료(진료과별)</button>
+                                                                    </li>
+                                                                    <li data-part="1000025" class="devPartItem">
+                                                                        <button type="button">의료(간호·원무·상담)</button>
+                                                                    </li>
+                                                                    <li data-part="1000028" class="devPartItem">
+                                                                        <button type="button">제약·보건·바이오</button>
+                                                                    </li>
+                                                                    <li data-part="1000029" class="devPartItem">
+                                                                        <button type="button">사회복지·요양</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10005" style="display:none">
+                                                                    <li data-part="1000030" class="devPartItem">
+                                                                        <button type="button">방송·케이블·프로덕션</button>
+                                                                    </li>
+                                                                    <li data-part="1000031" class="devPartItem">
+                                                                        <button type="button">신문·잡지·언론사</button>
+                                                                    </li>
+                                                                    <li data-part="1000032" class="devPartItem">
+                                                                        <button type="button">광고·홍보·전시</button>
+                                                                    </li>
+                                                                    <li data-part="1000033" class="devPartItem">
+                                                                        <button type="button">영화·음반·배급</button>
+                                                                    </li>
+                                                                    <li data-part="1000034" class="devPartItem">
+                                                                        <button type="button">연예·엔터테인먼트</button>
+                                                                    </li>
+                                                                    <li data-part="1000035" class="devPartItem">
+                                                                        <button type="button">출판·인쇄·사진</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10006" style="display:none">
+                                                                    <li data-part="1000036" class="devPartItem">
+                                                                        <button type="button">문화·공연·예술</button>
+                                                                    </li>
+                                                                    <li data-part="1000037" class="devPartItem">
+                                                                        <button type="button">디자인·CAD</button>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="devPartList " data-part-ctgr-code="10008" style="display:none">
+                                                                    <li data-part="1000048" class="devPartItem">
+                                                                        <button type="button">공기업·공공기관</button>
+                                                                    </li>
+                                                                    <li data-part="1000049" class="devPartItem">
+                                                                        <button type="button">협회·단체</button>
+                                                                    </li>
+                                                                    <li data-part="1000050" class="devPartItem">
+                                                                        <button type="button">컨설팅·연구·조사</button>
+                                                                    </li>
+                                                                    <li data-part="1000051" class="devPartItem">
+                                                                        <button type="button">회계·세무·법무</button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <p class="selTypeBtn">
+                                                                <button type="button" class="mtcBtnBd devLyClose">
+                                                                    <span>취소</span>
+                                                                </button>
+                                                                <button type="button" class="mtcBtnBg" id="devApplyPart">
+                                                                    <span>확인</span>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: 버튼 선택 시 on 추가, 리스트 선택 완료 시 .ok 추가, 필수 정보를 입력하지 않았을 경우 error 추가 -->
+                                            </div>
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph" for="devWorkerCnt">
+                                                            사원수
+                                                            <span class="point">*</span>
+                                                        </label>
+                                                        <input type="text" id="devWorkerCnt" class="inpDefault devAnimPh" name="corpCompanySize" th:value="${corpInfo.corpCompanySize}" maxlength="6">
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보 입력하지 않았을 경우 error 추가 -->
+                                            </div>
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph" for="devFax">
+                                                            팩스번호
+                                                        </label>
+                                                        <input type="text" id="devFax" class="inpDefault devAnimPh" name="corpFax" th:value="${corpInfo.corpFax}" maxlength="15">
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 ok 추가 -->
+                                            </div>
+                                        </div>
+
+                                        <div class="tbRow">
+                                            <div id="devAddrArea" class="elWrap devElWrap" style="display: block;">
+                                                <div class="schSetArea addressArea">
+                                                    <div class="schSetBx">
+                                                        <strong class="ph">
+                                                            회사주소
+                                                            <span class="point" id="devAddrRequire">*</span>
+                                                        </strong>
+                                                        <div class="bxItemList">
+                                                            <span class="itemWrap">
+                                                                <span class="item devTxResult" id="devAddr">주소</span>
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" class="btnSetFn" id="devSearchAddr">주소검색</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- javascript: 국내 기업 선택 시, display: block; -->
+                                            <!-- javascript: 회사주소 선택 완료시 클래스 ok, 입력하지 않고 저장 버튼 누르면 error -->
+
+                                            <div id="devForeignAddrArea" class="elWrap devElWrap" style="display: none;">
+                                                <div class="schInpType">
+                                                    <label class="ph" for="devAddrForeign">회사주소</label>
+                                                    <input type="text" id="devAddrForeign" class="inpDefault devAnimPh" name="Addr_Foreign" maxlength="150">
+                                                    <span class="byte">
+                                                        <em id="devAddrForeignTextCnt">0</em>/150
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- javascript: 외국 기업 선택 시, display: block -->
+                                            <!-- javascript: 회사주소 선택중 클래스 on, 회사주소 선택 완료시 클래스 ok -->
+
+                                            <div class="lyAddrMng">
+                                                <div class="addrMngWrap" id="devAddrMngWrap">
+                                                    <div id="frmAddr">
+                                                        <div class="popRecWrap popAddr addr on">
+                                                            <div class="popHd">
+                                                                <h1>주소 검색</h1>
+                                                            </div>
+                                                            <div class="popCont">
+                                                                <input type="text" class="address" id="postcode" name="addressZipcode" placeholder="우편번호 *" maxlength="5" th:value="${corpInfo.addressZipcode}">
+                                                                <input type="button" class="address" id="searchPostCodeBtn" value="우편번호 찾기">
+                                                                <input type="text" class="address" id="address" name="addressAddress" placeholder="주소 *" th:value="${corpInfo.addressAddress}">
+                                                                <input type="text" class="address" id="detailAddress" name="addressDetail" placeholder="상세주소" th:value="${corpInfo.addressDetail}">
+                                                            </div>
+                                                            <p class="popFunc">
+                                                                <button type="button" class="mtcBtnBd devCloseAddr">
+                                                                    <span>취소</span>
+                                                                </button><button type="button" class="mtcBtnBg">
+                                                                    <span>확인</span>
+                                                                </button>
+                                                                <!-- javascript: 버튼 클릭 이벤트 -->
+                                                            </p>
+                                                            <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseAddrLayer"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: 주소검색 선택 시 on 추가 -->
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="tbRow">
+                                            <div class="elWrap devElWrap">
+                                                <div class="schInpType">
+                                                    <label class="ph" for="devMainItem">
+                                                        주요사업내용
+                                                        <span class="point">*</span>
+                                                    </label>
+                                                    <input type="text" id="devMainItem" class="inpDefault devAnimPh" name="corpMainBusiness" th:value="${corpInfo.corpMainBusiness}" maxlength="50">
+                                                    <span class="byte">
+                                                        <em id="devMainItemTextCnt">0</em>/50
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- javascript: input 선택 시 on 추가, 입력 완료 시 .ok 추가, 필수 정보를 입력하지 않았을 경우 error 추가 -->
+                                        </div>
+
+                                        <div class="tbRow">
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph" for="txtHomepage">홈페이지</label>
+                                                        <input type="text" id="txtHomepage" class="inpDefault devAnimPh" name="corpWebsiteUrl" th:value="${corpInfo.corpWebsiteUrl}">
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 .ok 추가 -->
+                                            </div>
+
+                                            <div class="tbCell tbCapital">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label for="lb_basic_7" class="ph">자본금</label>
+                                                        <input type="hidden" id="corpCapitalHidden" name="corpCapital" th:value="${corpInfo.corpCapital}">
+                                                        <span class="inpTxItem">
+                                                            <input type="text" id="devCapital_A" class="inpDefault devAnimPh devCapitalText" title="억단위 입력" maxlength="8">
+                                                            <span class="tx" id="devCapitalUnitA"></span>
+                                                        </span>
+                                                        <span class="inpTxItem">
+                                                            <input type="text" id="devCapital_B" class="inpDefault devAnimPh devCapitalText" title="천단위 입력" maxlength="4">
+                                                            <span class="tx" id="devCapitalUnitB"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 .ok 추가 -->
+                                                <!-- javascript: on일 때, devCapitalUnitA, devCapitalUnitB에 각각 억, 만원 넣기 -->
+                                            </div>
+
+                                            <div class="tbCell">
+                                                <div class="elWrap devElWrap">
+                                                    <div class="schInpType">
+                                                        <label class="ph" for="txtSale">매출액 예) 3억 5천만</label>
+                                                        <input type="text" id="txtSale" class="inpDefault devAnimPh" name="corpTotalSales" th:value="${corpInfo.corpTotalSales}" maxlength="10">
+                                                    </div>
+                                                </div>
+                                                <!-- javascript: input 선택 시 on 추가, 입력 완료 시 .ok 추가 -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="artCompany artCoHistory">
+                                    <h3 class="info_hd_3">
+                                        <label for="lb_History">연혁 및 실적</label>
+                                    </h3>
+                                    <div class="mtcTxaType">
+                                        <span class="ph devTxAreaExam" style="display: block;">연혁 및 실적은 기업의 실적 위주로 표현하면 좋습니다. (ex. 2017.03. 올해의 브랜드 대상 수상)</span>
+                                        <!-- javascript: textarea에 value가 있다면 display: none; -->
+                                        <textarea rows="3" cols="80" name="corpPerformance" id="lb_History" class="txArea devTxArea" th:text="${corpInfo.corpPerformance}"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="artCompany artCoOverview">
+                                    <h3 class="info_hd_3">
+                                        <label for="lb_overview">기업개요 및 비전</label>
+                                    </h3>
+                                    <div class="mtcTxaType">
+                                        <span class="ph devTxAreaExam" style="display:block">
+                                            기업개요와 비젼은 기업의 특징을 요약해서 표현하면 좋습니다.
+                                            <br>
+                                            (ex. TRY-CATCH는 2026년에 취업 메타 검색엔진으로 출발하여 성장한 리크루팅마켓플레이스입니다.)
+                                        </span>
+                                        <!-- javascript: textarea에 value가 있다면 display: none; -->
+                                        <textarea rows="3" cols="80" name="corpVision" id="lb_overview" class="txArea devTxArea" th:text="${corpInfo.corpVision}"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- 복리후생 -->
+                                <div class="artCompany artCoWelfare">
+                                    <h3 class="info_hd_3">
+                                        <label for="lb_welfare">복리후생</label>
+                                    </h3>
+                                    <div class="WelfareType">
+                                        <span class="ph" id="devEmptyList">복리후생을 선택해 주세요.</span>
+                                        <!-- javascript: 선택된 복리후생이 있다면 display: none -->
+                                        <ul class="welfare-list" id="devWlfrList">
+                                            <!-- <li>
+                                                <button type="button" class="devItemDel" data-item-code>임직원 할인</button>
+                                            </li> -->
+                                        </ul>
+                                        <!-- javascript: 복리후생이 선택되면 ul에 li태그 동적으로 생성 -->
+                                        <button type="button" class="btnTotal btnSetFn" id="devWlfrInfo">전체보기</button>
+                                        <!-- javascript: 버튼 눌렀을 때 isCheckButton 추가 -->
+                                        <div class="giWelfareModal regModalWrap" style="display: none; opacity: 0;">
+                                            <div class="regModal reset" style="margin-top: -307px; outline: none;">
+                                                <div class="madalTopArea">
+                                                    <h5 class="titModal">복리후생 선택 </h5>
+                                                </div>
+                                                <div class="modalContent">
+                                                    <div class="regPrefWrap">
+                                                        <div class="innerBx">
+                                                            <div class="scrlBx">
+                                                                <div class="fieldList">
+                                                                    <strong class="hdItem">연금·보험</strong>
+                                                                    <ul id="devPopWlfrCtgrCode1">
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_36" name="WlfrCode" value="36">
+                                                                                <label for="lb_benefit_36">개인연금</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_29" name="WlfrCode" value="29" checked>
+                                                                                <label for="lb_benefit_29">건강보험</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_27" name="WlfrCode" value="27" checked>
+                                                                                <label for="lb_benefit_27">고용보험</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_31" name="WlfrCode" value="31">
+                                                                                <label for="lb_benefit_31">공무원연금</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_26" name="WlfrCode" value="26" checked>
+                                                                                <label for="lb_benefit_26">국민연금</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_30" name="WlfrCode" value="30">
+                                                                                <label for="lb_benefit_30">사학연금</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_28" name="WlfrCode" value="28" checked>
+                                                                                <label for="lb_benefit_28">산재보험</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_37" name="WlfrCode" value="37">
+                                                                                <label for="lb_benefit_37">상해보험</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77206" name="WlfrCode" value="77206">
+                                                                                <label for="lb_benefit_77206">실비보험</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_34" name="WlfrCode" value="34">
+                                                                                <label for="lb_benefit_34">퇴직연금</label>
+                                                                            </span>
+                                                                            <!-- javascript: check 시 chk 추가 -->
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="fieldList">
+                                                                    <strong class="hdItem">보상·수당·지원</strong>
+                                                                    <ul id="devPopWlfrCtgrCode2">
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_24" name="WlfrCode" class="devCodeItem" value="24">
+                                                                                <label for="lb_benefit_24">가족 의료비 지원</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_45" name="WlfrCode" class="devCodeItem" value="45">
+                                                                                <label for="lb_benefit_45">가족수당</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_53" name="WlfrCode" class="devCodeItem" value="53">
+                                                                                <label for="lb_benefit_53">각종 기념일 선물</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_19" name="WlfrCode" class="devCodeItem" value="19">
+                                                                                <label for="lb_benefit_19">각종 수당</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_9" name="WlfrCode" class="devCodeItem" value="9">
+                                                                                <label for="lb_benefit_9">경조금</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77217" name="WlfrCode" class="devCodeItem" value="77217">
+                                                                                <label for="lb_benefit_77217">교통비</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77218" name="WlfrCode" class="devCodeItem" value="77218">
+                                                                                <label for="lb_benefit_77218">국민연금 부담금 지원</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77219" name="WlfrCode" class="devCodeItem" value="77219">
+                                                                                <label for="lb_benefit_77219">난임/입양 지원</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_47" name="WlfrCode" class="devCodeItem" value="47">
+                                                                                <label for="lb_benefit_47">명절선물/명절상여</label>
+                                                                            </span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="fieldList">
+                                                                    <strong class="hdItem">사내시설</strong>
+                                                                    <ul id="devPopWlfrCtgrCode3">
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_109" name="WlfrCode" class="devCodeItem" value="109">
+                                                                                <label for="lb_benefit_109">건물내 경사로</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77299" name="WlfrCode" class="devCodeItem" value="77299">
+                                                                                <label for="lb_benefit_77299">공유오피스</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_21" name="WlfrCode" class="devCodeItem" value="21">
+                                                                                <label for="lb_benefit_21">구내식당</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_20" name="WlfrCode" class="devCodeItem" value="20">
+                                                                                <label for="lb_benefit_20">기숙사 지원</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_112" name="WlfrCode" class="devCodeItem" value="112">
+                                                                                <label for="lb_benefit_112">비상경보장치</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_66" name="WlfrCode" class="devCodeItem" value="66">
+                                                                                <label for="lb_benefit_66">사내 어린이집</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_63" name="WlfrCode" class="devCodeItem" value="63">
+                                                                                <label for="lb_benefit_63">사내도서관</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_64" name="WlfrCode" class="devCodeItem" value="64">
+                                                                                <label for="lb_benefit_64">사내정원</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_94172" name="WlfrCode" class="devCodeItem" value="94172">
+                                                                                <label for="lb_benefit_94172">사내카페</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_103" name="WlfrCode" class="devCodeItem" value="103">
+                                                                                <label for="lb_benefit_103">샤워실</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_99" name="WlfrCode" class="devCodeItem" value="99">
+                                                                                <label for="lb_benefit_99">수면실</label>
+                                                                            </span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="fieldList">
+                                                                    <strong class="hdItem">휴무·휴가·행사</strong>
+                                                                    <ul id="devPopWlfrCtgrCode4">
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_2" name="WlfrCode" class="devCodeItem" value="2">
+                                                                                <label for="lb_benefit_2">격주휴무</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_6" name="WlfrCode" class="devCodeItem" value="6">
+                                                                                <label for="lb_benefit_6">경조휴가</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77208" name="WlfrCode" class="devCodeItem" value="77208">
+                                                                                <label for="lb_benefit_77208">공휴일 휴무</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_74" name="WlfrCode" class="devCodeItem" value="74">
+                                                                                <label for="lb_benefit_74">남성출산휴가</label>
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="inpChk_ui size_small ">
+                                                                                <input type="checkbox" id="lb_benefit_77" name="WlfrCode" class="devCodeItem" value="77">
+                                                                                <label for="lb_benefit_77">노동절 휴무</label>
+                                                                            </span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="choiceArea">
+                                                            <div class="choiceListArea">
+                                                                <div class="keywordListBx">
+                                                                    <ul class="subList devPreviewList" style="display: none;">
+                                                                        <!-- <li class="subItem">
+                                                                            <span class="inr">
+                                                                                <span class="devItemText">공무원연금</span><button type="button" class="spRegA btnItemDel" data-item-code="31"></button> -->
+                                                                                <!-- javascript: 선택한 복리후생의 textContent가 들어가도록 -->
+                                                                                <!-- javascript: 버튼 누르면 선택된 복리후생 사라짐 -->
+                                                                            <!-- </span>
+                                                                        </li> -->
+                                                                        <!-- javascript: 복리후생이 선택되면 ul에 li태그 동적으로 생성 -->
+                                                                    </ul>
+                                                                    <!-- javascript: 복리후생이 선택되면 display: block -->
+                                                                    <span class="seflAddInpWrap devDirectInput">
+                                                                        <span class="inpTxItem seflAddItem size_small">
+                                                                            <input type="text" class="devDirectInput" placeholder="직접추가" title="복리후생 직접 입력">
+                                                                            <span class="icnWrap">
+                                                                                <span class="icn"></span>
+                                                                            </span>
+                                                                            <button type="button" class="addBtn devDirectInputBtn">
+                                                                                <span class="icn"></span>
+                                                                            </button>
+                                                                        </span>
+                                                                        <!-- javascript: input이 focus 될 때 ok 추가 -->
+                                                                    </span>
+                                                                    <button type="button" class="btnReset spRegB">초기화</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="buttons">
+                                                            <button type="button" class="btnCancel">취소</button>
+                                                            <button type="button" class="btnOk">확인</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btnModalClose spRegA"></button>
+                                            </div>
+                                            <div class="modalBg"></div>
+                                        </div>
+                                        <!-- javascript: 버튼 눌렀을 때 display: block, opacity: 1  -->
+                                        <!-- javascript: 버튼 눌렀을 때 body에 스타일 추가 width: 100%; height: 100%; position: fixed; top: -1200px; -->
+                                    </div>
+                                    <div class="plus autoWlfrRegArea">
+                                        <span class="autoTitle">추천</span>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="77217">교통비</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="2">격주휴무</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="21">구내식당</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="94172">사내카페</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="99">수면실</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="45">가족수당</button>
+                                        <!-- server: 아무거나 불러와서 채우기 -->
+                                    </div>
+                                    <p>· &nbsp;기업정보의 복리후생 정보만 업데이트 됩니다.</p>
+                                    <p>· &nbsp;공고에 노출되는 복리후생 정보는 해당 공고의 수정 페이지에서 업데이트해 주세요.</p>
+                                </div>
+                                
+                                <div class="artCoBtn">
+                                    <button type="submit" id="devBtnSubmit" class="infoBtnBg infoBtnApply">
+                                        <span>저장하기</span>
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="mtcTopBx">
+                <a id="btnMtcTop" href="javascript:;" class="mtcBtn btnMtcTop"></a>
+            </div>
+        </div>
+        <div th:replace="~{corporate/footer :: footer}"></div>
+    </div>
+</body>
+<script th:inline="javascript">
+    const savedWelfareItems = /*[[${corpInfo.welfareList}]]*/ [];
+</script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/corporate/profile/event.js"></script>
+</html>

@@ -1,0 +1,854 @@
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-display: swap;
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
+}
+
+/* 기본 */
+* {
+    /* padding: 0;
+    margin: 0; */
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+html, body {
+    width: 100%;
+}
+body {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+    background-color: #f2f4f7;
+}
+body, button, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, table, td, textarea, th, ul {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+}
+a, a:link, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+img {
+    border: 0;
+    vertical-align: top;
+}
+button, input, table, td, th {
+    font-size: 12px;
+    letter-spacing: 0;
+}
+button, fieldset, form, iframe {
+    border: 0;
+}
+button {
+    overflow: visible;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+button, input, select {
+    vertical-align: middle;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    font-size: 100%;
+}
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+input[type=text] {
+    font-size: 13px;
+    letter-spacing: 0;
+    color: #000;
+}
+input, option, select, textarea {
+    vertical-align: middle;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0px;
+}
+address, caption, em {
+    font-weight: 400;
+    font-style: normal;
+}
+textarea {
+    font-size: 13px;
+    color: #000;
+    resize: none;
+}
+form, fieldset, button {
+    border: 0 none;
+}
+em {
+    font-size: 15px;
+    color: #666;
+}
+address, caption, em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+#wrap {
+    position: relative;
+    min-width: 1270px;
+    margin: 0 auto;
+    background: #f2f4f7;
+}
+#wrap #container {
+    position: relative;
+    width: 1250px;
+    margin: 0 auto;
+}
+#wrap #container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 어사이드 */
+    /* 기업 정보 관리 메뉴 */
+#wrap #container #sideNav {
+    width: 200px;
+    float: left;
+}
+#sideNav .nav {
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+}
+#sideNav .nav ul {
+    padding: 25px 20px;
+}
+#sideNav .nav li {
+    font-size: 15px;
+    padding: 12px 0;
+    line-height: 1.4;
+}
+#sideNav .nav li.on > a, #sideNav .nav li.on > span {
+    font-weight: bold;
+}
+#sideNav .nav li > a:hover, #sideNav .nav li.on > a, #sideNav .nav li.on > span {
+    color: #006e3f;
+}
+#sideNav .nav li > a {
+    color: #000;
+    vertical-align: middle;
+    font-size: 15px;
+    line-height: 1.4;
+}
+    /* 광고 */
+#sideNav .adLeftBx {
+    margin-top: 10px;
+    text-align: center;
+}
+#sideNav .adLeftBx .ad-container {
+    width: 200px;
+    height: 275px;
+    background-color: #ffffff;
+}
+.ad-container, .ad-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* .ad-container a, .ad-container a p {
+    color: #333;
+    font: 14px / 17px Pretendard;
+}
+.ad-container a img {
+    max-width: 100%;
+    object-fit: contain;
+} */
+
+/* content */
+#wrap #container.sideTrue #content {
+    width: 1040px;
+    float: right;
+
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+}
+.mtcSubInfo .infoContent, .mtcSubHeadhunter .companyContent {
+    padding: 35px 39px;
+}
+.mtcSubInfo .infoContent, .mtcSubHeadhunter .companyContent {
+    padding: 35px 39px;
+}
+
+/* 회원정보관리 */
+    /* header */
+.memberMngWrap {
+    position: relative;
+}
+.artMemberMng {
+    position: relative;
+    border-bottom: 1px solid #edeef0;
+}
+.memberMngWrap .info_hd_3 {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: #000;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000;
+}
+.memberMngWrap .info_hd_3 .point {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #999;
+}
+.memberMngWrap .info_hd_3 .point em {
+    color: #f33;
+}
+.artMemberMng .infoTbBx {
+    padding: 14px 25px 32px 25px;
+}
+    /* 아이디, 가입자명 */
+.infoTbBx .tbRow {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    color: #000;
+}
+.infoTbBx .tbCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.artMemberMng .infoTbBx .tbIpt {
+    font-size: 16px;
+    letter-spacing: 0px;
+    width: 450px;
+    height: 60px;
+    line-height: 60px;
+}
+.artMemberMng .infoTbBx .tbIpt dt {
+    float: left;
+    color: #afb0b2;
+    padding-left: 16px;
+    box-sizing: border-box;
+}
+.artMemberMng .infoTbBx .tbIpt dt .point {
+    color: #f33;
+}
+.artMemberMng .infoTbBx .tbIpt dd {
+    color: #000;
+    padding-left: 20px;
+    margin-left: 114px;
+}
+.infoBtnBd {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 0px;
+    border: 1px solid #ddd;
+    background: #fff;
+    box-sizing: border-box;
+    text-align: center;
+}
+.memberMngWrap .infoBtnBd {
+    width: 126px;
+    height: 36px;
+    line-height: 32px;
+}
+.artMemberMng .infoBtnName, .artMemberMng .infoBtnPw {
+    margin-left: 10px;
+}
+.infoBtnBd span {
+    position: relative;
+    color: #000;
+}
+.artMemberMng .infoTbBx .tbCell + .tbCell {
+    float: left;
+
+    margin-left: 10px;
+}
+    /* 비밀번호 변경 전 */
+.artMemberMng .infoTbBx .tbPw {
+    position: relative;
+}
+.elWrap {
+    position: relative;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.artMemberMng .infoTbBx .tbPw .elWrap, .artMemberMng .infoTbBx .tbPw .mtcRdoBx {
+    display: inline-block;
+    vertical-align: middle;
+}
+.artMemberMng .infoTbBx .tbPw .elWrap {
+    width: 450px;
+}
+.artMemberMng .infoTbBx .pwNow .elWrap {
+    width: 240px;
+    border: 0;
+}
+.elWrap .schInpType {
+    position: relative;
+}
+.artMemberMng .infoTbBx .pwNow .elWrap .schInpType {
+    padding-left: 114px;
+}
+.elWrap .ph {
+    cursor: initial;
+    font-weight: normal;
+}
+.elWrap .schInpType .ph {
+    font-size: 16px;
+    color: #afb0b2;
+    position: absolute;
+    left: 16px;
+    top: 19px;
+    z-index: 1;
+    transition: all 0.2s ease-out;
+}
+.elWrap .schInpType .ph .point {
+    color: #ff3333;
+}
+.elWrap .schInpType .inpDefault {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    line-height: 40px;
+    padding: 20px 17px 0 17px;
+    border: none;
+    background-color: #fff;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #333;
+}
+.artMemberMng .infoTbBx .pwNow .elWrap .schInpType .inpDefault {
+    padding: 0 17px;
+}
+    /* 비밀번호 변경 */
+.artMemberMng .infoTbBx .tbRow + .tbRow + .tbRow {
+    margin-top: 10px;
+}
+.lyInfoWrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 12;
+}
+.artMemberMng .lyInfoHelp {
+    top: 18px;
+    right: 6px;
+}
+.artMemberMng .lyInfoHelp .lyBtn {
+    text-align: right;
+}
+.mtcBtn, .mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
+    display: inline-block;
+    background: url("/images/corporate/mtc_sp_btn_green.png") no-repeat;
+    box-sizing: border-box;
+}
+.mtcBtnTip {
+    width: 30px;
+    height: 30px;
+    background-position: 5px -85px;
+}
+.memberMngWrap .lyInfoWrap.on .mtcBtnTip {
+    background-position: -35px -85px;
+}
+.lyInfoWrap .lyInfoTy {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    padding: 12px 13px;
+    border: 1px solid #565d79;
+    background: #fff;
+    text-align: left;
+    box-sizing: border-box;
+}
+.artMemberMng .lyInfoHelp .lyInfoTy {
+    left: auto;
+    right: -6px;
+    top: -194px;
+    width: 450px;
+}
+.memberMngWrap .lyInfoWrap.on .lyInfoTy {
+    display: block;
+}
+.lyInfoWrap .lyList dt {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #333;
+    margin-bottom: 13px;
+}
+.lyInfoWrap .lyList dd {
+    position: relative;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #484848;
+    padding-left: 13px;
+    line-height: 1.9;
+}
+.lyInfoWrap .lyList dd:before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 12px;
+    width: 2px;
+    height: 2px;
+    background: #747474;
+}
+.infoIcn, .infoIcnB:before, .infoIcnA:after, .infoIcnM:before, .infoIcnM:after {
+    display: inline-block;
+    background: url("/images/corporate/info_sp_icn.png") no-repeat;
+    line-height: normal;
+    vertical-align: middle;
+}
+.lyInfoWrap .lyArrTop, .lyInfoWrap .lyArrBtm {
+    position: absolute;
+    top: -9px;
+    right: 15px;
+    width: 16px;
+    height: 9px;
+    background-position: 0 0;
+}
+.lyInfoWrap .lyArrBtm {
+    top: auto;
+    left: 15px;
+    bottom: -9px;
+    background-position: 0 -9px;
+}
+.artMemberMng .lyInfoHelp .lyArrBtm {
+    left: auto;
+    right: 12px;
+}
+.errorBx {
+    display: none;
+    position: absolute;
+    left: -1px;
+    top: 100%;
+    width: 100%;
+    border: 1px solid #ffbcb9;
+    z-index: 9;
+    background-color: #ffeeec;
+}
+.elWrap.on .errorBx {
+    display: none;
+}
+.errorBx:before {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 11px;
+    position: absolute;
+    left: 10px;
+    top: -11px;
+    background: url("/images/corporate/ico_error_arr.png") no-repeat 0 0;
+}
+.errorBx p {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #555;
+    padding: 5px 7px;
+}
+.artMemberMng .infoTbBx .tbPw .errorBx .invalid {
+    color: #ff4e4e;
+    font-weight: normal;
+}
+
+.error.elWrap {
+    border: 1px solid #eb8f8a !important;
+    z-index: auto;
+}
+.artMemberMng .infoTbBx .elWrap.error .ph {
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #afb0b2;
+}
+
+.artMemberMng .infoTbBx .tbPw .tbBx {
+    position: relative;
+    display: inline-block;
+}
+.mtcRdoBx {
+    position: relative;
+    display: inline-block;
+}
+.artMemberMng .infoTbBx .tbPw .mtcRdoBx {
+    margin: 4px 0 0 13px;
+}
+.mtcRdoBx input {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+.mtcRdoBx label {
+    display: inline-block;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-align: left;
+}
+.mtcRdoBx .bxIpt {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #999;
+    height: 20px;
+    padding-left: 24px;
+    background: url("/images/corporate/mtc_sp_form\ \(2\).png") no-repeat 0 -60px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.mtcRdoBx .bxIpt.chk {
+    color: #006e3f;
+    background-position: 0 -110px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.elWrap.on .ph {
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #afb0b2;
+    top: 10px;
+}
+.elWrap.ok .ph {
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #afb0b2;
+    top: 10px;
+}
+.memberContent .elWrap.on .ph, .memberContent .elWrap.ok .ph, .memberContent .elWrap.error .ph {
+    top: 22px;
+}
+.artMemberMng .infoTbBx .tbPw .elWrap.ok .schInpType {
+    padding: 0;
+}
+.artMemberMng .infoTbBx .elWrap.ok .schInpType .inpDefault, .artMemberMng .infoTbBx .elWrap.on .schInpType .inpDefault, .artMemberMng .infoTbBx .elWrap.error .schInpType .inpDefault {
+    padding: 0 50px 0 130px;
+}
+.artMemberMng .infoTbBx .tbCell + .tbCell {
+    float: left;
+    margin-left: 10px;
+}
+
+/* 개인정보 수집 이용 동의 */
+.artMemberMng .tbAgree {
+    padding: 15px 16px 0;
+}
+.corp-terms .terms {
+    position: relative;
+    margin-top: 11px;
+}
+.corp-terms .terms label {
+    display: block;
+    padding-left: 27px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #000;
+    line-height: 1;
+}
+.corp-terms .terms label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    background: #fff url("/images/corporate/sprite-icon.png") no-repeat 0 -283px;
+}
+.corp-terms .terms label a {
+    position: relative;
+    display: inline;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #006e3f;
+    padding: 0 12px 0 15px;
+    margin-left: 0;
+    vertical-align: unset;
+}
+.artMemberMng .tbAgree .button-more {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    padding-right: 16px;
+    vertical-align: middle;
+    margin-top: 2px;
+}
+.corp-terms .terms input {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1px;
+    height: 1px;
+}
+.corp-terms .terms label a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 3px;
+    width: 9px;
+    height: 5px;
+    background: url("/images/corporate/sprite-icon.png") no-repeat -20px -15px;
+}
+.artMemberMng .tbAgree .button-more:before {
+    content: '내용보기';
+    font-size: 14px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    line-height: 1;
+    color: #3399ff;
+}
+.corp-terms .terms label a.on:before {
+    background-position: -20px 0;
+}
+.artMemberMng .tbAgree .button-more:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 9px;
+    height: 5px;
+    background: url("/images/corporate/sprite-icon.png") no-repeat -20px -15px;
+}
+.artMemberMng .tbAgree .terms .button-more.on:before {
+    content: '';
+}
+.artMemberMng .tbAgree .terms .button-more::before {
+    content: '';
+}
+.artMemberMng .tbAgree .button-more.on:after {
+    background-position: -20px 0;
+}
+.corp-terms .terms-box {
+    display: none;
+    overflow-y: scroll;
+    width: 100%;
+    height: 140px;
+    padding: 25px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    box-sizing: border-box;
+    margin-top: 12px;
+}
+.corp-terms .terms-box .depth-1 li {
+    color: #999;
+    font-size: 12px;
+    letter-spacing: 0px;
+    line-height: 2;
+    padding: 0 0 10px 10px;
+    text-indent: -10px;
+}
+.corp-terms .terms-box .depth-1 li p {
+    text-indent: 0;
+}
+.corp-terms .terms-box .depth-1 li:last-child {
+    padding-bottom: 0;
+}
+.corp-terms .terms input:checked + label:before {
+    background-position: 0 -253px;
+}
+
+/* 저장하기 */
+.artBtmFunc {
+    text-align: center;
+    margin-top: 44px;
+}
+.infoBtnBg {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 0px;
+    background: #006e3f;
+    box-sizing: border-box;
+    text-align: center;
+}
+.artBtmFunc .infoBtnSave {
+    font-size: 17px;
+    letter-spacing: 0px;
+    font-weight: bold;
+    color: #fff;
+    width: 198px;
+    height: 52px;
+    line-height: 52px;
+    border-radius: 3px;
+}
+.infoBtnBg span {
+    position: relative;
+    color: #fff;
+}
+
+/* errorbox */
+.error .errorBx {
+    display: block;
+}
+
+/* 회원탈퇴 */
+.memberMngWrap .infoBtnLeave {
+    position: absolute;
+    top: -1px;
+    right: 0;
+}
+
+/* 회원탈퇴 모달 */
+.common-modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20000 !important;
+    width: 100%;
+    height: 100%;
+}
+.common-modal.active {
+    display: block;
+}
+.common-modal * {
+    box-sizing: border-box;
+}
+.common-modal .modal-dimmed {
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+}
+.common-modal .modal-contents {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    background: #fff;
+    padding: 40px;
+}
+.common-modal.company-certify-modal .modal-contents {
+    width: 560px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 48px 40px 40px;
+}
+.common-modal.company-certify-modal h2 {
+    font-size: 24px;
+    letter-spacing: -.5px;
+    color: #222;
+    line-height: 32px;
+    font-weight: 700;
+}
+.common-modal.company-certify-modal .head-desc {
+    margin-top: 4px;
+    font-size: 16px;
+    letter-spacing: 0;
+    color: #6a6a6a;
+    line-height: 24px;
+}
+.common-modal.company-certify-modal .modal-data {
+    overflow: hidden;
+    margin-top: 24px;
+    text-align: center;
+    border: 1px solid #d2d2d2;
+    border-radius: 8px;
+}
+.common-modal.company-certify-modal .modal-data .data-info {
+    padding: 15px 0;
+    color: #222;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    font-weight: 600;
+}
+.common-modal.company-certify-modal .modal-data .data-desc {
+    padding: 15px 0;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    background: #f8f8f8;
+    border-radius: 0 0 8px 8px;
+}
+
+.common-modal.company-certify-modal .modal-bts {
+    margin: 24px auto 0;
+    width: 243px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.common-modal.company-certify-modal .modal-btn {
+    margin: 0 auto;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0;
+    color: #fff;
+}
+.common-modal.company-certify-modal .modal-btn.blue {
+    background-color: #006e3f
+}
+.common-modal.company-certify-modal .modal-btn.xl {
+    height: 56px;
+    line-height: 56px;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0;
+}
+
+
+.common-modal.company-certify-modal .leaveAgreeWrap input {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1px;
+    height: 1px;
+}
+.common-modal.company-certify-modal .leaveAgreeWrap label{
+    display: block;
+    padding-left: 27px;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #000;
+    line-height: 1;
+    width: 110%;
+    text-align: left;
+}
+.common-modal.company-certify-modal .leaveAgreeWrap label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 147px;
+    top: 333px;
+    width: 20px;
+    height: 20px;
+    background: #fff url("/images/corporate/sprite-icon.png") no-repeat 0 -283px;
+}
+.common-modal.company-certify-modal .leaveAgreeWrap input:checked + label:before {
+    background-position: 0 -253px;
+}
+.common-modal .close-button {
+    position: absolute;
+    z-index: 10;
+    right: 26px;
+    top: 21px;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: url("/images/corporate/icon_close.png") no-repeat 50%;
+}

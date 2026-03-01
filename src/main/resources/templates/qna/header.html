@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>header</title>
+        <link rel="stylesheet" href="/css/qna/header.css" />
+    </head>
+    <body th:fragment="header">
+<div id="headerWrap" class="gnbTheme1200 devGnbContainer">
+            <div id="header" class="season_bg">
+                <!--신입공채 메뉴일경우 클래스 start-sub 추가 -->
+                <!-- // headInner -->
+                <!-- //비로그인/로그인 상단(로그인, 회원가입, 별충전, 기업서비스) -->
+                <div class="headInner">
+                    <h1 class="jkLogo">
+                        <a th:href="@{/main/main}">
+                            <img
+                                height="78"
+                                src="/images/logo.png"
+                                alt="TRY-CATCH"
+                            />
+                        </a>
+                    </h1>
+                    <!-- // search -->
+                    <div class="search" id="searchWrap">
+                        <h2 class="skip">검색</h2>
+                        <form
+                            name="global_seek"
+                            id="AKCFrm"
+                            autocomplete="off"
+                            action="/Search/"
+                            target="_self"
+                        >
+                            <fieldset>
+                                <legend>Smart Match 통합검색</legend>
+                                <div class="smKey">
+                                    <input
+                                        type="text"
+                                        id="stext"
+                                        title="검색어 입력"
+                                        name="stext"
+                                        placeholder="try me, try catch"
+                                        maxlength="30"
+                                        data-vvipkeyword=""
+                                        data-vvipkwrdno="0"
+                                    />
+                                    <!-- // 기존 자동완성 들어갈 영역 -->
+                                    <div id="AKCDiv" class="autoSearch">
+                                        <!-- // 기능 끈 상황 -->
+                                        <div
+                                            id="SearchStop"
+                                            class="autoSearchStop"
+                                        >
+                                            <p class="btnArrow" id="btnArrow_C">
+                                                <button
+                                                    type="button"
+                                                    title="열림"
+                                                    class="devAcDisabledInfoOpen"
+                                                >
+                                                    <span class="blind"
+                                                        >열림</span
+                                                    >
+                                                </button>
+                                            </p>
+                                            <div
+                                                class="searchStopDesc"
+                                                id="StopDesc"
+                                            >
+                                                <p class="description">
+                                                    키워드를 입력하시면<br />
+                                                    검색어를 추천해드립니다.
+                                                </p>
+                                                <p class="btnOdd">
+                                                    <button
+                                                        type="button"
+                                                        id="devAcOn"
+                                                    >
+                                                        자동완성 켜기
+                                                    </button>
+                                                    <span>|</span>
+                                                    <button
+                                                        type="button"
+                                                        id="devAcInfoClose"
+                                                        class="odd"
+                                                    >
+                                                        닫기
+                                                    </button>
+                                                </p>
+                                            </div>
+                                            <p
+                                                class="btnArrow btnArrowClose"
+                                                id="btnArrow_O"
+                                            >
+                                                <button
+                                                    type="button"
+                                                    title="닫힘"
+                                                    class="devAcDisabledInfoClose"
+                                                >
+                                                    <span class="blind"
+                                                        >닫힘</span
+                                                    >
+                                                </button>
+                                            </p>
+                                            <div class="bg"></div>
+                                        </div>
+
+                                        <!-- // 기능 켠 상황 -->
+                                        <div
+                                            id="SearchStart"
+                                            class="autoSearchStart"
+                                        >
+                                            <div
+                                                class="iframeHolder"
+                                                data-url=""
+                                                data-id="AKCIfrm"
+                                                data-name="AKCIfrm"
+                                                data-title="자동검색"
+                                                data-allowtransparency="true"
+                                            >
+                                                <div
+                                                    class="searchWrap"
+                                                    id="devSearchWrap"
+                                                >
+                                                    <div class="searchList">
+                                                        <h3>검색어 자동완성</h3>
+                                                        <ul id="AKCIDiv"></ul>
+
+                                                        <p class="btnOdd">
+                                                            <button
+                                                                type="button"
+                                                                id="devAcOff"
+                                                                class="odd"
+                                                            >
+                                                                자동완성 끄기
+                                                            </button>
+                                                            <span>|</span>
+                                                            <button
+                                                                type="button"
+                                                                id="devAcInfoClose2"
+                                                                class="odd"
+                                                            >
+                                                                닫기
+                                                            </button>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bg"></div>
+                                        </div>
+                                    </div>
+                                    <!-- 기존 자동완성 들어갈 영역 // -->
+                                    <input
+                                        type="submit"
+                                        value="검색"
+                                        class="submit spGnb"
+                                        id="common_search_btn"
+                                    />
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- search // -->
+
+                    <!-- // 배너 영역 -->
+                    <div class="headBann">
+                        <strong class="skip">TRY-CATCH 주요 서비스</strong>
+                    </div>
+                </div>
+                <!-- headInner // -->
+
+                <div id="headNavBar" class="headNavBar dev-headNavBar">
+                    <div class="navInner dev-navInner">
+                        <div class="jkNavArea dev-jkNavArea">
+                            <h2 class="skip">주요서비스</h2>
+                            <ul class="serviceNav dev-serviceNav">
+                                <li id="gnbGi" class="navItem">
+                                    <a th:href="@{/main/service-introduce}" class="linkItem"
+                                        ><span class="spNav"
+                                            ><span class="txIr"
+                                                >서비스 소개</span
+                                            ></span
+                                        ></a
+                                    >
+                                </li>
+                                <li class="navItem onepick" id="onepick">
+                                    <a href="" class="linkItem"
+                                        ><span class="spNav">체험 정보</span></a
+                                    >
+                                </li>
+                                <li
+                                    id="gnbInternship"
+                                    class="navItem internship"
+                                >
+                                    <a th:href="@{/skill-log/list}"
+                                        class="linkItem"
+                                        ><span class="spNav"
+                                            >기술 블로그</span
+                                        ></a
+                                    >
+                                </li>
+
+                                <li id="futurelab" class="navItem futurelab">
+                                    <a
+                                        href="/qna/list"
+                                        class="linkItem"
+                                    >
+                                        <span class="spNav"
+                                            ><span class="txIr"
+                                                >커뮤니티</span
+                                            ></span
+                                        >
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- 공통부분(상단 네비게이션) -->
+                            <!-- //비로그인 상단(로그인, 회원가입, 별충전, 기업서비스)// -->
+                            <ul th:unless="${session.member != null}" class="userNav">
+                                <li class="userNav-item login">
+                                    <a
+                                        href="/main/log-in"
+                                        class="txt-button login-button"
+                                        >로그인</a
+                                    >
+                                </li>
+                                <li class="userNav-item join">
+                                    <a
+                                        href="/main/individual-join"
+                                        class="txt-button join-button"
+                                        >회원가입</a
+                                    >
+                                </li>
+                                <li class="userNav-item star">
+                                    <a
+                                        th:href="@{/main/log-in(re_url='/point/point')}"
+                                        class="txt-button star-button"
+                                        >별 포인트</a
+                                    >
+                                </li>
+                                <li class="userNav-item corp">
+                                    <a th:href="@{/corporate/home}"
+                                        ><span class="spGnb"
+                                            >기업서비스</span
+                                        ></a
+                                    >
+                                    <div class="lyMyArea">
+                                        <div class="myInner">
+                                            <div class="lyRow">
+                                                <div class="btnRowWrap">
+                                                    <a href="/main/log-in"
+                                                        >기업회원 로그인</a
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="myLists">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/corporate/home"
+                                                            ><span
+                                                                class="tx"
+                                                                >기업회원
+                                                                홈</span
+                                                            ></a
+                                                        >
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{/corporate/program-apply}"
+                                                            ><span
+                                                                class="tx"
+                                                                >공고등록</span
+                                                            ></a
+                                                        >
+                                                    </li>
+                                                    <li>
+                                                        <a th:href="@{/corporate/program-management}"
+                                                            ><span
+                                                                class="tx"
+                                                                >공고·지원자
+                                                                관리</span
+                                                            ></a
+                                                        >
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- 비로그인 상단(로그인,회원가입,별충전,기업서비스 드롭다운)// -->
+                            <!-- //로그인 상단(알림,개인서비스) -->
+                            <!-- //기업회원 로그인 상단(기업서비스, 담당자명) -->
+                            <ul class="userNav" th:if="${session.member != null and session.member.class.name == 'com.app.trycatch.dto.member.CorpMemberDTO'}">
+                                <li class="userNav-item my member">
+                                    <span class="user-name" th:text="${session.member?.memberName}">담당자</span>
+                                </li>
+                                <li class="userNav-item corp">
+                                    <a th:href="@{/corporate/home}"
+                                        ><span class="spGnb"
+                                            >기업서비스</span
+                                        ></a
+                                    >
+                                    <div class="lyMyArea">
+                                        <div class="myInner">
+                                            <div class="myLists">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/corporate/home"
+                                                            ><span
+                                                                class="tx"
+                                                                >기업회원
+                                                                홈</span
+                                                            ></a
+                                                        >
+                                                    </li>
+                                                    <li>
+                                                        <a href="/corporate/program-apply"
+                                                            ><span
+                                                                class="tx"
+                                                                >공고등록</span
+                                                            ></a
+                                                        >
+                                                    </li>
+                                                    <li>
+                                                        <a href="/corporate/program-management"
+                                                            ><span
+                                                                class="tx"
+                                                                >공고·지원자
+                                                                관리</span
+                                                            ></a
+                                                        >
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="lyRow">
+                                                <div class="btnRowWrap">
+                                                    <a href="/main/log-out"
+                                                        class="btnLogOut"
+                                                        >로그아웃</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- 기업회원 로그인 상단(기업서비스, 담당자명)// -->
+                            <!-- //개인회원 로그인 상단(알림,개인서비스) -->
+                            <ul id="devMyPage" class="userNav" th:if="${session.member != null and session.member.class.name == 'com.app.trycatch.dto.member.IndividualMemberDTO'}">
+                                    <li
+                                        class="userNav-item notification devLiNotification"
+                                    >
+                                        <a
+                                            href="javascript:void(0)"
+                                            class="bell notify"
+                                            id="js-bell"
+                                        >
+                                            알림
+                                            <span id="js-alarmCnt" class="" th:text="${(qnaAlrams != null ? #lists.size(qnaAlrams) : 0) + (applyAlrams != null ? #lists.size(applyAlrams) : 0) + (skillLogAlrams != null ? #lists.size(skillLogAlrams) : 0)}">
+                                                0
+                                            </span>
+                                            <span class="alarm-dot" id="js-alarmDot" style="display:none"></span>
+                                        </a>
+                                        <div
+                                            class="popup-notification"
+                                            id="js-notiLayer"
+                                        >
+
+                                            <div
+                                                class="AItoast-popup AItoast-acceptance"
+                                            >
+                                                <div
+                                                    class="AItoast-acceptance-wrap"
+                                                >
+                                                    <p
+                                                        class="AItoast-acceptance-message"
+                                                    >
+                                                        2025년 3월 26일 AI추천
+                                                        채용정보에 대한
+                                                        <br />메일/문자 수신을
+                                                        <b>동의</b>했습니다.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!--// AI추천 : 푸시.알림 설정  -->
+                                            <input
+                                                type="hidden"
+                                                value="1"
+                                                id="js-AlarmLayerTotalCnt"
+                                            />
+                                            <div
+                                                class="popup-notification-body"
+                                                id="js-popupDiv"
+                                            >
+                                                <div
+                                                    class="list list-notification-container"
+                                                    id="js-LayerFrame"
+                                                >
+                                                    <ul class="list-notification">
+                                                        <li class="notification-item" th:each="alram : ${qnaAlrams}" th:data-is-read="${alram.notificationIsRead}" th:data-date="${alram.createdDatetime}">
+                                                            <div class="notification-header">
+                                                                <div class="notification-header-item category">취업톡톡</div>
+                                                                <div class="notification-header-item date" th:text="${alram.createdDatetime}"></div>
+                                                            </div>
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">
+                                                                    <a th:href="@{/qna/detail(id=${alram.qnaId})}" th:text="|${#strings.abbreviate(alram.notificationTitle, 15)}... 질문에 댓글이 달렸습니다|"></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="notificaiton-footer">
+                                                                <div class="buttons">
+                                                                    <a th:href="@{/qna/detail(id=${alram.qnaId})}" class="button">자세히보기</a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="notification-item" th:each="alram : ${applyAlrams}" th:data-is-read="${alram.notificationIsRead}" th:data-date="${alram.createdDatetime}">
+                                                            <div class="notification-header">
+                                                                <div class="notification-header-item category">체험지원현황</div>
+                                                                <div class="notification-header-item date" th:text="${alram.createdDatetime}"></div>
+                                                            </div>
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">
+                                                                    <a th:href="@{/mypage/experience}" th:text="|${#strings.abbreviate(alram.notificationTitle, 15)}... ${alram.experienceStatusLabel}|"></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="notificaiton-footer">
+                                                                <div class="buttons">
+                                                                    <a th:href="@{/mypage/experience}" class="button">자세히보기</a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="notification-item" th:each="alram : ${skillLogAlrams}" th:data-is-read="${alram.notificationIsRead}" th:data-date="${alram.createdDatetime}">
+                                                            <div class="notification-header">
+                                                                <div class="notification-header-item category">기술블로그</div>
+                                                                <div class="notification-header-item date" th:text="${alram.createdDatetime}"></div>
+                                                            </div>
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">
+                                                                    <a th:href="@{/skill-log/detail(id=${alram.skillLogId})}" th:text="|${#strings.abbreviate(alram.notificationTitle, 15)}... 글에 댓글이 달렸습니다|"></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="notificaiton-footer">
+                                                                <div class="buttons">
+                                                                    <a th:href="@{/skill-log/detail(id=${alram.skillLogId})}" class="button">자세히보기</a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="notification-item" th:if="${(qnaAlrams == null or #lists.isEmpty(qnaAlrams)) and (applyAlrams == null or #lists.isEmpty(applyAlrams)) and (skillLogAlrams == null or #lists.isEmpty(skillLogAlrams))}">
+                                                            <div class="notification-body">
+                                                                <div class="notification-title">새로운 알림이 없습니다.</div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="notice">
+                                                    <p class="notice-item">
+                                                        최근
+                                                        <u>30일 이내</u>
+                                                        알림만 확인할 수
+                                                        있습니다.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <a
+                                                href="/mypage/notification"
+                                                class="button button-footer button-all-view"
+                                                >모두보기</a
+                                            >
+                                            <!-- AI추천 : 푸시.알림 설정  -->
+                                            <!-- modal-acceptance 약관동의 / modal-missing 놓치는 알림 -->
+                                            <div
+                                                class="AImodal-popup AImodal-missing"
+                                                style="display: none"
+                                            >
+                                                <div
+                                                    class="AImodal-common-wrap"
+                                                >
+                                                    <p
+                                                        class="AImodal-common-title"
+                                                    ></p>
+                                                    <!--놓치는 알림-->
+                                                    <div
+                                                        class="AImodal-missing-alram"
+                                                        style="display: none"
+                                                    >
+                                                        <span
+                                                            class="AImissing-alram-image"
+                                                        ></span>
+                                                        <div
+                                                            class="AImissing-alram-group"
+                                                        >
+                                                            <ul>
+                                                                <li
+                                                                    class="AImissing-alram-item"
+                                                                    data-rcv-code="4"
+                                                                >
+                                                                    <i
+                                                                        class="line_line_check"
+                                                                    ></i
+                                                                    >AI추천
+                                                                    채용정보
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!--놓치는 알림-->
+                                                    <!-- 약관 내용 -->
+                                                    <div
+                                                        class="AImodal-common-policy"
+                                                    >
+                                                        <p
+                                                            class="AIcommon-policy-title"
+                                                        >
+                                                            <em
+                                                                class="AIcommon-type-choose"
+                                                                >[선택]</em
+                                                            >
+                                                            개인정보 수집 및
+                                                            이용 동의
+                                                        </p>
+                                                        <div
+                                                            class="AIcommon-policy-content"
+                                                        >
+                                                            <div
+                                                                class="AIcommon-policy-wrap"
+                                                            >
+                                                                <ol
+                                                                    class="AIcommon-policy-list"
+                                                                >
+                                                                    <li
+                                                                        class="AIcommon-policy-item"
+                                                                    >
+                                                                        1. 수집
+                                                                        이용
+                                                                        목적
+                                                                        <p>
+                                                                            <u
+                                                                                >맞춤공고,
+                                                                                서비스
+                                                                                안내,
+                                                                                마케팅
+                                                                                발송을
+                                                                                목적으로
+                                                                                활용</u
+                                                                            >
+                                                                        </p>
+                                                                    </li>
+                                                                    <li
+                                                                        class="AIcommon-policy-item"
+                                                                    >
+                                                                        2.
+                                                                        수집하는
+                                                                        개인정보
+                                                                        항목
+                                                                        <p>
+                                                                            전화번호,
+                                                                            이메일,
+                                                                            푸시토큰,
+                                                                            서비스
+                                                                            이용
+                                                                            기록
+                                                                        </p>
+                                                                    </li>
+                                                                    <li
+                                                                        class="AIcommon-policy-item"
+                                                                    >
+                                                                        3.
+                                                                        개인정보
+                                                                        보유 및
+                                                                        이용기간
+                                                                        <p>
+                                                                            <u
+                                                                                >회원탈퇴
+                                                                                시
+                                                                                즉시
+                                                                                파기</u
+                                                                            >
+                                                                        </p>
+                                                                    </li>
+                                                                    <li
+                                                                        class="AIcommon-policy-item"
+                                                                    >
+                                                                        4.
+                                                                        수신동의
+                                                                        거부 및
+                                                                        철회방법
+                                                                        안내
+                                                                        <p>
+                                                                            본
+                                                                            동의는
+                                                                            거부하실
+                                                                            수
+                                                                            있습니다.
+                                                                            다만
+                                                                            거부
+                                                                            시
+                                                                            동의를
+                                                                            통해
+                                                                            제공
+                                                                            가능한
+                                                                            각종
+                                                                            혜택,
+                                                                            이벤트
+                                                                            안내를
+                                                                            받아보실
+                                                                            수
+                                                                            없습니다.
+                                                                            더
+                                                                            이상
+                                                                            맞춤공고,
+                                                                            서비스
+                                                                            안내,
+                                                                            마케팅
+                                                                            발송을
+                                                                            원하시지
+                                                                            않는
+                                                                            경우
+                                                                            회원정보수정
+                                                                            페이지에서
+                                                                            수신여부를
+                                                                            변경하실
+                                                                            수
+                                                                            있습니다.
+                                                                        </p>
+                                                                    </li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        class="AIbutton-common-agreement"
+                                                        onclick="
+                                                            OpenMissingOptionalPIMAgreeSet()
+                                                        "
+                                                    >
+                                                        동의하고 알림받기
+                                                    </button>
+                                                    <button
+                                                        type="button"
+                                                        class="AIbutton-common-close"
+                                                        onclick="
+                                                            $(
+                                                                '.AImodal-popup',
+                                                            ).css(
+                                                                'display',
+                                                                'none',
+                                                            )
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="system_system_close"
+                                                        ></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="AItoast-popup AItoast-common"
+                                            >
+                                                <div
+                                                    class="AItoast-common-wrap"
+                                                >
+                                                    <p
+                                                        class="AItoast-common-message"
+                                                    >
+                                                        [선택]개인정보 수집 및
+                                                        이용
+                                                        <b>동의</b>
+                                                        항목 동의되어 광고성
+                                                        메일 알림
+                                                        ‘<b>수신</b>’처리
+                                                        되었습니다.
+                                                    </p>
+                                                    <p
+                                                        class="AItoast-common-date"
+                                                    >
+                                                        (2023년 04월 21일,
+                                                        전송자: 잡코리아)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <input
+                                                type="hidden"
+                                                id="isResultPrivacyChoiceAgree"
+                                                value="0"
+                                            />
+                                            <input
+                                                type="hidden"
+                                                id="PrivacyChoiceAgreeUrl"
+                                                value="/user/Alarm"
+                                            />
+                                            <!--// AI추천 : 푸시.알림 설정  -->
+                                        </div>
+                                    </li>
+                                    <li class="userNav-item my member">
+                                        <a
+                                            th:href="@{/mypage/mypage}"
+                                            class="btnMyOpen txt-button ico-cp"
+                                            onclick=""
+                                            ><span class="spGnb"></span
+                                            ><span class="user-name"
+                                                th:text="${session.member?.memberName}">김윤찬</span
+                                            ><span class="skip">열기</span></a
+                                        >
+                                        <div class="lyMyArea">
+                                            <div class="myInner">
+                                                <div class="myLists">
+                                                    <ul>
+                                                        <li>
+                                                            <a
+                                                                th:href="@{/mypage/mypage}"
+                                                                onclick=""
+                                                                ><span
+                                                                    class="tx"
+                                                                    >개인회원
+                                                                    홈</span
+                                                                ></a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                    th:href="@{/skill-log/dashboard}"
+                                                                ><span
+                                                                    class="tx"
+                                                                    >내 기술블로그</span
+                                                                ></a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                th:href="@{/mypage/experience}"
+                                                                onclick=""
+                                                                ><span
+                                                                    class="tx"
+                                                                    >체험지원
+                                                                    현황</span
+                                                                ></a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                th:href="@{/mypage/change-my-information}"
+                                                                onclick=""
+                                                                ><span
+                                                                    class="tx"
+                                                                    >개인정보
+                                                                    수정</span
+                                                                ></a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="lyRow">
+                                                    <div class="btnRowWrap">
+                                                        <a
+                                                            th:if="${session.member != null and session.member.class.name == 'com.app.trycatch.dto.member.IndividualMemberDTO' and session.member.provider != null and session.member.provider.value == 'kakao'}"
+                                                            href="https://kauth.kakao.com/oauth/logout?client_id=edeefdf5ab96d36811571fbd1e56a4cf&logout_redirect_uri=http://localhost:10000/main/log-out"
+                                                            class="btnLogOut"
+                                                            >로그아웃</a
+                                                        >
+                                                        <a
+                                                            th:unless="${session.member != null and session.member.class.name == 'com.app.trycatch.dto.member.IndividualMemberDTO' and session.member.provider != null and session.member.provider.value == 'kakao'}"
+                                                            href="/main/log-out"
+                                                            class="btnLogOut"
+                                                            >로그아웃</a
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="icnArr spGnb"></span>
+                                        </div>
+                                    </li>
+                                    <li class="userNav-item star">
+                                        <a th:href="@{/point/point}" class="txt-button star-button">별 포인트</a>
+                                    </li>
+                            </ul>
+                            <!-- 개인회원 로그인 상단(알림,개인서비스)// -->
+                        </div>
+                    </div>
+                    <div class="lyNavArea">
+                        <h3 class="skip">채용정보 세부메뉴</h3>
+                        <div class="lyNavWrap">
+                            <div class="lyNavInner side">
+                                <div class="lyRow row01">
+                                    <div class="lyRow-inner">
+                                        <div class="col-title">
+                                            나에게 딱 맞는 공고
+                                            <i class="watch"></i>
+                                        </div>
+                                        <div class="lyCol subCol">
+                                            <div class="colItem">
+                                                <strong class="titArea">
+                                                    <a href="/ex" class="tit gnbGi"
+                                                        >체험 정보</a
+                                                    >
+                                                </strong>
+                                                <div class="listBx">
+                                                    <ul class="list-col">
+                                                        <li>
+                                                            <a href=""
+                                                                >지역별 공고</a
+                                                            >
+                                                        </li>
+                                                        <li>
+                                                            <a href=""
+                                                                >직무별 공고</a
+                                                            >
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="colItem">
+
+                                                <div class="listBx">
+
+                                                </div>
+                                            </div>
+                                            <div class="colItem">
+                                                <strong class="titArea">
+                                                    <a
+                                                        th:href="@{/main/service-introduce}"
+                                                        class="tit headhunting"
+                                                        >서비스 소개</a
+                                                    >
+                                                </strong>
+                                                <div class="listBx">
+                                                    <ul class="list-col">
+                                                        <li>
+                                                            <a
+                                                                >서비스 소개</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lyCol subCol">
+                                            <div class="colItem">
+                                                <strong class="titArea">
+                                                    <a
+                                                        href=""
+                                                        class="tit onepick"
+                                                        >체험 정보</a
+                                                    >
+                                                </strong>
+                                                <div class="listBx">
+                                                    <ul class="list-col">
+                                                        <li>
+                                                            <a href=""
+                                                                >체험 공고</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="colItem">
+
+                                                <div class="listBx">
+
+                                                </div>
+                                            </div>
+                                            <div class="colItem">
+
+                                                <div class="listBx">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lyRow-inner">
+                                        <div class="col-title">
+                                            콘텐츠 탐색 <i class="quest"></i>
+                                        </div>
+
+                                        <div class="lyCol subCol">
+                                            <div class="colItem">
+                                                <strong class="titArea corp"
+                                                    ><a
+                                                        th:href="@{/skill-log/list}"
+                                                        class="tit career"
+                                                        >기술 블로그</a
+                                                    ></strong
+                                                >
+                                                <div class="listBx">
+                                                    <ul class="list-col">
+
+                                                        <li>
+                                                            <a th:href="@{/skill-log/list}"
+                                                                >기술 블로그</a
+                                                            >
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="colItem">
+
+                                                <div class="listBx">
+
+                                                </div>
+                                            </div>
+                                            <div class="colItem">
+
+                                                <div class="listBx">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lyCol subCol">
+                                            <div class="colItem">
+                                                <strong class="titArea"
+                                                    ><a href="/qna/list" class="tit talk"
+                                                        >커뮤니티</a
+                                                    ></strong
+                                                >
+                                                <div class="listBx">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="/qna/list"
+                                                                >QnA</a
+                                                            >
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lyCol bottom-menus">
+                                        <!-- CASE : 비로그인 -->
+                                        <ul>
+                                            <li>
+                                                <a href=""
+                                                    >자주하는 질문 FAQ<i
+                                                        class="faq"
+                                                    ></i
+                                                ></a>
+                                            </li>
+                                            <li>
+                                                <a href=""
+                                                    >주요 소식은 공지사항<i
+                                                        class="emoji32_loudspeaker"
+                                                    ></i
+                                                ></a>
+                                            </li>
+                                            <li>
+                                                <a href=""
+                                                    >도움이 필요할 땐 고객센터<i
+                                                        class="emoji32_headset"
+                                                    ></i
+                                                ></a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="sideCol side5h">
+                                    <!-- CASE: 비로그인 || 기업회원, 개인회원 로그인 시 삭제 -->
+                                    <div class="sideList bb">
+                                        <p class="col-title">
+                                            TRY-CATCH 회원이 아니라면?
+                                            <i class="notMember"></i>
+                                        </p>
+                                        <p>
+                                            <span class="desc"
+                                                >프로필 등록하고</span
+                                            >
+                                            <a
+                                                class="tit devNeedLogin"
+                                                data-url=""
+                                                >체험 신청하기<i
+                                                    class="line_line_arrow_right"
+                                                ></i
+                                            ></a>
+                                        </p>
+                                    </div>
+                                    <div class="colItem">
+                                        <strong class="titArea">
+                                            <a
+                                                data-url=""
+                                                class="tit devNeedLogin"
+                                                >개인회원 홈</a
+                                            >
+                                        </strong>
+                                        <div class="listBx">
+                                            <ul>
+                                                <li>
+                                                    <a
+                                                        data-url=""
+                                                        class="devNeedLogin"
+                                                        >자기소개서 관리</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        data-url=""
+                                                        class="devNeedLogin"
+                                                        >공고지원 현황</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        data-url=""
+                                                        class="devNeedLogin"
+                                                        >스크랩 공고</a
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <a
+                                                        data-url=""
+                                                        class="devNeedLogin"
+                                                        >개인정보 수정</a
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- 배너영역 -->
+                                    <!-- CASE: 비로그인 / 개인회원-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jkNavDimm"></div>
+    </body>
+    <script src="/js/qna/header-event.js"></script>
+</html>

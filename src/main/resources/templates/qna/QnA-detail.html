@@ -1,0 +1,751 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>QnA-detail</title>
+    <link rel="stylesheet" href="/css/qna/header.css"/>
+    <link rel="stylesheet" href="/css/qna/footer.css"/>
+    <link rel="stylesheet" href="/css/qna/QnA-detail.css"/>
+</head>
+<body>
+<header th:replace="~{/qna/header.html::header}"></header>
+<!-- //신고 팝업 -->
+<div class="mtuLyWrap lyQnaReport" aria-hidden="true" style="display: none;">
+    <div class="mtuPopup">
+        <h1 class="lyHd">신고사유</h1>
+        <div class="lyCnt">
+            <form action="" method="post">
+                <fieldset>
+                    <legend>신고사유 입력</legend>
+                    <ul class="reportBx radioCommWrap">
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_1" class="skip" value="1">
+                            <label for="lb_reason_1" class="qnaSpB"><span>서비스 성격에 맞지 않는 글</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_2" class="skip" value="2">
+                            <label for="lb_reason_2" class="qnaSpB"><span>비방/욕설/인신공격</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_3" class="skip" value="3">
+                            <label for="lb_reason_3" class="qnaSpB"><span>개인정보노출</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_4" class="skip" value="4">
+                            <label for="lb_reason_4" class="qnaSpB"><span>음란성</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_5" class="skip" value="5">
+                            <label for="lb_reason_5" class="qnaSpB"><span>게시글/댓글 도배</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_6" class="skip" value="6">
+                            <label for="lb_reason_6" class="qnaSpB"><span>불법성 홍보</span></label>
+                        </li>
+                        <li>
+                            <input type="radio" name="queType" id="lb_reason_7" class="skip" value="7">
+                            <label for="lb_reason_7" class="qnaSpB"><span>기타</span></label>
+                        </li>
+                    </ul>
+                    <div class="reasonBx">
+                        <div class="qnaFormBx qnaTxaBx devTplSchPh">
+                            <span class="ph">신고 사유 설명이 필요하신 경우 작성해 주세요.</span>
+                            <textarea cols="20" id="lb_reason_8" maxlength="2000" name="reportContent" rows="2"
+                                      class="qnaTxaTx" title="신고 사유 설명 작성"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="btnCommWrap">
+                <button type="button" class="btnCancel bg_white devLyBtnClose">취소</button>
+                <button type="button" class="btnReport devBtnReportIns">신고하기</button>
+            </div>
+        </div>
+        <button type="button" class="butClose mtuSpImg devLyBtnClose"><span class="blind">신고사유 레이어 닫기</span></button>
+    </div>
+    <div class="dimmed"></div>
+
+    <!--히든 값-->
+    <input type="hidden" name="hdnReportNo" value="152743">
+    <input type="hidden" name="hdnReportType" value="1">
+</div>
+<!-- 신고 팝업// -->
+<!-- //메인 페이지 -->
+<div id="wrap">
+    <!-- //사이드 네비게이션 -->
+    <div class="side-navigation">
+        <h2 class="skip">취업톡톡 세부메뉴</h2>
+        <!-- 기업회원이 아닐 때만 질문·목록 버튼 표시 -->
+        <div class="navi-top-area has-tooltip" th:if="${loginMember == null or loginMember instanceof T(com.app.trycatch.dto.member.IndividualMemberDTO)}">
+            <a href="javascript:;" class="select-tooltip btn-question qnaSpB"
+            >질문 · 목록</a
+            >
+            <!-- [Dev] 툴팁오픈 : tooltip-open 클래스 추가 -->
+            <!-- 로그인 시 create-menu -->
+            <div class="create-menu" th:if="${loginMember != null}">
+                <ul class="create-menu-wrap tooltip-layer qnaSpB">
+                    <li>
+                        <a
+                                href="/qna/write"
+                                class="create-menu-item qna qnaSpB"
+                                data-wtypecode="1"
+                        >직무/기업/동문에게 질문하기</a
+                        >
+                    </li>
+                    <li>
+                        <a href="/qna/list" class="create-menu-item carrier qnaSpB" data-wtypecode="2">QnA 목록</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 비로그인 시 create-menu -->
+            <div class="create-menu" th:unless="${loginMember != null}">
+                <ul class="create-menu-wrap tooltip-layer qnaSpB">
+                    <li>
+                        <a
+                                href="javascript:void(0);"
+                                class="create-menu-item qna qnaSpB"
+                                onclick="alert('로그인이 필요합니다.'); location.href='/main/log-in';"
+                                data-wtypecode="1"
+                        >직무/기업/동문에게 질문하기</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                                href="/qna/list"
+                                class="create-menu-item carrier qnaSpB"
+                                data-wtypecode="2"
+                        >커리어 관련 자유롭게 글쓰기</a
+                        >
+                    </li>
+                </ul>
+            </div>
+            <!-- 개인회원 사이드 네비게이션 -->
+            <div class="myInfoSec" th:if="${loginMember != null and loginMember instanceof T(com.app.trycatch.dto.member.IndividualMemberDTO)}">
+                <a href="" class="myInfo">
+                    <span class="proThumb"><img
+                            onerror="this.src='/images/default_image.png'"
+                            th:src="${loginMember.memberProfileImageUrl != null ? loginMember.memberProfileImageUrl : '/images/default_image.png'}"
+                            alt="프로필 이미지"
+                    /></span>
+                    <dl class="infoBx">
+                        <dt class="qnaSpA"><span class="nickname" th:text="${loginMember?.memberName}">mento...</span>
+                            <span class="lvIcon" th:text="'Lv.' + ${loginMember?.individualMemberLevel}">Lv.1</span>
+                        </dt>
+                        <dd>
+                            <span>글 <b th:text="${loginMember?.individualMemberPostCount}">0</b></span>
+                            <span>질문 <b th:text="${loginMember?.individualMemberQuestionCount}">0</b></span>
+                        </dd>
+                    </dl>
+                </a>
+                <a
+                        href="/point/point"
+                        class="myPoint devMainCouponButton"
+                >
+                            <span class="point qnaSpB" th:text="${loginMember?.individualMemberPoint}">0</span
+                            ><span class="btnCoupon qnaSpA">별 충전</span>
+                </a>
+            </div>
+            <!-- 비로그인 시 사이드 네비게이션 -->
+            <div class="myInfoSec logout" th:unless="${loginMember != null}">
+                <a href="" class="myInfo devLoginLayer" devalert="0">
+                            <span class="proThumb"
+                            ><img
+                                    src="/images/default_image.png"
+                                    alt="프로필 이미지"
+                            /></span>
+                    <p class="msg">
+                        <em>로그인</em> 후 구독과 활동을
+                        <br/>시작해보세요
+                    </p>
+                </a>
+            </div>
+        </div>
+        <!-- 기업회원 사이드 네비게이션 -->
+        <div class="myInfoSec" th:if="${loginMember != null and loginMember instanceof T(com.app.trycatch.dto.member.CorpMemberDTO)}">
+            <a href="" class="myInfo">
+                <span class="proThumb">
+                    <img th:if="${loginMember.logoFilePath != null}"
+                         th:src="@{/api/files/display(filePath=${loginMember.logoFilePath}, fileName=${loginMember.logoFileName})}"
+                         alt="기업 로고" />
+                    <img th:if="${loginMember.logoFilePath == null}"
+                         src="/images/corporate/logo_default.png"
+                         alt="기업 로고" />
+                </span>
+                <dl class="infoBx">
+                    <dt class="qnaSpA">
+                        <span class="nickname" th:text="${loginMember.memberName}">담당자명</span>
+                    </dt>
+                    <dd>
+                        <span th:text="${loginMember.corpCompanyName}">회사명</span>
+                    </dd>
+                </dl>
+            </a>
+        </div>
+        <div class="navi-list-area">
+            <!-- 인기 질문 Top 5 -->
+            <div class="sideNavLow">
+                <strong class="sideNavTit"><a href="/qna/list">인기 질문</a></strong>
+                <ul class="sideNavList">
+                    <th:block th:each="post : ${sideTopPosts}">
+                        <li>
+                            <a th:href="@{/qna/detail(id=${post.id})}"
+                               th:text="${post.qnaTitle}">제목</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+            <!-- 최신 질문 5개 -->
+            <div class="sideNavLow">
+                <strong class="sideNavTit"><a href="/qna/list">최신 질문</a></strong>
+                <ul class="sideNavList">
+                    <th:block th:each="post : ${sideLatestPosts}">
+                        <li>
+                            <a th:href="@{/qna/detail(id=${post.id})}"
+                               th:text="${post.qnaTitle}">제목</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 사이드 네비게이션// -->
+    <div id="container">
+        <!-- 뷰 : qnaViewWrap -->
+        <div id="content" class="qnaViewWrap">
+            <input type="hidden" name="qnaId" id="pageQnaId" th:value="${qna.id}">
+            <div class="top-title-wrap">
+                <h2 class="title">
+                    <span class="skip">질문 상세 보기</span>
+                </h2>
+            </div>
+            <div class="lyViewBoard">
+                <div class="viewContWrap">
+                    <div class="contBox">
+                        <div class="topArea">
+                            <div
+                                    class="labelSwiper swiper-container swiper-container-horizontal"
+                            >
+                                <div class="labelBx swiper-wrapper">
+                                    <!-- 직무선배 -->
+                                    <a th:if="${qna.jobCategoryName != null and qna.jobCategoryName != ''}"
+                                       href=""
+                                       class="label swiper-slide swiper-slide-active"
+                                       th:text="${qna.jobCategoryName}"></a>
+                                    <!-- 기업선배 -->
+                                    <a th:if="${qna.companyName != null and qna.companyName != ''}"
+                                       href=""
+                                       class="label swiper-slide swiper-slide-active"
+                                       th:text="${qna.companyName}"></a>
+                                    <!-- 동문선배 -->
+                                    <a th:if="${qna.collegeFriend != null and qna.collegeFriend != ''}"
+                                       href=""
+                                       class="label swiper-slide swiper-slide-active"
+                                       th:text="${qna.collegeFriend}"></a>
+                                </div>
+                            </div>
+                            <span class="point qnaSpB">5</span>
+                        </div>
+                        <p class="tit">
+                            <i class="icoQ_on qnaSpB">Q</i>
+                            <span th:text="${qna.qnaTitle}"></span>
+                        </p>
+                        <div class="post-state">
+                            <div class="post-cell-box">
+                                        <span class="cell">
+                                            <i class="qnaSpB icon-view-eye"
+                                            >조회수</i
+                                            >
+                                            <span th:text="${qna.qnaViewCount}"></span>
+                                        </span>
+                                <span class="cell devQnaCreatedTime"
+                                      th:data-created="${qna.createdDatetime}"
+                                      th:data-updated="${qna.updatedDatetime}"></span>
+                            </div>
+                            <div class="post-util">
+                                <div class="post-util-item">
+                                    <button
+                                            type="button"
+                                            class="icon-more-button qnaSpB devQstnDetailMenuIcon"
+                                    >
+                                        더보기
+                                    </button>
+                                    <!-- [Dev] 더보기 레이어 show - class active 추가  -->
+                                    <!-- 내 글일 시에 수정하기/삭제하기 -->
+                                    <div class="view-more-layer"
+                                         th:if="${loginMember != null and loginMember.id == qna.individualMemberId}">
+                                        <ul>
+                                            <li>
+                                                <a th:href="@{/qna/update(id=${qna.id})}"
+                                                   class="view-more-item">수정하기</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                   class="view-more-item devQstnDeleteButton"
+                                                   th:data-qstn-no="${qna.id}">삭제하기</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- 다른 사람 글일 시에 신고 -->
+                                    <div class="view-more-layer"
+                                         th:unless="${loginMember != null and loginMember.id == qna.individualMemberId}">
+                                        <ul>
+                                            <li>
+                                                <a
+                                                        href="javascript:void(0)"
+                                                        class="view-more-item devBtnReport"
+                                                        th:data-idf-no="${qna.id}"
+                                                        th:data-logged-in="${loginMember != null}"
+                                                        data-type="1"
+                                                >신고</a
+                                                >
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont">
+                            <p th:text="${qna.qnaContent}"></p>
+                            <div th:if="${qna.files != null and not #lists.isEmpty(qna.files)}"
+                                 class="qna-attach-image">
+                                <img th:each="file : ${qna.files}"
+                                     th:src="@{/file/{path}/{name}(path=${file.filePath},name=${file.fileName})}"
+                                     alt="첨부 이미지" style="max-width:100%; margin-top:12px;">
+                            </div>
+                        </div>
+                        <div class="btmArea">
+                            <div class="infoBx">
+                                <a href="" class="my-profile">
+                                    <!-- [Dev] 프로필 랜덤 이미지 파일명 : random_1 ~ random_20, 이미지 없음 : random_default -->
+                                    <span class="proThumb"
+                                    ><img
+                                        onerror="this.src='/images/default_image.png'"
+                                        th:src="${qna.memberProfileImageUrl != null ? qna.memberProfileImageUrl : '/images/default_image.png'}"
+                                        alt="프로필 이미지"
+                                    /></span>
+                                    <span class="info" th:text="${qna.memberName}"></span>
+                                </a>
+                            </div>
+                            <div class="reaction-wrap">
+                                <div class="reaction-item">
+                                    <button
+                                            type="button"
+                                            class="icon-like qnaSpB devQstnLike"
+                                            th:classappend="${qna.likedByCurrentUser} ? 'on'"
+                                            th:data-qstn-no="${qna.id}"
+                                            th:data-logged-in="${loginMember != null}"
+                                    >
+                                        좋아요<em th:text="${qna.qnaLikeCount}">0</em>
+                                    </button>
+                                </div>
+                                <div class="reaction-item">
+                                    <button
+                                            type="button"
+                                            class="icon-share qnaSpB devShareBtn"
+                                    >
+                                        공유하기
+                                    </button>
+                                    <div
+                                            class="share-layer tooltip-layer qnaSpA" style="display: none;"
+                                    >
+                                        <a
+                                                href="javascript:void(0)"
+                                                class="button button-bookmark"
+                                                id="devBookMark"
+                                        >즐겨찾기</a
+                                        >
+                                        <a
+                                                href="javascript:void(0)"
+                                                class="button button-copy-url button-popup-component"
+                                        >URL복사</a
+                                        >
+                                    </div>
+                                    <div class="url-copy-layer">
+                                        <div class="layer-body">
+                                            <div class="description">
+                                                현재 브라우저의 보안
+                                                설정에 따라 복사가
+                                                허용되지 않습니다.<br/>아래
+                                                URL 주소를 드래그 후
+                                                Ctrl+C를 눌러 복사하시기
+                                                바랍니다.
+                                            </div>
+                                            <div class="input">
+                                                <label
+                                                        for="lbl_url_copy"
+                                                        class="screen-out"
+                                                >주소복사</label
+                                                >
+                                                <input
+                                                        readonly="readonly"
+                                                        type="text"
+                                                        name=""
+                                                        id="lbl_url_copy"
+                                                        value=""
+                                                />
+                                            </div>
+                                        </div>
+                                        <a
+                                                href="javascript:void(0);"
+                                                class="button button-close"
+                                        >닫기</a
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // contBox -->
+                    <!-- 이미 댓글을 작성한 경우 안내문 -->
+                    <div class="inputBox" th:if="${loginMember != null and loginMember instanceof T(com.app.trycatch.dto.member.CorpMemberDTO) and hasMyComment}">
+                        <div class="notice-box-wrap" style="text-align: center; padding: 20px 0; color: #888;">
+                            <p style="font-size: medium">질문당 하나의 댓글만 작성할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <!-- 댓글 미작성 기업회원: 입력폼 표시 -->
+                    <div class="inputBox" th:if="${loginMember != null and loginMember instanceof T(com.app.trycatch.dto.member.CorpMemberDTO) and !hasMyComment}">
+                        <div
+                                class="writeBoxWrap cmtWrite case"
+                                style="margin-bottom: 10px"
+                        >
+                            <!-- 로그인
+                              form 태그부터-->
+                            <form action="" method="post" oncopy="return false" oncut="return false"
+                                  onpaste="return false">
+                                <fieldset>
+                                    <input type="hidden" name="qnaId" th:value="${qna.id}">
+                                    <input type="hidden" name="W_Type_Code" id="W_Type_Code" value="2">
+                                    <input type="hidden" name="Img_Path" id="Img_Path">
+                                    <legend>후배에게 답변하기 입력</legend>
+                                    <div class="uiPlaceholder">
+                                        <span class="ph ph_1" style="display: block;">솔직하고 따뜻한 댓글을 남겨주세요.</span>
+                                        <span class="ph ph_2" style="display: none;">-개인정보를 공유 및 요청하거나, 명예 훼손, 무단광고, 불법정보 유포 시 이에 대한 민형사상 책임은 작성자에게 있습니다.<br>-부적절한 댓글은 비노출 또는 서비스 이용 정지 사유가 될 수 있습니다.</span>
+                                        <textarea class="devTxtAreaAnswerWrite" name="qnaCommentContent"
+                                                  maxlength="1000" title="답변쓰기"></textarea>
+                                    </div>
+                                    <div class="btnWrap">
+                                        <div class="answer-util-wrap">
+                                            <div class="answer-util-item">
+                                                <label>
+                                                    <input type="file" style="display: none;" class="reply-file">
+                                                    <button type="button" class="button icon-photo qnaSpB">사진</button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <span class="byte"><b id="count">0</b> / 1,000</span>
+                                        <button type="button" id="btnSubmit" class="btnSbm devBtnAnswerWrite"
+                                                data-qstnno="128418">등록
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <!-- 로그인 -->
+                            <!-- //비로그인 -->
+                            <!-- <form action="#">
+                                <fieldset>
+                                    <legend>
+                                        후배에게 답변하기 입력
+                                    </legend>
+                                    <div class="uiPlaceholder">
+                                        <span class="ph">솔직하고 따뜻한 댓글을 남겨주세요.</span> -->
+                            <!-- 로그인 화면에서 나올 추가 HTML
+                             댓글 입력 창 -->
+                            <!-- <span class="ph ph_1" style="display: block;">솔직하고 따뜻한 댓글을 남겨주세요.</span> -->
+                            <!-- <span class="ph ph_2" style="display:none;">-개인정보를 공유 및 요청하거나, 명예 훼손, 무단광고, 불법정보 유포 시 이에 대한 민형사상 책임은 작성자에게 있습니다.<br>-부적절한 댓글은 비노출 또는 서비스 이용 정지 사유가 될 수 있습니다.</span> -->
+                            <!-- <textarea
+                                onclick=""
+                                class="devTxtAreaAnswerWrite"
+                                name="qnaCommentContent"
+                                maxlength="1000"
+                                title="답변쓰기"
+                            ></textarea>
+                        </div> -->
+                            <!-- 비로그인 댓글 입력 버튼-->
+                            <!-- <div class="btnWrap">
+                                <div class="infoBx">
+                                    <a
+                                        href="javascript:;"
+                                        class="my-profile"
+                                    >
+                                        <span
+                                            class="proThumb"
+                                        ></span>
+                                        <span class="info"
+                                            >닉네임</span
+                                        >
+                                    </a>
+                                </div>
+                                <span class="byte"
+                                    ><b id="count">0</b> /
+                                    1,000</span
+                                >
+                                <button
+                                    onclick=""
+                                    type="button"
+                                    id="btnSubmit"
+                                    class="btnSbm"
+                                >
+                                    등록
+                                </button>
+                            </div>
+                        <fieldset>
+                    </form> -->
+                            <!-- 비로그인// -->
+                        </div>
+                        <!-- //로그인 댓글 아래 주의사항 -->
+                        <ul class="notice-box-wrap">
+                            <li>댓글을 등록하면 이름으로 작성자에게 전달됩니다.</li>
+                            <li>개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법정보 유포 시 이에 대한 민형사상 책임은 작성자에게 있습니다.</li>
+                            <li>개인정보가 포함되거나 부적절한 댓글은 비노출 또는 해당 서비스 이용 불가 처리될 수 있습니다.</li>
+                        </ul>
+                        <!-- 로그인 댓글 아래 주의사항// -->
+                    </div>
+                </div>
+                <div class="viewListWrap">
+                    <div class="headerWrap">
+                        <div class="numBx">
+                            <span>댓글 <span class="num" th:text="${#lists.size(comments)}">0</span></span>
+                        </div>
+                        <!-- //로그인 후 댓글 달았을 시 체크박스 생김 -->
+                        <!-- <div class="checkBx">
+                               <input type="checkbox" id="sorting_chk">
+                               <label for="sorting_chk" class="qnaSpB devBtnMyAnswer">내가 작성한 댓글 보기</label>
+                           </div> -->
+                        <!-- 로그인 후 댓글 달았을 시 체크박스 생김// -->
+                    </div>
+                    <div class="listWrap commonSecWrap">
+                        <ul class="answerArea" id="answerArea">
+
+                            <!-- th:each 댓글 동적 렌더링 시작 -->
+                            <th:block th:each="comment : ${comments}" th:if="${comment.qnaCommentParent == null}">
+                                <li th:data-comment-id="${comment.id}">
+                                    <div class="contSec devContSection"
+                                         th:classappend="${loginMember != null and comment.memberId == loginMember.id} ? 'myCmt'">
+                                        <div class="infoBx">
+                                            <span class="proThumb" th:if="${comment.logoFilePath != null}" style="display:inline-block; width:24px; height:24px; vertical-align:middle; margin-right:6px;">
+                                                <img th:src="@{/api/files/display(filePath=${comment.logoFilePath}, fileName=${comment.logoFileName})}"
+                                                     alt="기업 로고" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" />
+                                            </span>
+                                            <span class="nickname" th:text="${comment.memberName}">닉네임</span>
+                                        </div>
+                                        <p class="cont" th:text="${comment.qnaCommentContent}">댓글내용</p>
+                                        <div th:if="${comment.commentFilePath != null}" class="attach-wrap" style="margin-top:8px;">
+                                            <div class="attach-image">
+                                                <img th:src="@{/api/files/display(filePath=${comment.commentFilePath}, fileName=${comment.commentFileName})}"
+                                                     alt="첨부 이미지" style="max-width:100%;">
+                                            </div>
+                                        </div>
+                                        <div class="cellBx">
+                                            <span class="cell" th:text="${comment.createdDatetime}"></span>
+                                            <th:block
+                                                    th:if="${loginMember != null and comment.memberId == loginMember.id}">
+                                                <span class="cell"><button type="button"
+                                                                           class="btnEdit devAnswerEditButton">수정</button></span>
+                                                <span class="cell"><button type="button"
+                                                                           class="btnDelete devAnswerDeleteButton"
+                                                                           th:data-id="${comment.id}">삭제</button></span>
+                                            </th:block>
+                                        </div>
+                                        <div class="btnBx devComtRoot">
+                                            <button type="button" class="btnCmt devBtnComtList">댓글 <em th:text="${comment.replyCount}">0</em></button>
+                                        </div>
+                                    </div>
+                                    <!-- 댓글 수정 폼 (숨김) -->
+                                    <div class="contSec modify-answer" style="display:none;">
+                                        <div class="writeBoxWrap cmtWrite">
+                                            <form action="#" oncopy="return false" oncut="return false"
+                                                  onpaste="return false">
+                                                <fieldset>
+                                                    <legend>답변 수정</legend>
+                                                    <div class="uiPlaceholder focus">
+                                                        <textarea name="qnaCommentContent" maxlength="1000"
+                                                                  th:text="${comment.qnaCommentContent}"></textarea>
+                                                        <div th:if="${comment.commentFilePath != null}" class="attach-wrap">
+                                                            <div class="attach-image">
+                                                                <img th:src="@{/api/files/display(filePath=${comment.commentFilePath}, fileName=${comment.commentFileName})}"
+                                                                     alt="첨부 이미지" style="max-width:100%;">
+                                                                <button type="button" class="remove-button qnaSpB">삭제하기</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="btnWrap">
+                                                        <div class="answer-util-wrap">
+                                                            <div class="answer-util-item">
+                                                                <label>
+                                                                    <input type="file" style="display: none;" class="reply-file">
+                                                                    <button type="button" class="button icon-photo qnaSpB">사진</button>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <span class="byte"><b id="count">6</b>
+                                                                / 1,000</span>
+                                                        <button type="button" id="btnSubmit"
+                                                                class="btnSbm devAnswerEditSubmitButton"
+                                                                th:data-id="${comment.id}">
+                                                            등록
+                                                        </button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                            <button type="button" class="btnModifyCancel qnaSpB"></button>
+                                        </div>
+                                    </div>
+                                    <!-- 대댓글 영역 -->
+                                    <div class="commentSec" style="display:none;">
+                                        <div class="cmtArea">
+                                            <ul class="cmtList replyWrap">
+                                                <th:block th:each="reply : ${comments}"
+                                                          th:if="${reply.qnaCommentParent == comment.id}">
+                                                    <li th:data-comment-id="${reply.id}"
+                                                        th:class="${loginMember != null and reply.memberId == loginMember.id} ? 'devCmtWrap myCmt' : 'devCmtWrap'">
+                                                        <div class="devComtSection">
+                                                            <div class="infoBx">
+                                                                <i class="icoCmt qnaSpB">댓글</i>
+                                                                <span class="proThumb" th:if="${reply.logoFilePath != null}" style="display:inline-block; width:20px; height:20px; vertical-align:middle; margin-right:4px;">
+                                                                    <img th:src="@{/api/files/display(filePath=${reply.logoFilePath}, fileName=${reply.logoFileName})}"
+                                                                         alt="기업 로고" style="width:20px; height:20px; border-radius:50%; object-fit:cover;" />
+                                                                </span>
+                                                                <span class="nickname"
+                                                                      th:text="${reply.memberName}">닉네임</span>
+                                                            </div>
+                                                            <p class="cont" th:text="${reply.qnaCommentContent}">
+                                                                대댓글내용</p>
+                                                            <div th:if="${reply.commentFilePath != null}" class="attach-wrap" style="margin-top:8px;">
+                                                                <div class="attach-image">
+                                                                    <img th:src="@{/api/files/display(filePath=${reply.commentFilePath}, fileName=${reply.commentFileName})}"
+                                                                         alt="첨부 이미지" style="max-width:100%;">
+                                                                </div>
+                                                            </div>
+                                                            <div class="cellBx">
+                                                                <span class="cell"
+                                                                      th:text="${reply.createdDatetime}"></span>
+                                                                <th:block
+                                                                        th:if="${loginMember != null and reply.memberId == loginMember.id}">
+                                                                    <span class="cell"><button type="button"
+                                                                                               class="btnEdit devComtEditButton">수정</button></span>
+                                                                    <span class="cell"><button type="button"
+                                                                                               class="btnDelete devBtnComtDelete"
+                                                                                               th:data-id="${reply.id}">삭제</button></span>
+                                                                </th:block>
+                                                            </div>
+                                                        </div>
+                                                        <!-- 대댓글 수정 폼 (숨김) -->
+                                                        <div class="modify-comt" style="display:none;">
+                                                            <div class="writeBoxWrap cmtWrite qnaSpB">
+                                                                <form action="#">
+                                                                    <fieldset>
+                                                                        <div class="uiPlaceholder">
+                                                                            <textarea name="qnaCommentContent"
+                                                                                      maxlength="1000"
+                                                                                      th:text="${reply.qnaCommentContent}"></textarea>
+                                                                            <div th:if="${reply.commentFilePath != null}" class="attach-wrap">
+                                                                                <div class="attach-image">
+                                                                                    <img th:src="@{/api/files/display(filePath=${reply.commentFilePath}, fileName=${reply.commentFileName})}"
+                                                                                         alt="첨부 이미지" style="max-width:100%;">
+                                                                                    <button type="button" class="remove-button qnaSpB">삭제하기</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="btnWrap">
+                                                                            <div class="answer-util-wrap">
+                                                                                <div class="answer-util-item">
+                                                                                    <label>
+                                                                                        <input type="file" style="display: none;" class="reply-file">
+                                                                                        <button type="button" class="button icon-photo qnaSpB">사진</button>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span class="byte"><b id="count">6</b>
+                                                                / 1,000</span>
+                                                                            <button type="button" id="btnSubmit"
+                                                                                    class="btnSbm devComtEditSubmitButton"
+                                                                                    th:data-id="${reply.id}">
+                                                                                등록
+                                                                            </button>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </form>
+                                                                <button type="button"
+                                                                        class="close-button qnaSpB btnComtModifyCancel">
+                                                                    닫기
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </th:block>
+                                            </ul>
+                                            <!-- 대댓글 작성 폼 (로그인 시) -->
+                                            <div th:if="${loginMember != null}"
+                                                 class="writeBoxWrap cmtWrite qnaSpB dev-ComtEditor case"
+                                                 style="display:block;">
+                                                <form action="" method="post">
+                                                    <fieldset>
+                                                        <legend>대댓글 입력</legend>
+                                                        <input type="hidden" name="qnaCommentParent"
+                                                               th:value="${comment.id}">
+                                                        <div class="uiPlaceholder">
+                                                            <textarea class="devComtWrite" name="qnaCommentContent"
+                                                                      maxlength="1000"></textarea>
+                                                        </div>
+                                                        <div class="btnWrap">
+                                                            <div class="answer-util-wrap">
+                                                                <div class="answer-util-item">
+                                                                    <label>
+                                                                        <input type="file" style="display: none;" class="reply-file">
+                                                                        <button type="button" class="button icon-photo qnaSpB">사진</button>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <span class="byte"><b id="count">0</b>
+                                                                / 1,000</span>
+                                                            <button type="button"
+                                                                    class="btnSbm devBtnComtWrite">
+                                                                등록
+                                                            </button>
+                                                        </div>
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btnCmtClose qnaSpA qnaBtnClose">댓글접기</button>
+                                    </div>
+                                </li>
+                            </th:block>
+                            <!-- th:each 댓글 동적 렌더링 끝 -->
+                        </ul>
+
+                        <!--?xml version="1.0" encoding="utf-16"?-->
+                        <div
+                                class="tplPagination newVer"
+                                role="navigation"
+                        >
+                            <ul>
+                                <li>
+                                    <span class="now">1</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 목록보기 -->
+                <div class="bottom-btn-wrap">
+                    <a
+                            href=""
+                            class="btn-all-question qnaSpB devBtnQstnList"
+                            data-backtoqstnlist="https://www.jobkorea.co.kr/User/Qstn/Index"
+                    >목록보기</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 메인 끝// -->
+<footer th:replace="~{/qna/footer.html::footer}"></footer>
+</body>
+<script src="/js/qna/QnA-detail-event.js"></script>
+<script src="/js/qna/header-event.js"></script>
+<script src="/js/qna/footer.js"></script>
+</html>

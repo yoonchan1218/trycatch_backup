@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.corporate.CorpInviteMapper">
+
+    <insert id="insert">
+        INSERT INTO tbl_corp_invite (corp_id, invite_email, invite_code)
+        VALUES (#{corpId}, #{inviteEmail}, #{inviteCode})
+    </insert>
+
+    <select id="selectByInviteCode" resultType="CorpInviteVO">
+        SELECT id, corp_id, invite_email, invite_code, invite_status
+        FROM tbl_corp_invite
+        WHERE invite_code = #{inviteCode}
+          AND invite_status = 'pending'
+    </select>
+
+    <update id="updateStatus">
+        UPDATE tbl_corp_invite
+        SET invite_status = #{status}
+        WHERE invite_code = #{inviteCode}
+    </update>
+
+</mapper>

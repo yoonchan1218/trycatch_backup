@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.skilllog.SkillLogMapper">
+    <sql id="search">
+        s.skill_log_status = 'published'
+        <if test="search.keyword != null and search.keyword != ''.toString()">
+            and
+            (
+            skill_log_title like concat('%', #{search.keyword}, '%')
+            or
+            skill_log_content like concat('%', #{search.keyword}, '%')
+            )
+        </if>
+        <if test="search.tagNames != null">
+            and
+            t.tag_name in
+            <trim prefix="(" suffix=")">
+                <foreach item="tagName" collection="search.tagNames" separator=",">
+                    #{tagName}
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_skill_log(member_id, experience_program_id, skill_log_title, skill_log_content)
+        values(#{memberId}, #{experienceProgramId}, #{skillLogTitle}, #{skillLogContent})
+    </insert>
+
+    <select id="selectProfileByMemberId" resultType="SkillLogAsideDTO">
+        select
+            m.id, m.member_name, im.individual_member_level, im.individual_member_point,
+            count(distinct s.id) as skill_log_count,
+            count(distinct q.id) as question_count
+        from tbl_member m join tbl_individual_member im
+        on m.id = im.id
+        left join tbl_skill_log s
+        on m.id = s.member_id
+        left join tbl_qna q
+        on m.id = q.individual_member_id
+        where m.id = #{id} and s.skill_log_status = 'published'
+    </select>
+
+    <select id="selectDashboardByMemberId" resultType="skillLogDashboardDTO">
+        select
+            count(distinct s.id) as individual_member_post_count,
+            sum(s.skill_log_view_count) as skill_log_view_count_total,
+            count(distinct l.id) as skill_log_like_count_total,
+            count(distinct c.id) as skill_log_comment_count
+        from view_member_profile m
+        left join tbl_skill_log s
+        on m.id = s.member_id and s.skill_log_status = 'published'
+        left join tbl_skill_log_comment c
+        on s.id = c.skill_log_id and c.skill_log_comment_parent_id is null
+        left join tbl_skill_log_likes l
+        on s.id = l.skill_log_id
+        where m.id = #{id};
+    </select>
+
+    <select id="selectAll">
+        select
+            distinct
+            m.member_name, s.id, s.member_id, s.experience_program_id, s.skill_log_title, s.skill_log_content,
+            s.skill_log_view_count, s.skill_log_status, s.created_datetime, s.updated_datetime
+        from tbl_member m join tbl_skill_log s
+        on m.id = s.member_id
+        left outer join tbl_tag t
+        on s.id = t.skill_log_id
+        <where>
+            <include refid="search"></include>
+        </where>
+        <if test="search.type != null">
+            <choose>
+                <when test="search.type == '인기'.toString()">
+                    order by s.skill_log_view_count desc
+                </when>
+                <otherwise>
+                    order by s.created_datetime desc
+                </otherwise>
+            </choose>
+        </if>
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectTotal">
+        select count(distinct s.id)
+        from tbl_skill_log s
+        left outer join tbl_tag t
+        on s.id = t.skill_log_id
+        <where>
+            <include refid="search"></include>
+        </where>
+    </select>
+
+    <select id="selectLatest">
+        select
+            s.id, s.skill_log_title, s.created_datetime
+        from tbl_skill_log s
+        where s.skill_log_status = 'published'
+        order by s.created_datetime desc
+        limit #{limit}
+    </select>
+
+    <select id="selectAllByMemberId">
+        select
+        distinct
+        m.member_name, s.id, s.member_id, s.experience_program_id, s.skill_log_title, s.skill_log_content,
+        s.skill_log_view_count, s.skill_log_status, s.created_datetime, s.updated_datetime,
+        (select count(*) from tbl_skill_log_likes l where l.skill_log_id = s.id) as like_count,
+        (select count(*) from tbl_skill_log_comment c where c.skill_log_id = s.id and c.skill_log_comment_parent_id is null) as comment_count
+        from tbl_member m join tbl_skill_log s
+        on m.id = s.member_id
+        where s.member_id = #{memberId} and s.skill_log_status = 'published'
+        <if test="search.type != null">
+            <choose>
+                <when test="search.type == '인기순'.toString()">
+                    order by s.skill_log_view_count desc
+                </when>
+                <otherwise>
+                    order by s.created_datetime desc
+                </otherwise>
+            </choose>
+        </if>
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+    <select id="selectTotalByMemberId">
+        select count(id)
+        from tbl_skill_log
+        where member_id = #{memberId} and skill_log_status = 'published'
+    </select>
+
+    <select id="selectById">
+        select
+            m.member_name, s.id, s.member_id, s.experience_program_id, s.skill_log_title, s.skill_log_content,
+            s.skill_log_view_count, s.skill_log_status, s.created_datetime, s.updated_datetime,
+            e.id, e.experience_program_title, c.corp_company_name,
+
+            f.file_path as experienceProgramFilePath, f.file_name as experienceProgramFileName,
+            f.file_original_name as experienceProgramFileOriginalName,
+            f.file_size as experienceProgramFileSize, f.file_content_type as experienceProgramFileContentType
+        from tbl_member m
+        join tbl_skill_log s
+        on m.id = s.member_id
+        left join tbl_experience_program e
+        on e.id = s.experience_program_id
+        left join tbl_corp c
+        on e.corp_id = c.id
+        left join view_experience_program_file f
+        on f.experience_program_id = e.id
+        where s.id = #{id} and s.skill_log_status = 'published'
+        order by f.id
+        limit 1 offset 0
+    </select>
+
+    <update id="updateSkillLogViewCount">
+        update tbl_skill_log
+        set skill_log_view_count = skill_log_view_count + 1
+        where id = #{id}
+    </update>
+
+    <update id="update">
+        update tbl_skill_log
+        set
+            experience_program_id = #{experienceProgramId},
+            skill_log_title = #{skillLogTitle},
+            skill_log_content = #{skillLogContent},
+            updated_datetime = current_timestamp
+        where id = #{id}
+    </update>
+
+    <update id="updateSkillLogStatus">
+        update tbl_skill_log
+        set skill_log_status = 'deleted'
+        where id = #{id}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

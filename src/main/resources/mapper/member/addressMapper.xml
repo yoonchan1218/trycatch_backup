@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.trycatch.mapper.member.AddressMapper">
+<insert id="insert">
+    INSERT INTO tbl_address (id, address_zipcode, address_address, address_detail)
+    VALUES (#{id}, #{addressZipcode}, #{addressAddress}, #{addressDetail})
+</insert>
+
+<insert id="insertForProgram" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO tbl_address (address_zipcode, address_address, address_detail)
+    VALUES (#{addressZipcode}, #{addressAddress}, #{addressDetail})
+</insert>
+
+<delete id="delete">
+    DELETE FROM tbl_address WHERE id = #{id}
+</delete>
+
+<update id="update">
+    UPDATE tbl_address SET
+        address_zipcode = #{addressZipcode},
+        address_address = #{addressAddress},
+        address_detail  = #{addressDetail}
+    WHERE id = #{id}
+</update>
+</mapper>

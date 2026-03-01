@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>individual-join</title>
+    <link rel="stylesheet" href="/css/main/individual-join.css">
+</head>
+<body class="jkJoin" style="">
+<div id="wrap">
+    <div id="header">
+        <h1>
+            <a href=""
+            ><img
+                    src="/images/logo.png"
+                    alt=""
+            /></a>
+        </h1>
+        <div class="joinTop">
+            <h2>
+                <span class="slogun_1"></span>
+            </h2>
+        </div>
+
+        <h3 class="skip">글로벌 메뉴</h3>
+        <ul class="gnb f_clear">
+            <li><a href="">TRY-CATCH홈</a></li>
+        </ul>
+
+        <h3 class="skip">회원 형태별 가입</h3>
+        <ul class="snb f_clear">
+            <li class="person on">
+                <a
+                        href=""
+                >개인회원</a
+                >
+            </li>
+            <li class="corp">
+                <a
+                        href="/main/company-join"
+                >기업회원</a
+                >
+            </li>
+        </ul>
+    </div>
+
+    <input type="hidden" id="hdnEduId" value=""/>
+    <div id="container" class="mbrRegist">
+        <h3 class="skip">개인회원 가입 정보</h3>
+        <fieldset>
+            <legend>개인회원 가입</legend>
+            <form
+                    action="/main/individual-join"
+                    id="frm"
+                    method="post"
+                    name="frm"
+            >
+                <!-- 약관 동의 -->
+                <input
+                        data-val="true"
+                        data-val-required='&lt;p class="failure"&gt;필수 정보입니다.&lt;/p&gt;'
+                        id="M_Id"
+                        name="M_Id"
+                        type="hidden"
+                        value=""
+                /><input
+                    id="OEM_No"
+                    name="OEM_No"
+                    type="hidden"
+                    value="1"
+            /><input
+                    id="DI_Code"
+                    name="DI_Code"
+                    type="hidden"
+                    value=""
+            /><input
+                    id="getCertifynum"
+                    name="getCertifynum"
+                    type="hidden"
+                    value=""
+            /><input
+                    id="CertifyReCall"
+                    name="CertifyReCall"
+                    type="hidden"
+                    value=""
+            /><input
+                    id="ReSubmit"
+                    name="ReSubmit"
+                    type="hidden"
+                    value=""
+            /><input
+                    id="CertifyCode"
+                    name="CertifyCode"
+                    type="hidden"
+                    value=""
+            /><input
+                    id="Aptitute_Stat"
+                    name="Aptitute_Stat"
+                    type="hidden"
+                    value=""
+            /><input
+                    id="CheckParamString"
+                    name="CheckParamString"
+                    type="hidden"
+                    value="8d3bc0d8e98202294a311db74c5eb05d"
+            /><input
+                    id="Re_Url"
+                    name="Re_Url"
+                    type="hidden"
+                    value=""
+            />
+                <!-- 소셜 로그인 -->
+                <div class="row_group row_group_social">
+                    <h4>소셜로 간편하게 로그인하세요</h4>
+                    <div class="list-social">
+                        <ul>
+                            <li>
+                                <button type="button" class="kakao">
+                                    카카오 로그인
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row_group mbr_info">
+                    <h4>회원가입하고 다양한 혜택을 누리세요!</h4>
+                    <div class="row mbr_id">
+                        <div class="col_1">
+                            <label for="idcheck"
+                            >아이디</label
+                            >
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    id="idcheck"
+                                    name="memberId"
+                                    maxlength="16"
+                                    class="dev-id"
+                                    value=""
+                                    style="ime-mode: disabled"
+                            />
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_id"
+                            ></div>
+                        </div>
+                    </div>
+                    <div class="row mbr_passwd">
+                        <div class="col_1">
+                            <label for="M_Pwd"
+                            >비밀번호(8~16자의 영문, 숫자,
+                                특수기호)</label
+                            >
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="password"
+                                    id="M_Pwd"
+                                    name="memberPassword"
+                                    class="dev-password"
+                                    maxlength="16"
+                                    style="ime-mode: disabled"
+                            />
+                            <button
+                                    type="button"
+                                    class="btnHelp"
+                                    title="안전한 비밀번호 작성법"
+                            >
+                                ?
+                            </button>
+                            <div class="lyHelp" style="display: none;">
+                                <dl>
+                                    <dt>안전한 비밀번호 작성법</dt>
+                                    <dd>
+                                        <ol>
+                                            <li>
+                                                8~16자의 영문 대소문,
+                                                숫자, 특수기호만
+                                                사용가능 (공백입력 불가)
+                                            </li>
+                                            (사용 가능한 특수문자는 ! "#
+                                            $ % &amp; ( ) * + , - . / :
+                                            ; ? @ [ ] ^ _ { } ~ 입니다.)
+                                            <li>
+                                                3자 이상 연속 영문/숫자
+                                                조합은 사용불가 (AAA.
+                                                111)
+                                            </li>
+                                            <li>
+                                                아이디, 반복되는
+                                                영문/숫자 조합은
+                                                사용불가 (1234, ABCD)
+                                            </li>
+                                            <li>
+                                                키보드의 연속 패턴은
+                                                사용하지 마세요. (ASDF)
+                                            </li>
+                                            <li>
+                                                비밀번호는 주기적으로
+                                                변경하여 안전하게
+                                                관리하기
+                                            </li>
+                                        </ol>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_pwd"
+                            ></div>
+                        </div>
+                        <div class="col_3">
+                            <button
+                                    type="button"
+                                    class="mbrBtnAuth dev-password-dp"
+                            >
+                                <span>표시</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row mbr_name">
+                        <div class="col_1">
+                            <label for="M_Name" class="mbr_name"
+                            >이름(실명)</label
+                            >
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    id="M_Name"
+                                    name="memberName"
+                                    class="mbr_name devReadOnly dev-name"
+                                    maxlength="12"
+                            />
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_name"
+                            ></div>
+                        </div>
+                    </div>
+                    <div class="row mbr_age">
+                        <div class="col_1">
+                            <label for="Born" class="mbr_age"
+                            >생년월일(예시 : 20000131)</label
+                            >
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    id="Born"
+                                    name="individualMemberBirth"
+                                    class="mbr_age devReadOnly dev-born"
+                                    maxlength="8"
+                            />
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_age"
+                            ></div>
+                        </div>
+                        <div class="col_3">
+                            <div class="select">
+                                <input
+                                        type="radio"
+                                        id="boy"
+                                        name="individualMemberGender"
+                                        value="man"
+                                        class="dev-gender"
+                                /><label for="boy">남자</label>
+                                <input
+                                        type="radio"
+                                        id="girl"
+                                        name="individualMemberGender"
+                                        value="women"
+                                        class="dev-gender"
+                                /><label for="girl">여자</label>
+                            </div>
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_gender"
+                            ></div>
+                        </div>
+                    </div>
+                    <div class="row mbr_email">
+                        <!-- <p class="emailTxt">개인 맞춤 채용정보/정기 뉴스레터/이벤트 메일이 발송됩니다.</p>  -->
+                        <div class="col_1">
+                            <label for="M_Email" class="mbr_email_id"
+                            >이메일</label
+                            >
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    id="M_Email"
+                                    name="memberEmail"
+                                    class="mbr_email_id dev-mail"
+                                    size="8"
+                                    maxlength="30"
+                            />
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_mail"
+                            ></div>
+                            <input
+                                    type="hidden"
+                                    id="Email_ID"
+                                    name="Email_ID"
+                            />
+                            <input
+                                    type="hidden"
+                                    id="Email_Addr"
+                                    name="Email_Addr"
+                            />
+                        </div>
+                    </div>
+                    <div class="row mbr_phone">
+                        <div class="col_1">
+                            <label for="M_Phone">휴대폰번호</label>
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="text"
+                                    id="M_Phone"
+                                    name="memberPhone"
+                                    size="4"
+                                    maxlength="13"
+                                    class="phone-input"
+                            />
+                            <button
+                                    type="button"
+                                    class="button btn-send-cert"
+                                    id="btnSendCert"
+                            >
+                                <span>인증번호 전송</span>
+                            </button>
+                            <div
+                                    class="notice_msg"
+                                    id="notice_msg_phone"
+                            ></div>
+                            <input
+                                    type="hidden"
+                                    id="M_Phone1"
+                                    name="M_Phone1"
+                            />
+                            <input
+                                    type="hidden"
+                                    id="M_Phone2"
+                                    name="M_Phone2"
+                            />
+                            <input
+                                    type="hidden"
+                                    id="M_Phone3"
+                                    name="M_Phone3"
+                            />
+                        </div>
+                    </div>
+                    <!--   인증 번호 solapi 사용-->
+                    <div class="row phone-cert-section">
+                        <div class="col_1">
+                            <label
+                                    for="Certify_Num"
+                                    class="cert-number-label"
+                            >인증번호 입력</label
+                            >
+                        </div>
+                        <div class="col_2">
+                            <input
+                                    type="hidden"
+                                    name="lb_certifytype"
+                                    value="2"
+                            />
+                            <input
+                                    type="text"
+                                    id="Certify_Num"
+                                    name="Certify_Num"
+                                    class="cert-number-input"
+                                    maxlength="6"
+                            />
+                            <div>
+                                <button
+                                        type="button"
+                                        class="btn-verify-cert"
+                                        id="btnCheckCert"
+                                >
+                                    <span>확인</span>
+                                </button>
+                            </div>
+                            <div
+                                    class="notice_msg"
+                                    id="notice-msg-cert"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="skip">약관 동의</h4>
+                <div class="row_group line_all policy">
+                    <div class="row policy_check_all">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_all"
+                                class="mbrCheckOff"
+                        />
+                        <label for="lb_chk_all" class="chk_all"
+                        ><span class="txt"
+                        >필수동의 항목 및 개인정보 수집 및 이용
+                                        동의(선택), 광고성 정보 수신<br/>(선택)에
+                                        모두 동의합니다.</span
+                        ></label
+                        >
+                    </div>
+                    <div class="row policy_check_service required">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_age"
+                                name="Y15_Older_Agree"
+                                class="mbrCheckOn"
+                                value="1"
+                        />
+                        <label for="lb_chk_age" class="chk_age"
+                        ><strong>[필수]</strong> 만 15세 이상입니다
+                        </label>
+                    </div>
+                    <div
+                            class="row policy_check_privacyOptional optional"
+                    >
+                        <input
+                                type="checkbox"
+                                id="lb_chk_privacyOptional"
+                                name="memberAgreePrivacy"
+                                class="mbrCheckOn"
+                                value="true"
+                        />
+                        <label
+                                for="lb_chk_privacyOptional"
+                                class="chk_privacyOptional"
+                        >[선택] 개인정보 수집 및 이용 동의
+                            <a
+                                    href="#DevPolicyService"
+                                    class="mbrBtnPolicy"
+                            >내용보기</a
+                            ></label
+                        >
+                        <div
+                                id="DevPolicyPrivacyOptional"
+                                class="policyTplBox"
+                                style="display: none;"
+                        >
+                            <div class="pvsSec pvsTpList">
+                                <h2 class="pvsHeading2">
+                                    <strong> 1. 수집 이용 목적 </strong>
+                                </h2>
+                                <p class="depth_01">
+                                    <u
+                                    >맞춤공고, 서비스 안내, 마케팅
+                                        발송을 목적으로 활용</u
+                                    >
+                                </p>
+                                <h2 class="pvsHeading2">
+                                    <strong
+                                    >2. 수집하는 개인정보
+                                        항목</strong
+                                    >
+                                </h2>
+                                <p class="depth_01">
+                                    전화번호, 이메일, 푸시토큰, 서비스
+                                    이용 기록
+                                </p>
+                                <h2 class="pvsHeading2">
+                                    <strong
+                                    >3. 개인정보 보유 및
+                                        이용기간</strong
+                                    >
+                                </h2>
+                                <p class="depth_01">
+                                    <u>회원탈퇴 시 즉시 파기</u>
+                                </p>
+                                <h2 class="pvsHeading2">
+                                    <strong
+                                    >4. 수신동의 거부 및 철회방법
+                                        안내</strong
+                                    >
+                                </h2>
+                                <p class="depth_01">
+                                    본 동의는 거부하실 수 있습니다. 다만
+                                    거부 시 동의를 통해 제공 가능한 각종
+                                    혜택, 이벤트 안내를 받아보실 수
+                                    없습니다. 더 이상 맞춤공고, 서비스
+                                    안내, 마케팅 발송을 원하시지 않는
+                                    경우 회원정보수정 페이지에서
+                                    수신여부를 변경하실 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row check_sms optional">
+                        <input
+                                type="checkbox"
+                                id="lb_chk_adinfo"
+                                name="memberAgreeMarketing"
+                                class="mbrCheckOn"
+                                value="true"
+                        />
+                        <label for="lb_chk_adinfo" class="chk_adinfo"
+                        >[선택] 광고성 정보 수신 동의
+                            <a
+                                    href="#DevPolicyAdInfo"
+                                    class="mbrBtnPolicy"
+                            >내용보기</a
+                            ></label
+                        >
+                        <div id="DevPolicyAdInfo" class="policyTplBox">
+                            <div class="pvsSec pvsTpList">
+                                <p class="depth_01">
+                                    회원이 수집 및 이용에 동의한
+                                    개인정보를 잡코리아, 알바몬에서
+                                    활용하는 것에 동의하며, 해당
+                                    개인정보를 활용하여 전자적
+                                    전송매체(이메일/SMS/Push 등 다양한
+                                    전송매체)를 통해 회원에게 유용한
+                                    혜택, 이벤트, 광고 정보를 전송할 수
+                                    있습니다.
+                                    <br/><br/>광고성 정보 수신 동의를
+                                    철회하고자 할 경우에는 광고성 동의
+                                    수신 설정 페이지에서 수신여부를
+                                    변경하실 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 회원 가입 버튼 -->
+                <div
+                        class="row_group line_none regist_complete"
+                        style="position: relative"
+                >
+                    <div class="row">
+                        <!-- 서버땐 type submit으로 바꾸기 -->
+                        <button type="button" class="mbrBtnRegist">
+                            <span>가입하기</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+        <!-- familysite -->
+        <div class="familysite">
+            <h3 class="skip">Family site</h3>
+            <p class="text">
+                <strong>회원가입 한번으로</strong> TRY-CATCH의 모든
+                서비스를 이용헤보세요!
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/member/join/individual-service.js"></script>
+<script src="/js/sms/service.js"></script>
+<script src="/js/sms/event.js"></script>
+<script src="/js/main/join/individual-join-event.js"></script>
+</html>

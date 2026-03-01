@@ -1,0 +1,2095 @@
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/font/Pretendard-Regular.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-display: swap;
+    src: url("/font/Pretendard-SemiBold.subset.woff2") format(woff2);
+}
+@font-face {
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/font/Pretendard-Bold.subset.woff2") format(woff2);
+}
+
+
+/* 기본 */
+* {
+    /* padding: 0;
+    margin: 0; */
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, Helvetica Neue, Segoe UI, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif !important;
+}
+html, body {
+    width: 100%;
+}
+body {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+    /* background-color: #f2f4f7; */
+}
+body, button, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, table, td, textarea, th, ul {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+}
+a, a:link, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+img {
+    border: 0;
+    vertical-align: top;
+}
+button, input, table, td, th {
+    font-size: 12px;
+    letter-spacing: 0;
+}
+button, fieldset, form, iframe {
+    border: 0;
+}
+button {
+    overflow: visible;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+button, input, select {
+    vertical-align: middle;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    font-size: 100%;
+}
+label {
+    cursor: pointer;
+    vertical-align: middle;
+}
+input[type=text] {
+    font-size: 13px;
+    letter-spacing: 0;
+    color: #000;
+}
+input, option, select, textarea {
+    vertical-align: middle;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0px;
+}
+address, caption, em {
+    font-weight: 400;
+    font-style: normal;
+}
+textarea {
+    font-size: 13px;
+    color: #000;
+    resize: none;
+}
+form, fieldset, button {
+    border: 0 none;
+}
+em {
+    font-size: 15px;
+    color: #666;
+}
+address, caption, em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+#wrap {
+    position: relative;
+    min-width: 1270px;
+    margin: 0 auto;
+    background: #f2f4f7;
+}
+#wrap #container {
+    width: 1250px !important;
+    margin: 0 auto;
+}
+#wrap #container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 어사이드 */
+    /* 기업 정보 관리 메뉴 */
+#wrap #container #sideNav {
+    width: 200px;
+    float: left;
+}
+#sideNav .nav {
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+}
+#sideNav .nav ul {
+    padding: 25px 20px;
+}
+#sideNav .nav li {
+    font-size: 15px;
+    padding: 12px 0;
+    line-height: 1.4;
+}
+#sideNav .nav li.on > span {
+    font-weight: bold;
+}
+#sideNav .nav li > a:hover, #sideNav .nav li.on > span {
+    color: #006e3f;
+}
+#sideNav .nav li > a {
+    color: #000;
+    vertical-align: middle;
+    font-size: 15px;
+    line-height: 1.4;
+}
+    /* 광고 */
+#sideNav .adLeftBx {
+    margin-top: 10px;
+    text-align: center;
+}
+#sideNav .adLeftBx .ad-container {
+    width: 200px;
+    height: 275px;
+    background-color: #ffffff;
+}
+.ad-container, .ad-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* .ad-container a, .ad-container a p {
+    color: #333;
+    font: 14px / 17px Pretendard;
+}
+.ad-container a img {
+    max-width: 100%;
+    object-fit: contain;
+} */
+
+/* 복리후생 스타일 */
+#wrap #container.sideTrue #content {
+    width: 1040px;
+    float: right;
+    border: 0;
+    background: none;
+    box-sizing: border-box;
+}
+    /* 기업정보관리 입력폼 */
+.artCompany {
+    padding: 31px 31px 44px 31px;
+    border: 1px solid #e1e5eb;
+    background: #fff;
+    box-sizing: border-box;
+}
+.artCoSummary {
+    padding: 0;
+}
+.infoTbBx .tbRow {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    color: #000;
+}
+.infoTbBx .tbCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.artCoSummary .tbSum {
+    overflow: hidden;
+    color: #000;
+    height: 101px;
+    padding: 0 31px 5px 31px;
+    box-sizing: border-box;
+}
+.artCoSummary .tbSum .name {
+    font-size: 30px;
+    letter-spacing: -0.5px;
+    padding-right: 30px;
+    line-height: 1.2;
+    word-break: break-all;
+}
+.artCoSummary .tbSum .name, .artCoSummary .tbSum .info {
+    display: table-cell;
+    vertical-align: middle;
+}
+.artCoSummary .tbSum .info {
+    font-size: 15px;
+    padding-top: 6px;
+    text-align: right;
+    white-space: nowrap;
+}
+.artCoSummary .tbSum .info dt {
+    color: #999;
+}
+.artCoSummary .tbSum .info dt, .artCoSummary .tbSum .info dd {
+    display: inline-block;
+}
+.artCoSummary .tbSum .info dt:first-child + dd {
+    margin-right: 27px;
+}
+.artCoSummary .tbSum .info dd {
+    margin-left: 4px;
+}
+.artCoSummary .tbLogo {
+    position: relative;
+    width: 248px;
+    border-left: 1px solid #eee;
+    box-sizing: border-box;
+}
+.infoBtn, .infoBtnB, .infoBtnA, .infoBtnM {
+    position: relative;
+    display: inline-block;
+    color: #666;
+    box-sizing: border-box;
+}
+.artCoSummary .tbLogo .infoBtnUp {
+    display: block;
+    width: 113px;
+    margin: 0 auto;
+    
+}
+.infoBtnUp{
+    font-size: 16px;
+    color: #999;
+    padding: 8px 8px;
+}
+.infoBtnB:before, .infoBtnA:after, .infoBtnM:before, .infoBtnM:after {
+    content: "";
+}
+.infoBtn span, .infoBtnB span, .infoBtnA span, .infoBtnM span, .infoBtnB:before, .infoBtnA:after, .infoBtnM:before, .infoBtnM:after {
+    position: relative;
+}
+.infoBtn, .infoBtnB:before, .infoBtnA:after, .infoBtnM:before, .infoBtnM:after {
+    display: inline-block;
+    background: url("/images/corporate/info_sp_btn.png") no-repeat;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.infoBtnUp:before {
+    width: 16px;
+    height: 16px;
+    margin: -2px 6px 0 0;
+    background-position: -30px 0;
+}
+.artCompany + .artCompany {
+    margin-top: 10px;
+}
+.artCompany .info_hd_3 {
+    overflow: hidden;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+        /* 로고 업로드 후 */
+.artCoSummary .tbLogo .logo {
+    width: 128px;
+    height: 51px;
+    padding-left: 48px;
+}
+.artCoSummary .tbLogo .logo img {
+    width: 100%;
+    height: 100%;
+}
+.btn, .jams-btn, .line-btn {
+    border-radius: 4px;
+}
+.artCoSummary .tbLogo .btn {
+    position: absolute;
+    top: 22px;
+    right: 15px;
+}
+.infoBtnDel {
+    width: 25px;
+    height: 25px;
+    background-position: -60px 0;
+}
+.artCoSummary .tbLogo .btn button {
+    display: block;
+}
+.infoBtnMod {
+    width: 25px;
+    height: 25px;
+    background-position: -100px 0;
+}
+.artCoSummary .tbLogo .btn .infoBtnMod {
+    margin-top: 7px;
+}
+        /* 로고 업로드 레이어 */
+.artCoSummary .tbLogo.on .logoUploadWrap {
+    display: block;
+}
+.artCoSummary .logoUploadWrap {
+    display: none;
+    position: absolute;
+    top: 101px;
+    right: -1px;
+    left: auto;
+    width: 510px;
+    height: 298px;
+    z-index: 99;
+}
+#frmLogo {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+}
+.popRecWrap {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #565d79;
+    background: #fff;
+    box-sizing: border-box;
+    z-index: 99;
+}
+#frmLogo .popLogoUpload.on, #frmLogo .popLogoDel.on, #frmLogo .popIdRevise.on {
+    display: block;
+    position: static;
+    width: 510px;
+}
+#frmLogo .popRecWrap .popHd {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #333;
+    padding: 20px 20px 20px 25px;
+    border-bottom: 1px solid #e0e3ea;
+    box-sizing: border-box;
+}
+#frmLogo .popLogoUpload .popCont {
+    padding: 23px 43px 43px 43px;
+}
+#frmLogo .popLogoUpload .ntcList {
+    font-size: 13px;
+    letter-spacing: 0px;
+    line-height: 1.8;
+}
+#frmLogo .popLogoUpload .ntcList li em {
+    color: #006e3f;
+    font-weight: bold;
+}
+#frmLogo .popLogoUpload .infoFileBx {
+    overflow: hidden;
+    width: 422px;
+    height: 62px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+#frmLogo .fileBx {
+    float: left;
+    display: inline-block;
+    color: #000;
+    width: 373px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0px;
+    border: 1px solid #ddd;
+    background: #fafbfd;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0;
+    box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+#frmLogo .popLogoUpload .fileBx {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    letter-spacing: 0px;
+    padding: 0 48px 0 18px;
+    height: 62px;
+    line-height: 62px;
+    width: 295px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+#frmLogo .popLogoUpload .fileBx, #frmLogo .popLogoUpload .infoFileBx .btnUploadm {
+    float: left;
+}
+
+#frmLogo .popLogoUpload .fileBx label {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    letter-spacing: 0px;
+    color: #999;
+    padding: 0 18px;
+    box-sizing: border-box;
+    z-index: 1;
+} 
+#frmLogo .popLogoUpload .fileBx:after {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    width: 18px;
+    height: 17px;
+    background-position: -30px 0;
+}
+#frmLogo .infoIcnB:before, #frmLogo .infoIcnA:after, #frmLogo .infoIcnM:before, #frmLogo .infoIcnM:after {
+    content: "";
+}
+#frmLogo .infoIcn, #frmLogo .infoIcnB:before, #frmLogo .infoIcnA:after, #frmLogo .infoIcnM:before, #frmLogo .infoIcnM:after {
+    display: inline-block;
+    background: url("/images/corporate/info_sp_icn.png") no-repeat;
+    line-height: normal;
+    vertical-align: middle;
+}
+#frmLogo .popLogoUpload .infoFileBx .btnUpload {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #000;
+    width: 126px;
+    height: 62px;
+    margin-left: -1px;
+    border-left: 1px solid #ddd;
+}
+
+#frmLogo .popLogoUpload .infoFileBx .btnUpload span {
+    position: relative;
+}
+#frmLogo .popRecWrap .mtcBtnPopClose {
+    position: absolute;
+    top: 19px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    background-position: -265px -45px;
+}
+        /* 로고 삭제 레이어 */
+#frmLogo .popLogoDel .popCont {
+    padding: 36px 43px 43px 43px;
+}
+#frmLogo .popLogoDel .popCont .ntcTx {
+    font-size: 15px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+#frmLogo .popRecWrap .popFunc {
+    text-align: center;
+}
+#frmLogo .popLogoDel .popFunc {
+    margin: 35px 0 18px 0;
+}
+#frmLogo .popRecWrap .popFunc button, .popRecWrap .popFunc a {
+    display: inline-block;
+    margin: 0 5px;
+}
+#frmLogo .popLogoDel .popFunc .mtcBtnBg {
+    width: 120px;
+    height: 44px;
+}
+#frmLogo .mtcBtnPopClose {
+    width: 30px;
+    height: 30px;
+    background-position: -265px -45px;
+}
+#frmLogo .popRecWrap .mtcBtnPopClose {
+    position: absolute;
+    top: 19px;
+    right: 18px;
+}
+        /* 기본 정보 */
+.artCoBasic .tbCell {
+    width: 33.33%;
+}
+.artCoBasic .tbCell + .tbCell {
+    padding-left: 10px;
+}
+.elWrap {
+    position: relative;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.elWrap.on {
+    border: 1px solid #565d79 !important;
+    z-index: 10;
+}
+.error.elWrap {
+    border: 1px solid #eb8f8a !important;
+    z-index: auto;
+}
+.elWrap .schInpType {
+    position: relative;
+}
+.elWrap .ph {
+    cursor: initial;
+    font-weight: normal;
+}
+.elWrap .schInpType .ph {
+    font-size: 16px;
+    color: #afb0b2;
+    position: absolute;
+    left: 16px;
+    top: 19px;
+    z-index: 1;
+    transition: all 0.2s ease-out;
+}
+.elWrap.ok .ph {
+    font-size: 11px;
+    color: #afb0b2;
+    top: 10px;
+}
+.elWrap .schInpType .ph .point {
+    color: #ff3333;
+}
+.elWrap .schInpType .inpDefault {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    line-height: 40px;
+    padding: 20px 17px 0 17px;
+    border: none;
+    background-color: #fff;
+    font-size: 16px;
+    color: #333;
+}
+.elWrap .selType .btnSelType {
+    width: 100%;
+    height: 60px;
+    padding: 0 32px 0 17px;
+    border: none;
+    background-color: #fff;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    position: relative;
+}
+.elWrap .selType .btnSelType .txCate {
+    display: inline-block;
+    color: #afb0b2;
+    position: absolute;
+    left: 16px;
+    top: 20px;
+    transition: all 0.2s ease-out;
+}
+.elWrap.ok .selType .btnSelType .txCate {
+    display: block;
+    top: 10px;
+    font-size: 11px;
+    letter-spacing: 0px;
+    color: #afb0b2;
+}
+.elWrap .selType .btnSelType .txCate .point {
+    color: #ff3333;
+}
+.elWrap .selType .btnSelType .txResult {
+    display: none;
+}
+.elWrap.ok .selType .btnSelType .txResult {
+    display: block;
+    width: 100%;
+    margin: 19px 0 0 0;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/* .mtcBtn span, .mtcBtnB span, .mtcBtnA span, .mtcBtnM span, .mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
+    position: relative;
+} */
+ .elWrap .selType .btnSelType:after {
+    width: 11px;
+    height: 6px;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    margin-top: -2px;
+    background-position: -302px -50px;
+}
+.elWrap.on .selType .btnSelType:after {
+    margin-top: -3px;
+    background-position: -319px -50px;
+}
+.mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
+    content: "";
+}
+.mtcBtn, .mtcBtnB:before, .mtcBtnA:after, .mtcBtnM:before, .mtcBtnM:After {
+    display: inline-block;
+    background: url("/images/corporate/mtc_sp_btn.png") no-repeat;
+    box-sizing: border-box;
+}
+        /* 레이어 영역 */
+.lyElBx {
+    display: none;
+    width: 100%;
+    border: 1px solid #565d79;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin: 0 -1px;
+    background-color: #fff;
+    z-index: 2;
+}
+.elWrap.on .lyElBx {
+    display: block;
+}
+.elWrap .selType .selTypeList li:first-child a, .elWrap .selType .selTypeList li:first-child button {
+    padding-top: 13px;
+}
+.elWrap .selType .selTypeList a:hover, .elWrap .selType .selTypeList .on a, .elWrap .selType .selTypeList button:hover, .elWrap .selType .selTypeList .on button {
+    background-color: #f6fafd;
+}
+.elWrap .selType .selTypeList button {
+    width: 100%;
+    text-align: left;
+}
+.elWrap .selType .selTypeList a, .elWrap .selType .selTypeList button {
+    display: block;
+    padding: 7px 18px 8px;
+    font-size: 16px;
+    color: #333;
+}
+            /* 외국계 기업 */
+.artCoBasic .tbRow + .tbRow {
+    margin-top: 10px;
+}
+/* .elWrap .keySchNtc {
+    display: table;
+    width: 100%;
+    height: 114px;
+    background: #fff;
+}
+.elWrap .keySchNtc p {
+    display: table-cell;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    vertical-align: middle;
+} */
+.elWrap .keySchType {
+    background-color: #fff;
+}
+.elWrap .keySchType ul {
+    max-height: 207px;
+    overflow-y: auto;
+}
+
+.elWrap .keySchType a {
+    display: block;
+    padding: 7px 18px 8px;
+    font-size: 16px;
+    color: #333;
+}
+.elWrap .keySchType li:first-child a {
+    padding-top: 13px;
+}
+/* .elWrap .keySchType a strong {
+    font-weight: normal;
+    color: #006e3f;
+}
+.elWrap .keySchType a:hover strong, .elWrap .keySchType .on a strong {
+    font-weight: bold;
+} */
+.elWrap .keySchType a:hover, .elWrap .keySchType .on a {
+    background-color: #f6fafd;
+    font-weight: bold;
+}
+            /* 업종 선택 */
+.elWrap .selType .btnSelType .txResult {
+    display: none;
+}
+.elWrap.ok .selType .btnSelType .txResult {
+    display: block;
+    width: 100%;
+    margin: 19px 0 0 0;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 16px;
+    letter-spacing: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.elWrap.on .lyElBx {
+    display: block;
+}
+.artCoBasic .tbPart .lyElBx {
+    width: 494px;
+}
+.artCoBasic .tbPart .selTypeList {
+    overflow: hidden;
+    max-height: 207px;
+    overflow-y: auto;
+    background: url("/images/corporate/bg_sel_list.png") repeat-y left bottom;
+}
+.elWrap .selType .selTypeList {
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.artCoBasic .tbPart .selTypeList ul {
+    float: left;
+    width: 238px;
+}
+.elWrap .selType .selTypeList li:first-child a, .elWrap .selType .selTypeList li:first-child button {
+    padding-top: 13px;
+}
+.artCoBasic .tbPart .elWrap .selType .selTypeList .on a, .artCoBasic .tbPart .elWrap .selType .selTypeList .on button {
+    color: #006e3f;
+    font-weight: bold;
+}
+.artCoBasic .tbPart .selTypeList ul + ul {
+    margin-left: 1px;
+}
+/* .artCoBasic .tbPart .selTypeList .devPartList {
+    display: none;
+}
+.artCoBasic .tbPart .selTypeList .devPartList.devOn {
+    display: block;
+} */
+.artCoBasic .tbPart .selTypeBtn {
+    padding: 10px 8px 10px 10px;
+    border-top: 1px solid #e5e5e5;
+    text-align: right;
+}
+.artCoBasic .tbPart .selTypeBtn .mtcBtnBd {
+    margin: 0 5px;
+}
+.mtcBtnBd {
+    font-size: 13px;
+    color: #666;
+    height: 30px;
+    line-height: 28px;
+    letter-spacing: 0px;
+    padding: 0 16px;
+    border: 1px solid #ccc;
+    background: #fff;
+    box-sizing: border-box;
+}
+/* .mtcBtnBd span {
+    position: relative;
+} */
+.mtcBtnBg {
+    display: inline-block;
+    font-size: 13px;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 16px;
+    background: #006e3f;
+    text-align: center;
+    box-sizing: border-box;
+}
+.mtcBtnBg span {
+    position: relative;
+    color: #fff;
+}
+        /* 회사 주소 */
+.elWrap .schSetArea {
+    min-height: 60px;
+}
+.elWrap .schSetArea .ph {
+    font-size: 16px;
+    color: #afb0b2;
+    font-weight: normal;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    margin-top: -10px;
+}
+.elWrap.on .schSetBx .ph, .elWrap.ok .schSetBx .ph {
+    display: block;
+    margin-top: 0;
+    top: 13px;
+    font-size: 11px;
+    color: #afb0b2;
+}
+.elWrap .schSetArea .ph .point {
+    color: #ff3333;
+    display: inline;
+}
+.on .addressArea .bxItemList, .ok .addressArea .bxItemList {
+    display: block;
+}
+.addressArea .bxItemList {
+    display: none;
+    padding: 33px 10px 11px 9px;
+}
+.addressArea .bxItemList:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.bxItemList .itemWrap {
+    float: left;
+    margin: 4px 0 0 7px;
+}
+.bxItemList .itemWrap .item {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #e0e6ee;
+    background-color: #f2f4f7;
+    padding: 6px 28px 6px 10px;
+    position: relative;
+    border-radius: 1px;
+}
+.artCoBasic .bxItemList .itemWrap .item {
+    padding: 6px 10px;
+}
+.elWrap.on .schSetBx .btnSetFn, .elWrap.ok .schSetBx .btnSetFn {
+    top: 11px;
+}
+.elWrap .schSetBx .btnSetFn {
+    position: absolute;
+    right: 12px;
+    top: 17px;
+    padding: 4px;
+    font-size: 12px;
+    color: #006e3f;
+    text-decoration: underline;
+}
+.mtcSubInfo .elWrap .schInpType .byte {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    font-size: 13px;
+}
+.mtcSubInfo .elWrap .schInpType .byte em {
+    font-weight: bold;
+    color: #006e3f;
+}
+.mtcSubInfo .elWrap.on .schInpType .byte {
+    display: block;
+}
+.elWrap.on .ph {
+    font-size: 11px;
+    color: #afb0b2;
+    top: 10px;
+}
+.mtcSubInfo .elWrap.on .schInpType #devAddrForeign {
+    padding-right: 70px;
+}
+            /* 자본금 */
+.artCoBasic .tbCapital .elWrap .schInpType {
+    overflow: hidden;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .ph {
+    z-index: 1;
+}
+.inpTxItem {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .inpTxItem {
+    /* position: relative; */
+    float: left;
+    width: 136px;
+}
+.inpTxItem input {
+    height: 48px;
+    padding: 0 13px;
+    border: 1px solid #e1e2e6;
+    font-size: 15px;
+    line-height: 46px;
+    text-align: left;
+    box-sizing: border-box;
+    border-radius: 3px;
+    vertical-align: top;
+    background-color: #fcfdff;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .inpDefault {
+    padding: 19px 35px 0 17px;
+    text-align: right;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .tx {
+    position: absolute;
+    top: 0;
+    right: 17px;
+    font-size: 16px;
+    color: #333;
+    padding-top: 21px;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .inpTxItem + .inpTxItem {
+    width: 177px;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .inpTxItem + .inpTxItem .inpDefault {
+    padding: 19px 66px 0 17px;
+}
+.artCoBasic .tbCapital .elWrap.on .schInpType .tx, .artCoBasic .tbCapital .elWrap.ok .schInpType .tx {
+    top: 9px;
+}
+
+    /* 실적 */
+.mtcTxaType {
+    position: relative;
+}
+.mtcTxaType .ph {
+    display: block;
+    position: absolute;
+    left: 17px;
+    top: 15px;
+    font-size: 13px;
+    color: #afb0b2;
+}
+.artCompany .mtcTxaType .ph {
+    font-size: 16px;
+    line-height: 1.6;
+}
+.mtcTxaType .txArea {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    resize: none;
+}
+.artCompany .mtcTxaType .txArea {
+    overflow: auto;
+    font-size: 16px;
+    height: 86px;
+    height: 125px;
+    padding: 15px 17px 0 17px;
+}
+    /* 복리후생 */
+.artCoWelfare.artCoWelfare {
+    position: relative;
+}
+.artCoWelfare .btnSetFn {
+    font-size: 12px;
+    color: #006e3f;
+    position: absolute;
+    right: 31px;
+    top: 42px;
+    text-decoration: underline;
+}
+.artCoWelfare .WelfareType {
+    position: relative;
+    overflow: auto;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 15px 71px 18px 17px;
+}
+.artCoWelfare .WelfareType .ph {
+    display: block;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #afb0b2;
+}
+.artCoWelfare .WelfareType .welfare-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.artCoWelfare .WelfareType .welfare-list > li:first-of-type {
+    margin-left: 0;
+}
+.artCoWelfare .WelfareType .welfare-list > li {
+    margin-right: 20px;
+    line-height: 30px;
+}
+.artCoWelfare .WelfareType .welfare-list > li > button {
+    font-size: 15px;
+    letter-spacing: 0px;
+}
+.artCoWelfare .WelfareType .welfare-list > li > button::after {
+    content: "";
+    display: inline-block;
+    background: url("/images/corporate/icon_close\ \(1\).png") no-repeat;
+    width: 17px;
+    height: 17px;
+    margin-left: 10px;
+    margin-top: -4px;
+    vertical-align: middle;
+}
+.artCoWelfare .WelfareType .btnSetFn {
+    position: absolute;
+    right: 17px;
+    top: 23px;
+}
+.artCoWelfare .btnSetFn {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #006e3f;
+    position: absolute;
+    right: 31px;
+    top: 42px;
+    text-decoration: underline;
+}
+.regModalWrap {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -17px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 11111;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.regModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1040px;
+    margin-left: -530px;
+    border: 1px solid #565d79;
+    box-sizing: border-box;
+    z-index: 11;
+    background-color: #fff;
+}
+/* .regModalWrap .regModal.reset {
+    top: 0 !important;
+    margin-top: 0 !important;
+} */
+.regModal .madalTopArea {
+    padding: 48px 49px 8px 46px;
+}
+.regModal .madalTopArea .titModal {
+    font-size: 32px;
+    letter-spacing: -1px;
+    color: #000;
+}
+.regModal .madalTopArea .topSubArea:after, .regModal .madalTopArea:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.regModal .modalContent {
+    padding: 16px 49px 34px;
+}
+.regPrefWrap .innerBx {
+    overflow: hidden;
+    height: 329px;
+    border: 1px solid #c1c3c7;
+    overflow-y: scroll;
+}
+.regPrefWrap .scrlBx {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+}
+.regPrefWrap .scrlBx .fieldList:first-child {
+    border-left: none;
+}
+.regPrefWrap .scrlBx .fieldList {
+    display: table-cell;
+    border-left: 1px solid #e0e0e0;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+.regPrefWrap .scrlBx .hdItem:first-child {
+    margin-top: 0;
+    border-top: none;
+}
+.regPrefWrap .scrlBx .hdItem {
+    display: block;
+    height: 24px;
+    margin-top: 10px;
+    padding: 9px 0 0 19px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: 700;
+    font-size: 13px;
+    /* letter-spacing: 0; */
+    color: #333;
+    background-color: #f8f9fb;
+    box-sizing: content-box;
+}
+.regPrefWrap .scrlBx .fieldList>ul {
+    padding: 4px 0 15px 20px;
+}
+.regPrefWrap .scrlBx .fieldList>ul>li {
+    margin-top: 12px;
+    font-size: 13px;
+    letter-spacing: 0;
+    color: #333;
+}
+.inpChk_ui {
+    vertical-align: middle;
+}
+.inpChk_ui, .inpChk_ui label {
+    display: inline-block;
+    position: relative;
+}
+.inpChk_ui.size_small {
+    padding-right: 4px;
+}
+.inpChk_ui input[type=checkbox] {
+    position: absolute;
+    left: -9999px;
+}
+.inpChk_ui label {
+    padding-left: 30px;
+    font-size: 15px;
+    color: #333;
+}
+.inpChk_ui.size_small label {
+    padding-left: 24px;
+    font-size: 13px;
+    color: #333;
+    line-height: 20px;
+}
+.inpChk_ui button:before, .inpChk_ui label:before, .spRegA:after, .spRegB:before {
+    background-image: url("/images/corporate/spr.png");
+    background-repeat: no-repeat;
+    background-size: 300px 300px;
+}
+.inpChk_ui label:before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    content: "";
+    background-position: 0 0;
+    transform: translateY(-50%);
+}
+.inpChk_ui.size_small label:before {
+    width: 18px;
+    height: 18px;
+    background-position: 0 -30px;
+}
+.inpChk_ui.size_small.chk label:before {
+    background-image: url("/images/corporate/size_small.chk-label.svg");
+    background-size: 18px;
+    border-radius: 3px;
+    background-color: #006e3f;
+    background-position: 50%;
+}
+.regModal .choiceArea {
+    position: relative;
+    border: 1px solid #c1c3c7;
+    border-top: none;
+}
+.regModal .choiceArea .choiceListArea{
+    min-height: 61px;
+    box-sizing: border-box;
+    background-color: #f3f5f8;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.giWelfareModal .regModal .regPrefWrap .choiceArea .choiceListArea {
+    padding: 17px 25px 16px 18px;
+}
+
+.regModal .choiceArea .choiceListArea .keywordListBx {
+    display: inline-flex;
+    align-items: center;
+    position: static;
+    min-height: auto;
+    padding: 0 100px 0 0 !important;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    vertical-align: middle;
+    margin-top: 0;
+}
+.regModal .choiceArea .choiceListArea .keywordListBx .subList .subItem {
+    display: inline;
+    font-size: 15px;
+    letter-spacing: 0;
+    color: #000;
+}
+.regModal .choiceArea .choiceListArea .keywordListBx .subItem .inr {
+    display: inline-block;
+    margin: 7px 14px 0 0;
+}
+.regModal .choiceArea .choiceListArea .keywordListBx .subList .subItem .inr {
+    margin-top: 0;
+    font-size: 13px;
+    letter-spacing: 0;
+}
+.regModal .choiceArea .choiceListArea .keywordListBx .subList .subItem .inr .btnItemDel {
+    margin-left: 0;
+    vertical-align: -4px;
+    padding: 1px;
+}
+.spRegA:after, .spRegB:before {
+    display: inline-block;
+    content: "";
+}
+.btnItemDel:after {
+    display: block;
+    width: 17px;
+    height: 17px;
+    background-position: -150px -60px;
+}
+.inpTxItem.seflAddItem, .seflAddInpWrap {
+    vertical-align: top;
+}
+.seflAddInpWrap {
+    display: inline-block;
+    width: 134px;
+}
+.inpTxItem.seflAddItem input {
+    width: 91px;
+    height: 30px;
+    padding: 2px 26px 2px 10px;
+    border: 1px dashed #e1e2e6;
+    font-size: 13px;
+    letter-spacing: 0;
+    color: #b0b0b0;
+    background-color: rgba(0, 0, 0, 0);
+    line-height: 30px;
+}
+.inpTxItem.seflAddItem .icnWrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 28px;
+    padding-top: 7px;
+    padding-left: 3px;
+    box-sizing: border-box;
+}
+/* .inpTxItem.seflAddItem .icnWrap .icn {
+    margin: 0 auto;
+} */
+.inpTxItem.seflAddItem .icn {
+    display: inline-block;
+    position: relative;
+    width: 9px;
+    height: 9px;
+    vertical-align: middle;
+}
+.inpTxItem.seflAddItem .icn:before {
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 1px;
+    height: 100%;
+    content: "";
+    background-color: #b0b0b0;
+}
+.inpTxItem.seflAddItem .icn:after {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background-color: #b0b0b0;
+}
+.inpTxItem.seflAddItem button.addBtn {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 28px;
+    padding-left: 3px;
+    text-align: left;
+    box-sizing: border-box;
+}
+.inpTxItem.seflAddItem .icn {
+    display: inline-block;
+    position: relative;
+    width: 9px;
+    height: 9px;
+    vertical-align: middle;
+}
+.inpTxItem.seflAddItem.ok input {
+    width: 134px;
+    color: #000;
+    border-color: #565d79;
+    background-color: #fcfdff;
+}
+.inpTxItem.seflAddItem.ok .icnWrap {
+    display: none;
+}
+.inpTxItem.seflAddItem.ok button.addBtn {
+    display: block;
+    padding-top: 1px;
+}
+.inpTxItem.seflAddItem.ok input {
+    width: 134px;
+    color: #000;
+    border-color: #565d79;
+    background-color: #fcfdff;
+}
+.inpTxItem.seflAddItem.ok button.addBtn .icn {
+    display: block;
+}
+.btnReset {
+    padding: 6px;
+    font-size: 12px;
+    font-size: 13px;
+    color: #000;
+    color: #666;
+    border-radius: 1px;
+}
+.regModal .choiceArea .choiceListArea .btnReset {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 18px;
+    padding: 0;
+}
+.btnReset:before {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+    background-position: -90px -180px;
+    vertical-align: -1px;
+}
+.regModal .buttons {
+    padding-top: 23px;
+    text-align: center;
+}
+.regModal .buttons button {
+    margin: 0 1px;
+}
+.btnCancel {
+    min-width: 132px;
+    height: 50px;
+    padding-top: 1px;
+    border: 1px solid #dbdbdb;
+    font-size: 15px;
+    color: #666;
+    background-color: #fff;
+    border-radius: 1px;
+}
+.btnOk {
+    min-width: 132px;
+    height: 50px;
+    padding-top: 1px;
+    border: 1px solid #006e3f;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    background-color: #006e3f;
+    border-radius: 1px;
+}
+.regModal .btnModalClose {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    padding: 4px;
+}
+.regModal .btnModalClose:after {
+    display: block;
+    width: 27px;
+    height: 27px;
+    background-position: 0 -180px;
+}
+.regModalWrap .modalBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .6);
+    z-index: 10;
+}
+.artCoWelfare .plus {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 13px;
+    /* letter-spacing: 0px; */
+    margin-bottom: 19px;
+    color: #333;
+    line-height: 36px;
+}
+.artCoWelfare .plus span {
+    margin-right: 12px;
+}
+.artCoWelfare .plus span, .artCoWelfare .plus button {
+    margin-top: 9px;
+}
+.artCoWelfare .plus button {
+    background: #f0f3f9;
+    border: 1px solid #f0f3f9;
+    font-size: 12px;
+    /* letter-spacing: 0px; */
+    padding: 10px;
+    margin-right: 5px;
+    color: #333;
+    border-radius: 5%;
+    box-sizing: border-box;
+}
+.artCoWelfare .plus button:hover {
+    background: #e3e9f4;
+    border: 1px solid #c3d2f0;
+}
+.artCoWelfare .plus button::before {
+    content: "";
+    display: inline-block;
+    background: url("/images/corporate/icon_plus.png") no-repeat;
+    width: 9px;
+    height: 8px;
+}
+.artCoWelfare > p {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #666;
+    line-height: 26px;
+}
+.regModal .choiceArea .choiceListArea:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+    /* 사진 업로드 */
+.artCoPhotoVideo {
+    position: relative;
+}
+.artCoPhotoVideo .thumbList {
+    position: relative;
+}
+.artCompany .info_hd_3 .fl_l {
+    float: left;
+}
+.artCompany .info_hd_3 em {
+    font-size: 15px;
+    color: #666;
+}
+.artCoPhotoVideo .thumbList .upload-button-area {
+    margin-bottom: 9px;
+    font-size: 0;
+}
+.artCoPhotoVideo .thumbList .upload-button-area button {
+    display: inline-block;
+    margin-right: 10px;
+    width: 186px;
+    height: 60px;
+    background-color: #fff;
+    border: 1px solid #e1e5eb;
+    font-size: 17px;
+    color: #888;
+    text-align: center;
+    line-height: 60px;
+}
+.artCoPhotoVideo .thumbList .upload-button-area button > span:before {
+    margin: -4px 8px 0 0;
+    width: 12px;
+    height: 12px;
+    background-position: -193px -232px;
+}
+.artCoPhotoVideo .thumbList .upload-button-area button:last-child {
+    margin-right: 0;
+}
+.artCoPhotoVideo .thumbList .upload-button-area button:hover {
+    background-color: #006e3f;
+    border-color: #006e3f;
+    font-weight: bold;
+    color: #fff;
+}
+.artCoPhotoVideo .thumbList .upload-button-area button:hover > span:before {
+    background-position: -215px -232px;
+}
+.artCoPhotoVideo .thumbList .upload-text-guide {
+    padding: 4px 10px 4px;
+    position: relative;
+    font-size: 13px;
+    color: #666666;
+}
+.artCoPhotoVideo .thumbList .upload-text-guide:before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 0px;
+    display: block;
+    width: 2px;
+    height: 2px;
+    background-color: #747474;
+}
+.artCoPhotoVideo .thumbList .sortable {
+    overflow: hidden;
+    width: 987px;
+    margin-left: -11px;
+    list-style-type: disc;
+    position: relative !important;
+}
+.artCoPhotoVideo .thumbList #devPhotoVideoList:before {
+    content: '';
+    box-sizing: border-box;
+    display: block;
+    border: 1px solid #7BA882;
+    width: 186px;
+    height: 119px;
+    position: absolute;
+    top: 11px;
+    left: 11px;
+    z-index: 1;
+}
+.artCoPhotoVideo .thumbList #devPhotoVideoList:after {
+    content: '대표';
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    text-align: center;
+    top: 17px;
+    left: 17px;
+    z-index: 10;
+    padding: 4px 12px 6px;
+    background-color: #7BA882;
+}
+.artCoPhotoVideo .thumbList .sortable li {
+    float: left;
+    position: relative;
+    margin: 11px 0 0 11px;
+    width: 186px;
+    height: 179px;
+    vertical-align: top;
+    cursor: move;
+}
+.artCoPhotoVideo .thumbList .sortable li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+.artCoPhotoVideo .thumbList .sortable li .thumb {
+    overflow: hidden;
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 119px;
+    border: 1px dashed #ccc;
+    box-sizing: border-box;
+    text-align: center;
+}
+.artCoPhotoVideo .thumbList .sortable li .thumb.ok {
+    display: block;
+}
+.artCoPhotoVideo .thumbList .sortable li .thumb img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+.artCoPhotoVideo .thumbList .sortable li .thumb .btnFunc {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 4;
+}
+.artCoPhotoVideo .thumbList .sortable li .thumb .btnFunc .mtcBtn {
+    float: left;
+    margin-left: 1px;
+}
+.mtcBtnDel_1 {
+    width: 24px;
+    height: 24px;
+    background-position: -210px -90px;
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box {
+    position: relative;
+    z-index: 3;
+    margin-top: 10px;
+    width: 100%;
+    background-color: #fafbfd;
+    border: 1px solid #fafbfd;
+    box-sizing: border-box;
+
+    transition: background-color .25s ease-in-out;
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box textarea {
+    overflow-y: hidden;
+    padding: .539em .8em 0;
+    width: 100%;
+    height: 30px;
+    max-height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: 0;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 13px;
+    color: #000;
+    line-height: 1.3;
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box.has-value {
+    background-color: #fff;
+    border-color: #ddd;
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box.focus {
+    background-color: #fff !important;
+    border-color: #565d79 !important;
+}
+/* 사진 레이어 */
+.artCoPhotoVideo .lyFileMng {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 99;
+    text-align: right;
+    transform: translate(-50%, -50%);
+}
+.artCoPhotoVideo .fileMngWrap {
+    display: none;
+    width: 512px;
+    height: 588px;
+}
+.artCoPhotoVideo .fileMngWrap.on {
+    display: block;
+}
+#frmPhoto {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+}
+.popRecWrap {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #565d79;
+    background: #fff;
+    box-sizing: border-box;
+    z-index: 99;
+}
+#frmPhoto .popPhotoVideo {
+    display: block;
+    position: relative;
+    width: 512px;
+    text-align: left;
+}
+#frmPhoto .popRecWrap .popHd {
+    height: 66px;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #333;
+    padding: 20px 20px 20px 25px;
+    border-bottom: 1px solid #e0e3ea;
+    box-sizing: border-box;
+}
+#frmPhoto .popRecWrap .popHd h1 {
+    font-weight: normal;
+    font-size: 100%;
+}
+#frmPhoto .popPhotoVideo .popCont {
+    padding: 20px 20px;
+}
+#frmPhoto .popPhotoVideo .mtcTplTab {
+    margin: 0;
+    padding-left: 1px;
+}
+#frmPhoto .popPhotoVideo .mtcTplTab .tabItems {
+    position: relative;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+#frmPhoto .popPhotoVideo .mtcTplTab .tabItems li {
+    display: block;
+}
+#frmPhoto .mtcTplTab .tabItems li a {
+    display: block;
+    height: 43px;
+    line-height: 43px;
+    margin-left: -1px;
+    border: 1px solid #e5e6e8;
+    border-bottom: 1px solid #858c99;
+    background-color: #fafafa;
+    position: relative;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #999;
+    text-align: center;
+}
+#frmPhoto .mtcTplTab .tabItems li.on a {
+    border: 1px solid #858c99;
+    border-bottom: 1px solid #fff;
+    z-index: 2;
+    background-color: #fff;
+    font-weight: bold;
+    color: #333;
+}
+#frmPhoto .popPhotoVideo .mtcTplTab .tabItems > li a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 13px;
+    letter-spacing: 0px;
+    font-weight: normal;
+    width: 126px;
+    height: 36px;
+    line-height: 36px;
+    border-bottom: 0;
+    box-sizing: border-box;
+}
+#frmPhoto .popPhotoVideo .mtcTplTab .tabItems > li.on a {
+    height: 37px;
+}
+#frmPhoto .popPhotoVideo .fileContWrap li .fileUploadWrap {
+    /* display: block; */
+    padding-top: 24px;
+    margin-top: 36px;
+    border-top: 1px solid #858c99;
+}
+#frmPhoto .popPhotoVideo .infoFileBx {
+    position: relative;
+}
+#frmPhoto .popPhotoVideo .infoFileBx .ph {
+    position: absolute;
+    left: 10px;
+    top: 11px;
+    color: #999;
+    z-index: 1;
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#frmPhoto .fileBx {
+    float: left;
+    display: inline-block;
+    color: #000;
+    width: 373px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0px;
+    border: 1px solid #ddd;
+    background: #fafbfd;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0;
+    box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+}
+#frmPhoto .btnMtcTpl {
+    display: inline-block;
+    height: 36px;
+    padding: 0 15px;
+    line-height: 34px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #000;
+    text-align: center;
+    box-sizing: border-box;
+}
+#frmPhoto .btnMtcTpl:hover {
+    border-color: #777777;
+}
+#frmPhoto .popPhotoVideo .infoFileBx .btnMtcTpl {
+    color: #666;
+    font-weight: bold;
+    width: 96px;
+    margin-left: -1px;
+    line-height: 35px;
+}
+#frmPhoto .popPhotoVideo .infoFileBx .mtcIpt, #frmPhoto .popPhotoVideo .infoFileBx .btnMtcTpl {
+    float: left;
+}
+#frmPhoto .popPhotoVideo .infoFileBx .btnMtcTpl span {
+    position: relative;
+}
+#frmPhoto .btnMtcTpl span {
+    color: #000;
+}
+.clear:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+#frmPhoto .popPhotoVideo .descWrap {
+    margin-top: 33px;
+}
+#frmPhoto .popPhotoVideo .popCont h2 {
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+#frmPhoto .popPhotoVideo .descWrap .txaBx {
+    position: relative;
+    margin-top: 10px;
+}
+#frmPhoto .popPhotoVideo .descWrap .txArea {
+    overflow: auto;
+    font-size: 13px;
+    color: #000;
+    width: 100%;
+    height: 62px;
+    padding: 8px 12px 10px 12px;
+    line-height: 24px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    resize: none;
+}
+#frmPhoto .popPhotoVideo .descWrap .byte {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    font-size: 12px;
+    color: #999;
+}
+#frmPhoto .popPhotoVideo .descWrap .byte em {
+    color: #006e3f;
+}
+#frmPhoto .popPhotoVideo .ntcList {
+    margin: 15px 0;
+}
+#frmPhoto .popPhotoVideo .ntcList li {
+    position: relative;
+    padding-left: 8px;
+    line-height: 1.3;
+}
+#frmPhoto .popPhotoVideo .ntcList li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 2px;
+    height: 2px;
+    background: #747474;
+}
+#frmPhoto .popPhotoVideo .ntcList li +li {
+    margin-top: 6px;
+}
+#frmPhoto .popPhotoVideo .ntcList li em {
+    color: #ff5b5b;
+    font-size: 12px;
+    letter-spacing: 0px;
+}
+#frmPhoto .popPhotoVideo .popFunc {
+    padding: 10px 5px 10px 0;
+    border-top: 1px solid #e5e5e5;
+    text-align: right;
+}
+#frmPhoto .popPhotoVideo .popFunc button {
+    width: 70px;
+    padding: 0;
+}
+#frmPhoto .popRecWrap .popFunc button, #frmPhoto .popRecWrap .popFunc a {
+    display: inline-block;
+    margin: 0 5px;
+}
+#frmPhoto .mtcBtnBd span {
+    position: relative;
+}
+#frmPhoto .mtcBtnPopClose {
+    width: 30px;
+    height: 30px;
+    background-position: -265px -45px;
+}
+#frmPhoto .popRecWrap .mtcBtnPopClose {
+    position: absolute;
+    top: 19px;
+    right: 18px;
+}
+        /* 안내문구 */
+.artCoNotice {
+    margin-top: 15px;
+}
+.artCoNotice ul {
+    font-size: 14px;
+    line-height: 23px;
+}
+.artCoNotice li {
+    position: relative;
+    padding-left: 13px;
+}
+.artCoNotice li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    display: block;
+    width: 2px;
+    height: 2px;
+    background-color: #747474;
+}
+.artCoNotice li strong, .artCoNotice li em {
+    color: #000;
+}
+.artCoBtn {
+    text-align: center;
+    margin: 44px 0 60px 0;
+}
+.artCoBtn .infoBtnApply {
+    width: 208px;
+    height: 64px;
+}
+.infoBtnBg {
+    display: inline-block;
+    font-size: 13px;
+    background: #7BA882;
+    box-sizing: border-box;
+    text-align: center;
+}
+.infoBtnApply {
+    font-size: 17px;
+    font-weight: bold;
+    width: 202px;
+    height: 52px;
+    line-height: 52px;
+    border-radius: 3px;
+}
+.infoBtnBg span {
+    position: relative;
+    color: #fff;
+}
+.artCoBtn .infoBtnApply:hover {
+    background: #006e3f;
+}
+
+/* placeholder */
+.artCoPhotoVideo .thumbList .sortable li .text-box textarea::placeholder {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #999 !important;
+    transition: color .25s ease-in-out
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box.focus textarea::placeholder {
+    color: #ccc !important;
+}
+.popPhotoVideo .descWrap .txArea::placeholder {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #999 !important;
+}
+#frmAddr .popAddr .popCont input[type=text]::placeholder {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #999 !important;
+}
+/* outline */
+#devCapital_A, #devCapital_B {
+    outline: none;
+}
+
+/* 주소 레이어 */
+.infoTbBx > .tbRow:nth-child(4) {
+    position: relative;
+}
+.lyAddrMng .addrMngWrap.on {
+    display: block;
+}
+.lyAddrMng .addrMngWrap {
+    display: none;
+    position: absolute;
+    top: 61px;
+    right: 0px;
+    left: auto;
+    width: 510px;
+    height: auto;
+    z-index: 99;
+}
+#frmAddr {
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #666;
+}
+#frmAddr .popRecWrap.on {
+    display: block;
+}
+#frmAddr .popRecWrap .popHd {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #333;
+    padding: 20px 20px 20px 25px;
+    border-bottom: 1px solid #e0e3ea;
+    box-sizing: border-box;
+}
+#frmAddr .popAddr .popCont {
+    padding: 23px 43px 43px 43px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 6px;
+
+}
+/* content */
+#frmAddr .popAddr .popCont input {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+}
+#frmAddr .popAddr .popCont input[type=text] {
+    padding: 0 14px;
+}
+#frmAddr .popAddr .popCont #postcode {
+    width: 35%;
+}
+/* #frmAddr .popAddr .popCont #detailAddress, #frmAddr .popAddr .popCont #extraAddress   {
+    width: 41.8%;
+} */
+#frmAddr .popAddr .popCont input[type=button] {
+    width: 28%;
+    border: 1px solid #006e3f;
+    background-color: #006e3f;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+}
+/*  */
+/* #frmAddr .popAddr .infoFileBx .btnUpload {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #000;
+    width: 128px;
+    height: 62px;
+    margin-left: -1px;
+    border-left: 1px solid #ddd;
+}
+
+#frmAddr .popAddr .infoFileBx .btnUpload span {
+    position: relative;
+} */
+ #frmAddr .popAddr .popFunc {
+    padding: 10px 5px 10px 0;
+    border-top: 1px solid #e5e5e5;
+    text-align: right;
+    /* display: flex;
+    justify-content: center; */
+}
+#frmAddr .popAddr .popFunc button {
+    width: 70px;
+    padding: 0;
+}
+#frmAddr .popRecWrap .popFunc button, #frmAddr .popRecWrap .popFunc a {
+    display: inline-block;
+    margin: 0 5px;
+}
+#frmAddr .mtcBtnBd span {
+    position: relative;
+}
+
+#frmAddr .popRecWrap .mtcBtnPopClose {
+    position: absolute;
+    top: 19px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    background-position: -265px -45px;
+}
+
+/* 맨위로 */
+.mtcTopBx {
+    position: relative;
+    clear: both;
+}
+.mtcTopBx .mtcBtn {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    margin-left: 665px;
+    width: 42px;
+    height: 42px;
+    background-position: -88px -180px;
+}

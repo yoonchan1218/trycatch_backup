@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>팀원 가입 | TRY-CATCH</title>
+    <link rel="stylesheet" href="/css/main/individual-join.css">
+</head>
+<body class="jkJoin" style="">
+<div id="wrap">
+    <div id="header">
+        <h1>
+            <a href=""><img src="/images/logo.png" alt=""></a>
+        </h1>
+        <div class="joinTop">
+            <h2>
+                <span class="slogun_1"></span>
+            </h2>
+        </div>
+
+        <h3 class="skip">글로벌 메뉴</h3>
+        <ul class="gnb f_clear">
+            <li><a href="">TRY-CATCH홈</a></li>
+        </ul>
+
+        <h3 class="skip">팀원 가입</h3>
+        <ul class="snb f_clear">
+            <li class="person on" style="width: 100%">
+                <a href="">팀원 가입</a>
+            </li>
+        </ul>
+    </div>
+
+    <input type="hidden" id="hdnEduId" value="">
+    <div id="container" class="mbrRegist">
+        <h3 class="skip">팀원 가입 정보</h3>
+        <fieldset>
+            <legend>팀원 가입</legend>
+            <form action="/mail/invite/join" id="frm" method="post" name="frm">
+                <input type="hidden" name="inviteCode" th:value="${inviteCode}">
+
+                <div class="row_group mbr_info">
+                    <h4>
+                        <span th:text="${corpName}">기업명</span>에서 초대했습니다. 정보를 입력하여 가입을 완료하세요!
+                    </h4>
+
+                    <div class="row mbr_email">
+                        <div class="col_1">
+                            <label for="M_Email" class="mbr_email_id">이메일</label>
+                        </div>
+                        <div class="col_2">
+                            <input type="text" id="M_Email" name="memberEmail" class="mbr_email_id dev-mail" size="8" maxlength="30" th:value="${email}" readonly>
+                            <div class="notice_msg" id="notice_msg_mail"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mbr_id">
+                        <div class="col_1">
+                            <label for="M_Id" class="mbr_id">아이디</label>
+                        </div>
+                        <div class="col_2">
+                            <input type="text" id="M_Id" name="memberId" class="mbr_id dev-id" maxlength="20" placeholder="아이디를 입력하세요">
+                            <div class="notice_msg" id="notice_msg_id"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mbr_pw">
+                        <div class="col_1">
+                            <label for="M_Pw" class="mbr_pw">비밀번호</label>
+                        </div>
+                        <div class="col_2">
+                            <input type="password" id="M_Pw" name="memberPassword" class="mbr_pw dev-pw" maxlength="20" placeholder="비밀번호를 입력하세요">
+                            <div class="notice_msg" id="notice_msg_pw"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mbr_name">
+                        <div class="col_1">
+                            <label for="M_Name" class="mbr_name">이름(실명)</label>
+                        </div>
+                        <div class="col_2">
+                            <input type="text" id="M_Name" name="memberName" class="mbr_name dev-name" maxlength="12" placeholder="이름을 입력하세요">
+                            <div class="notice_msg" id="notice_msg_name"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mbr_phone">
+                        <div class="col_1">
+                            <label for="M_Phone">휴대폰번호</label>
+                        </div>
+                        <div class="col_2">
+                            <input type="text" id="M_Phone" name="memberPhone" size="4" maxlength="13" class="dev-phone" placeholder="010-0000-0000">
+                            <div class="notice_msg" id="notice_msg_phone"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <h4 class="skip">약관 동의</h4>
+                <div class="row_group line_all policy">
+                    <div class="row policy_check_all">
+                        <input type="checkbox" id="lb_chk_all" class="mbrCheckOff">
+                        <label for="lb_chk_all" class="chk_all"><span class="txt">필수동의 항목 및 개인정보 수집 및 이용
+                                        동의(선택), 광고성 정보 수신<br>(선택)에
+                                        모두 동의합니다.</span></label>
+                    </div>
+                    <div class="row policy_check_service required">
+                        <input type="checkbox" id="lb_chk_age" name="Y15_Older_Agree" class="mbrCheckOn" value="1">
+                        <label for="lb_chk_age" class="chk_age"><strong>[필수]</strong> 만 15세 이상입니다
+                        </label>
+                    </div>
+                    <div class="row policy_check_privacyOptional optional">
+                        <input type="checkbox" id="lb_chk_privacyOptional" name="memberAgreePrivacy" class="mbrCheckOn" value="true">
+                        <label for="lb_chk_privacyOptional" class="chk_privacyOptional">[선택] 개인정보 수집 및 이용 동의
+                            <a href="#DevPolicyService" class="mbrBtnPolicy">내용보기</a></label>
+                        <div id="DevPolicyPrivacyOptional" class="policyTplBox" style="display: none;">
+                            <div class="pvsSec pvsTpList">
+                                <h2 class="pvsHeading2">
+                                    <strong> 1. 수집 이용 목적 </strong>
+                                </h2>
+                                <p class="depth_01">
+                                    <u>맞춤공고, 서비스 안내, 마케팅
+                                        발송을 목적으로 활용</u>
+                                </p>
+                                <h2 class="pvsHeading2">
+                                    <strong>2. 수집하는 개인정보
+                                        항목</strong>
+                                </h2>
+                                <p class="depth_01">
+                                    전화번호, 이메일, 푸시토큰, 서비스
+                                    이용 기록
+                                </p>
+                                <h2 class="pvsHeading2">
+                                    <strong>3. 개인정보 보유 및
+                                        이용기간</strong>
+                                </h2>
+                                <p class="depth_01">
+                                    <u>회원탈퇴 시 즉시 파기</u>
+                                </p>
+                                <h2 class="pvsHeading2">
+                                    <strong>4. 수신동의 거부 및 철회방법
+                                        안내</strong>
+                                </h2>
+                                <p class="depth_01">
+                                    본 동의는 거부하실 수 있습니다. 다만
+                                    거부 시 동의를 통해 제공 가능한 각종
+                                    혜택, 이벤트 안내를 받아보실 수
+                                    없습니다. 더 이상 맞춤공고, 서비스
+                                    안내, 마케팅 발송을 원하시지 않는
+                                    경우 회원정보수정 페이지에서
+                                    수신여부를 변경하실 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row check_sms optional">
+                        <input type="checkbox" id="lb_chk_adinfo" name="memberAgreeMarketing" class="mbrCheckOn" value="true">
+                        <label for="lb_chk_adinfo" class="chk_adinfo">[선택] 광고성 정보 수신 동의
+                            <a href="#DevPolicyAdInfo" class="mbrBtnPolicy">내용보기</a></label>
+                        <div id="DevPolicyAdInfo" class="policyTplBox">
+                            <div class="pvsSec pvsTpList">
+                                <p class="depth_01">
+                                    회원이 수집 및 이용에 동의한
+                                    개인정보를 잡코리아, 알바몬에서
+                                    활용하는 것에 동의하며, 해당
+                                    개인정보를 활용하여 전자적
+                                    전송매체(이메일/SMS/Push 등 다양한
+                                    전송매체)를 통해 회원에게 유용한
+                                    혜택, 이벤트, 광고 정보를 전송할 수
+                                    있습니다.
+                                    <br><br>광고성 정보 수신 동의를
+                                    철회하고자 할 경우에는 광고성 동의
+                                    수신 설정 페이지에서 수신여부를
+                                    변경하실 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 회원 가입 버튼 -->
+                <div class="row_group line_none regist_complete" style="position: relative">
+                    <div class="row">
+                        <button type="button" class="mbrBtnRegist">
+                            <span>가입하기</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+        <!-- familysite -->
+        <div class="familysite">
+            <h3 class="skip">Family site</h3>
+            <p class="text">
+                <strong>회원가입 한번으로</strong> TRY-CATCH의 모든
+                서비스를 이용헤보세요!
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/mail/team-member-join-event.js"></script>
+<script th:if="${error == 'duplicate'}">
+    alert("이미 가입된 이메일입니다. 다른 이메일로 시도해주세요.");
+</script>
+</html>
