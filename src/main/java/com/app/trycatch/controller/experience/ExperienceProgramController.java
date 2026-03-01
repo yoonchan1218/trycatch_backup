@@ -46,7 +46,7 @@ public class ExperienceProgramController {
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("canApply", canApply);
         model.addAttribute("hasApplied", hasApplied);
-        return "experience/detail";
+        return "experience/training-program";
     }
 
     @GetMapping("/training-program/{id}")

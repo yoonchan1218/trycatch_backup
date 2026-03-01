@@ -1027,3 +1027,39 @@ $env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-ho
   - `GET /experience/training-program.html` -> `404`
 - 결론:
   - 현재 라우팅은 정적 `.html` 직접 접근이 아니라 컨트롤러 매핑 경로(`/experience/...`) 기준으로 정상 동작
+
+---
+
+## 추가 요청 반영 (2026-03-01) - main 탭 하드코딩 정리 + 목록 조회 `select` 검증
+
+### 1) main 탭 하드코딩 정리
+- 파일: `src/main/resources/templates/main/main.html`
+- 반영:
+  - `기술블로그` 탭(`dev-cont-Cntnt_OnePick`) 정적 카드 제거
+  - `QnA` 탭(`dev-cont-Cntnt_Theme_V2`) 정적 카드 제거
+  - 서버 모델 데이터 기반으로 변경
+    - `th:each="log : ${latestSkillLogs}"`
+    - `th:each="qna : ${latestQnas}"`
+  - 빈 목록 시 안내 문구(`th:if`) 추가
+  - 기존 슬라이더 클래스(`instance-swipwe-3`, `instance-swipwe-5`) 유지
+
+### 2) 목록 조회가 모두 `select`인지 확인 결과
+1. 메인 체험공고 목록
+   - `MainHomeService.getPopularPrograms()` -> `ExperienceProgramRankDAO.findTopByViewCount()` -> `ExperienceProgramRankMapper.selectTopByViewCount()`
+   - `MainHomeService.getLatestPrograms()` -> `ExperienceProgramRankDAO.findTopByUpdatedDatetime()` -> `ExperienceProgramRankMapper.selectTopByUpdatedDatetime()`
+   - SQL: `mapper/mypage/experienceProgramRankMapper.xml`의 `<select ...>` 사용
+2. 메인 QnA 목록
+   - `MainHomeService.getLatestQnas()` -> `QnaDAO.findLatest()` -> `QnaMapper.selectLatest()`
+   - SQL: `mapper/qna/qnaMapper.xml`의 `<select id="selectLatest">`
+3. 메인 기술블로그 목록
+   - `MainHomeService.getLatestSkillLogs()` -> `SkillLogDAO.findLatest()` -> `SkillLogMapper.selectLatest()`
+   - SQL: `mapper/skilllog/skillLogMapper.xml`의 `<select id="selectLatest">`
+4. 체험공고 목록 페이지
+   - `ExperienceProgramService.getList()` -> `ExperienceProgramDAO.countPublic()/findPublic()`
+   - `ExperienceProgramMapper.countPublic()/selectPublic()`
+   - SQL: `mapper/experience/ExperienceProgramMapper.xml`의 `<select id="countPublic">`, `<select id="selectPublic">`
+
+### 3) 검증
+- `./gradlew.bat compileJava --no-daemon` 성공
+- `GET /main/main` -> `200` 확인
+- 응답에 `기술블로그/QnA` 탭 및 동적 렌더링 블록 존재 확인
