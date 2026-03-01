@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("mypagePointDetailsDAO")
 @RequiredArgsConstructor
 public class PointDetailsDAO {
     private final PointDetailsMapper pointDetailsMapper;

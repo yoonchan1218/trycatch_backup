@@ -638,3 +638,59 @@ $env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-ho
 $env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-home'; .\\gradlew.bat compileJava
 ```
 - 결과: `BUILD SUCCESSFUL`
+
+---
+
+## 추가 요청 반영 (2026-03-01) - 체험 목록/상세 오류 디버깅(기동 장애 선해결)
+
+### 1) 문제 배경
+- 사용자 제보: 체험 목록/체험 상세에서 오류 발생
+- 실제 재현 시점에는 `/experience/list`, `/experience/program/{id}` 진입 전,
+  앱 컨텍스트 초기화 단계에서 기동 실패가 먼저 발생
+
+### 2) 재현된 실제 오류(순차 확인)
+1. `ConflictingBeanDefinitionException`
+   - `PointDetailsDAO` 중복 빈 이름 충돌
+   - 대상: `repository.point.PointDetailsDAO` vs `repository.mypage.PointDetailsDAO`
+2. `ConflictingBeanDefinitionException`
+   - `PointDetailsMapper` 중복 빈 이름 충돌
+   - 대상: `mapper.point.PointDetailsMapper` vs `mapper.mypage.PointDetailsMapper`
+3. MyBatis alias 충돌
+   - `The alias 'PointDetailsDTO' is already mapped ...`
+   - 결과적으로 `sqlSessionTemplate` 생성 실패 연쇄 발생
+
+### 3) 적용한 수정
+1. DAO 빈 이름 명시 분리
+   - `src/main/java/com/app/trycatch/repository/point/PointDetailsDAO.java`
+     - `@Repository("pointPointDetailsDAO")`
+   - `src/main/java/com/app/trycatch/repository/mypage/PointDetailsDAO.java`
+     - `@Repository("mypagePointDetailsDAO")`
+2. Mapper 빈 이름 명시 분리
+   - `src/main/java/com/app/trycatch/mapper/point/PointDetailsMapper.java`
+     - `@Repository("pointPointDetailsMapper")` 추가
+   - `src/main/java/com/app/trycatch/mapper/mypage/PointDetailsMapper.java`
+     - `@Repository("mypagePointDetailsMapper")` 추가
+3. mypage PointDetails 타입 alias 분리
+   - `src/main/java/com/app/trycatch/dto/mypage/PointDetailsDTO.java`
+     - `@Alias("MyPagePointDetailsDTO")` 추가
+   - `src/main/java/com/app/trycatch/domain/mypage/PointDetailsVO.java`
+     - `@Alias("MyPagePointDetailsVO")` 추가
+   - `src/main/resources/mapper/mypage/pointDetailsMapper.xml`
+     - `resultType="MyPagePointDetailsDTO"`로 변경
+
+### 4) 검증 결과
+1. 컴파일 검증
+```powershell
+$env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-home'; .\\gradlew.bat compileJava
+```
+- 결과: `BUILD SUCCESSFUL`
+2. 런타임 재현 검증
+- `bootRun` 정상 기동 확인 (`Tomcat started on port 10000`)
+- `GET /experience/list` -> `200`
+- `GET /experience/program/1` -> `200` 확인
+- 현재 테스트 DB 기준 목록 데이터는 비어 있어 empty state 렌더링(`cardCount=0`) 확인
+
+### 5) 참고
+- 이번 수정은 체험 목록/상세 경로 자체 버그라기보다, 해당 화면 진입 전 앱을 중단시키던
+  중복 빈/alias 문제를 해소한 작업
+- 실제 체험 데이터가 있는 계정/프로그램 ID 기준으로 최종 UX 확인을 추가 권장

@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.ibatis.type.Alias;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
+@Alias("MyPagePointDetailsDTO")
 public class PointDetailsDTO {
     private Long id;
     private Long memberId;

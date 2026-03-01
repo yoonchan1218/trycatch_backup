@@ -7,12 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.apache.ibatis.type.Alias;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "id")
 @Getter
 @ToString(callSuper = true)
 @SuperBuilder
+@Alias("MyPagePointDetailsVO")
 public class PointDetailsVO extends Period {
     private Long id;
     private Long memberId;

@@ -5,11 +5,13 @@ import com.app.trycatch.domain.point.PointDetailsVO;
 import com.app.trycatch.dto.point.PointDetailsDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Mapper
+@Repository("pointPointDetailsMapper")
 public interface PointDetailsMapper {
 //    건수 조회
     int selectCountByIndividualMemberId(Long individualMemberId);
