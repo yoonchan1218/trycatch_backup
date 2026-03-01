@@ -116,11 +116,14 @@ public class MemberController {
 
     @GetMapping("main")
     public String goMainPage(Model model) {
-        List<ExperienceProgramRankDTO> featuredPrograms = mainHomeService.getTopPrograms(6);
+        List<ExperienceProgramRankDTO> popularPrograms = mainHomeService.getPopularPrograms(6);
+        List<ExperienceProgramRankDTO> latestPrograms = mainHomeService.getLatestPrograms(6);
         List<QnaDTO> latestQnas = mainHomeService.getLatestQnas(6);
         List<SkillLogDTO> latestSkillLogs = mainHomeService.getLatestSkillLogs(6);
 
-        model.addAttribute("featuredPrograms", featuredPrograms);
+        model.addAttribute("featuredPrograms", popularPrograms);
+        model.addAttribute("popularPrograms", popularPrograms);
+        model.addAttribute("latestPrograms", latestPrograms);
         model.addAttribute("latestQnas", latestQnas);
         model.addAttribute("latestSkillLogs", latestSkillLogs);
         model.addAttribute("loginMember", session.getAttribute("member"));

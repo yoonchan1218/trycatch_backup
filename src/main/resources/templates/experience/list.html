@@ -20,12 +20,10 @@
 
 <main class="page-main">
     <section class="search-section">
-        <h1>체험 프로그램 목록</h1>
+        <h1>체험 프로그램</h1>
         <p class="result-text" th:text="|총 ${programWithPaging.total}건|">총 0건</p>
 
         <form class="search-form" method="get" th:action="@{/experience/list}">
-            <input type="hidden" name="page" value="1">
-
             <label>
                 상태
                 <select name="status">
@@ -38,22 +36,25 @@
             </label>
 
             <label>
-                정렬
-                <select name="sort">
-                    <option value="latest" th:selected="${sort == 'latest'}">최신순</option>
-                    <option value="views" th:selected="${sort == 'views'}">조회순</option>
-                    <option value="deadline" th:selected="${sort == 'deadline'}">마감 임박순</option>
+                직무
+                <select name="job">
+                    <option value="" th:selected="${job == null or job == ''}">전체</option>
+                    <option th:each="jobItem : ${jobs}" th:value="${jobItem}" th:text="${jobItem}" th:selected="${job == jobItem}">직무</option>
                 </select>
             </label>
 
             <label>
-                직무
-                <input type="text" name="job" placeholder="예: 개발, 디자인" th:value="${job}">
+                정렬
+                <select name="sort">
+                    <option value="latest" th:selected="${sort == 'latest'}">최신순</option>
+                    <option value="views" th:selected="${sort == 'views'}">조회수순</option>
+                    <option value="deadline" th:selected="${sort == 'deadline'}">마감임박순</option>
+                </select>
             </label>
 
-            <label class="keyword-label">
-                키워드
-                <input type="text" name="keyword" placeholder="프로그램명, 기업명" th:value="${keyword}">
+            <label>
+                검색
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="공고명/기업명 검색">
             </label>
 
             <button type="submit">검색</button>
@@ -63,14 +64,12 @@
     <section class="list-section" th:if="${!#lists.isEmpty(programWithPaging.programs)}">
         <ul class="program-grid">
             <li class="program-card" th:each="program : ${programWithPaging.programs}">
-                <th:block th:with="thumb=${#lists.isEmpty(program.experienceProgramFiles) ? null : program.experienceProgramFiles.get(0)}">
-                    <a class="thumbnail" th:href="@{/experience/program/{id}(id=${program.id})}">
-                        <img th:if="${thumb != null}"
-                             th:src="@{/api/files/display(filePath=${thumb.filePath}, fileName=${thumb.fileName})}"
-                             alt="프로그램 대표 이미지">
-                        <div class="thumb-placeholder" th:unless="${thumb != null}">NO IMAGE</div>
-                    </a>
-                </th:block>
+                <a class="thumbnail" th:href="@{/experience/program/{id}(id=${program.id})}" th:with="thumb=${#lists.isEmpty(program.experienceProgramFiles) ? null : program.experienceProgramFiles.get(0)}">
+                    <img th:if="${thumb != null and thumb.fileContentType != null and thumb.fileContentType.name() == 'IMAGE'}"
+                         th:src="@{/api/files/display(filePath=${thumb.filePath}, fileName=${thumb.fileName})}"
+                         alt="프로그램 대표 이미지">
+                    <div class="thumb-placeholder" th:unless="${thumb != null and thumb.fileContentType != null and thumb.fileContentType.name() == 'IMAGE'}">NO IMAGE</div>
+                </a>
 
                 <div class="card-body">
                     <div class="meta-row">
@@ -85,19 +84,15 @@
                     </div>
 
                     <h2>
-                        <a th:href="@{/experience/program/{id}(id=${program.id})}"
-                           th:text="${program.experienceProgramTitle}">프로그램 제목</a>
+                        <a th:href="@{/experience/program/{id}(id=${program.id})}" th:text="${program.experienceProgramTitle}">공고 제목</a>
                     </h2>
 
-                    <p class="description" th:text="${program.descriptionText}">프로그램 설명</p>
+                    <p class="description" th:text="${program.descriptionText != null and !program.descriptionText.isEmpty() ? program.descriptionText : '상세 설명이 등록되지 않았습니다.'}">설명</p>
 
                     <div class="info-row">
-                        <span th:text="|직무: ${program.experienceProgramJob != null ? program.experienceProgramJob : '-'}|">직무</span>
-                        <span th:text="|마감: ${program.experienceProgramDeadline != null ? program.experienceProgramDeadline : '-'}|">마감</span>
-                    </div>
-                    <div class="info-row">
-                        <span th:text="|모집인원: ${program.experienceProgramRecruitmentCount}명|">모집인원</span>
-                        <span th:text="|조회수: ${program.experienceProgramViewCount}|">조회수</span>
+                        <span th:text="${program.experienceProgramJob != null ? program.experienceProgramJob : '직무 미정'}">직무</span>
+                        <span th:text="|조회수 ${program.experienceProgramViewCount}|">조회수</span>
+                        <span th:text="${program.experienceProgramDeadline != null ? '마감 ' + program.experienceProgramDeadline : '마감일 미정'}">마감일</span>
                     </div>
                 </div>
             </li>
@@ -105,24 +100,23 @@
     </section>
 
     <section class="empty-section" th:if="${#lists.isEmpty(programWithPaging.programs)}">
-        <p>조건에 맞는 체험 프로그램이 없습니다.</p>
+        조건에 맞는 체험 프로그램이 없습니다.
     </section>
 
-    <nav class="pagination" th:if="${programWithPaging.total > 0}">
+    <nav class="pagination" th:if="${programWithPaging.criteria.realEnd > 1}">
         <a class="page-link"
            th:if="${programWithPaging.criteria.page > 1}"
-           th:href="@{/experience/list(page=${programWithPaging.criteria.page - 1}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}">이전</a>
-
-        <th:block th:each="p : ${#numbers.sequence(programWithPaging.criteria.startPage, programWithPaging.criteria.endPage)}">
-            <a class="page-link"
-               th:classappend="${p == programWithPaging.criteria.page} ? ' active' : ''"
-               th:href="@{/experience/list(page=${p}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}"
-               th:text="${p}">1</a>
-        </th:block>
+           th:href="@{/experience/list(page=${programWithPaging.criteria.page - 1}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}">‹</a>
 
         <a class="page-link"
-           th:if="${programWithPaging.criteria.hasMore}"
-           th:href="@{/experience/list(page=${programWithPaging.criteria.page + 1}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}">다음</a>
+           th:each="pageNum : ${#numbers.sequence(programWithPaging.criteria.startPage, programWithPaging.criteria.endPage)}"
+           th:href="@{/experience/list(page=${pageNum}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}"
+           th:text="${pageNum}"
+           th:classappend="${pageNum == programWithPaging.criteria.page} ? ' active'">1</a>
+
+        <a class="page-link"
+           th:if="${programWithPaging.criteria.page < programWithPaging.criteria.realEnd}"
+           th:href="@{/experience/list(page=${programWithPaging.criteria.page + 1}, status=${status}, keyword=${keyword}, job=${job}, sort=${sort})}">›</a>
     </nav>
 </main>
 </body>

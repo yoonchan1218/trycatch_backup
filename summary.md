@@ -1,3 +1,79 @@
+# 작업 요약 (2026-03-01)
+
+## 이번 세션 목적
+- `main`, `experience/list`, `experience/training-program` 전체 로직 점검 및 실제 동작 반영
+- 페이징/검색/정렬(조회수순, 최신순, 마감임박순) 적용 상태를 코드/DB 기준으로 검증
+- 메인 체험공고를 정적 하드코딩이 아닌 체험공고 데이터 기반으로 전환
+- 테스트 가능한 더미 체험공고 데이터 삽입
+
+## 코드 변경 사항
+
+### 1) 메인 페이지 체험공고 로직
+- `src/main/java/com/app/trycatch/controller/member/MemberController.java`
+  - `popularPrograms`, `latestPrograms` 모델 전달
+  - 기존 호환을 위해 `featuredPrograms`도 `popularPrograms`로 유지
+- `src/main/java/com/app/trycatch/service/main/MainHomeService.java`
+  - `getPopularPrograms(int limit)` 추가
+  - `getLatestPrograms(int limit)` 추가
+  - 파일 첨부 매핑 공통화 `attachProgramFiles(...)` 추가
+- `src/main/java/com/app/trycatch/repository/mypage/ExperienceProgramRankDAO.java`
+  - `findTopByUpdatedDatetime(int limit)` 추가
+- `src/main/java/com/app/trycatch/mapper/mypage/ExperienceProgramRankMapper.java`
+  - `selectTopByUpdatedDatetime(@Param("limit") int limit)` 추가
+- `src/main/resources/mapper/mypage/experienceProgramRankMapper.xml`
+  - 최신 정렬 SQL 추가/정비 (`order by ep.updated_datetime desc, ep.id desc`)
+- `src/main/resources/templates/main/main.html`
+  - 체험공고 하드코딩 블록 제거
+  - `인기공고(조회수)` / `최신공고(업데이트순)` 동적 렌더링 적용
+
+### 2) 체험공고 리스트 페이지 로직
+- `src/main/resources/templates/experience/list.html`
+  - 서버 렌더링 기준으로 재구성
+  - `status`, `job`, `sort`, `keyword` 검색 폼 반영
+  - `programWithPaging.programs` 리스트 렌더링
+  - 페이지네이션(`startPage~endPage`, 이전/다음) 반영
+  - 카드에 직무/조회수/마감일 및 파일 썸네일 연동
+
+### 3) 체험공고 상세 페이지 로직
+- `src/main/resources/templates/experience/training-program.html`
+  - 정적 더미 페이지 제거
+  - `program`, `canApply`, `hasApplied`, `loginMember` 기반 조건 렌더링 적용
+  - 즉시지원/이미지원/로그인유도/권한없음 버튼 분기 정상화
+
+## DB 더미 데이터 반영 (로컬)
+- `tbl_experience_program`에 테스트 공고 11건 삽입
+  - `recruiting` 9건, `closed` 1건, `cancelled` 1건
+  - 조회수/업데이트시간/마감일 분포를 다르게 구성하여 정렬 검증 가능
+
+## 검증 결과
+
+### 1) 빌드
+- 실행:
+```powershell
+$env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-home'; .\\gradlew.bat compileJava --no-daemon
+```
+- 결과: `BUILD SUCCESSFUL`
+
+### 2) 정렬/검색 검증 (DB 쿼리)
+- 조회수순 상위 예시:
+  - `DevOps 운영 체험 프로그램(140)`
+  - `AI 모델 서빙 체험 프로그램(132)`
+  - `백엔드 실무 체험 프로그램(120)`
+- 최신(업데이트)순 상위 예시:
+  - `보안 취약점 점검 체험`
+  - `AI 모델 서빙 체험 프로그램`
+  - `모바일 앱 QA 체험`
+- 마감임박순:
+  - `2026-03-08`, `2026-03-09`, `2026-03-11` ... 순으로 정상 확인
+- 검색 검증:
+  - 제목/회사명 키워드 매칭 및 직무 키워드(`백엔드`) 매칭 확인
+
+## 비고
+- 이번 세션에서 DB 더미 데이터는 로컬 DB에 직접 반영됨 (Git 추적 대상 아님)
+- 화면 상세 UX/스타일은 기존 CSS 구조를 최대한 유지하면서 서버 데이터 연결을 우선 적용
+
+---
+
 # 작업 요약 (2026-02-24)
 
 ## 이번 세션 목적
@@ -829,3 +905,39 @@ $env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-ho
 ### 4) 비고
 - 상세 페이지 응답 코드 `302`는 현재 테스트 DB에서 해당 ID 실데이터 미존재 시
   예외 핸들러/리다이렉트가 정상 동작한 결과이며, 라우트 깨짐으로 인한 서버 오류는 재현되지 않음
+
+---
+
+## 추가 요청 반영 (2026-03-01) - 외부 원본 experience 폴더 재적용 + 목록/상세 재진행
+
+### 1) 요청 사항
+- `C:\Users\pigch\Desktop\gb_0090_kyc\TRY-CATCH`의 `experience` 폴더 파일을 현재 프로젝트로 재반영
+- 체험 프로그램 목록/상세 화면을 원본 기준으로 다시 교체
+- `summary.md` 작업 흐름에 맞춰 이번 변경 내역 기록
+
+### 2) 적용한 파일 반영
+1. 원본 템플릿 반영
+   - `src/main/resources/templates/experience/list.html`
+   - `src/main/resources/templates/experience/training-program.html`
+2. 원본 정적 리소스 반영
+   - `src/main/resources/static/js/experience/list.js`
+   - `src/main/resources/static/js/experience/training-program.js`
+   - `src/main/resources/static/css/experience/list.css`
+   - `src/main/resources/static/css/experience/training-program.css`
+   - `src/main/resources/static/css/experience/icons.c8c8e4ab.woff2`
+   - `src/main/resources/static/css/experience/icons.fc26c557.woff2`
+3. 스프링 정적 경로 최소 보정
+   - `list.html`
+     - `/static/css/experience/list.css` -> `/css/experience/list.css`
+     - `/static/images/logo.png` -> `/images/logo.png`
+     - `/static/js/experience/list.js` -> `/js/experience/list.js`
+   - `training-program.html`
+     - `../../static/css/experience/training-program.css` -> `/css/experience/training-program.css`
+     - `../../static/js/experience/training-program.js` -> `/js/experience/training-program.js`
+
+### 3) 검증 결과
+1. 컴파일 검증
+```powershell
+$env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-home'; .\\gradlew.bat compileJava
+```
+- 결과: `BUILD SUCCESSFUL` (`:compileJava UP-TO-DATE`)

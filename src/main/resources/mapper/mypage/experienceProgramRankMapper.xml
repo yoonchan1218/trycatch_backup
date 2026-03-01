@@ -49,7 +49,23 @@
         from tbl_experience_program ep
         join tbl_corp c on ep.corp_id = c.id
         where ep.experience_program_status = 'recruiting'
-        order by ep.id desc
+        order by ep.updated_datetime desc, ep.id desc
+        limit #{limit}
+    </select>
+
+    <select id="selectTopByUpdatedDatetime" resultType="ExperienceProgramRankDTO">
+        select
+            ep.id                          as experienceProgramId,
+            ep.experience_program_title,
+            ep.experience_program_job,
+            ep.experience_program_deadline,
+            ep.experience_program_view_count,
+            ep.corp_id,
+            c.corp_company_name
+        from tbl_experience_program ep
+        join tbl_corp c on ep.corp_id = c.id
+        where ep.experience_program_status = 'recruiting'
+        order by ep.updated_datetime desc, ep.id desc
         limit #{limit}
     </select>
 

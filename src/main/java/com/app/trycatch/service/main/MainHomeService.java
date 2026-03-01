@@ -29,12 +29,27 @@ public class MainHomeService {
     private final SkillLogDAO skillLogDAO;
 
     public List<ExperienceProgramRankDTO> getTopPrograms(int limit) {
+        return getPopularPrograms(limit);
+    }
+
+    public List<ExperienceProgramRankDTO> getPopularPrograms(int limit) {
         List<ExperienceProgramRankDTO> programs = experienceProgramRankDAO.findTopByViewCount(limit);
+        attachProgramFiles(programs);
+        return programs;
+    }
+
+    public List<ExperienceProgramRankDTO> getLatestPrograms(int limit) {
+        List<ExperienceProgramRankDTO> programs = experienceProgramRankDAO.findTopByUpdatedDatetime(limit);
+        attachProgramFiles(programs);
+        return programs;
+    }
+
+    private void attachProgramFiles(List<ExperienceProgramRankDTO> programs) {
         programs.forEach(program -> {
-            List<ExperienceProgramFileDTO> files = experienceProgramFileDAO.findAllByExperienceProgramId(program.getExperienceProgramId());
+            List<ExperienceProgramFileDTO> files =
+                    experienceProgramFileDAO.findAllByExperienceProgramId(program.getExperienceProgramId());
             program.setExperienceProgramFiles(files);
         });
-        return programs;
     }
 
     public List<QnaDTO> getLatestQnas(int limit) {

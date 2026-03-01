@@ -23,4 +23,8 @@ public class ExperienceProgramRankDAO {
     public List<ExperienceProgramRankDTO> findTopPublicByLatest(int limit) {
         return experienceProgramRankMapper.selectTopPublicByLatest(limit);
     }
+
+    public List<ExperienceProgramRankDTO> findTopByUpdatedDatetime(int limit) {
+        return experienceProgramRankMapper.selectTopByUpdatedDatetime(limit);
+    }
 }
