@@ -941,3 +941,46 @@ $env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-ho
 $env:GRADLE_USER_HOME='C:\\Users\\pigch\\Desktop\\trycatch_copy\\.gradle-user-home'; .\\gradlew.bat compileJava
 ```
 - 결과: `BUILD SUCCESSFUL` (`:compileJava UP-TO-DATE`)
+
+---
+
+## 추가 요청 반영 (2026-03-01) - 메인/목록/상세 더미데이터 + 상세 500 수정
+
+### 1) 요청 사항
+- 메인 페이지, 체험프로그램 목록, 체험프로그램 상세가 실제 데이터로 보이도록 더미 데이터 투입
+- 메인에서 인기공고(조회수순), 최신공고(업데이트순) 동작 확인
+- 목록/상세 썸네일이 보이도록 파일 데이터까지 연결
+- 상세 페이지가 열리지 않는(500) 문제 원인 확인 및 수정
+
+### 2) 적용한 변경
+1. DB 시드 파일 추가/적용
+   - `src/main/resources/sql/dummy_main_experience_seed.sql`
+   - 추가 데이터:
+     - 회원/기업 기본 더미
+     - 체험 프로그램 12건 (상태: recruiting/draft/closed/cancelled 혼합)
+     - 조회수/업데이트일 차등 데이터
+2. 썸네일 매핑 데이터 추가
+   - `tbl_file`, `tbl_experience_program_file` 시드 추가
+   - `/api/files/display` 경로 기준 실제 파일 배치
+     - `C:/file/seed/program/program-5001.png` ~ `program-5012.png`
+3. 상세 페이지 500 수정
+   - 원인: `templates/experience/training-program.html`의 `<title th:text>` 파싱 식 오류
+   - 수정 파일:
+     - `src/main/resources/templates/experience/training-program.html`
+     - `src/main/resources/templates/experience/detail.html`
+   - 라우트 렌더 템플릿 통일:
+     - `src/main/java/com/app/trycatch/controller/experience/ExperienceProgramController.java`
+     - `GET /experience/program/{id}` -> `experience/detail` 렌더
+
+### 3) 검증 결과
+1. 데이터 검증
+- `tbl_experience_program` 총 12건, `recruiting` 9건
+- 인기공고 상위 조회수/최신공고 업데이트순 쿼리 결과 정상
+- `view_experience_program_file` 12건 매핑 확인
+2. 페이지 응답 검증
+- `GET /experience/list` -> `200`
+- `GET /experience/program/5001` -> `200`
+- 상세 HTML 본문에 프로그램 제목/이미지 태그 확인
+
+### 4) 비고
+- 기존 `10000` 포트 서버가 구버전 프로세스로 남아 있으면 수정 반영이 지연될 수 있어 재기동 후 확인 필요
